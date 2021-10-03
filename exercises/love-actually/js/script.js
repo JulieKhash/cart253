@@ -28,12 +28,19 @@ let circleC = {
 function setup(){
   createCanvas(windowWidth, windowHeight);
 
+  // Circles' positions on canvas
   circleB.x = width/3;
   circleB.y = height/3;
 
+  circleA.x = width/2;
+  circleA.y = height - 100;
 
+  // makes circles move accoring to the speed
   circleB.vx = circleB.vx + circleB.speed;
   circleB.vy = circleB.vy + circleB.speed;
+
+  circleA.vx = circleA.vx + circleA.speed;
+  circleA.vy = circleA.vy + circleA.speed;
 }
 
 
@@ -56,11 +63,13 @@ function draw(){
   }
 
 
-
   //moves the user's circle
   circleB.x = circleB.x + circleB.vx;
   circleB.y = circleB.y + circleB.vy;
 
+  //moves circle A
+  circleA.x = circleA.x + circleA.vx;
+  circleA.y = circleA.y + circleA.vy;
 
   //display circles
   fill(255, 0, 0);
