@@ -68,12 +68,15 @@ function draw(){
     display();
   }
 
-  function mousePressed(){
-    if (state === `title`){
-      state === `simulation`;
-    }
+  function love(){
+    push();
+    textSize(80);
+    fill(255, 0, 0);
+    textFont(`Sansita Swashed`);
+    textAlign(CENTER, CENTER);
+    text(`LOVE!`, width/2, height/2);
+    pop();
   }
-
 
   // moves circles
   function move(){
@@ -100,6 +103,12 @@ function draw(){
   let d = dist(circle1.x, circle1.y, circle2.x, circle2.y);
   if (d < circle1.size/2 + circle2.size/2) {
   // returns "true love"
+  }
+}
+
+function mousePressed(){
+  if (state === `title`){
+    state = `simulation`;
   }
 }
 
