@@ -16,6 +16,8 @@ let circle2 ={
   speed: 2
 }
 
+let state = `simulation`
+
 
 function setup(){
   createCanvas(500, 500);
@@ -38,8 +40,23 @@ function draw(){
   checkOffscreen();
   checkOverlap();
   display();
-  //simulation();
+  simulation();
 }
+
+// checks the states
+  if (state === `title`){
+    title();
+  }
+  else if (state === `simulation`){
+    simulation();
+  }
+  else if (state === `love`){
+    love();
+  }
+  else if (state === `sadness`){
+    sadness()
+  }
+
 
   // moves circles
   function move(){
