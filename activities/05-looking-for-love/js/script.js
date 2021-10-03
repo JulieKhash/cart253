@@ -102,7 +102,6 @@ function draw(){
   if (circle1.x < 0 || circle1.x > width || circle1.y < 0 || circle1.y > height || circle2.x < 0 || circle2.x > width || circle2.y < 0 || circle2.y > height){
     state = `sadness`
   }
-  // returns "sad ending"
 }
 
   // check if circles overlap
