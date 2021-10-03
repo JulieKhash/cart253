@@ -16,7 +16,7 @@ let circle2 ={
   speed: 2
 }
 
-let state = `simulation`
+let state = `title`;
 
 
 function setup(){
@@ -36,14 +36,7 @@ function setup(){
 function draw(){
   background(0);
 
-  move();
-  checkOffscreen();
-  checkOverlap();
-  display();
-  simulation();
-}
 
-// checks the states
   if (state === `title`){
     title();
   }
@@ -54,7 +47,31 @@ function draw(){
     love();
   }
   else if (state === `sadness`){
-    sadness()
+    sadness();
+  }
+}
+
+  function title(){
+    push();
+    textSize(70);
+    fill(255, 200, 0);
+    textFont(`Sansita Swashed`);
+    textAlign(CENTER, CENTER);
+    text(`IS IT LOVE?`, width/2, height/2);
+    pop();
+  }
+
+  function simulation(){
+    move();
+    checkOffscreen();
+    checkOverlap();
+    display();
+  }
+
+  function mousePressed(){
+    if (state === `title`){
+      state === `simulation`;
+    }
   }
 
 
@@ -87,7 +104,7 @@ function draw(){
 }
 
   function display(){
-  fill(255, 0, 0);
+  fill(255);
   ellipse(circle1.x, circle1.y, circle1.size);
   ellipse(circle2.x, circle2.y, circle2.size);
 }
