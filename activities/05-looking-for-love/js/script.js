@@ -78,6 +78,16 @@ function draw(){
     pop();
   }
 
+  function sadness(){
+    push();
+    textSize(80);
+    fill(10, 200, 200);
+    textFont(`Sansita Swashed`);
+    textAlign(CENTER, CENTER);
+    text(`SADNESS!`, width/2, height/2);
+    pop();
+  }
+
   // moves circles
   function move(){
   circle1.x = circle1.x + circle1.vx;
@@ -90,10 +100,7 @@ function draw(){
   //checks if circles go off screen
   function checkOffscreen(){
   if (circle1.x < 0 || circle1.x > width || circle1.y < 0 || circle1.y > height || circle2.x < 0 || circle2.x > width || circle2.y < 0 || circle2.y > height){
-    return true;
-  }
-  else {
-    false;
+    state = `sadness`
   }
   // returns "sad ending"
 }
@@ -102,7 +109,7 @@ function draw(){
   function checkOverlap(){
   let d = dist(circle1.x, circle1.y, circle2.x, circle2.y);
   if (d < circle1.size/2 + circle2.size/2) {
-  // returns "true love"
+    state = `love`;
   }
 }
 
