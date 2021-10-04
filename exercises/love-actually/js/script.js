@@ -41,7 +41,7 @@ function preload(){
   encounterImg = loadImage("assets/images/encounter.png");
   chasedImg = loadImage("assets/images/chased.png");
   ballroomImg = loadImage("assets/images/ballroom.png");
-  heartImg - loadImage("assets/images/love.png");
+  heartImg - loadImage("assets/images/broken-heart.png");
 }
 
 
@@ -76,10 +76,11 @@ function draw(){
 }
 
   function simulation(){
+
     userControl();
     moveRandom();
-    checkOverlap();
     move();
+    checkOverlap();
     display();
   }
 
@@ -127,20 +128,6 @@ encounter.vy = random(-encounter.speed, encounter.speed);
 }
 
 
-function checkOverlap () {
-//if the user catches the lady shows heart
-  let d = dist(user.x, user.y, chased.x, chased.y);
-  if (d < userImg.pixels/2 + chasedImg.pixels/2) {
-    user.sizeX = user.sizeX +10;
-   // state = `romance`;
-   romance();
-
-  }
-}
-
-  function romance(){
-    image(heartImg, user.x, user.y);
-  }
 
 
 
@@ -157,6 +144,18 @@ function checkOverlap () {
   // move circle C
   encounter.x = encounter.x + encounter.vx;
   encounter.y = encounter.y + encounter.vy;
+}
+
+
+function checkOverlap () {
+  //check if overlap
+  let x = map(noise(xoff), 0, 1, 0, width);
+  xoff += 0.009;
+  let d = dist(user.x, user.y, x, chased.y);
+  if (d < user.sizeY/4 + chased.sizeY/4){
+    image(heartImg, user.x, user.y +10);
+    noLoop();
+  }
 }
 
   function display(){
