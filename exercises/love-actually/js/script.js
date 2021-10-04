@@ -6,7 +6,7 @@ let circleA = {
   vy: 0,
   speed: 2
 }
-let circleB = {
+let userB = {
   x: undefined,
   y: undefined,
   size: 100,
@@ -20,7 +20,7 @@ let circleC = {
   size: 100,
   vx: 0,
   vy: 0,
-  speed: 1
+  speed: 2
 }
 
 
@@ -29,8 +29,8 @@ function setup(){
   createCanvas(windowWidth, windowHeight);
 
   // Cicrles' positions on canvas
-  circleB.x = width/3;
-  circleB.y = height/3;
+  userB.x = width/3;
+  userB.y = height/3;
 
   circleA.x = width/2;
   circleA.y =  height/2;
@@ -39,8 +39,8 @@ function setup(){
   circleC.y = height/4
 
   // makes user's circle move accoring to its speed
-  circleB.vx = circleB.vx + circleB.speed;
-  circleB.vy = circleB.vy + circleB.speed;
+  userB.vx = userB.vx + userB.speed;
+  userB.vy = userB.vy + userB.speed;
 
 }
 
@@ -49,35 +49,36 @@ function draw(){
   background(0);
 
   // control user's circle with mouseX and mouseY
-  if (mouseX < circleB.x) {
-    circleB.vx = -circleB.speed;
+  if (mouseX < userB.x) {
+    userB.vx = -userB.speed;
   }
   else {
-    circleB.vx = circleB.speed;
+    userB.vx = userB.speed;
   }
 
-  if (mouseY < circleB.y) {
-    circleB.vy = -circleB.speed;
+  if (mouseY < userB.y) {
+    userB.vy = -userB.speed;
   }
   else {
-    circleB.vy = circleB.speed;
+    userB.vy = userB.speed;
   }
 
   // makes circle A jittery (tries to escape user)
-  let change = random();
-  if (change < 0.03) {
+  let change1 = random();
+  if (change1 < 0.03) {
   circleA.vx = random(-circleA.speed, circleA.speed);
   circleA.vy = random(-circleA.speed, circleA.speed);
 }
 
-  circleC.vx = circleB.vx + -circleC.speed;
-  circleC.vy = circleB.vy + -circleC.speed;
-
-
+let change2 = random();
+if (change2 < 0.03) {
+circleC.vx = random(-circleC.speed, circleC.speed);
+circleC.vy = random(-circleC.speed, circleC.speed);
+}
 
   //moves the user's circle
-  circleB.x = circleB.x + circleB.vx;
-  circleB.y = circleB.y + circleB.vy;
+  userB.x = userB.x + userB.vx;
+  userB.y = userB.y + userB.vy;
 
   //moves circle A
   circleA.x = circleA.x + circleA.vx;
@@ -87,13 +88,11 @@ function draw(){
   circleC.x = circleC.x + circleC.vx;
   circleC.y = circleC.y + circleC.vy;
 
-
-
   //display circles
   fill(255, 0, 0);
   ellipse(circleA.x, circleA.y, circleA.size);
   fill(0, 255, 0);
-  ellipse(circleB.x, circleB.y, circleB.size);
+  rect(userB.x, userB.y, userB.size);
   fill(0, 0, 255);
   ellipse(circleC.x, circleC.y, circleC.size);
 }
