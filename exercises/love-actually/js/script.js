@@ -20,23 +20,22 @@ let encounter = {
   size: 100,
   vx: 0,
   vy: 0,
-  speed: 2
+  speed: 4
 }
 
 let xoff = 0;
-let xoff2 = 0;
 
 
 
 function setup(){
   createCanvas(windowWidth, windowHeight);
 
-  // Cicrles' positions on canvas
+  // objects' positions on canvas
   user.x = width/3;
   user.y = height/3;
 
-  chased.x = width/2 * 5
-  chased.y =  height/2 * 2;
+  chased.x = width/2 * 5;
+  chased.y =  height/2 ;
 
   encounter.x = width/4;
   encounter.y = height/4
@@ -79,17 +78,18 @@ function draw(){
   chased.vx = random(-chased.speed, chased.speed);
   chased.vy = random(-chased.speed, chased.speed);
 }
+// makes the chased move smoother horizontally
   let x = map(noise(xoff), 0, 1, 0, width);
-  xoff += 0.01;
+  xoff += 0.009;
 
-
+// makes the encounter jittery (trying to follow the chased)
 let change2 = random();
 if (change2 < 0.1) {
 encounter.vx = random(-encounter.speed, encounter.speed);
 encounter.vy = random(-encounter.speed, encounter.speed);
 }
-let y = map(noise(xoff2), 0, 1, 0, width);
-xoff2 += 0.01;
+// let y = map(noise(xoff2), 0, 1, 0, width);
+// xoff2 += 0.01;
 
   //moves the user's circle
   user.x = user.x + user.vx;
@@ -109,5 +109,5 @@ xoff2 += 0.01;
   fill(0, 255, 0);
   rect(user.x, user.y, user.size);
   fill(0, 0, 255);
-  ellipse(encounter.x,  y, encounter.size);
+  ellipse(encounter.x,  encounter.y, encounter.size);
 }
