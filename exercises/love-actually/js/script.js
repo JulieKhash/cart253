@@ -1,3 +1,6 @@
+let userImg;
+
+
 let chased = {
   x: undefined,
   y: undefined,
@@ -25,6 +28,10 @@ let encounter = {
 
 let xoff = 0;
 
+function preload(){
+  userImg = loadImage("assets/images/user-pic.png")
+}
+
 
 
 function setup(){
@@ -49,6 +56,7 @@ function setup(){
 
 function draw(){
   background(0);
+
 
   // control user's  horizontal movement with keyboard arrows
   if (keyIsDown (LEFT_ARROW)) {
@@ -107,7 +115,7 @@ encounter.vy = random(-encounter.speed, encounter.speed);
   fill(255, 0, 0);
   ellipse(x, chased.y, chased.size);
   fill(0, 255, 0);
-  rect(user.x, user.y, user.size);
+  image(userImg, user.x, user.y, 300, 300);
   fill(0, 0, 255);
   ellipse(encounter.x,  encounter.y, encounter.size);
 }
