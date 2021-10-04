@@ -2,20 +2,23 @@ let userImg;
 let encounterImg;
 let chasedImg;
 let ballroomImg;
+let heartImg;
 
 
 let chased = {
   x: undefined,
   y: undefined,
-  size: 100,
+  sizeX: 250,
+  sizeY: 230,
   vx: 0,
   vy: 0,
-  speed: 3
+  speed: 3,
 }
 let user = {
   x: undefined,
   y: undefined,
-  size: 100,
+  sizeX: 200,
+  sizeY: 200,
   vx: 0,
   vy: 0,
   speed: 2
@@ -31,11 +34,14 @@ let encounter = {
 
 let xoff = 0;
 
+let state = 'title' // title, love, heartbreak, tragedy
+
 function preload(){
   userImg = loadImage("assets/images/user-pic.png");
   encounterImg = loadImage("assets/images/encounter.png");
   chasedImg = loadImage("assets/images/chased.png");
   ballroomImg = loadImage("assets/images/ballroom.png");
+  heartImg - loadImage("assets/images/love.png");
 }
 
 
@@ -64,8 +70,20 @@ function draw(){
   background(0);
   imageMode(CENTER);
   image(ballroomImg, width/2, height/2, 2600, 2600);
+  simulation();
 
 
+}
+
+  function simulation(){
+    userControl();
+    moveRandom();
+    checkOverlap();
+    move();
+    display();
+  }
+
+  function userControl(){
   // control user's  horizontal movement with keyboard arrows
   if (keyIsDown (LEFT_ARROW)) {
     user.vx = -user.speed;
@@ -86,8 +104,10 @@ function draw(){
   else {
     user.vy = 0;
   }
+}
 
 
+  function moveRandom(){
   // makes the chased jittery (tries to escape user and encounter)
   let change1 = random();
   if (change1 < 0.04) {
@@ -103,10 +123,29 @@ let change2 = random();
 if (change2 < 0.07) {
 encounter.vx = random(-encounter.speed, encounter.speed);
 encounter.vy = random(-encounter.speed, encounter.speed);
+  }
 }
-// let y = map(noise(xoff2), 0, 1, 0, width);
-// xoff2 += 0.01;
 
+
+function checkOverlap () {
+//if the user catches the lady shows heart
+  let d = dist(user.x, user.y, chased.x, chased.y);
+  if (d < userImg.pixels/2 + chasedImg.pixels/2) {
+    user.sizeX = user.sizeX +10;
+   // state = `romance`;
+   romance();
+
+  }
+}
+
+  function romance(){
+    image(heartImg, user.x, user.y);
+  }
+
+
+
+
+  function move() {
   //moves the user's circle
   user.x = user.x + user.vx;
   user.y = user.y + user.vy;
@@ -118,12 +157,15 @@ encounter.vy = random(-encounter.speed, encounter.speed);
   // move circle C
   encounter.x = encounter.x + encounter.vx;
   encounter.y = encounter.y + encounter.vy;
+}
 
-  //display circles
+  function display(){
+  let x = map(noise(xoff), 0, 1, 0, width);
+  xoff += 0.009;
   fill(255, 0, 0);
-  image(chasedImg, x, chased.y,  250, 230);
+  image(chasedImg, x, chased.y,  chased.sizeX, chased.sizeY);
   fill(0, 255, 0);
-  image(userImg, user.x, user.y, 200, 200);
+  image(userImg, user.x, user.y, user.sizeX, user.sizeY);
   fill(0, 0, 255);
   image(encounterImg, encounter.x, encounter.y, 200, 250);
 }
