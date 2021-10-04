@@ -1,6 +1,7 @@
 let userImg;
 let encounterImg;
 let chasedImg;
+let ballroomImg;
 
 
 let chased = {
@@ -31,9 +32,10 @@ let encounter = {
 let xoff = 0;
 
 function preload(){
-  userImg = loadImage("assets/images/user-pic.png")
-  encounterImg = loadImage("assets/images/encounter.png")
-  chasedImg = loadImage("assets/images/chased.png")
+  userImg = loadImage("assets/images/user-pic.png");
+  encounterImg = loadImage("assets/images/encounter.png");
+  chasedImg = loadImage("assets/images/chased.png");
+  ballroomImg = loadImage("assets/images/ballroom.png");
 }
 
 
@@ -48,8 +50,8 @@ function setup(){
   chased.x = width/2 * 5;
   chased.y =  height/2 ;
 
-  encounter.x = width/4;
-  encounter.y = height/4
+  encounter.x = width/3;
+  encounter.y = height/3
 
   // makes user's circle move accoring to its speed
   user.vx = user.vx + user.speed;
@@ -60,6 +62,8 @@ function setup(){
 
 function draw(){
   background(0);
+  imageMode(CENTER);
+  image(ballroomImg, width/2, height/2, 2600, 2600);
 
 
   // control user's  horizontal movement with keyboard arrows
@@ -87,7 +91,7 @@ function draw(){
   // makes the chased jittery (tries to escape user and encounter)
   let change1 = random();
   if (change1 < 0.04) {
-  chased.vx = random(-chased.speed, chased.speed);
+  //chased.vx = random(-chased.speed, chased.speed);
   chased.vy = random(-chased.speed, chased.speed);
 }
 // makes the chased move smoother horizontally
@@ -96,7 +100,7 @@ function draw(){
 
 // makes the encounter jittery (trying to follow the chased)
 let change2 = random();
-if (change2 < 0.1) {
+if (change2 < 0.07) {
 encounter.vx = random(-encounter.speed, encounter.speed);
 encounter.vy = random(-encounter.speed, encounter.speed);
 }
@@ -117,9 +121,9 @@ encounter.vy = random(-encounter.speed, encounter.speed);
 
   //display circles
   fill(255, 0, 0);
-  image(chasedImg, x, chased.y,  300, 280);
+  image(chasedImg, x, chased.y,  250, 230);
   fill(0, 255, 0);
-  image(userImg, user.x, user.y, 300, 300);
+  image(userImg, user.x, user.y, 200, 200);
   fill(0, 0, 255);
-  image(encounterImg,  encounter.y, encounter.size, 300, 350);
+  image(encounterImg, encounter.x, encounter.y, 200, 250);
 }
