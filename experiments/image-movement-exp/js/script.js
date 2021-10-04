@@ -87,11 +87,18 @@ function draw(){
     user.vy = 0;
   }
 
+//make the chased move to random directions
   let change1 = random();
   if (change1 < 0.04) {
   chased.vx = random(-chased.speed, chased.speed);
   chased.vy = random(-chased.speed, chased.speed);
 }
+//make the encounter move to random directions
+let change2 = random();
+if (change2 < 0.07) {
+encounter.vx = random(-encounter.speed, encounter.speed);
+encounter.vy = random(-encounter.speed, encounter.speed);
+  }
 
 // make the characters move
   user.x = user.x + user.vx;
@@ -100,7 +107,8 @@ function draw(){
   chased.x = chased.x + chased.vx;
   chased.y = chased.y + chased.vy;
 
-
+  encounter.x = encounter.x + encounter.vx;
+  encounter.y = encounter.y + encounter.vy;
 
 
 
