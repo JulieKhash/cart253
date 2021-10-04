@@ -1,6 +1,7 @@
 let userImg;
 let chasedImg;
 let heartImg;
+let brokenImg;
 let ballroomImg;
 let encounterImg;
 
@@ -41,6 +42,7 @@ function preload(){
   chasedImg = loadImage("assets/images/chased.png");
   encounterImg = loadImage("assets/images/encounter.png");
   heartImg = loadImage("assets/images/love.png");
+  brokenImg = loadImage("assets/images/broken.png");
   ballroomImg = loadImage("assets/images/ballroom.png");
 
 }
@@ -121,12 +123,15 @@ encounter.vy = random(-encounter.speed, encounter.speed);
   let d = dist(user.x, user.y, x, chased.y);
   if (d < user.sizeY/4 + chased.sizeY/4){
     image(heartImg, user.x, user.y +10);
+    image(brokenImg, encounter.x, encounter.y-25);
+
     noLoop();
   }
   //check if encounter overlaps with the chased
   let dis = dist(encounter.x, encounter.y, x, chased.y);
   if (dis < encounter.sizeY/4 + chased.sizeY/4){
     image(heartImg, encounter.x, encounter.y+10);
+    image(brokenImg, user.x, user.y-25);
     noLoop();
   }
 
