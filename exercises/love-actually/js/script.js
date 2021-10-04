@@ -1,4 +1,5 @@
 let userImg;
+let encounterImg;
 
 
 let chased = {
@@ -30,6 +31,7 @@ let xoff = 0;
 
 function preload(){
   userImg = loadImage("assets/images/user-pic.png")
+  encounterImg = loadImage("assets/images/encounter.png")
 }
 
 
@@ -117,5 +119,5 @@ encounter.vy = random(-encounter.speed, encounter.speed);
   fill(0, 255, 0);
   image(userImg, user.x, user.y, 300, 300);
   fill(0, 0, 255);
-  ellipse(encounter.x,  encounter.y, encounter.size);
+  image(encounterImg,  encounter.y, encounter.size, 300, 350);
 }
