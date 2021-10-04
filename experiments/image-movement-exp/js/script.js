@@ -1,7 +1,8 @@
 let userImg;
 let chasedImg;
 let heartImg;
-
+let ballroomImg;
+let encounterImg;
 
 let chased = {
   x: undefined,
@@ -22,6 +23,15 @@ let user = {
   vy: 0,
   speed: 2
 }
+let encounter = {
+  x: undefined,
+  y: undefined,
+  sizeX: 200,
+  sizeY: 250,
+  vx: 0,
+  vy: 0,
+  speed: 4
+}
 
 let xoff = 0;
 
@@ -29,7 +39,9 @@ let xoff = 0;
 function preload(){
   userImg = loadImage("assets/images/user.png");
   chasedImg = loadImage("assets/images/chased.png");
+  encounterImg = loadImage("assets/images/encounter.png");
   heartImg = loadImage("assets/images/love.png");
+  ballroomImg = loadImage("assets/images/ballroom.png");
 
 }
 
@@ -43,12 +55,18 @@ function setup(){
 
   chased.x = width/2 * 5;
   chased.y =  height/2 ;
+
+  encounter.x = width/3;
+  encounter.y = height/3
 }
 
 function draw(){
   background(0);
+  imageMode(CENTER);
+  image(ballroomImg, width/2, height/2, 2600, 2600);
 
 
+// control user's vertical movement with keyboard arrows
   if (keyIsDown (LEFT_ARROW)) {
     user.vx = -user.speed;
   }
@@ -69,19 +87,23 @@ function draw(){
     user.vy = 0;
   }
 
-
   let change1 = random();
   if (change1 < 0.04) {
   chased.vx = random(-chased.speed, chased.speed);
   chased.vy = random(-chased.speed, chased.speed);
 }
 
-
+// make the characters move
   user.x = user.x + user.vx;
   user.y = user.y + user.vy;
 
   chased.x = chased.x + chased.vx;
   chased.y = chased.y + chased.vy;
+
+
+
+
+
 
 
   let x = map(noise(xoff), 0, 1, 0, width);
@@ -95,10 +117,10 @@ function draw(){
   }
 
 
+  //Display images
 
 
-  //fill(255, 0, 0);
   image(chasedImg, x, chased.y,  chased.sizeX, chased.sizeY);
-  //fill(0, 255, 0);
   image(userImg, user.x, user.y, user.sizeX, user.sizeY);
+  image(encounterImg, encounter.x, encounter.y, encounter.sizeX, encounter.sizeY);
 }

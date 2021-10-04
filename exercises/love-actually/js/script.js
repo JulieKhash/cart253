@@ -128,10 +128,6 @@ encounter.vy = random(-encounter.speed, encounter.speed);
 }
 
 
-
-
-
-
   function move() {
   //moves the user's circle
   user.x = user.x + user.vx;
