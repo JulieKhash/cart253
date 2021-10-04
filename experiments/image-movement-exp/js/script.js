@@ -117,17 +117,21 @@ encounter.vy = random(-encounter.speed, encounter.speed);
   let x = map(noise(xoff), 0, 1, 0, width);
   xoff += 0.009;
 
-  //check if overlap
+  //check if overlap user overlaps with chased
   let d = dist(user.x, user.y, x, chased.y);
   if (d < user.sizeY/4 + chased.sizeY/4){
     image(heartImg, user.x, user.y +10);
     noLoop();
   }
+  //check if encounter overlaps with the chased
+  let dis = dist(encounter.x, encounter.y, x, chased.y);
+  if (dis < encounter.sizeY/4 + chased.sizeY/4){
+    image(heartImg, encounter.x, encounter.y+10);
+    noLoop();
+  }
 
 
   //Display images
-
-
   image(chasedImg, x, chased.y,  chased.sizeX, chased.sizeY);
   image(userImg, user.x, user.y, user.sizeX, user.sizeY);
   image(encounterImg, encounter.x, encounter.y, encounter.sizeX, encounter.sizeY);
