@@ -162,6 +162,7 @@ function checkOverlap () {
   function display(){
   let x = map(noise(xoff), 0, 1, 0, width);
   xoff += 0.009;
+
   fill(255, 0, 0);
   image(chasedImg, x, chased.y,  chased.sizeX, chased.sizeY);
   fill(0, 255, 0);
