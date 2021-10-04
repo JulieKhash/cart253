@@ -1,4 +1,4 @@
-let circleA = {
+let chased = {
   x: undefined,
   y: undefined,
   size: 100,
@@ -6,7 +6,7 @@ let circleA = {
   vy: 0,
   speed: 2
 }
-let userB = {
+let user = {
   x: undefined,
   y: undefined,
   size: 100,
@@ -14,7 +14,7 @@ let userB = {
   vy: 0,
   speed: 2
 }
-let circleC = {
+let encounter = {
   x: undefined,
   y: undefined,
   size: 100,
@@ -29,18 +29,18 @@ function setup(){
   createCanvas(windowWidth, windowHeight);
 
   // Cicrles' positions on canvas
-  userB.x = width/3;
-  userB.y = height/3;
+  user.x = width/3;
+  user.y = height/3;
 
-  circleA.x = width/2;
-  circleA.y =  height/2;
+  chased.x = width/2;
+  chased.y =  height/2;
 
-  circleC.x = width/4;
-  circleC.y = height/4
+  encounter.x = width/4;
+  encounter.y = height/4
 
   // makes user's circle move accoring to its speed
-  userB.vx = userB.vx + userB.speed;
-  userB.vy = userB.vy + userB.speed;
+  user.vx = user.vx + user.speed;
+  user.vy = user.vy + user.speed;
 
 }
 
@@ -48,51 +48,58 @@ function setup(){
 function draw(){
   background(0);
 
-  // control user's circle with mouseX and mouseY
-  if (mouseX < userB.x) {
-    userB.vx = -userB.speed;
+  // control user's  horizontal movement with keyboard arrows
+  if (keyIsDown (LEFT_ARROW)) {
+    user.vx = -user.speed;
+  }
+  else if (keyIsDown(RIGHT_ARROW)) {
+    user.vx = user.speed;
   }
   else {
-    userB.vx = userB.speed;
+    user.vx = 0;
+  }
+// control user's vertical movement with keyboard arrows
+  if (keyIsDown(UP_ARROW)){
+    user.vy = -user.speed;
+  }
+  else if (keyIsDown(DOWN_ARROW)){
+    user.vy = user.speed;
+  }
+  else {
+    user.vy = 0;
   }
 
-  if (mouseY < userB.y) {
-    userB.vy = -userB.speed;
-  }
-  else {
-    userB.vy = userB.speed;
-  }
 
   // makes circle A jittery (tries to escape user)
   let change1 = random();
-  if (change1 < 0.03) {
-  circleA.vx = random(-circleA.speed, circleA.speed);
-  circleA.vy = random(-circleA.speed, circleA.speed);
+  if (change1 < 0.04) {
+  chased.vx = random(-chased.speed, chased.speed);
+  chased.vy = random(-chased.speed, chased.speed);
 }
 
 let change2 = random();
-if (change2 < 0.03) {
-circleC.vx = random(-circleC.speed, circleC.speed);
-circleC.vy = random(-circleC.speed, circleC.speed);
+if (change2 < 0.1) {
+encounter.vx = random(-encounter.speed, encounter.speed);
+encounter.vy = random(-encounter.speed, encounter.speed);
 }
 
   //moves the user's circle
-  userB.x = userB.x + userB.vx;
-  userB.y = userB.y + userB.vy;
+  user.x = user.x + user.vx;
+  user.y = user.y + user.vy;
 
   //moves circle A
-  circleA.x = circleA.x + circleA.vx;
-  circleA.y = circleA.y + circleA.vy;
+  chased.x = chased.x + chased.vx;
+  chased.y = chased.y + chased.vy;
 
   // move circle C
-  circleC.x = circleC.x + circleC.vx;
-  circleC.y = circleC.y + circleC.vy;
+  encounter.x = encounter.x + encounter.vx;
+  encounter.y = encounter.y + encounter.vy;
 
   //display circles
   fill(255, 0, 0);
-  ellipse(circleA.x, circleA.y, circleA.size);
+  ellipse(chased.x, chased.y, chased.size);
   fill(0, 255, 0);
-  rect(userB.x, userB.y, userB.size);
+  rect(user.x, user.y, user.size);
   fill(0, 0, 255);
-  ellipse(circleC.x, circleC.y, circleC.size);
+  ellipse(encounter.x,  encounter.y, encounter.size);
 }
