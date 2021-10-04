@@ -4,7 +4,7 @@ let circleA = {
   size: 100,
   vx: 0,
   vy: 0,
-  speed: 3
+  speed: 2
 }
 let circleB = {
   x: undefined,
@@ -20,7 +20,7 @@ let circleC = {
   size: 100,
   vx: 0,
   vy: 0,
-  speed: 3
+  speed: 1
 }
 
 
@@ -28,19 +28,20 @@ let circleC = {
 function setup(){
   createCanvas(windowWidth, windowHeight);
 
-  // Circles' positions on canvas
+  // Cicrles' positions on canvas
   circleB.x = width/3;
   circleB.y = height/3;
 
   circleA.x = width/2;
-  circleA.y = height - 100;
+  circleA.y =  height/2;
 
-  // makes circles move accoring to the speed
+  circleC.x = width/4;
+  circleC.y = height/4
+
+  // makes user's circle move accoring to its speed
   circleB.vx = circleB.vx + circleB.speed;
   circleB.vy = circleB.vy + circleB.speed;
 
-  circleA.vx = circleA.vx + circleA.speed;
-  circleA.vy = circleA.vy + circleA.speed;
 }
 
 
@@ -62,6 +63,17 @@ function draw(){
     circleB.vy = circleB.speed;
   }
 
+  // makes circle A jittery (tries to escape user)
+  let change = random();
+  if (change < 0.03) {
+  circleA.vx = random(-circleA.speed, circleA.speed);
+  circleA.vy = random(-circleA.speed, circleA.speed);
+}
+
+  circleC.vx = circleB.vx + -circleC.speed;
+  circleC.vy = circleB.vy + -circleC.speed;
+
+
 
   //moves the user's circle
   circleB.x = circleB.x + circleB.vx;
@@ -70,6 +82,12 @@ function draw(){
   //moves circle A
   circleA.x = circleA.x + circleA.vx;
   circleA.y = circleA.y + circleA.vy;
+
+  // move circle C
+  circleC.x = circleC.x + circleC.vx;
+  circleC.y = circleC.y + circleC.vy;
+
+
 
   //display circles
   fill(255, 0, 0);
