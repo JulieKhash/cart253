@@ -27,6 +27,8 @@ let circle2 ={
   speed: 2
 }
 
+let state = `simulation`
+
 
 "use strict";
 
@@ -63,9 +65,20 @@ function draw() {
   imageMode(CENTER);
   image(chessboarImg, width/2, height/2, 650, 650);
 
-  simulation();
-
+  if (state === `title`){
+    title();
+  }
+  else if (state === `simulation`){
+    simulation();
+  }
+  else if (state === `romance`){
+    romance();
+  }
+  else if (state === `loss`){
+  }
+  
 }
+
 
 function simulation(){
   userControl();
