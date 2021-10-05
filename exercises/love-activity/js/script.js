@@ -71,9 +71,9 @@ function draw() {
   else if (state === `simulation`){
     simulation();
   }
-  // else if (state === `romance`){
-  //   romance();
-  // }
+  else if (state === `romance`){
+    romance();
+  }
   // else if (state === `loss`){
   // }
 
@@ -93,6 +93,19 @@ function title(){
   rectMode(CENTER);
   rect(width/2, height/2, 300, 150);
   pop();
+}
+
+function romance(){
+  push();
+  textAlign(CENTER, CENTER);
+  textFont(`Georgia`);
+  textSize(40);
+  fill(255, 0, 0);
+  text(`True Love`, circle1.x, circle1.y+ 50);
+  fill(200, 0, 0, 100);
+  rectMode(CENTER);
+  rect(circle1.x, circle1.y+ 50, 300, 150);
+  pop()
 }
 
 
@@ -142,7 +155,7 @@ function simulation(){
   function checkOverlap(){
   let d = dist(circle1.x, circle1.y, circle2.x, circle2.y);
   if (d < circle1.size/3 + circle2.size/3){
-    //Love ending
+    state = `romance`;
   }
 }
 
