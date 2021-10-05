@@ -35,6 +35,7 @@ let encounter = {
 }
 
 let xoff = 0;
+let state = `title`
 
 
 function preload(){
@@ -53,13 +54,15 @@ function setup(){
 
   // objects' positions on canvas
   user.x = width/3;
-  user.y = height/3;
+  user.y = height/3-200;
 
   chased.x = width/2 * 5;
   chased.y =  height/2 ;
 
-  encounter.x = width/3;
-  encounter.y = height/3
+  encounter.x = width/3-10;
+  encounter.y = height/3*2;
+
+
 }
 
 function draw(){
@@ -67,7 +70,38 @@ function draw(){
   imageMode(CENTER);
   image(ballroomImg, width/2, height/2, 2600, 2600);
 
+  simulation();
 
+
+  // if (state === `title`) {
+  //   title();
+  // }
+  // else if (state === `simulation`){
+  //   simulation();
+  // }
+  // else if (state === `romance`){
+  //   romance();
+  // }
+  // else if (state === `lost`){
+  //   lost();
+  // }
+  // else if (state === `ballisOver`){
+  //   ballisOver();
+  // }
+
+}
+  function simulation(){
+    userControl();
+    randomDirection();
+    move();
+    checkuserOVerlap();
+    checkencounterOverlap();
+    chasedOffscreen();
+    display();
+  }
+
+
+  function userControl(){
 // control user's vertical movement with keyboard arrows
   if (keyIsDown (LEFT_ARROW)) {
     user.vx = -user.speed;
@@ -88,8 +122,10 @@ function draw(){
   else {
     user.vy = 0;
   }
+}
 
-//make the chased move to random directions
+  function randomDirection(){
+  //make the chased move to random directions
   let change1 = random();
   if (change1 < 0.04) {
   chased.vx = random(-chased.speed, chased.speed);
@@ -101,7 +137,9 @@ if (change2 < 0.07) {
 encounter.vx = random(-encounter.speed, encounter.speed);
 encounter.vy = random(-encounter.speed, encounter.speed);
   }
+}
 
+  function move(){
 // make the characters move
   user.x = user.x + user.vx;
   user.y = user.y + user.vy;
@@ -111,17 +149,16 @@ encounter.vy = random(-encounter.speed, encounter.speed);
 
   encounter.x = encounter.x + encounter.vx;
   encounter.y = encounter.y + encounter.vy;
+}
 
 
 
-
-
-  let x = map(noise(xoff), 0, 1, 0, width);
-  xoff += 0.009;
-
-  //check if overlap user overlaps with chased
-  let d = dist(user.x, user.y, x, chased.y);
-  if (d < user.sizeY/4 + chased.sizeY/4){
+    function checkuserOVerlap(){
+      let x = map(noise(xoff), 0, 1, 0, width);
+      xoff += 0.0009;
+    //check if overlap user overlaps with chased
+    let d = dist(user.x, user.y, x, chased.y);
+    if (d < user.sizeY/4 + chased.sizeY/4){
 
     // image(ballroomImg, width/2, height/2, 2600, 2600);
     tint(0,30, 30);
@@ -134,8 +171,12 @@ encounter.vy = random(-encounter.speed, encounter.speed);
     encounter.sizeY = 0.1;
     noLoop();
   }
+}
 
-  //check if encounter overlaps with the chased
+
+  function checkencounterOverlap(){
+    let x = map(noise(xoff), 0, 1, 0, width);
+    xoff += 0.0009;
   let dis = dist(encounter.x, encounter.y, x, chased.y);
   if (dis < encounter.sizeY/4 + chased.sizeY/4){
     tint(0, 60, 60);
@@ -143,8 +184,11 @@ encounter.vy = random(-encounter.speed, encounter.speed);
     image(brokenImg, user.x, user.y-15);
     noLoop();
   }
+}
 
-  //check if the chased goes off screen
+  function chasedOffscreen(){
+    let x = map(noise(xoff), 0, 1, 0, width);
+    xoff += 0.0009;
   if (x > width+100 || x < 0, chased.y > height+100 || chased.y < 0){
     tint(0, 60, 60)
     image(brokenImg, user.x, user.y-15);
@@ -152,11 +196,13 @@ encounter.vy = random(-encounter.speed, encounter.speed);
     image(ballroomImg, width/2, height/2, 2600, 2600);
     noLoop();
   }
+}
 
-
-
-  //Display images
+  // displays images and x values of the chased
+  function display() {
+  let x = map(noise(xoff), 0, 1, 0, width);
+  xoff += 0.0009;
   image(chasedImg, x, chased.y,  chased.sizeX, chased.sizeY);
   image(userImg, user.x, user.y, user.sizeX, user.sizeY);
   image(encounterImg, encounter.x, encounter.y, encounter.sizeX, encounter.sizeY);
-}
+  }
