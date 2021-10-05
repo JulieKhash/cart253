@@ -63,8 +63,19 @@ function draw() {
   imageMode(CENTER);
   image(chessboarImg, width/2, height/2, 650, 650);
 
+  simulation();
 
-  // function userControl(){
+}
+
+function simulation(){
+  userControl();
+  move();
+  checkOffscreen()
+  checkOverlap();
+  display();
+}
+
+  function userControl(){
 // control user's vertical movement with keyboard arrows
   if (keyIsDown (LEFT_ARROW)) {
     circle1.vx = -user.speed;
@@ -85,10 +96,10 @@ function draw() {
   else {
     circle1.vy = 0;
   }
-// }
+ }
 
-  function checkOffscreen(){
   //check if the circles go off canvas
+  function checkOffscreen(){
   if (circle2.x > width || circle2.x < 0 || circle2.y > height || circle2.y < 0) {
     return true;
   }
@@ -98,20 +109,27 @@ function draw() {
 }
 
 
+  // check if circles overlap
+  function checkOverlap(){
+  let d = dist(circle1.x, circle1.y, circle2.x, circle2.y);
+  if (d < circle1.size/3 + circle2.size/3){
+    //Love ending
+  }
+}
 
-
-
-  //makes the circles move
+//makes the circles move
+  function move(){
   circle1.x = circle1.x + circle1.vx;
   circle1.y = circle1.y + circle1.vy;
 
   circle2.x = circle2.x + circle2.vx;
   circle2.y = circle2.y + circle2.vy;
+}
 
   //display circles
+  function display(){
   fill(255, 0, 30);
   ellipse(circle1.x, circle1.y, circle1.size);
   fill(0, 255, 30);
   ellipse(circle2.x, circle2.y, circle2.size);
-
 }
