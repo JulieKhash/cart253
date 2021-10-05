@@ -4,6 +4,7 @@ let heartImg;
 let brokenImg;
 let ballroomImg;
 let encounterImg;
+let maskImg;
 
 let chased = {
   x: undefined,
@@ -45,6 +46,7 @@ function preload(){
   heartImg = loadImage("assets/images/love.png");
   brokenImg = loadImage("assets/images/broken.png");
   ballroomImg = loadImage("assets/images/ballroom.png");
+  maskImg = loadImage("assets/images/mask.png");
 
 }
 
@@ -70,15 +72,13 @@ function draw(){
   imageMode(CENTER);
   image(ballroomImg, width/2, height/2, 2600, 2600);
 
-  simulation();
 
-
-  // if (state === `title`) {
-  //   title();
-  // }
-  // else if (state === `simulation`){
-  //   simulation();
-  // }
+  if (state === `title`) {
+    title();
+  }
+  else if (state === `simulation`){
+    simulation();
+  }
   // else if (state === `romance`){
   //   romance();
   // }
@@ -88,6 +88,25 @@ function draw(){
   // else if (state === `ballisOver`){
   //   ballisOver();
   // }
+
+
+function title(){
+  push();
+  textSize(100);
+  fill(255,0, 0);
+  textFont(`Sansita Swashed`);
+  textAlign(CENTER, CENTER);
+  text("MASQUERADE AFFAIR", width/2, height/3);
+  textSize(50);
+  fill(0, 60, 60);
+  text("Catch Your Romance", width/2, height/3+120);
+  textSize(50);
+  fill(200, 200, 200);
+  text("press any key", width/2, height-100);
+  image(maskImg, width/2+50, height/3-50, 400, 400);
+  pop();
+}
+
 
 }
   function simulation(){
@@ -205,4 +224,10 @@ encounter.vy = random(-encounter.speed, encounter.speed);
   image(chasedImg, x, chased.y,  chased.sizeX, chased.sizeY);
   image(userImg, user.x, user.y, user.sizeX, user.sizeY);
   image(encounterImg, encounter.x, encounter.y, encounter.sizeX, encounter.sizeY);
+  }
+
+  function keyPressed(){
+    if (state === `title`) {
+      state = `simulation`;
+    }
   }
