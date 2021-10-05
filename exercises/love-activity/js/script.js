@@ -15,7 +15,7 @@ let circle1 ={
   size: 50,
   vx:0,
   vy:0,
-  speed: 2
+  speed: 3
 }
 
 let circle2 ={
@@ -27,7 +27,8 @@ let circle2 ={
   speed: 2
 }
 
-let state = `title`
+let xoff = 0;
+let state = `simulation`
 
 
 "use strict";
@@ -44,11 +45,11 @@ chessboarImg = loadImage("assets/images/chessboard.png")
 function setup() {
   createCanvas(700, 700);
 
-  circle1.x = width-630;
-  circle1.y = height-630;
+  circle1.x = width-550;
+  circle1.y = height-550;
 
-  circle2.x = width -70;
-  circle2.y = height-70;
+  circle2.x = width -150;
+  circle2.y = height-150;
 
   //start circles moving
   // circle1.vx = random(-circle1.speed, circle1.speed);
@@ -56,6 +57,7 @@ function setup() {
 
   circle2.vx = random(-circle2.speed, circle2.speed);
   circle2.vy = random(-circle2.speed, circle2.speed);
+
 
 }
 
@@ -133,7 +135,7 @@ function simulation(){
   function userControl(){
 // control user's vertical movement with keyboard arrows
   if (keyIsDown (LEFT_ARROW)) {
-    circle1.vx = -user.speed;
+    circle1.vx = -circle1.speed;
   }
   else if (keyIsDown(RIGHT_ARROW)) {
     circle1.vx = circle1.speed;
@@ -171,15 +173,19 @@ function simulation(){
 
 //makes the circles move
   function move(){
+  let x = map(noise(xoff), 0, 1, 0, width);
+  xoff += 0.009;
+
   circle1.x = circle1.x + circle1.vx;
   circle1.y = circle1.y + circle1.vy;
 
-  circle2.x = circle2.x + circle2.vx;
+  circle2.x = x + circle2.vx;
   circle2.y = circle2.y + circle2.vy;
 }
 
   //display circles
   function display(){
+
   fill(255, 0, 30);
   ellipse(circle1.x, circle1.y, circle1.size);
   fill(0, 255, 30);
