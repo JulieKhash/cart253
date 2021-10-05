@@ -1,3 +1,7 @@
+
+//to do figure out states
+
+
 let userImg;
 let chasedImg;
 let heartImg;
@@ -190,15 +194,6 @@ encounter.vy = random(-encounter.speed, encounter.speed);
 }
 
 
-  function isuserOverlap(){
-    let d = dist(user.x, user.y, x, chased.y);
-    if (d < user.sizeY/4 + chased.sizeY/4){
-      return true;
-  }
-  else {
-    return false;
-  }
-}
 
     function checkuserOVerlap(){
       let x = map(noise(xoff), 0, 1, 0, width);
@@ -218,7 +213,6 @@ encounter.vy = random(-encounter.speed, encounter.speed);
     noLoop();
   }
 }
-
 
   function checkencounterOverlap(){
     let x = map(noise(xoff), 0, 1, 0, width);
