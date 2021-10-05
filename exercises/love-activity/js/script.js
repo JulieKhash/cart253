@@ -74,9 +74,9 @@ function draw() {
   else if (state === `romance`){
     romance();
   }
-  // else if (state === `loss`){
-  // }
-
+  else if (state === `loss`){
+    loss();
+  }
 }
 
 function title(){
@@ -101,8 +101,21 @@ function romance(){
   textFont(`Georgia`);
   textSize(40);
   fill(255, 0, 0);
-  text(`True Love`, circle1.x, circle1.y+ 50);
+  text(`LOVER`, circle1.x, circle1.y+ 50);
   fill(200, 0, 0, 100);
+  rectMode(CENTER);
+  rect(circle1.x, circle1.y+ 50, 300, 150);
+  pop()
+}
+
+function loss(){
+  push();
+  textAlign(CENTER, CENTER);
+  textFont(`Georgia`);
+  textSize(40);
+  fill(0, 100, 100);
+  text(`IT'S OVER`, circle1.x, circle1.y+ 50);
+  fill(0, 30, 100, 100);
   rectMode(CENTER);
   rect(circle1.x, circle1.y+ 50, 300, 150);
   pop()
@@ -143,11 +156,8 @@ function simulation(){
   //check if the circles go off canvas
   function checkOffscreen(){
   if (circle2.x > width || circle2.x < 0 || circle2.y > height || circle2.y < 0) {
-    return true;
+    state = `loss`;
   }
-  else{
-    return false;
-  }  //Lost ending
 }
 
 
