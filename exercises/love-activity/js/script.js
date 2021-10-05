@@ -15,7 +15,7 @@ let circle1 ={
   size: 50,
   vx:0,
   vy:0,
-  speed: 3
+  speed: 2
 }
 
 let circle2 ={
@@ -24,11 +24,11 @@ let circle2 ={
   size: 50,
   vx:0,
   vy:0,
-  speed: 2
+  speed: 4
 }
 
 let xoff = 0;
-let state = `simulation`
+let state = `title`
 
 
 "use strict";
@@ -70,6 +70,9 @@ function draw() {
   if (state === `title`){
     title();
   }
+  else if (state === `instruction`){
+    instruction();
+  }
   else if (state === `simulation`){
     simulation();
   }
@@ -83,18 +86,31 @@ function draw() {
 
 function title(){
   push();
+  fill(0, 0, 0, 100);
+  rectMode(CENTER);
+  rect(width/2, height/2, 300, 150);
   textAlign(CENTER, CENTER);
   textFont(`Georgia`);
   textSize(40);
-  fill(255, 0, 0);
+  fill(210, 0, 30);
   text(`CHESS L/OVER`, width/2, height/2);
   textSize(20);
   fill(200, 200, 200);
   text(`Press a key`, width/2, height-150);
+  pop();
+}
+
+function instruction(){
+  push();
   fill(0, 0, 0, 100);
   rectMode(CENTER);
-  rect(width/2, height/2, 300, 150);
-  pop();
+  rect(width/2, height/2, 450, 100);
+  textAlign(CENTER, CENTER);
+  textFont(`Georgia`);
+  textSize(30);
+  fill(200, 200, 200);
+  text(`Use arrow keys to control`, width/2, height/2);
+  pop()
 }
 
 function romance(){
@@ -162,7 +178,6 @@ function simulation(){
   }
 }
 
-
   // check if circles overlap
   function checkOverlap(){
   let d = dist(circle1.x, circle1.y, circle2.x, circle2.y);
@@ -193,7 +208,10 @@ function simulation(){
 }
 
 function keyPressed(){
-  if (state === `title`){
+  if (state === `instruction`){
     state = `simulation`;
+  }
+  else if (state === `title`){
+    state = `instruction`;
   }
 }
