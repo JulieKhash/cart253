@@ -49,8 +49,8 @@ function setup() {
   circle2.y = height-70;
 
   //start circles moving
-  circle1.vx = random(-circle1.speed, circle1.speed);
-  circle1.vy = random(-circle1.speed, circle1.speed);
+  // circle1.vx = random(-circle1.speed, circle1.speed);
+  // circle1.vy = random(-circle1.speed, circle1.speed);
 
   circle2.vx = random(-circle2.speed, circle2.speed);
   circle2.vy = random(-circle2.speed, circle2.speed);
@@ -64,6 +64,38 @@ function draw() {
   image(chessboarImg, width/2, height/2, 650, 650);
 
 
+  // function userControl(){
+// control user's vertical movement with keyboard arrows
+  if (keyIsDown (LEFT_ARROW)) {
+    circle1.vx = -user.speed;
+  }
+  else if (keyIsDown(RIGHT_ARROW)) {
+    circle1.vx = circle1.speed;
+  }
+  else {
+    circle1.vx = 0;
+  }
+// control circle1's vertical movement with keyboard arrows
+  if (keyIsDown(UP_ARROW)){
+    circle1.vy = -circle1.speed;
+  }
+  else if (keyIsDown(DOWN_ARROW)){
+    circle1.vy = circle1.speed;
+  }
+  else {
+    circle1.vy = 0;
+  }
+// }
+
+  //check if the circles go off canvas
+  if (circle2.x > width || circle2.x < 0 || circle2.y > height || circle2.y < 0) {
+    return true;
+  }
+  else{
+    return false;
+  }  //Lost ending 
+
+
   //makes the circles move
   circle1.x = circle1.x + circle1.vx;
   circle1.y = circle1.y + circle1.vy;
@@ -71,7 +103,7 @@ function draw() {
   circle2.x = circle2.x + circle2.vx;
   circle2.y = circle2.y + circle2.vy;
 
-
+  //display circles
   fill(255, 0, 30);
   ellipse(circle1.x, circle1.y, circle1.size);
   fill(0, 255, 30);
