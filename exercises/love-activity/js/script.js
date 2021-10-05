@@ -1,12 +1,12 @@
 /**
 Love Actually - Chess L/Over
-Author Name
+Julie Khashimova
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
+The player must catch the other checker to win, if it escapes the game is over
 */
 
-///press a key to get started
+"use strict";
+
 let chessboarImg;
 
 let circle1 ={
@@ -31,30 +31,22 @@ let xoff = 0;
 let state = `title`
 
 
-"use strict";
-
-/**
-Description of preload
-*/
 function preload() {
 chessboarImg = loadImage("assets/images/chessboard.png")
 }
 
 
-
 function setup() {
   createCanvas(700, 700);
 
+  // sets up the position of the circles
   circle1.x = width-550;
   circle1.y = height-550;
 
   circle2.x = width -150;
   circle2.y = height-150;
 
-  //start circles moving
-  // circle1.vx = random(-circle1.speed, circle1.speed);
-  // circle1.vy = random(-circle1.speed, circle1.speed);
-
+  //makes a circle to move in random directions
   circle2.vx = random(-circle2.speed, circle2.speed);
   circle2.vy = random(-circle2.speed, circle2.speed);
 
@@ -66,6 +58,7 @@ function draw() {
   imageMode(CENTER);
   image(chessboarImg, width/2, height/2, 650, 650);
 
+  //checks the state of the program
   if (state === `title`){
     title();
   }
@@ -83,6 +76,7 @@ function draw() {
   }
 }
 
+// draws a title
 function title(){
   push();
   fill(0, 0, 0, 100);
@@ -99,6 +93,7 @@ function title(){
   pop();
 }
 
+// shows instruction
 function instruction(){
   push();
   fill(0, 0, 0, 100);
@@ -112,6 +107,7 @@ function instruction(){
   pop()
 }
 
+//shows love text
 function romance(){
   push();
   textAlign(CENTER, CENTER);
@@ -125,6 +121,7 @@ function romance(){
   pop()
 }
 
+// shows the over text
 function loss(){
   push();
   textAlign(CENTER, CENTER);
@@ -138,7 +135,7 @@ function loss(){
   pop()
 }
 
-
+//calls all the simulation part of the program
 function simulation(){
   userControl();
   move();
@@ -147,6 +144,7 @@ function simulation(){
   display();
 }
 
+ //user keyboard control function
   function userControl(){
 // control user's vertical movement with keyboard arrows
   if (keyIsDown (LEFT_ARROW)) {
