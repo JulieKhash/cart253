@@ -122,13 +122,23 @@ encounter.vy = random(-encounter.speed, encounter.speed);
   //check if overlap user overlaps with chased
   let d = dist(user.x, user.y, x, chased.y);
   if (d < user.sizeY/4 + chased.sizeY/4){
-    image(heartImg, user.x, user.y +10);
+
+    // image(ballroomImg, width/2, height/2, 2600, 2600);
+    tint(0,30, 30);
     image(brokenImg, encounter.x, encounter.y-25);
+    image(encounterImg, encounter.x, encounter.y, encounter.sizeX, encounter.sizeY);
+    tint(255, 0, 0);
+    image(userImg, user.x, user.y, user.sizeX, user.sizeY);
+    image(heartImg, user.x, user.y +10);
+    encounter.sizeX = 0.1;
+    encounter.sizeY = 0.1;
     noLoop();
   }
+
   //check if encounter overlaps with the chased
   let dis = dist(encounter.x, encounter.y, x, chased.y);
   if (dis < encounter.sizeY/4 + chased.sizeY/4){
+    tint(0, 60, 60);
     image(heartImg, encounter.x, encounter.y+10);
     image(brokenImg, user.x, user.y-15);
     noLoop();
@@ -136,11 +146,12 @@ encounter.vy = random(-encounter.speed, encounter.speed);
 
   //check if the chased goes off screen
   if (x > width+100 || x < 0, chased.y > height+100 || chased.y < 0){
+    tint(0, 60, 60)
     image(brokenImg, user.x, user.y-15);
     image(brokenImg, encounter.x, encounter.y-25);
+    image(ballroomImg, width/2, height/2, 2600, 2600);
     noLoop();
   }
-
 
 
 
