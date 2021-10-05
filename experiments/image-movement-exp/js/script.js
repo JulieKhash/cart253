@@ -79,9 +79,9 @@ function draw(){
   else if (state === `simulation`){
     simulation();
   }
-  // else if (state === `romance`){
-  //   romance();
-  // }
+  else if (state === `romance`){
+    romance();
+  }
   // else if (state === `lost`){
   //   lost();
   // }
@@ -89,6 +89,7 @@ function draw(){
   //   ballisOver();
   // }
 
+}
 
 function title(){
   push();
@@ -108,7 +109,26 @@ function title(){
 }
 
 
-}
+  function romance(){
+    push();
+    textSize(70);
+    fill(255,0, 0);
+    textFont(`Sansita Swashed`);
+    text(`I’m not going far my love. I’ll always be here. Just an inch away. I promise`, user.x, user.y -200);
+    pop();
+  }
+
+
+//   function lost(){
+//   if ()
+//   text(`Break my heart. Break it a thousand times if you like. It was only ever yours to break`)
+//
+// }
+//
+// function ballisOver(){
+//   text(`You’re my dearest punishment`)
+// }
+
   function simulation(){
     userControl();
     randomDirection();
@@ -118,7 +138,6 @@ function title(){
     chasedOffscreen();
     display();
   }
-
 
   function userControl(){
 // control user's vertical movement with keyboard arrows
@@ -171,6 +190,15 @@ encounter.vy = random(-encounter.speed, encounter.speed);
 }
 
 
+  function isuserOverlap(){
+    let d = dist(user.x, user.y, x, chased.y);
+    if (d < user.sizeY/4 + chased.sizeY/4){
+      return true;
+  }
+  else {
+    return false;
+  }
+}
 
     function checkuserOVerlap(){
       let x = map(noise(xoff), 0, 1, 0, width);
@@ -178,8 +206,7 @@ encounter.vy = random(-encounter.speed, encounter.speed);
     //check if overlap user overlaps with chased
     let d = dist(user.x, user.y, x, chased.y);
     if (d < user.sizeY/4 + chased.sizeY/4){
-
-    // image(ballroomImg, width/2, height/2, 2600, 2600);
+    state = `romance`;
     tint(0,30, 30);
     image(brokenImg, encounter.x, encounter.y-25);
     image(encounterImg, encounter.x, encounter.y, encounter.sizeX, encounter.sizeY);
