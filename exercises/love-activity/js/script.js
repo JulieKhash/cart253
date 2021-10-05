@@ -1,5 +1,5 @@
 /**
-Title of Project
+Love Actually - Chess L/Over
 Author Name
 
 This is a template. You must fill in the title,
@@ -60,7 +60,6 @@ function setup() {
 
 
 }
-
 
 function draw() {
   background(0);
