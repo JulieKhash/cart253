@@ -1,167 +1,214 @@
-let userImg;
-let encounterImg;
-let chasedImg;
-let ballroomImg;
-let heartImg;
+/**
+Love Actually - Chess L/Over
+Julie Khashimova
 
+The player must catch the other checker to win, if it escapes the game is over
+*/
 
-let chased = {
+"use strict";
+
+let chessboarImg;
+
+let circle1 ={
   x: undefined,
   y: undefined,
-  sizeX: 250,
-  sizeY: 230,
-  vx: 0,
-  vy: 0,
-  speed: 3,
-}
-let user = {
-  x: undefined,
-  y: undefined,
-  sizeX: 200,
-  sizeY: 200,
-  vx: 0,
-  vy: 0,
+  size: 50,
+  vx:0,
+  vy:0,
   speed: 2
 }
-let encounter = {
+
+let circle2 ={
   x: undefined,
   y: undefined,
-  size: 100,
-  vx: 0,
-  vy: 0,
+  size: 50,
+  vx:0,
+  vy:0,
   speed: 4
 }
 
 let xoff = 0;
+let state = `title`
 
-let state = 'title' // title, love, heartbreak, tragedy
 
-function preload(){
-  userImg = loadImage("assets/images/user-pic.png");
-  encounterImg = loadImage("assets/images/encounter.png");
-  chasedImg = loadImage("assets/images/chased.png");
-  ballroomImg = loadImage("assets/images/ballroom.png");
-  heartImg - loadImage("assets/images/broken-heart.png");
+function preload() {
+chessboarImg = loadImage("assets/images/chessboard.png")
 }
 
 
+function setup() {
+  createCanvas(700, 700);
 
-function setup(){
-  createCanvas(windowWidth, windowHeight);
+  // sets up the position of the circles
+  circle1.x = width-550;
+  circle1.y = height-550;
 
-  // objects' positions on canvas
-  user.x = width/3;
-  user.y = height/3;
+  circle2.x = width -150;
+  circle2.y = height-150;
 
-  chased.x = width/2 * 5;
-  chased.y =  height/2 ;
+  //makes a circle to move in random directions
+  circle2.vx = random(-circle2.speed, circle2.speed);
+  circle2.vy = random(-circle2.speed, circle2.speed);
 
-  encounter.x = width/3;
-  encounter.y = height/3
-
-  // makes user's circle move accoring to its speed
-  user.vx = user.vx + user.speed;
-  user.vy = user.vy + user.speed;
 
 }
 
-
-function draw(){
+function draw() {
   background(0);
   imageMode(CENTER);
-  image(ballroomImg, width/2, height/2, 2600, 2600);
-  simulation();
+  image(chessboarImg, width/2, height/2, 650, 650);
 
-
+  //checks the state of the program
+  if (state === `title`){
+    title();
+  }
+  else if (state === `instruction`){
+    instruction();
+  }
+  else if (state === `simulation`){
+    simulation();
+  }
+  else if (state === `romance`){
+    romance();
+  }
+  else if (state === `loss`){
+    loss();
+  }
 }
 
-  function simulation(){
+// draws a title
+function title(){
+  push();
+  fill(0, 0, 0, 100);
+  rectMode(CENTER);
+  rect(width/2, height/2, 300, 150);
+  textAlign(CENTER, CENTER);
+  textFont(`Georgia`);
+  textSize(40);
+  fill(210, 0, 30);
+  text(`CHESS L/OVER`, width/2, height/2);
+  textSize(20);
+  fill(200, 200, 200);
+  text(`Press a key`, width/2, height-150);
+  pop();
+}
 
-    userControl();
-    moveRandom();
-    move();
-    checkOverlap();
-    display();
-  }
+// shows instruction
+function instruction(){
+  push();
+  fill(0, 0, 0, 100);
+  rectMode(CENTER);
+  rect(width/2, height/2, 450, 100);
+  textAlign(CENTER, CENTER);
+  textFont(`Georgia`);
+  textSize(30);
+  fill(200, 200, 200);
+  text(`Use arrow keys to control`, width/2, height/2);
+  pop()
+}
 
+//shows love text
+function romance(){
+  push();
+  textAlign(CENTER, CENTER);
+  textFont(`Georgia`);
+  textSize(40);
+  fill(255, 0, 0);
+  text(`LOVER`, circle1.x, circle1.y+ 50);
+  fill(200, 0, 0, 100);
+  rectMode(CENTER);
+  rect(circle1.x, circle1.y+ 50, 300, 150);
+  pop()
+}
+
+// shows the over text
+function loss(){
+  push();
+  textAlign(CENTER, CENTER);
+  textFont(`Georgia`);
+  textSize(40);
+  fill(0, 100, 100);
+  text(`IT'S OVER`, circle1.x, circle1.y+ 50);
+  fill(0, 30, 100, 100);
+  rectMode(CENTER);
+  rect(circle1.x, circle1.y+ 50, 300, 150);
+  pop()
+}
+
+//calls all the simulation part of the program
+function simulation(){
+  userControl();
+  move();
+  checkOffscreen()
+  checkOverlap();
+  display();
+}
+
+ //user keyboard control function
   function userControl(){
-  // control user's  horizontal movement with keyboard arrows
+// control user's vertical movement with keyboard arrows
   if (keyIsDown (LEFT_ARROW)) {
-    user.vx = -user.speed;
+    circle1.vx = -circle1.speed;
   }
   else if (keyIsDown(RIGHT_ARROW)) {
-    user.vx = user.speed;
+    circle1.vx = circle1.speed;
   }
   else {
-    user.vx = 0;
+    circle1.vx = 0;
   }
-// control user's vertical movement with keyboard arrows
+// control circle1's vertical movement with keyboard arrows
   if (keyIsDown(UP_ARROW)){
-    user.vy = -user.speed;
+    circle1.vy = -circle1.speed;
   }
   else if (keyIsDown(DOWN_ARROW)){
-    user.vy = user.speed;
+    circle1.vy = circle1.speed;
   }
   else {
-    user.vy = 0;
+    circle1.vy = 0;
+  }
+ }
+
+  //check if the circles go off canvas
+  function checkOffscreen(){
+  if (circle2.x > width || circle2.x < 0 || circle2.y > height || circle2.y < 0) {
+    state = `loss`;
   }
 }
 
-
-  function moveRandom(){
-  // makes the chased jittery (tries to escape user and encounter)
-  let change1 = random();
-  if (change1 < 0.04) {
-  //chased.vx = random(-chased.speed, chased.speed);
-  chased.vy = random(-chased.speed, chased.speed);
+  // check if circles overlap
+  function checkOverlap(){
+  let d = dist(circle1.x, circle1.y, circle2.x, circle2.y);
+  if (d < circle1.size/3 + circle2.size/3){
+    state = `romance`;
+  }
 }
-// makes the chased move smoother horizontally
+
+//makes the circles move
+  function move(){
   let x = map(noise(xoff), 0, 1, 0, width);
   xoff += 0.009;
 
-// makes the encounter jittery (trying to follow the chased)
-let change2 = random();
-if (change2 < 0.07) {
-encounter.vx = random(-encounter.speed, encounter.speed);
-encounter.vy = random(-encounter.speed, encounter.speed);
-  }
+  circle1.x = circle1.x + circle1.vx;
+  circle1.y = circle1.y + circle1.vy;
+
+  circle2.x = x + circle2.vx;
+  circle2.y = circle2.y + circle2.vy;
 }
 
-
-  function move() {
-  //moves the user's circle
-  user.x = user.x + user.vx;
-  user.y = user.y + user.vy;
-
-  //moves circle A
-  chased.x = chased.x + chased.vx;
-  chased.y = chased.y + chased.vy;
-
-  // move circle C
-  encounter.x = encounter.x + encounter.vx;
-  encounter.y = encounter.y + encounter.vy;
-}
-
-
-function checkOverlap () {
-  //check if overlap
-  let x = map(noise(xoff), 0, 1, 0, width);
-  xoff += 0.009;
-  let d = dist(user.x, user.y, x, chased.y);
-  if (d < user.sizeY/4 + chased.sizeY/4){
-    image(heartImg, user.x, user.y +10);
-    noLoop();
-  }
-}
-
+  //display circles
   function display(){
-  let x = map(noise(xoff), 0, 1, 0, width);
-  xoff += 0.009;
 
-  fill(255, 0, 0);
-  image(chasedImg, x, chased.y,  chased.sizeX, chased.sizeY);
-  fill(0, 255, 0);
-  image(userImg, user.x, user.y, user.sizeX, user.sizeY);
-  fill(0, 0, 255);
-  image(encounterImg, encounter.x, encounter.y, 200, 250);
+  fill(255, 0, 30);
+  ellipse(circle1.x, circle1.y, circle1.size);
+  fill(0, 255, 30);
+  ellipse(circle2.x, circle2.y, circle2.size);
+}
+
+function keyPressed(){
+  if (state === `instruction`){
+    state = `simulation`;
+  }
+  else if (state === `title`){
+    state = `instruction`;
+  }
 }
