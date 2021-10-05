@@ -27,7 +27,7 @@ let circle2 ={
   speed: 2
 }
 
-let state = `simulation`
+let state = `title`
 
 
 "use strict";
@@ -71,12 +71,28 @@ function draw() {
   else if (state === `simulation`){
     simulation();
   }
-  else if (state === `romance`){
-    romance();
-  }
-  else if (state === `loss`){
-  }
-  
+  // else if (state === `romance`){
+  //   romance();
+  // }
+  // else if (state === `loss`){
+  // }
+
+}
+
+function title(){
+  push();
+  textAlign(CENTER, CENTER);
+  textFont(`Georgia`);
+  textSize(40);
+  fill(255, 0, 0);
+  text(`CHESS L/OVER`, width/2, height/2);
+  textSize(20);
+  fill(200, 200, 200);
+  text(`Press a key`, width/2, height-150);
+  fill(0, 0, 0, 100);
+  rectMode(CENTER);
+  rect(width/2, height/2, 300, 150);
+  pop();
 }
 
 
@@ -145,4 +161,10 @@ function simulation(){
   ellipse(circle1.x, circle1.y, circle1.size);
   fill(0, 255, 30);
   ellipse(circle2.x, circle2.y, circle2.size);
+}
+
+function keyPressed(){
+  if (state === `title`){
+    state = `simulation`;
+  }
 }
