@@ -87,13 +87,18 @@ function draw() {
   }
 // }
 
+  function checkOffscreen(){
   //check if the circles go off canvas
   if (circle2.x > width || circle2.x < 0 || circle2.y > height || circle2.y < 0) {
     return true;
   }
   else{
     return false;
-  }  //Lost ending 
+  }  //Lost ending
+}
+
+
+
 
 
   //makes the circles move
