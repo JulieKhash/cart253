@@ -1,24 +1,17 @@
 let roseImg;
 let userImg;
 
-// How many lines projecting from the center in a circle?
-let lines = 140;
-// A base time value we'll increase to make the lines wave
-let baseT = 0;
-
-let numLines = 200;
-let length = 300;
 
 
 function preload(){
-  roseImg = loadImage("assets/images/focus.gif");
-  //userImg =  loadImage("assets/images/user-pic.png");
+  roseImg = loadImage("assets/images/shadow.gif");
+  userImg =  loadImage("assets/images/handgre.png");
 }
 
 
 
 function setup(){
-  createCanvas(700, 850);
+  createCanvas(windowWidth, windowHeight);
 }
 
 
@@ -27,12 +20,27 @@ function setup(){
 function draw(){
 background(0);
 imageMode(CENTER);
-//image(roseImg, width/2, height/2);
+tint(100, 210, 210);
+image(roseImg, width/2, height/2, 800, 590);
 
-for (let i = 0; i < numLines; i++) {
+tint(255, 100); // how to apply a tint to a single code?
+image(userImg, mouseX, mouseY, 140, 190);
 
-  numLines = numLines + 1;
+let col = random(0, 220);
 
-  stroke(255);
-  line(width/2, height/2, numLines, 0);
-  }
+
+textFont(`Verdana`);
+textSize(50);
+fill(col);
+textAlign(CENTER, CENTER);
+text(`SECRET SIGNS`, width/2, height/5);
+
+
+
+
+textFont(`Verdana`);
+textSize(30);
+fill(col);
+text(`Touch my hand`, width-400, height-400);
+
+}
