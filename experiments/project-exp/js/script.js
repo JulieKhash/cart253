@@ -1,11 +1,13 @@
 let roseImg;
 let userImg;
+let fireImg;
 
 
 
 function preload(){
   roseImg = loadImage("assets/images/shadow.gif");
   userImg =  loadImage("assets/images/handgre.png");
+  fireImg = loadImage("assets/images/fire.gif");
 }
 
 
@@ -20,9 +22,9 @@ function setup(){
 function draw(){
 background(0);
 imageMode(CENTER);
+image(fireImg, width/5, height/5, 500, 640);
 tint(100, 210, 210);
 image(roseImg, width/2, height/2, 800, 590);
-
 tint(255, 100); // how to apply a tint to a single code?
 image(userImg, mouseX, mouseY, 140, 190);
 
