@@ -2,11 +2,11 @@
 
 let shadowImg;
 let backgroundImg;
-let headshadowImg;
+let crescentImg;
 
 
 function preload() {
-headshadowImg = loadImage("assets/images/moon.gif");
+crescentImg = loadImage("assets/images/moon.gif");
 shadowImg = loadImage("assets/images/shadow.gif");
 backgroundImg = loadImage("assets/images/apparition.gif");
 }
@@ -32,9 +32,9 @@ background(0);
 
 
 imageMode(CENTER);
-//tint(200, 200);
+tint(col, 200, 200);
 //image(shadowImg, width/2, height/2);
-image(headshadowImg, width/2, height/3+100, 500, 276);
+image(crescentImg, width/2, height/3+100, 500, 276);
 
 
 textFont(`Verdana`);
