@@ -53,30 +53,35 @@ function preload() {
 
 function setup() {
   createCanvas(1900, 1300);
-
-
+  //hand postion point
+  noStroke();
+  fill(200, handPosition.alpha);
+  ellipse(handPosition.x, handPosition.y, handPosition.place);
 
 }
 
 function draw() {
-
+background(0);
 //isNoloop();
 //CallAnimation();
-//handAnimation();
-//isHandonHand();
 
-background(0);
 imageMode(CENTER);
 tint(100, 210, 210);
 image(shadowImg, width/2, height/2, 800, 590);
 tint(255, 100); // how to apply a tint to a single code?
 image(handImg, mouseX, mouseY, 140, 190);
 
-//hand postion point
-noStroke();
-fill(200, handPosition.alpha);
-ellipse(handPosition.x, handPosition.y, handPosition.place);
+handAnimation();
+isHandonHand();
+
+
 }
+
+//hand postion point
+// noStroke();
+// fill(200, handPosition.alpha);
+// ellipse(handPosition.x, handPosition.y, handPosition.place);
+// }
 //touch animation
 // function CallAnimation(){
 //   if (isHandonHand()){
@@ -84,11 +89,10 @@ ellipse(handPosition.x, handPosition.y, handPosition.place);
 //   }
 // }
 
-    //function handAnimation(){
-     // let d = dist(mouseX, mouseY, handPosition.x, handPosition.y);
-     // if (d < handPosition.place/5){
-     //if (mouseX > handPosition.place/5){
-    noStroke();
+    function handAnimation(){
+    if (isHandonHand()) {
+
+
     circle1.size += 1;
     circle1.size = constrain(circle1.size, 20, 210);
     fill(39, 169, 179, circle1.alpha);
@@ -106,24 +110,26 @@ ellipse(handPosition.x, handPosition.y, handPosition.place);
     fill(39, 169, 179, circle3.alpha);
     circle3.alpha -= circle3.speed;
     ellipse(handPosition.x, handPosition.y, circle3.size);
-  
+}
+}
 
 
 
-//check if it's not looping
+//
+// //check if it's not looping
 // function isNoloop(){
 //   if (isHandonHand()) {
 //     noLoop();
 //   }
 // }
-
-//checks if hand is on hand
- // function isHandonHand(){
- //   let d = dist(mouseX, mouseY, handPosition.x, handPosition.y);
- //   if (d < handPosition.place/5){
- //     return true;
- //   }
- //  else {
- //    return false;
- //  }
- // }
+// //
+// //checks if hand is on hand
+ function isHandonHand(){
+   let d = dist(mouseX, mouseY, handPosition.x, handPosition.y);
+   if (d < handPosition.place/5){
+     return true;
+   }
+  else {
+    return false;
+  }
+ }
