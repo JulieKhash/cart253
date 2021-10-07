@@ -14,7 +14,7 @@ let handPosition ={
   x: undefined,
   y: undefined,
   size: 100,
-  alpha:0
+  alpha:100
 }
 circle1 = {
   x: undefined,
@@ -61,20 +61,29 @@ function preload(){
 
 function setup(){
   createCanvas(1900, 1300);
-  userHand = userImg;
+
+  x = width/3+190;
+  y = height/2;
+
 }
-
-
 
 
 function draw(){
 background(0);
+//isNoloop();
+// isHandonHand();
+// handAnimation();
+//handPositionDisplay();
+//display();
+
+
+
 imageMode(CENTER);
 //image(fireImg, width/5, height/5, 500, 640);
-tint(100, 210, 210);
-image(roseImg, width/2, height/2, 800, 590);
-tint(255, 100); // how to apply a tint to a single code?
-image(userHand, mouseX, mouseY, 140, 190);
+// tint(100, 210, 210);
+// image(roseImg, width/2, height/2, 800, 590);
+// tint(255, 100); // how to apply a tint to a single code?
+// image(userImg, mouseX, mouseY, 140, 190);
 
 
 let col = random(0, 220);
@@ -91,14 +100,17 @@ textSize(30);
 fill(col);
 text(`Touch my hand`, width-400, height-400);
 
+}
 
-
-x = width/3+190;
-y = height/2;
+// x = width/3+190;
+// y = height/2;
+//noStroke();
+fill(255, handPosition.alpha);
+ellipse(x, y, handPosition.size);
 
 let d = dist(mouseX, mouseY, x, y);
 if (d < handPosition.size/5){
-  noLoop();
+    noLoop();
 
     noStroke();
     circle1.size += 1;
@@ -118,16 +130,64 @@ if (d < handPosition.size/5){
     fill(39, 169, 179, circle3.alpha);
     circle3.alpha -= circle3.speed;
     ellipse(x, y, circle3.size);
-    loop();
+  }
+
+
+
+//check if it's not looping
+// function isNoloop(){
+//   if (isHandonHand()) {
+//     noLoop();
+//   }
+// }
+
+
+//checks if hand is on hand
+//  function isHandonHand(){
+//    x = width/3+190;
+//    y = height/2;
+//    let d = dist(mouseX, mouseY, x, y);
+//    if (d < handPosition.size/5){
+//      return true;
+//    }
+//   else {
+//     return false;
+//   }
+//  }
+// //touch animation
+// function handAnimation(){
+//   x = width/3+190;
+//   y = height/2;
+//
+//   if (isHandonHand()){
+//     noStroke();
+//     circle1.size += 1;
+//     circle1.size = constrain(circle1.size, 20, 210);
+//     fill(39, 169, 179, circle1.alpha);
+//     circle1.alpha -= circle1.speed;
+//     ellipse(x, y, circle1.size)
+//
+//     circle2.size += 0.9;
+//     circle2.size = constrain(circle2.size, 30, 220);
+//     fill(39, 180, 179, circle2.alpha);
+//     circle2.alpha -= circle2.speed;
+//     ellipse(x, y, circle2.size);
+//
+//     circle3.size += 1.2;
+//     circle3.size = constrain(circle3.size, 30, 220);
+//     fill(39, 169, 179, circle3.alpha);
+//     circle3.alpha -= circle3.speed;
+//     ellipse(x, y, circle3.size);
+//   }
+// }
 
 
 
 
-
-}
-
-noStroke();
-fill(255, handPosition.alpha);
-ellipse(x, y, handPosition.size);
-
-}
+// function handPositionDisplay(){
+// x = width/3+190;
+// y = height/2;
+// noStroke();
+// fill(255, handPosition.alpha);
+// ellipse(x, y, handPosition.size);
+// }
