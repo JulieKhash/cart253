@@ -4,12 +4,13 @@
 let handImg;
 let handIndexImg;
 let shadowImg;
+let shadowShotImg;
 
 
 let handPosition ={
   x: 810,
   y: 665,
-  place: 110,
+  place: 120,
   alpha:100
 }
 
@@ -69,7 +70,7 @@ let circle5 = {
 function preload() {
   shadowImg = loadImage("assets/images/shadow.gif");
   handImg =  loadImage("assets/images/handgre.png");
-  handIndexImg =loadImage("assets/images/handwhite.png");
+  shadowShotImg =loadImage("assets/images/shadowGlow1.png");
 }
 
 
@@ -123,6 +124,8 @@ isHandonHand();
     if (isHandonHand()) {
 
     let glitch = random(0, 255);
+    tint(100, 210, 210, 255);
+    image(shadowShotImg, width/2, height/2, 800, 590);
 
     circle1.size += 1;
     circle1.size = constrain(circle1.size, 20, 210);
