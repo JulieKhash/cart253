@@ -10,7 +10,7 @@ let shadowShotImg;
 let handPosition ={
   x: 810,
   y: 665,
-  place: 120,
+  place: 125,
   alpha:100
 }
 
@@ -19,8 +19,6 @@ let circle1 = {
   y: undefined,
   size:90,
   speed:2,
-  vx:0,
-  vy:0,
   alpha: 200,
 }
 
@@ -29,8 +27,6 @@ let circle2 = {
   y: undefined,
   size: 40,
   speed:1.5,
-  vx:0,
-  vy:0,
   alpha: 200,
 }
 
@@ -39,8 +35,6 @@ let circle3 = {
   y: undefined,
   size:110,
   speed:2,
-  vx:0,
-  vy:0,
   alpha: 190,
 }
 let circle4 = {
@@ -48,8 +42,6 @@ let circle4 = {
   y: undefined,
   size:140,
   speed:2,
-  vx:0,
-  vy:0,
   alpha: 190,
 }
 let circle5 = {
@@ -57,8 +49,6 @@ let circle5 = {
   y: undefined,
   size:160,
   speed:2,
-  vx:0,
-  vy:0,
   alpha: 190,
 }
 let circle6 = {
@@ -68,8 +58,6 @@ let circle6 = {
   speed:50,
   alpha: 100,
 }
-
-
 
 
 function preload() {
@@ -91,7 +79,6 @@ function setup() {
 
 function draw() {
 background(0);
-//CallAnimation();
 
 imageMode(CENTER);
 tint(100, 210, 210);
@@ -99,30 +86,12 @@ image(shadowImg, width/2, height/2, 800, 590);
 tint(255, 100); // how to apply a tint to a single code?
 image(handImg, mouseX, mouseY, 140, 190);
 
-//loopAnimation()
-//stopLoop();
 text2();
 handAnimation();
 isHandonHand();
 
 
 }
-
-//hand postion point
-// noStroke();
-// fill(200, handPosition.alpha);
-// ellipse(handPosition.x, handPosition.y, handPosition.place);
-// }
-//touch animation
-// function CallAnimation(){
-//   if (isHandonHand()){
-//   handAnimation();
-//   }
-// }
-  // function loopAnimation(){
-  //   if (handAnimation());
-  //   loop();
-  // }
 
 
     function handAnimation(){
@@ -174,20 +143,17 @@ isHandonHand();
     tint(glitch);
     image(handImg, mouseX, mouseY, 140, 190);
 
-    //image(handIndexImg, handPosition.x, handPosition.y, 200, 272);
-
 }
 }
 
 
-//
 //check if it's not looping
 function stopLoop(){
   if (isHandonHand()) {
     noLoop();
   }
 }
-// //
+
 // //checks if hand is on hand
  function isHandonHand(){
    let d = dist(mouseX, mouseY, handPosition.x, handPosition.y);
