@@ -62,7 +62,6 @@ function setup() {
 
 function draw() {
 background(0);
-//isNoloop();
 //CallAnimation();
 
 imageMode(CENTER);
@@ -71,6 +70,8 @@ image(shadowImg, width/2, height/2, 800, 590);
 tint(255, 100); // how to apply a tint to a single code?
 image(handImg, mouseX, mouseY, 140, 190);
 
+
+stopLoop();
 handAnimation();
 isHandonHand();
 
@@ -89,10 +90,12 @@ isHandonHand();
 //   }
 // }
 
+
+
     function handAnimation(){
     if (isHandonHand()) {
 
-
+    loop();
     circle1.size += 1;
     circle1.size = constrain(circle1.size, 20, 210);
     fill(39, 169, 179, circle1.alpha);
@@ -116,12 +119,12 @@ isHandonHand();
 
 
 //
-// //check if it's not looping
-// function isNoloop(){
-//   if (isHandonHand()) {
-//     noLoop();
-//   }
-// }
+//check if it's not looping
+function stopLoop(){
+  if (isHandonHand()) {
+    noLoop();
+  }
+}
 // //
 // //checks if hand is on hand
  function isHandonHand(){
