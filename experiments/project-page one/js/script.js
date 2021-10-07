@@ -2,12 +2,14 @@
 "use strict";
 
 let handImg;
+let handIndexImg;
 let shadowImg;
+
 
 let handPosition ={
   x: 810,
   y: 665,
-  place: 90,
+  place: 110,
   alpha:100
 }
 
@@ -41,12 +43,33 @@ let circle3 = {
   alpha: 190,
 }
 
+let circle4 = {
+  x: undefined,
+  y: undefined,
+  size:140,
+  speed:2,
+  vx:0,
+  vy:0,
+  alpha: 190,
+}
+
+let circle5 = {
+  x: undefined,
+  y: undefined,
+  size:160,
+  speed:2,
+  vx:0,
+  vy:0,
+  alpha: 190,
+}
+
 
 
 
 function preload() {
   shadowImg = loadImage("assets/images/shadow.gif");
   handImg =  loadImage("assets/images/handgre.png");
+  handIndexImg =loadImage("assets/images/handwhite.png");
 }
 
 
@@ -70,8 +93,9 @@ image(shadowImg, width/2, height/2, 800, 590);
 tint(255, 100); // how to apply a tint to a single code?
 image(handImg, mouseX, mouseY, 140, 190);
 
-
-stopLoop();
+//loopAnimation()
+//stopLoop();
+text2();
 handAnimation();
 isHandonHand();
 
@@ -89,30 +113,52 @@ isHandonHand();
 //   handAnimation();
 //   }
 // }
-
+  // function loopAnimation(){
+  //   if (handAnimation());
+  //   loop();
+  // }
 
 
     function handAnimation(){
     if (isHandonHand()) {
 
-    loop();
+    let glitch = random(0, 255);
+
     circle1.size += 1;
     circle1.size = constrain(circle1.size, 20, 210);
-    fill(39, 169, 179, circle1.alpha);
+    fill(glitch, circle1.alpha);
     circle1.alpha -= circle1.speed;
     ellipse(handPosition.x, handPosition.y, circle1.size)
 
     circle2.size += 0.9;
     circle2.size = constrain(circle2.size, 30, 220);
-    fill(39, 180, 179, circle2.alpha);
+    fill(glitch , circle2.alpha);
     circle2.alpha -= circle2.speed;
     ellipse(handPosition.x, handPosition.y, circle2.size);
 
     circle3.size += 1.2;
     circle3.size = constrain(circle3.size, 30, 220);
-    fill(39, 169, 179, circle3.alpha);
+    fill(glitch, circle3.alpha);
     circle3.alpha -= circle3.speed;
     ellipse(handPosition.x, handPosition.y, circle3.size);
+
+    circle4.size += 1.2;
+    circle4.size = constrain(circle4.size, 80, 300);
+    fill(glitch , circle4.alpha);
+    circle4.alpha -= circle4.speed;
+    ellipse(handPosition.x, handPosition.y, circle4.size);
+
+    circle5.size += 1.2;
+    circle5.size = constrain(circle5.size, 80, 350);
+    fill(glitch, circle5.alpha);
+    circle5.alpha -= circle5.speed;
+    ellipse(handPosition.x, handPosition.y, circle5.size);
+
+    tint(glitch);
+    image(handImg, mouseX, mouseY, 140, 190);
+
+    //image(handIndexImg, handPosition.x, handPosition.y, 200, 272);
+
 }
 }
 
@@ -135,4 +181,12 @@ function stopLoop(){
   else {
     return false;
   }
+ }
+
+ function text2(){
+   let glitch = random(0, 255);
+   textFont(`Verdana`);
+   textSize(30);
+   fill(glitch);
+   text(`Touch my hand`, width/7, height/2);
  }
