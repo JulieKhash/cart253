@@ -3,13 +3,21 @@
 
 let sunImg;
 let darkPlanetImg;
-let angle = 10
+let angle = 0;
 
+let sun ={
+  x: 950,
+  y: 260,
+  size: 900,
+  speed: 0.9
+}
 
 let planet ={
   x: 950,
-  y: 12,
-  size: 6
+  y: 950,
+  size: 600,
+  speed: 0.9,
+  angle: 0
 }
 
 /**
@@ -28,6 +36,7 @@ Description of setup
 */
 function setup() {
   createCanvas(1900, 1300);
+  angleMode(DEGREES);
 }
 
 
@@ -38,14 +47,33 @@ function draw() {
 let glitter= random(0,25);
 background(glitter);
 
+//rotate the sun
 push();
-translate(width/2, height/5);
+translate(sun.x, sun.y);
 rotate(angle);
 imageMode(CENTER);
-image(sunImg, 0,0 , 800, 800);
+image(sunImg, 0,0 , sun.size, sun.size);
+angle+=0.1;
 pop();
 
+push();
+translate(planet.x, planet.y);
+rotate(angle);
+image(darkPlanetImg, 0, 0, planet.size, planet.size);
+angle+=0.3;
+pop();
+planet.y = planet.y - planet.speed;
+planet.size = planet.size - 0.8;
+planet.size = constrain(planet.size, 250, 700);
 
-image(darkPlanetImg, width/2, height-100);
-
+//check the distance between planet and sun
+let d = dist(planet.x, planet.y, sun.x, sun.y);
+if (d < planet.size/10 + sun.size/6){
+planet.y = sun.y;
+imageMode(CENTER);
+planet.speed = 0;
+glitter = random(0,100);
+sun.size+=2;
+planet.size -=0.5;
+}
 }
