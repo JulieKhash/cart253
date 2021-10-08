@@ -42,7 +42,7 @@ function setup(){
 function draw(){
   let col = random(0, 220);
   let bg = random (200, 230);
-  background(200);
+  background(bg);
 
 
 
