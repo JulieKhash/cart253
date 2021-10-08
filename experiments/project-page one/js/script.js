@@ -182,3 +182,7 @@ function stopLoop(){
    text(`Click on It`, handPosition.x-50, handPosition.y -150);
  }
  }
+
+ // function mousePressed(){
+ //   state == page1
+ // }
