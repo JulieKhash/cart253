@@ -3,11 +3,6 @@ let offset = 0;
 let offset2 = 0;
 let easing = 0.05;
 
-let mouseEasing ={
-  vx: 0.05,
-  vy: 0.05,
-  speed: 1
-}
 
 let aimPosition = {
   x: 950,
@@ -41,7 +36,7 @@ function setup(){
 
 function draw(){
   let col = random(0, 220);
-  let bg = random (200, 230);
+  let bg = random (150, 230);
   background(bg);
 
 
@@ -76,11 +71,6 @@ function draw(){
   if (d < aimPosition.place/20){
     noLoop();
   }
-
-
-  // if (offset == y){
-  //   noLoop();
-  // }
 
   //red aim pos
   stroke(255, 0, 0);

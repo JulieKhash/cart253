@@ -106,9 +106,10 @@ function draw() {
   else if (state === `pageTwo`){
     pageTwo();
   }
+  else if (state === `pageThree`){
 
-  // titlePage();
-  // pageTwo();
+  }
+
 
 }
 // PAGE ONE FUNCTIONS
@@ -264,6 +265,18 @@ function text3(){
  text(`Click on It`, handPosition.x-50, handPosition.y -150);
 }
 }
+
+//PAGE THREE FUNCTIONS
+
+
+
+
+
+
+
+
+
+
 
 
 //change page if pressed ENTER
