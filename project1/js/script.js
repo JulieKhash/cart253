@@ -13,6 +13,7 @@ let crescentImg;
 let handImg;
 let shadowImg;
 let shadowShotImg;
+let focusImg;
 
 
 let handPosition ={
@@ -67,16 +68,69 @@ let circle6 = {
   alpha: 100,
 }
 
+let aimPosition = {
+  x: 950,
+  y: 650,
+  place: 100,
+}
+
+let mousePointer ={
+  x: undefined,
+  y: undefined,
+  size: 100
+}
+
+// Focus Animation ellipses
+let ellipse1 = {
+  x: 950,
+  y: 650,
+  size: 50,
+  speed: 9,
+  strokeSize: 10
+}
+let ellipse2 = {
+  x: 950,
+  y: 650,
+  size: 40,
+  speed: 8,
+ strokeSize: 10
+}
+let ellipse3 = {
+  x: 950,
+  y: 650,
+  size: 30,
+  speed: 7,
+ strokeSize: 10
+}
+let ellipse4 = {
+  x: 950,
+  y: 650,
+
+  size: 20,
+  speed: 6,
+ strokeSize: 10
+}
+let ellipse5 = {
+  x: 950,
+  y: 650,
+  size: 10,
+  speed: 4,
+ strokeSize: 10
+}
+let ellipse6 = {
+  x: 950,
+  y: 650,
+  size: 5,
+  speed: 3,
+  strokeSize: 10
+}
 
 
 
 
-
-
-
-
-
-
+let offset = 0; //for image control
+let offset2 = 0;
+let easing = 0.05;
 let state = `title`
 
 function preload() {
@@ -85,6 +139,7 @@ backgroundImg = loadImage("assets/images/headshadow.gif");
 shadowImg = loadImage("assets/images/shadow.gif");
 handImg =  loadImage("assets/images/handgre.png");
 shadowShotImg =loadImage("assets/images/shadowGlow.png");
+focusImg = loadImage("assets/images/focus.gif");
 }
 
 
@@ -267,6 +322,31 @@ function text3(){
 }
 
 //PAGE THREE FUNCTIONS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

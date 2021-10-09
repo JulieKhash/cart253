@@ -72,30 +72,32 @@ function setup(){
 
 
 function draw(){
-  let col = random(0, 220);
+  //let col = random(0, 220);
   let bg = random (0, 23);
   background(bg);
 
-  //aim position
-  stroke(0);
-  noFill();
-  ellipse(aimPosition.x, aimPosition.y, aimPosition.place);
-
-
+  aimposition();
   eyeImage();
   controlImage();
   showFocus();
   displayAim();
   text4()
   showClicktext()
+}
+
+
+//aim position
+function aimposition(){
+stroke(0);
+noFill();
+ellipse(aimPosition.x, aimPosition.y, aimPosition.place);
+}
 
   //displays eye image at the center
   function eyeImage(){
   imageMode(CENTER);
   tint(255, 255);
   image(focusImg, width/2, height/2,600, 450);
-
-
   //pointer
   stroke(255, 0);
   line(offset-30, offset2, offset+30, offset2);
