@@ -134,7 +134,7 @@ function titlePage(){
   textSize(20);
   fill(col);
   textAlign(CENTER, CENTER);
-  text(`Press any key`, width/2, height/3+400);
+  text(`Press Enter`, width/2, height/3+400);
 
 }
 
@@ -236,7 +236,7 @@ if (isHandonHand()) {
 }
 }
 
-// //checks if hand is on hand
+//checks if hand is on hand
 function isHandonHand(){
  let d = dist(mouseX, mouseY, handPosition.x, handPosition.y);
  if (d < handPosition.place/5){
@@ -265,8 +265,10 @@ function text3(){
 }
 }
 
-  function keyPressed () {
-    if (state === `title`) {
+
+//change page if pressed ENTER
+function keyPressed(){
+  if (keyCode === ENTER && state === `title`){
     state = `pageTwo`
   }
 }
