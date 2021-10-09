@@ -80,19 +80,25 @@ function setup() {
 function draw() {
 background(0);
 
-imageMode(CENTER);
-tint(100, 210, 210);
-image(shadowImg, width/2, height/2, 800, 590);
-tint(255, 100); // how to apply a tint to a single code?
-image(handImg, mouseX, mouseY, 140, 190);
-
-text2();
-handAnimation();
-isHandonHand();
+pageTwo();
 
 
 }
 
+  function pageTwo(){
+    pageTwoImages();
+    text2();
+    handAnimation();
+    isHandonHand();
+  }
+
+function pageTwoImages(){
+  imageMode(CENTER);
+  tint(100, 210, 210);
+  image(shadowImg, width/2, height/2, 800, 590);
+  tint(255, 100);
+  image(handImg, mouseX, mouseY, 140, 190);
+}
 
     function handAnimation(){
     if (isHandonHand()) {

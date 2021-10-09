@@ -10,18 +10,89 @@ author, and this description to match your project!
 
 let backgroundImg;
 let crescentImg;
+let handImg;
+let shadowImg;
+let shadowShotImg;
+
+
+let handPosition ={
+  x: 810,
+  y: 665,
+  place: 125,
+  alpha:100
+}
+
+let circle1 = {
+  x: undefined,
+  y: undefined,
+  size:90,
+  speed:2,
+  alpha: 200,
+}
+
+let circle2 = {
+  x: undefined,
+  y: undefined,
+  size: 40,
+  speed:1.5,
+  alpha: 200,
+}
+
+let circle3 = {
+  x: undefined,
+  y: undefined,
+  size:110,
+  speed:2,
+  alpha: 190,
+}
+let circle4 = {
+  x: undefined,
+  y: undefined,
+  size:140,
+  speed:2,
+  alpha: 190,
+}
+let circle5 = {
+  x: undefined,
+  y: undefined,
+  size:160,
+  speed:2,
+  alpha: 190,
+}
+let circle6 = {
+  x: undefined,
+  y: undefined,
+  size:10,
+  speed:50,
+  alpha: 100,
+}
+
+
+
+
+
+
+
+
+
+
 
 let state = `title`
 
 function preload() {
 crescentImg = loadImage("assets/images/moon.gif");
 backgroundImg = loadImage("assets/images/headshadow.gif");
+shadowImg = loadImage("assets/images/shadow.gif");
+handImg =  loadImage("assets/images/handgre.png");
+shadowShotImg =loadImage("assets/images/shadowGlow.png");
 }
 
 
 
 function setup() {
 createCanvas(1900, 1300);
+
+
 }
 
 
@@ -29,14 +100,21 @@ function draw() {
   let col = random(0, 220);
   background(0);
 
-  titlePage();
+  if (state === `title`){
+    titlePage();
+  }
+  else if (state === `pageTwo`){
+    pageTwo();
+  }
 
-
+  // titlePage();
+  // pageTwo();
 
 }
+// PAGE ONE FUNCTIONS
 //Dispays first page of the program
 function titlePage(){
-  text2();
+  text1();
   titleText()
   titleImages();
 }
@@ -50,7 +128,7 @@ function titlePage(){
   text(`SECRET SIGNS`, width/2, height/4.5);
 }
 
-  function text2() {
+  function text1() {
   let col = random(0, 220);
   textFont(`Verdana`);
   textSize(20);
@@ -69,4 +147,126 @@ function titleImages(){
 
   image(backgroundImg, width/2, height/2);
   image(crescentImg, width/2, height/3+210, 500, 276);
+}
+
+
+//PAGE TWO FUNCTIONS
+function pageTwo(){
+
+  handposition();
+  pageTwoImages();
+  text2();
+  handAnimation();
+  isHandonHand();
+
+}
+
+function pageTwoImages(){
+imageMode(CENTER);
+tint(100, 210, 210);
+image(shadowImg, width/2, height/2, 800, 590);
+tint(255, 100);
+image(handImg, mouseX, mouseY, 140, 190);
+}
+
+//hand position point
+function handposition(){
+noStroke();
+fill(200, handPosition.alpha);
+ellipse(handPosition.x, handPosition.y, handPosition.place);
+}
+
+  function handAnimation(){
+  if (isHandonHand()) {
+
+  let glitch = random(0, 255);
+  tint(100, 210, 210, 255);
+  image(shadowShotImg, width/2, height/2, 800, 590);
+
+  noStroke();
+  circle1.size += 1;
+  circle1.size = constrain(circle1.size, 20, 210);
+  fill(glitch, circle1.alpha);
+  circle1.alpha -= circle1.speed;
+  ellipse(handPosition.x, handPosition.y, circle1.size)
+
+  circle2.size += 0.9;
+  circle2.size = constrain(circle2.size, 30, 220);
+  fill(glitch , circle2.alpha);
+  circle2.alpha -= circle2.speed;
+  ellipse(handPosition.x, handPosition.y, circle2.size);
+
+  circle3.size += 1.2;
+  circle3.size = constrain(circle3.size, 30, 220);
+  fill(glitch, circle3.alpha);
+  circle3.alpha -= circle3.speed;
+  ellipse(handPosition.x, handPosition.y, circle3.size);
+
+  circle4.size += 1.2;
+  circle4.size = constrain(circle4.size, 80, 300);
+  fill(glitch , circle4.alpha);
+  circle4.alpha -= circle4.speed;
+  ellipse(handPosition.x, handPosition.y, circle4.size);
+
+  circle5.size += 1.2;
+  circle5.size = constrain(circle5.size, 80, 350);
+  fill(glitch, circle5.alpha);
+  circle5.alpha -= circle5.speed;
+  ellipse(handPosition.x, handPosition.y, circle5.size);
+
+  circle6.size += 10;
+  circle6.size = constrain(circle6.size, 10, 500);
+  fill(glitch, circle6.alpha);
+  circle6.alpha -= circle6.speed;
+  ellipse(handPosition.x, handPosition.y, circle6.size)
+  circle6.alpha += circle6.speed;
+
+  text3();
+  tint(glitch);
+  image(handImg, mouseX, mouseY, 140, 190);
+
+}
+}
+
+
+//check if it's not looping
+function stopLoop(){
+if (isHandonHand()) {
+  noLoop();
+}
+}
+
+// //checks if hand is on hand
+function isHandonHand(){
+ let d = dist(mouseX, mouseY, handPosition.x, handPosition.y);
+ if (d < handPosition.place/5){
+   return true;
+ }
+else {
+  return false;
+}
+}
+
+function text2(){
+ let glitch = random(0, 255);
+ textFont(`Verdana`);
+ textSize(25);
+ fill(glitch);
+ text(`Touch my hand`, width/2-150, height/2+10);
+}
+
+function text3(){
+ let glitch = random(0, 255);
+ if (circle6.size == 500){
+ textFont(`Verdana`);
+ textSize(20);
+ fill(glitch);
+ text(`Click on It`, handPosition.x-50, handPosition.y -150);
+}
+}
+
+  function keyPressed () {
+    if (state === `title`) {
+    state = `pageTwo`
+  }
 }
