@@ -4,6 +4,7 @@
 let lightImg;
 let handCatcherImg;
 let faceImg;
+let birdsImg;
 
 let light = {
   x: 1000,
@@ -21,7 +22,7 @@ let handCatcher ={
   sizeY: 231,
   vx: 0,
   vy: 0,
-  speed: 2.5
+  speed: 3
 }
 
 let xoff = 0;
@@ -31,6 +32,7 @@ function preload() {
   lightImg = loadImage("assets/images/light.png");
   handCatcherImg =  loadImage("assets/images/handtransparent.png");
   faceImg = loadImage("assets/images/face.png");
+  birdsImg = loadImage("assets/images/fly.gif");
 }
 
 function setup() {
@@ -97,6 +99,10 @@ function draw() {
   imageMode(CENTER);
   image(lightImg, light.x, light.y, light.size, light.size);
 
+  if (light.size === 6000){
+    image(birdsImg, light.x, light.y);
+  }
+
 
   image(handCatcherImg, handCatcher.x, handCatcher.y, handCatcher.sizeX, handCatcher.sizeY);
 
@@ -104,7 +110,9 @@ function draw() {
   textFont(`Verdana`);
   textSize(25);
   fill(glitch);
-  text(`Catch the Light`, width/2-220, height/2+10);
+  //text(`Catch the Light`, width/2-220, height/2+10);
+
+  text(`We will meet again`, width/2-220, height/2+10);
 
 
 
