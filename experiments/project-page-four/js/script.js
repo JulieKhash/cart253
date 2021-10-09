@@ -8,7 +8,7 @@ let angle = 0;
 let sun ={
   x: 950,
   y: 260,
-  size: 900,
+  size: 1100,
   speed: 0.9
 }
 
@@ -51,7 +51,7 @@ background(glitter);
 push();
 translate(sun.x, sun.y);
 rotate(angle);
-imageMode(CENTER);
+//imageMode(CENTER);
 image(sunImg, 0,0 , sun.size, sun.size);
 angle+=0.1;
 pop();
@@ -65,15 +65,19 @@ pop();
 planet.y = planet.y - planet.speed;
 planet.size = planet.size - 0.8;
 planet.size = constrain(planet.size, 250, 700);
-
+pop();
 //check the distance between planet and sun
 let d = dist(planet.x, planet.y, sun.x, sun.y);
 if (d < planet.size/10 + sun.size/6){
-planet.y = sun.y;
-imageMode(CENTER);
+//planet.y = 280;
+planet.x = sun.x;
+//translate(sun.x + 200, sun.y- 200);
+//imageMode(CENTER);
 planet.speed = 0;
-glitter = random(0,100);
-sun.size+=2;
+glitter = random(0,25);
+sun.size-=2;
 planet.size -=0.5;
 }
 }
+
+//constrain sun size to a certain amount than move page
