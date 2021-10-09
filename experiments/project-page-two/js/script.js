@@ -72,7 +72,6 @@ function setup(){
 
 
 function draw(){
-  //let col = random(0, 220);
   let bg = random (0, 23);
   background(bg);
 
@@ -115,7 +114,7 @@ ellipse(aimPosition.x, aimPosition.y, aimPosition.place);
   tint(255, 150); //
   image(focusImg, offset, offset2, 600, 450);
 }
-}
+
 
   //shows focus animation if the aimed
   function showFocus(){
