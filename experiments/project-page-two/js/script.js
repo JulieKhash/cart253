@@ -122,7 +122,7 @@ function draw(){
     }
   }
 
-  //check the distances
+  //checks the distances between aim and image positioning
   function checkAim(){
   let d = dist(offset, offset2, aimPosition.x, aimPosition.y);
   if (d < aimPosition.place/20){
@@ -231,11 +231,3 @@ function text5(){
 //
 //if (circle6.size === 300){
 //mouseClick text
-
-
-
-
-
-// create 2 circles, one attached to mouse the other is a focus point\
-//stop the program and make animation
-//when both distances match make ripple animation then move to other page
