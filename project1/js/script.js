@@ -147,7 +147,7 @@ let ash = {
   speed: 0.00005,
   opacity: 250
 }
-let state = `pageFour`;
+let state = `title`;
 let substate = `fireplace` //sub-state for page three
 
 
@@ -512,6 +512,7 @@ function pageFour() {
     displayFireImage1()
     text7()
     text6();
+     blockWord();
     userTextinput();
     makeButton();
 
@@ -524,7 +525,6 @@ function pageFour() {
 
   // makes tiny red circles
   function makeAshes(){
-
   let glitchred = random(0, 250);
   for (let i = 0; i < numAshes; i++){
   let x = random(0, width);
@@ -546,6 +546,7 @@ function pageFour() {
   }
 }
 
+// displays the text
 function text7(){
   let col = random(0, 220);
   noStroke();
@@ -563,16 +564,24 @@ imageMode(CENTER);
 image(fireImg, width/2+200, height/2, 500+100, 700+100);
 }
 
-//displays textfield text and removes when user starts typing
+//displays a textfield text and removes it when user starts typing
   function text6(){
   let col = random(0, 220);
+  if (numKeysTyped < 1)
   noStroke();
   textSize(30);
   fill(col);
-  if (numKeysTyped >= 1){
+  if (numKeysTyped > 1){
   fill(0,0);
 }
   text(`write here`, width/3+ 30, height/4);
+
+}
+// blocks the word enter that appears in the text box by default :(
+function blockWord(){
+  if (currentInput === `Enter`){
+     currentInput = ``;
+  }
 }
 
 //displays user input text
@@ -626,14 +635,14 @@ else {
 }
 
 // controls what user can do when typed
-function keyPressed(){
-  if (keyCode === BACKSPACE){
-    currentInput = ``;
-  }
-  else if (keyCode === ENTER){
-
-  }
-}
+// function keyPressed(){
+//   if (keyCode === BACKSPACE){
+//     currentInput = ``;
+//   }
+//   else if (keyCode === ENTER){
+//
+//   }
+// }
 
 // changes to another sunstate after button is pressed
 // function mousePressed(){
@@ -661,7 +670,16 @@ function keyPressed() {
   if (keyCode === ENTER && state === `title`) {
     state = `pageTwo`;
   }
+  else if(keyCode === BACKSPACE){
+    currentInput = ``;
+  }
+  else if(keyCode === ENTER && `fireplace`){
+    return false;
+  }
 }
+
+
+
 
 function mousePressed() {
   if (state === `pageTwo` && isHandonHand() && checkCircleSize()) {
