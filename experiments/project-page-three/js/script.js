@@ -16,6 +16,12 @@ let button = {
 
 }
 
+let ash = {
+  size: 3,
+  speed: 0.0002,
+  opacity: 250
+}
+
 //ellipse(width/2, height/2-180, 100);
 
 let textfield = {
@@ -25,6 +31,7 @@ let textfield = {
   h: 200
 }
 
+let substate = `fireplace` //another is after mouse clicked
 
 
 function preload() {
@@ -46,27 +53,50 @@ function draw() {
   background(0);
 
 
-  //textbox();
-  displayFireImage1()
-  text7()
-  text6();
-  userTextinput();
-  makeButton();
+  if (substate === `fireplace`){
+    fireplace()
+  }
+  else if (substate === `ashes`){
+    makeAshes();
+  }
+
 }
+
+  function fireplace(){
+    displayFireImage1()
+    text7()
+    text6();
+    userTextinput();
+    makeButton();
+  }
+
+  function ashes(){
+    makeAshes();
+    checkAshsize()
+
+  }
 
 
   function makeAshes(){
+
   let glitchred = random(0, 250);
-  //let glitter = random(0, 40); // make bg orangy color
   for (let i = 0; i < numAshes; i++){
   let x = random(0, width);
   let y = random(0, height);
-  let ashSize = 3
-  //ashSize += 50;
+  ash.size += ash.speed;
+  ash.size = constrain(ash.size, 3, 50);
   noStroke()
-  fill(glitchred, 50, 0)
-  strokeWeight(2);
-  ellipse(x, y, ashSize);
+  fill(glitchred, 50, 0, ash.opacity)
+  strokeWeight(1);
+  ellipse(x, y, ash.size);
+  tint(100,70);
+  }
+}
+
+  function checkAshsize(){
+    if (ash.size === 50){
+     ash.speed = 0;
+    //move to exclipse
   }
 }
 
@@ -138,7 +168,7 @@ function makeButton(){
     textSize(25);
     text(`burn`, width/2, height/2-180)
 
-    //tint(200, 100, 0, 50);
+
     imageMode(CENTER);
     tint(random(0, 50), 100);
     image(ashesImg, width/2+100, height/2, 800, 480);
@@ -146,22 +176,15 @@ function makeButton(){
     image(burnImg, width/2+100, height/2, 800, 480);
     tint(0,0);
     image(fireImg, width/2+200, height/2, 500*2-200, 700*2-200);
-    //makeAshes();
+
   }
 }
 
-function mousePressed(){
-  if(isOnButton()){
-    noLoop();
-    // tint(100,70);
-    // image(burnImg, width/2+100, height/2, 800*2, 480*2);
-  }
-}
 
 //calculate the distance between the mouse and the face
 function isOnButton(){
 let d = dist(mouseX, mouseY, button.x, button.y);
-if (d < button.x/5 + button.y/5){
+if (d < button.size/2){
   return true;
 }
 else {
@@ -178,3 +201,16 @@ function keyPressed(){
 
   }
 }
+
+function mousePressed(){
+  if (substate === `fireplace` && isOnButton()){
+      substate = `ashes`;
+   }
+}
+    ///noLoop();
+    // rectMode(CENTER);
+    // fill(255, 0, 0);
+    // rect(400, 400, 400, 400);
+    //image(burnImg, width/2+100, height/2, 800*2, 480*2);
+    // fill(255, 0, 0, glitter);
+    // ellipse(button.x, button.y, button.size);

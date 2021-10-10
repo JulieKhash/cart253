@@ -189,6 +189,10 @@ function stopLoop(){
  }
  }
 
- // function mousePressed(){
- //   state == page1
- // }
+ function mousePressed(){
+   if(isHandonHand()){
+     rectMode(CENTER);
+     fill(255, 0, 0);
+     rect(400, 400, 400, 400);
+   }
+ }
