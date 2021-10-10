@@ -3,13 +3,15 @@
 
 let fireImg;
 let burnImg;
+let fireeImg
 
 let currentInput = ``;
 let numStars = 700
 
 function preload() {
   fireImg = loadImage("assets/images/fire.gif");
-  burnImg = loadImage("assets/images/burn.gif");
+  fireeImg = loadImage("assets/images/burn.gif");
+  burnImg = loadImage("assets/images/ashes-dust.gif");
 }
 
 
@@ -29,18 +31,22 @@ function draw() {
 
   imageMode(CENTER);
   tint(255, 255);
-  image(fireImg, width/2+150, height/2, 500, 700);
-  //tint(glitter);
-  image(burnImg, width/2+200, height/2, 600*2, 1017*2);
+  image(fireImg, width/2+150, height/2, 500*2, 700*2);
+  // tint(255,50);
+  // image(fireeImg, width/2+200, height/2, 600*2, 1017*2);
+  // tint(220, 30, 0, 50);
+
 
 
   for (let i = 0; i < numStars; i++){
   let x = random(0, width);
   let y = random(0, height);
+  let ashSize = 3
+  // ashSize += 10;
   noStroke()
   fill(glitchred, 50, 0)
   strokeWeight(2);
-  ellipse(x, y, 3, 3);
+  ellipse(x, y, ashSize);
   }
 
 
@@ -53,10 +59,10 @@ function draw() {
   text(`What is it you wish to burn away?`, width/2, height/3+400);
 
   //Diplay Input Field
-  stroke(184, 75, 48);
+  //stroke(184, 75, 48);
   fill(glitter, 100); //sets opacity at half
   rectMode(CENTER);
-  rect(width/3, height/4, 500, 200)
+  rect(width/3, height/4, 600, 200)
 
   // noStroke();
   // textSize(20);
@@ -74,6 +80,9 @@ function draw() {
   text(currentInput, width/3, height/4);
 }
 
+
+
+
 function keyTyped() {
   currentInput += key;
 }
@@ -82,5 +91,9 @@ function keyTyped() {
 function keyPressed(){
   if (keyCode === BACKSPACE){
     currentInput = ``;
+  }
+  else if (keyCode === ENTER){
+    keyCode === SPACEBAR;
+
   }
 }
