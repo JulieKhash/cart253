@@ -129,7 +129,8 @@ function makeButton(){
     textSize(25);
     text(`burn`, width/2, height/2-200)
 
-    tint(200, 100, 0, 50);
+    //tint(200, 100, 0, 50);
+    tint(255, 50);
     image(ashesImg, width/2+200, height/2, 500*5, 300*5);
     //tint(100,50);
     //image(burnImg, width/2+200, height-300, 190*5, 355*5);
