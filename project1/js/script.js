@@ -130,7 +130,7 @@ let ellipse6 = {
 let offset = 0; //for image control
 let offset2 = 0;
 let easing = 0.05;
-let state = `title`;
+
 
 let currentInput = ``;
 let numAshes = 700
@@ -147,6 +147,7 @@ let ash = {
   speed: 0.00005,
   opacity: 250
 }
+let state = `pageFour`;
 let substate = `fireplace` //sub-state for page three
 
 
@@ -181,7 +182,10 @@ function draw() {
   } else if (state ===`pageFour`) {
     pageFour();
   }
-}
+  else if (state ===`pageFour` && substate === `fireplace`) {
+    ashes();
+  }
+    }
 // PAGE ONE FUNCTIONS
 //Dispays first page of the program
 function titlePage() {
@@ -510,7 +514,7 @@ function pageFour() {
     text6();
     userTextinput();
     makeButton();
-    //mousePressed()
+
   }
 
   function ashes(){
@@ -632,12 +636,12 @@ function keyPressed(){
 }
 
 // changes to another sunstate after button is pressed
-function mousePressed(){
-  if (substate === `fireplace` && isOnButton()){
-      substate = `ashes`;
-   }
-}
-
+// function mousePressed(){
+//  else if (substate === `fireplace` && isOnButton()){
+//       substate = `ashes`;
+//    }
+// }
+//
 
 
 
@@ -666,4 +670,8 @@ function mousePressed() {
   else if (state ===`pageThree` && checkAim() && checkAimSize()){
     state = `pageFour`;
   }
+  else if (state === `pageFour` && `fireplace` && isOnButton()){
+     substate = `ashes`;
+}
+
 }
