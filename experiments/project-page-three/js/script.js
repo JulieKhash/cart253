@@ -13,7 +13,6 @@ let button = {
   x: 950,
   y: 470,
   size: 100
-
 }
 
 let ash = {
@@ -22,16 +21,7 @@ let ash = {
   opacity: 250
 }
 
-//ellipse(width/2, height/2-180, 100);
-
-let textfield = {
-  x: 550,
-  y: 360,
-  w: 600,
-  h: 200
-}
-
-let substate = `fireplace` //another is after mouse clicked
+let substate = `fireplace` //substate for page three
 
 
 function preload() {
@@ -43,7 +33,7 @@ function preload() {
 
 function setup() {
   createCanvas(1900, 1300);
-  textfield = createInput();
+  createInput();
 
 }
 
@@ -52,14 +42,12 @@ function draw() {
 
   background(0);
 
-
   if (substate === `fireplace`){
     fireplace()
   }
   else if (substate === `ashes`){
     makeAshes();
   }
-
 }
 
   function fireplace(){
@@ -73,10 +61,9 @@ function draw() {
   function ashes(){
     makeAshes();
     checkAshsize()
-
   }
 
-
+  // makes tiny red circles
   function makeAshes(){
 
   let glitchred = random(0, 250);
@@ -96,7 +83,7 @@ function draw() {
   function checkAshsize(){
     if (ash.size === 10){
      randomSeed();
-    //move to exclipse
+    //move to eclipse
   }
 }
 
@@ -111,22 +98,13 @@ function text7(){
 }
 
 
-
-function textbox(){
-  //Diplay Input Field
-  let glitter = random(0, 40); // make bg orangy color
-  fill(glitter, 100); //sets opacity at half
-  rectMode(CENTER);
-  rect(width/3-150, height/4, 650, 250);
-}
-
 //displays first fire image
 function displayFireImage1(){
 imageMode(CENTER);
 image(fireImg, width/2+200, height/2, 500+100, 700+100);
 }
 
-//displays textfield text
+//displays textfield text and removes when user starts typing
   function text6(){
   let col = random(0, 220);
   noStroke();
@@ -154,7 +132,6 @@ function keyTyped() {
 }
 }
 
-
 //displays a button
 function makeButton(){
   if (numKeysTyped > 3){
@@ -164,8 +141,11 @@ function makeButton(){
     fill(random(50, 190), 0, 0);
     textSize(25);
     text(`burn`, width/2, height/2-180)
-
-
+    displayFireImage2()
+}
+}
+//displays another image after first image
+function displayFireImage2(){
     imageMode(CENTER);
     tint(random(0, 50), 100);
     image(ashesImg, width/2+100, height/2, 800, 480);
@@ -173,12 +153,10 @@ function makeButton(){
     image(burnImg, width/2+100, height/2, 800, 480);
     tint(0,0);
     image(fireImg, width/2+200, height/2, 500*2-200, 700*2-200);
-
-  }
 }
 
 
-//calculate the distance between the mouse and the face
+//calculates the distance between the mouse and the red button
 function isOnButton(){
 let d = dist(mouseX, mouseY, button.x, button.y);
 if (d < button.size/2){
@@ -189,7 +167,7 @@ else {
 }
 }
 
-
+// controls what user can do when typed
 function keyPressed(){
   if (keyCode === BACKSPACE){
     currentInput = ``;
@@ -199,15 +177,9 @@ function keyPressed(){
   }
 }
 
+// changes to another sunstate after button is pressed
 function mousePressed(){
   if (substate === `fireplace` && isOnButton()){
       substate = `ashes`;
    }
 }
-    ///noLoop();
-    // rectMode(CENTER);
-    // fill(255, 0, 0);
-    // rect(400, 400, 400, 400);
-    //image(burnImg, width/2+100, height/2, 800*2, 480*2);
-    // fill(255, 0, 0, glitter);
-    // ellipse(button.x, button.y, button.size);
