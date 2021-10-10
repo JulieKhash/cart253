@@ -9,7 +9,8 @@ let sun ={
   x: 950,
   y: 260,
   size: 1100,
-  speed: 0.9
+  speed: 0.6,
+  angle: 6
 }
 
 let planet ={
@@ -17,7 +18,7 @@ let planet ={
   y: 950,
   size: 600,
   speed: 0.9,
-  angle: 0
+  angle: 150
 }
 
 /**
@@ -46,38 +47,55 @@ Description of draw()
 function draw() {
 let glitter= random(0,25);
 background(glitter);
-
+sun.x -= sun.speed;
 //rotate the sun
 push();
-translate(sun.x, sun.y);
-rotate(angle);
+translate(sun.x, sun.y-600);
+rotate(sun.angle);
 //imageMode(CENTER);
 image(sunImg, 0,0 , sun.size, sun.size);
-angle+=0.1;
+sun.angle+=0.1;
 pop();
 
+
+//rotate the planet
 push();
 translate(planet.x, planet.y);
-rotate(angle);
+rotate(planet.angle);
 image(darkPlanetImg, 0, 0, planet.size, planet.size);
-angle+=0.3;
-pop();
+planet.angle+=0.1;
 planet.y = planet.y - planet.speed;
-planet.size = planet.size - 0.8;
+planet.size = planet.size - 0.9;
 planet.size = constrain(planet.size, 250, 700);
 pop();
+
+
 //check the distance between planet and sun
 let d = dist(planet.x, planet.y, sun.x, sun.y);
-if (d < planet.size/10 + sun.size/6){
+if (d < planet.size/10 + sun.size/4){
 //planet.y = 280;
-planet.x = sun.x;
-//translate(sun.x + 200, sun.y- 200);
-//imageMode(CENTER);
+sun.speed = 0;
 planet.speed = 0;
-glitter = random(0,25);
-sun.size-=2;
-planet.size -=0.5;
+noLoop();
+//planet.angle -=0.1;
+//sun.angle-=0.1;
+
+// translate(planet.x, planet.y);
+// sun.x = planet.x;
+// sun.y = planet.y;
+// sun.angle = 0;
+// sun.size+=2;
+// planet.size -=2
 }
+
+//
+// planet.x = sun.x;
+// translate(sun.x + 200, sun.y- 200)
+// planet.speed = 0;
+// glitter = random(0,25);
+// sun.size-=2;
+// planet.size -=0.5;
+// }
 
 
 

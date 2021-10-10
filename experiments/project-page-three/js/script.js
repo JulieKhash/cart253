@@ -17,8 +17,8 @@ let button = {
 }
 
 let ash = {
-  size: 3,
-  speed: 0.0002,
+  size: 10,
+  speed: 0.00005,
   opacity: 250
 }
 
@@ -83,10 +83,10 @@ function draw() {
   for (let i = 0; i < numAshes; i++){
   let x = random(0, width);
   let y = random(0, height);
-  ash.size += ash.speed;
-  ash.size = constrain(ash.size, 3, 50);
+  ash.size -= ash.speed;
+  ash.size = constrain(ash.size, 1, 10);
   noStroke()
-  fill(glitchred, 50, 0, ash.opacity)
+  fill(glitchred, 30, 0, ash.opacity)
   strokeWeight(1);
   ellipse(x, y, ash.size);
   tint(100,70);
@@ -94,8 +94,8 @@ function draw() {
 }
 
   function checkAshsize(){
-    if (ash.size === 50){
-     ash.speed = 0;
+    if (ash.size === 10){
+     randomSeed();
     //move to exclipse
   }
 }
@@ -106,9 +106,6 @@ function text7(){
   textFont(`Verdana`);
   textSize(20);
   fill(col);
-  // if (userTextinput()){
-  // fill(0,0);
-  // }
   textAlign(CENTER, CENTER);
   text(`What is it you wish to burn away?`, width-500, height/2+400);
 }
