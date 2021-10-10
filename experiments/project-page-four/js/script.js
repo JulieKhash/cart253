@@ -78,6 +78,19 @@ glitter = random(0,25);
 sun.size-=2;
 planet.size -=0.5;
 }
+
+
+
+let col = random(0, 220);
+noStroke();
+textFont(`Verdana`);
+textSize(20);
+fill(col);
+// if (userTextinput()){
+// fill(0,0);
+// }
+textAlign(CENTER, CENTER);
+text(`Wait for an Eclipse`, width/2, height/3+400);
 }
 
 //constrain sun size to a certain amount than move page
