@@ -82,7 +82,7 @@ function draw() {
 }
 
   function fireplace(){
-    displayFireImage1()
+    displayFireImage()
     text7()
     text6();
     userTextinput();

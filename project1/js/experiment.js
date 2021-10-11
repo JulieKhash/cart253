@@ -31,47 +31,48 @@ let handPosition = {
 let circle1 = {
   x: undefined,
   y: undefined,
-  size: 90,
-  speed: 2,
+  size:90,
+  speed:2,
   alpha: 200,
-};
+}
 
 let circle2 = {
   x: undefined,
   y: undefined,
   size: 40,
-  speed: 1.5,
+  speed:1.5,
   alpha: 200,
-};
+}
 
 let circle3 = {
   x: undefined,
   y: undefined,
-  size: 110,
-  speed: 2,
+  size:110,
+  speed:2,
   alpha: 190,
-};
+}
 let circle4 = {
   x: undefined,
   y: undefined,
-  size: 140,
-  speed: 2,
+  size:140,
+  speed:2,
   alpha: 190,
-};
+}
 let circle5 = {
   x: undefined,
   y: undefined,
-  size: 160,
-  speed: 2,
+  size:160,
+  speed:2,
   alpha: 190,
-};
+}
 let circle6 = {
   x: undefined,
   y: undefined,
-  size: 10,
-  speed: 50,
+  size:10,
+  speed:50,
   alpha: 100,
-};
+}
+
 
 let aimPosition = {
   x: 950,
@@ -91,44 +92,44 @@ let ellipse1 = {
   y: 650,
   size: 50,
   speed: 9,
-  strokeSize: 10,
-};
+  strokeSize: 10
+}
 let ellipse2 = {
   x: 950,
   y: 650,
   size: 40,
   speed: 8,
-  strokeSize: 10,
-};
+ strokeSize: 10
+}
 let ellipse3 = {
   x: 950,
   y: 650,
   size: 30,
   speed: 7,
-  strokeSize: 10,
-};
+ strokeSize: 10
+}
 let ellipse4 = {
   x: 950,
   y: 650,
 
   size: 20,
   speed: 6,
-  strokeSize: 10,
-};
+ strokeSize: 10
+}
 let ellipse5 = {
   x: 950,
   y: 650,
   size: 10,
   speed: 4,
-  strokeSize: 10,
-};
+ strokeSize: 10
+}
 let ellipse6 = {
   x: 950,
   y: 650,
   size: 5,
   speed: 3,
-  strokeSize: 10,
-};
+  strokeSize: 10
+}
 
 let sun ={
   x: 1800,
@@ -177,8 +178,8 @@ let substate = `fireplace` //sub-state for page three
 
 
 function preload() {
-  crescentImg = loadImage("assets/images/moon.gif");
-  backgroundImg = loadImage("assets/images/headshadow.gif");
+
+  backgroundImg = loadImage("assets/images/signs.gif");
   shadowImg = loadImage("assets/images/shadow.gif");
   handImg = loadImage("assets/images/handgre.png");
   shadowShotImg = loadImage("assets/images/shadowGlow.png");
@@ -197,8 +198,7 @@ function setup() {
 }
 
 function draw() {
-  //let col = random(0, 220);
-  let bg1 = random(0, 23);
+
   background(0);
 
   if (state === `title`) {
@@ -230,15 +230,17 @@ function titlePage() {
   titleImages();
 }
 
+//displays the title
 function titleText() {
   let col = random(0, 220);
   textFont(`Verdana`);
-  textSize(70);
+  textSize(75);
   fill(col);
   textAlign(CENTER, CENTER);
   text(`SECRET SIGNS`, width / 2, height / 4.5);
 }
 
+// displays text
 function text1() {
   let col = random(0, 220);
   textFont(`Verdana`);
@@ -248,16 +250,11 @@ function text1() {
   text(`Press Enter`, width / 2, height / 3 + 400);
 }
 
-//displays title images
+//displays cerscent moon and the head sillouhete
 function titleImages() {
-  let col = random(0, 220);
-  push();
   imageMode(CENTER);
-  // tint(col, 200, 200, 150);
+  image(backgroundImg, width / 2, height / 2-50);
 
-  image(backgroundImg, width / 2, height / 2);
-  image(crescentImg, width / 2, height / 3 + 210, 500, 276);
-  pop();
 }
 
 //PAGE TWO FUNCTIONS
@@ -269,11 +266,11 @@ function pageTwo() {
   isHandonHand();
 }
 
+// dipslays moving shadow figure and user's hands
 function pageTwoImages() {
   imageMode(CENTER);
-  //tint(100, 210, 210);
+
   image(shadowImg, width / 2, height / 2, 800, 590);
-  //tint(255, 100);
   image(handImg, mouseX, mouseY, 140, 190);
 }
 
@@ -284,23 +281,23 @@ function handposition() {
   ellipse(handPosition.x, handPosition.y, handPosition.place);
 }
 
+// displays ellectric ripplic animation within the hand position
 function handAnimation() {
   if (isHandonHand()) {
-    push();
     let glitch = random(0, 255);
-    //tint(100, 210, 210, 255);
-    image(shadowShotImg, width / 2, height / 2, 800, 590);
+
+    image(shadowShotImg, width/2, height/2, 800, 590); //displays the frozen shot of the figure
 
     noStroke();
     circle1.size += 1;
     circle1.size = constrain(circle1.size, 20, 210);
     fill(glitch, circle1.alpha);
     circle1.alpha -= circle1.speed;
-    ellipse(handPosition.x, handPosition.y, circle1.size);
+    ellipse(handPosition.x, handPosition.y, circle1.size)
 
     circle2.size += 0.9;
     circle2.size = constrain(circle2.size, 30, 220);
-    fill(glitch, circle2.alpha);
+    fill(glitch , circle2.alpha);
     circle2.alpha -= circle2.speed;
     ellipse(handPosition.x, handPosition.y, circle2.size);
 
@@ -312,7 +309,7 @@ function handAnimation() {
 
     circle4.size += 1.2;
     circle4.size = constrain(circle4.size, 80, 300);
-    fill(glitch, circle4.alpha);
+    fill(glitch , circle4.alpha);
     circle4.alpha -= circle4.speed;
     ellipse(handPosition.x, handPosition.y, circle4.size);
 
@@ -322,19 +319,17 @@ function handAnimation() {
     circle5.alpha -= circle5.speed;
     ellipse(handPosition.x, handPosition.y, circle5.size);
 
-    circle6.size += 10;
+    circle6.size += 2;
     circle6.size = constrain(circle6.size, 10, 500);
     fill(glitch, circle6.alpha);
     circle6.alpha -= circle6.speed;
-    ellipse(handPosition.x, handPosition.y, circle6.size);
+    ellipse(handPosition.x, handPosition.y, circle6.size)
     circle6.alpha += circle6.speed;
 
     text3();
-    //tint(glitch);
     image(handImg, mouseX, mouseY, 140, 190);
-    pop();
   }
-}
+  }
 
 //checks if users hand is on shadow's hand
 function isHandonHand() {
@@ -360,7 +355,7 @@ function text3() {
     textFont(`Verdana`);
     textSize(20);
     fill(glitch);
-    text(`Click on It`, handPosition.x - 50, handPosition.y - 150);
+    text(`Click on It`, handPosition.x, handPosition.y - 150);
   }
 }
 //checks if the main circle reaches its given size
@@ -396,9 +391,9 @@ function aimposition() {
 
 //displays eye image at the center
 function eyeImage() {
-  push();
+  //push();
   imageMode(CENTER);
-  tint(255, 255);
+  //tint(255, 255);
   image(focusImg, width / 2, height / 2, 600, 450);
   //pointer
   stroke(255, 0);
@@ -406,7 +401,7 @@ function eyeImage() {
   line(offset, offset2 + 30, offset, offset2 - 30);
   stroke(255, 0);
   ellipse(offset, offset2, mousePointer.size); //mouse pointer
-  pop();
+  //pop();
 }
 
 //controls second image with mouse

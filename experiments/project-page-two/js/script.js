@@ -95,7 +95,7 @@ ellipse(aimPosition.x, aimPosition.y, aimPosition.place);
   //displays eye image at the center
   function eyeImage(){
   imageMode(CENTER);
-  tint(255, 255);
+  //tint(255, 255);
   image(focusImg, width/2, height/2,600, 450);
   //pointer
   stroke(255, 0);
@@ -106,13 +106,17 @@ ellipse(aimPosition.x, aimPosition.y, aimPosition.place);
 }
 
   //controls second image with mouse
+
   function controlImage(){
+
   let dx = mouseX - focusImg.width/2 - offset;
   let dy = mouseY - focusImg.height/2 - offset2;
   offset += dx * easing;
   offset2 += dy * easing;
+  push();
   tint(255, 150); //
   image(focusImg, offset, offset2, 600, 450);
+  pop();
 }
 
 
@@ -211,12 +215,20 @@ ellipse(ellipse6.x, ellipse6.y, ellipse6.size);
 
 }
 
-function showClicktext(){
-  if (ellipse6.size === 300 && checkAim()) {
+function showClicktext() {
+  if (checkAimSize() && checkAim()) {
     text5();
   }
 }
 
+function checkAimSize(){
+  if (ellipse6.size === 300){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
 
 function text5(){
   let col = random(0, 220);
