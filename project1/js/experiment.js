@@ -197,7 +197,7 @@ let ash = {
 }
 
 let currentInput = ``;
-let state = `title`;
+let state = `pageFour`;
 let substate = `fireplace` //sub-state for page three
 //let stateEclipse = `pageFive`;
 
@@ -593,7 +593,7 @@ function pageFour() {
 
 
   function islegOffscreen(){
-    if (userleg.x > width || userleg.x < 0 || userleg.y > height || userleg.y < 0){
+    if (userleg.x > width/2+40 || userleg.x < width/2-40 || userleg.y > height || userleg.y < 0){
     return text7();
   }
   else {

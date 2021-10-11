@@ -12,7 +12,7 @@ let sun ={
   vx: 0.7,
   vy: 0.3,
   size: 1100,
-  angle: 6
+  angle: 10
 }
 
 let planet ={
@@ -21,7 +21,7 @@ let planet ={
   vx: 0.9,
   vy: 0.6,
   size: 650,
-  angle: 60
+  angle: 50
 }
 
 function preload() {
@@ -39,17 +39,16 @@ function setup() {
 
 
 function draw() {
+
 let glitter= random(0,30);
 background(glitter);
-imageMode(CENTER);
 
 checkPlanetSize();
 moveSun();
 movePlanet();
 eclipseMode();
-//text8()
-displayClick()
-
+text8()
+imageMode(CENTER);
 
 }
 
@@ -73,7 +72,6 @@ function moveSun(){
 sun.x -= sun.vx;
 sun.y += sun.vy;
 sun.size +=0.7;
-sun.size = constrain(sun.size, 1000,  1800);
 //rotates sun
 push();
 translate (sun.x, sun.y);
@@ -83,18 +81,17 @@ sun.angle+=0.2;
 pop();
 }
 
-// moves planet up and to the right
+// moves promlanet up and to the right
 function movePlanet(){
 planet.x += planet.vx;
 planet.y -= planet.vy;
 planet.size -=0.3;
-planet.size = constrain(planet.size,  340, 650);
 //rotates sun
 push();
 translate (planet.x, planet.y);
 rotate(planet.angle);
 image(darkPlanetImg, 0, 0, planet.size, planet.size);
-planet.angle+=0.7;
+planet.angle+=2;
 pop();
 }
 
@@ -109,28 +106,20 @@ else {
 }
 }
 
-// planet and the sun stops after and shows starsoverlap
+//
 function eclipseMode(){
   if (isOverlap()){
-  planet.vy = 0;
-  planet.vx = 0;
-  sun.vy = 0;
-  sun.vx = 0;
-
+  planet.vy = 0.01;
+  planet.vx = 0.01;
+  sun.vy = 0.01;
+  sun.vx = 0.01;
+  planet.size -=1;
+  planet.size = constrain(planet.size,  200, 650);
   makeStars();
   tint(10, 200);
 }
 }
- function displayClick(){
-   if (checkPlanetSize()){
-     text9();
-   }
-   else {
-     text8();
-   }
- }
 
-// displays a text before eclipse
 function text8(){
   let col = random(0, 220);
   noStroke();
@@ -138,46 +127,24 @@ function text8(){
   textSize(20);
   fill(col);
   textAlign(CENTER, CENTER);
-  if (isOverlap() && planet.vx === 0){
-    fill(0, 0);
+  if (isOverlap()){
+    fill(0,0);
   }
-    else {
-  text(`Wait for an Eclipse`, width/2+100, height/2+200);
+   else{
+ text(`Wait for an Eclipse`, width/2+100, height/2+200);
 }
 }
 
-// displays a text
-function text9(){
-  let col = random(0, 220);
-  noStroke();
-  textFont(`Verdana`);
-  textSize(25);
-  fill(col);
-  textAlign(CENTER, CENTER);
-
-  text(`Click`, planet.x, planet.y);
-}
-
-// checks the planet's size
 function checkPlanetSize(){
-  if(planet.size === 340){
+  if(planet.size <= 330){
   return true;
   }
   else {
     return false;
   }
 }
+//move to other state
 
 
-function isOnPlanet(){
-  let d = dist(mouseX, mouseY, planet.x, planet.y);
-  if (d < planet.x/2){
-  return true;
-}
- else {
-return false;
-}
-}
 
-
-// if mouse clicked move to other state
+//if the sun size reaches ... move to other page

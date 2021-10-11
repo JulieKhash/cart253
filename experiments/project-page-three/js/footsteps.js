@@ -26,7 +26,6 @@ let userleg = {
   h: 70
 }
 
-
 function preload(){
   footStepImg = loadImage("assets/images/footprints.gif");
   nightImg = loadImage("assets/images/night.gif");
@@ -52,8 +51,6 @@ function draw(){
   moveUserleg()
   userFoot();
 
-  //text6();
-
   //move footsteps upwards
   //display images
 
@@ -78,7 +75,6 @@ else {
   return text6();
 }
 }
-
 
 
 function isLegOnroad(){
