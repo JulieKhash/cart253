@@ -239,8 +239,6 @@ function draw() {
   } else if (state ===`pageFour`) {    //follow footsteps
     pageFour();
   }
-
-
   else if (state ===`pageFive`){
     pageFive();
   }
@@ -570,15 +568,14 @@ function pageFour() {
     moveFootsteps();
     resetFootsteps();
     roadFooodsteps();
-
     islegOffscreen()
-    isLegOnroad()
     moveUserleg()
     userFoot();
 
+    movetoPage5()  //Moves to Page 5!
+
     //move footsteps upwards
     //display images
-
 
   }
   function moveFootsteps(){
@@ -603,12 +600,19 @@ function pageFour() {
 
 
   function isLegOnroad(){
-    //let d = dist()
     if (userleg.y <= 300){
-    background(100);
-    // move to page four
+    return true;
+  }
+  else {
+    return false;
   }
   }
+
+function movetoPage5(){
+  if(isLegOnroad()){
+    pageFive();
+  }
+}
 
   function userFoot(){
 
@@ -678,33 +682,37 @@ function pageFive() {
 
 let glitter = random(0,30);
 background(glitter);
+imageMode(CENTER);
 
 checkPlanetSize();
 moveSun();
 movePlanet();
 eclipseMode();
-text8()
-imageMode(CENTER);
+displayClick()
 
 }
 
 //makes stars
 function makeStars(){
+
 let glitch = random(0, 250);
 for (let i = 0; i < numStars; i++){
 let x = random(0, width);
 let y = random(0, height);
-noStroke();
+noStroke()
 fill(glitch, 150);
+strokeWeight(1);
 ellipse(x, y, 2);
 }
 }
+
 
 // moves sun down and to the left
 function moveSun(){
 sun.x -= sun.vx;
 sun.y += sun.vy;
 sun.size +=0.7;
+sun.size = constrain(sun.size, 1000,  1800);
 //rotates sun
 push();
 translate (sun.x, sun.y);
@@ -714,17 +722,18 @@ sun.angle+=0.2;
 pop();
 }
 
-// moves promlanet up and to the right
+// moves planet up and to the right
 function movePlanet(){
 planet.x += planet.vx;
 planet.y -= planet.vy;
 planet.size -=0.3;
+planet.size = constrain(planet.size,  340, 650);
 //rotates sun
 push();
 translate (planet.x, planet.y);
 rotate(planet.angle);
 image(darkPlanetImg, 0, 0, planet.size, planet.size);
-planet.angle+=0.4;
+planet.angle+=0.7;
 pop();
 }
 
@@ -739,21 +748,30 @@ else {
 }
 }
 
-//chanhes planet/sun paramentres after eclipse
+// planet and the sun stops after and shows starsoverlap
 function eclipseMode(){
   if (isOverlap()){
-  planet.vy = 0.01;
-  planet.vx = 0.01;
-  sun.vy = 0.01;
-  sun.vx = 0.01;
-  planet.size -=1;
-  planet.size = constrain(planet.size,  200, 650);
+  //push();
+  planet.vy = 0;
+  planet.vx = 0;
+  sun.vy = 0;
+  sun.vx = 0;
+
   makeStars();
   tint(10, 200);
-  }
+  //pop();
 }
+}
+ function displayClick(){
+   if (checkPlanetSize()){
+     text9();
+   }
+   else {
+     text8();
+   }
+ }
 
-//displays a text
+// displays a text before eclipse
 function text8(){
   let col = random(0, 220);
   noStroke();
@@ -761,23 +779,49 @@ function text8(){
   textSize(20);
   fill(col);
   textAlign(CENTER, CENTER);
-  if (isOverlap()){
-    fill(0,0);
+  if (isOverlap() && planet.vx === 0){
+    fill(0, 0);
   }
-   else{
- text(`Wait for an Eclipse`, width/2+100, height/2+200);
+    else {
+  text(`Wait for an Eclipse`, width/2+100, height/2+200);
 }
 }
 
-//checks planet size for reference
+// displays a text
+function text9(){
+  let col = random(0, 220);
+  noStroke();
+  textFont(`Verdana`);
+  textSize(25);
+  fill(col);
+  textAlign(CENTER, CENTER);
+
+  text(`Click`, planet.x, planet.y);
+}
+
+// checks the planet's size
 function checkPlanetSize(){
-  if(planet.size <= 330){
+  if(planet.size === 340){
   return true;
   }
   else {
     return false;
   }
 }
+
+
+function isOnPlanet(){
+  let d = dist(mouseX, mouseY, planet.x, planet.y);
+  if (d < planet.x/2){
+  return true;
+}
+ else {
+return false;
+}
+}
+
+
+// if mouse clicked move to other state
 
 //move to other state
 
@@ -818,11 +862,4 @@ function mousePressed() {
   else if (state ===`pageThree` && checkAim() && checkAimSize()){
     state = `pageFour`;
   }
-
-  else if (state === `pageFour` && substate ===`fireplace` && isOnButton()){
-     substate = `ashes`;
-}
-  else if (isOnButton() && substate === `fireplace`){
-  substate = `ashes`
-}
 }

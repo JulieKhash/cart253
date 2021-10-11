@@ -116,9 +116,10 @@ function eclipseMode(){
   planet.vx = 0;
   sun.vy = 0;
   sun.vx = 0;
-
+  push();
   makeStars();
   tint(10, 200);
+  pop();
 }
 }
  function displayClick(){
