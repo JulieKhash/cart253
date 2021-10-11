@@ -157,16 +157,18 @@ let numStars = 200;
 let numKeysTyped = 0;
 
 let button = {
-  x: 950,
-  y: 470,
-  size: 100
+  x: 1200,
+  y: 600,
+  size: 400
 }
 
 let ash = {
-  size: 10,
+  sizeX: 10,
+  sizeY: 100,
   speed: 0.00005,
-  opacity: 250
+  opacity: 150
 }
+
 let currentInput = ``;
 let state = `pageFour`;
 let substate = `fireplace` //sub-state for page three
@@ -211,7 +213,7 @@ function draw() {
   else if (state ===`pageFour` && substate === `fireplace`) {
     fireplace();
   }
-  else if (state ===`pageFour` && substate === `ashes`) {
+  else if (substate === `ashes`) {
     ashes();
   }
   else if (state ===`pageFive`){
@@ -219,7 +221,7 @@ function draw() {
   }
     }
 
-
+/////////////////////////////////////////////////////////////////////////////
 // PAGE ONE FUNCTIONS
 //Dispays first page of the program
 function titlePage() {
@@ -367,6 +369,7 @@ function checkCircleSize() {
   }
 }
 
+/////////////////////////////////////////////////////////////////////////
 //PAGE THREE FUNCTIONS
 function pageThree() {
   let bg = random(0, 23);
@@ -529,6 +532,7 @@ function text5() {
   text(`click`, ellipse6.x, ellipse6.y - 60);
 }
 
+///////////////////////////////////////////////////////////////////
 //PAGE FOUR FUNCTIONS
 function pageFour() {
 
@@ -552,39 +556,40 @@ function pageFour() {
   }
 
   function ashes(){
-    //checkAshsize();
+
     makeAshes();
-    if (checkAshsize()){
-        pageFive();
-    }
+    checkOpacity();
 
 }
 
   // makes tiny red circles
+
   function makeAshes(){
-  let glitchred = random(0, 250);
-  for (let i = 0; i < numAshes; i++){
-  let x = random(0, width);
-  let y = random(0, height);
-  ash.size -= ash.speed;
-  ash.size = constrain(ash.size, 2, 10);
-  noStroke()
-  fill(glitchred, 30, 0, ash.opacity)
-  strokeWeight(1);
-  ellipse(x, y, ash.size);
-  tint(100,70);
+    push()
+    let glitchred = random(0, 250);
+    for (let i = 0; i < numAshes; i++){
+    let x = random(0, width);
+    let y = random(0, height);
+    ash.sizeX -= ash.speed;
+    ash.sizeY -= ash.speed;
+    ash.opacity -=0.0006;
+    ash.opacity = constrain(ash.opacity, 0, 150);
+    noStroke()
+
+    fill(glitchred, 20, 0, ash.opacity)
+    ellipse(x, y, ash.sizeX, ash.sizeY);
+
+    pop();
+
   }
 }
-function checkAshsize(){
-  if (ash.size <= 2){
-  return true;
-}
-else {
-  false;
-}
-  //move to eclipse
-}
 
+// moves to eclipse state based on ash opacity
+  function checkOpacity(){
+    if (ash.opacity <= 1){
+    pageFive();
+  }
+}
 
 
 // displays the text
@@ -592,17 +597,21 @@ function text7(){
   let col = random(0, 220);
   noStroke();
   textFont(`Verdana`);
-  textSize(20);
+  textSize(25);
   fill(col);
   textAlign(CENTER, CENTER);
-  text(`What is it you wish to burn away?`, width-500, height/2+400);
+  text(`What is it you wish to burn away?`, width-500, height/2+380);
 }
 
 
 //displays first fire image
 function displayFireImage1(){
+push();
 imageMode(CENTER);
+image(ashesImg, width/2+250, height/2);
+tint(255, 150);
 image(fireImg, width/2+200, height/2, 500+100, 700+100);
+pop();
 }
 
 //displays a textfield text and removes it when user starts typing
@@ -649,20 +658,10 @@ function makeButton(){
     ellipse(button.x, button.y, button.size);
     fill(random(50, 190), 0, 0);
     textSize(25);
-    text(`burn`, width/2, height/2-180)
-    displayFireImage2()
+    text(`burn`, button.x, button.y);
 }
 }
-//displays another image after first image
-function displayFireImage2(){
-    imageMode(CENTER);
-    tint(random(0, 50), 100);
-    image(ashesImg, width/2+100, height/2, 800, 480);
-    tint(100,70);
-    image(burnImg, width/2+100, height/2, 800, 480);
-    tint(0,0);
-    image(fireImg, width/2+200, height/2, 500*2-200, 700*2-200);
-}
+
 
 //calculates the distance between the mouse and the red button
 function isOnButton(){
@@ -680,7 +679,7 @@ else {
 //PAGE FIVE FUNCTIONS
 function pageFive() {
 
-let glitter= random(0,30);
+let glitter = random(0,30);
 background(glitter);
 
 checkPlanetSize();
@@ -692,15 +691,14 @@ imageMode(CENTER);
 
 }
 
-// makes stars
+//makes stars
 function makeStars(){
 let glitch = random(0, 250);
 for (let i = 0; i < numStars; i++){
 let x = random(0, width);
 let y = random(0, height);
-noStroke()
+noStroke();
 fill(glitch, 150);
-strokeWeight(1);
 ellipse(x, y, 2);
 }
 }
@@ -788,7 +786,6 @@ function checkPlanetSize(){
 
 
 
-//if the sun size reaches ... move to other page
 
 
 
@@ -796,11 +793,8 @@ function checkPlanetSize(){
 
 
 
+////////////////////////////////////////////////////////////////////////////
 
-
-
-
-//
 //if (circle6.size === 300){
 //mouseClick text
 
@@ -830,7 +824,7 @@ function mousePressed() {
   else if (state === `pageFour` && substate ===`fireplace` && isOnButton()){
      substate = `ashes`;
 }
- else if (state === `pageFour` && substate ===`ashes`){
-   state = `pageFive`;
+  else if (isOnButton() && substate === `fireplace`){
+  substate = `ashes`
 }
 }
