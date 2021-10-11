@@ -14,6 +14,10 @@ let handImg;
 let shadowImg;
 let shadowShotImg;
 let focusImg;
+let footStepImg;
+let nightImg;
+
+
 let fireImg;
 let burnImg;
 let ashesImg;
@@ -131,6 +135,28 @@ let ellipse6 = {
   strokeSize: 10
 }
 
+let road = {
+  x: 950,
+  y: 16
+}
+
+
+let footsteps = {
+  x: 950,
+  y: 1000,
+  speed: 1
+}
+
+let userleg = {
+  x: 950,
+  y: 1200,
+  speed: 2,
+  vx: 0,
+  vy: 0,
+  w: 25,
+  h: 70
+}
+
 let sun ={
   x: 1800,
   y: 100,
@@ -184,6 +210,9 @@ function preload() {
   handImg = loadImage("assets/images/handgre.png");
   shadowShotImg = loadImage("assets/images/shadowGlow.png");
   focusImg = loadImage("assets/images/focus.gif");
+  footStepImg = loadImage("assets/images/footprints.gif");
+  nightImg = loadImage("assets/images/night.gif");
+
   fireImg = loadImage("assets/images/fire.gif");
   burnImg = loadImage("assets/images/fire-flames.gif");
   ashesImg = loadImage("assets/images/ashes-dust.gif");
@@ -201,21 +230,17 @@ function draw() {
 
   background(0);
 
-  if (state === `title`) {
+  if (state === `title`) {    //main
     titlePage();
-  } else if (state === `pageTwo`) {
+  } else if (state === `pageTwo`) {   //shadow man
     pageTwo();
-  } else if (state === `pageThree`) {
+  } else if (state === `pageThree`) {   //focus mind
     pageThree();
-  } else if (state ===`pageFour`) {
+  } else if (state ===`pageFour`) {    //follow footsteps
     pageFour();
   }
-  else if (state ===`pageFour` && substate === `fireplace`) {
-    fireplace();
-  }
-  else if (substate === `ashes`) {
-    ashes();
-  }
+
+
   else if (state ===`pageFive`){
     pageFive();
   }
@@ -538,146 +563,113 @@ function text5() {
 //PAGE FOUR FUNCTIONS
 function pageFour() {
 
-  background(0);
+    background(0);
+    imageMode(CENTER);
 
-  if (substate === `fireplace`){
-    fireplace()
-  }
-  else if (substate === `ashes`){
-    ashes();
-  }
-  else if (state === `pageFive`){
-    pageFive();
-}
-}
 
-  function fireplace(){
-    displayFireImage();
-    text7();
-    text6();
-    blockWord();
-    userTextinput();
-    makeButton();
-  }
+    moveFootsteps();
+    resetFootsteps();
+    roadFooodsteps();
 
-  function ashes(){
+    islegOffscreen()
+    isLegOnroad()
+    moveUserleg()
+    userFoot();
 
-    makeAshes();
-    checkOpacity();
+    //move footsteps upwards
+    //display images
 
-}
-
-  // makes tiny red circles
-
-  function makeAshes(){
-    push()
-    let glitchred = random(0, 250);
-    for (let i = 0; i < numAshes; i++){
-    let x = random(0, width);
-    let y = random(0, height);
-    ash.sizeX -= ash.speed;
-    ash.sizeY -= ash.speed;
-    ash.opacity -=0.0006;
-    ash.opacity = constrain(ash.opacity, 0, 150);
-    noStroke()
-
-    fill(glitchred, 20, 0, ash.opacity)
-    ellipse(x, y, ash.sizeX, ash.sizeY);
-
-    pop();
 
   }
-}
-
-// moves to eclipse state based on ash opacity
-  function checkOpacity(){
-    if (ash.opacity <= 1){
-    pageFive();
+  function moveFootsteps(){
+  footsteps.y -= footsteps.speed;
   }
-}
+
+  function resetFootsteps(){
+  if (footsteps.y <= height/3+40){
+    footsteps.y = 1000;
+  }
+  }
 
 
-// displays the text
-function text7(){
-  let col = random(0, 220);
-  noStroke();
-  textFont(`Verdana`);
-  textSize(25);
-  fill(col);
-  textAlign(CENTER, CENTER);
-  text(`What is it you wish to burn away?`, width-500, height/2+380);
-}
+  function islegOffscreen(){
+    if (userleg.x > width || userleg.x < 0 || userleg.y > height || userleg.y < 0){
+    return text7();
+  }
+  else {
+    return text6();
+  }
+  }
 
 
-//displays first fire image
-function displayFireImage(){
-push();
-imageMode(CENTER);
-image(ashesImg, width/2+250, height/2);
-//tint(255, 150);
-image(fireImg, width/2+200, height/2, 500+100, 700+100);
-pop();
-}
+  function isLegOnroad(){
+    //let d = dist()
+    if (userleg.y <= 300){
+    background(100);
+    // move to page four
+  }
+  }
 
-//displays a textfield text and removes it when user starts typing
+  function userFoot(){
+
+    userleg.vx +=userleg.speed;
+    userleg.vy +=userleg.speed;
+
+    let glitch = random(50, 150);
+    fill(glitch, 0, 0);
+    ellipse (userleg.x+30, userleg.y, userleg.w, userleg.h);
+    ellipse (userleg.x-20, userleg.y, userleg.w, userleg.h);
+  }
+
+  function moveUserleg(){
+    if (keyIsDown (LEFT_ARROW)) {
+      userleg.vx = -userleg.speed;
+    }
+    else if (keyIsDown(RIGHT_ARROW)) {
+     userleg.vx = userleg.speed;
+    }
+    else {
+      userleg.vx= 0;
+    }
+    // control user's horizontal movement
+    if (keyIsDown(UP_ARROW)){
+    userleg.vy = -userleg.speed;
+    }
+    else if (keyIsDown(DOWN_ARROW)){
+    userleg.vy = userleg.speed;
+    }
+    else {
+      userleg.vy = 0;
+    }
+    userleg.x += userleg.vx;
+    userleg.y+=userleg.vy;
+  }
+
+  function roadFooodsteps(){
+  image(nightImg, road.x, road.y);
+  image(footStepImg, footsteps.x, footsteps.y, 286/2, 888/2);
+  }
+
   function text6(){
-  let col = random(0, 220);
-  if (numKeysTyped === 0)
-  noStroke();
-  textSize(30);
-  fill(col);
-  if (numKeysTyped >= 1){
-  fill(0,0);
-}
-  text(`write here`, width/3+ 30, height/4);
-
-}
-// blocks the word enter that appears in the text box by default :(
-function blockWord(){
-  if (currentInput === `Enter`){
-     currentInput = ``;
-  }
-}
-
-//displays user input text
-  function userTextinput(){
-  let col = random(0, 220);
-  textSize(90);
-  fill(col, 30, 0);
-  text(currentInput, width/3+70, height/4);
-}
-
-//checks and limits the number of character input
-function keyTyped() {
-  numKeysTyped = numKeysTyped + 1;
-  if (numKeysTyped < 30){
-  currentInput += key;
-}
-}
-
-//displays a button
-function makeButton(){
-  if (numKeysTyped > 3){
-    let glitter = random(0, 90);
-    fill(255, 0, 0, glitter);
-    ellipse(button.x, button.y, button.size);
-    fill(random(50, 190), 0, 0);
+    let col = random(0, 220);
+    noStroke();
+    textFont(`Verdana`);
     textSize(25);
-    text(`burn`, button.x, button.y);
-}
-}
+    fill(col);
+    textAlign(CENTER, CENTER);
+    text(`Follow the Footsteps`, width/5, height/2+200);
+  }
 
+  function text7(){
+    let col = random(0, 220);
+    noStroke();
+    textFont(`Verdana`);
+    textSize(25);
+    fill(col, 0, 0);
+    textAlign(CENTER, CENTER);
+    text(`Don't lose the track!`, width/5, height/2+200);
 
-//calculates the distance between the mouse and the red button
-function isOnButton(){
-let d = dist(mouseX, mouseY, button.x, button.y);
-if (d < button.size/2){
-  return true;
-}
-else {
-  return false
-}
-}
+  }
 
 
 
@@ -824,7 +816,7 @@ function mousePressed() {
     state = `pageThree`;
   }
   else if (state ===`pageThree` && checkAim() && checkAimSize()){
-    state = `pageFive`;
+    state = `pageFour`;
   }
 
   else if (state === `pageFour` && substate ===`fireplace` && isOnButton()){
