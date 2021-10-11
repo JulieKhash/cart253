@@ -197,7 +197,7 @@ let ash = {
 }
 
 let currentInput = ``;
-let state = `pageFour`;
+let state = `pageTwo`;
 let substate = `fireplace` //sub-state for page three
 //let stateEclipse = `pageFive`;
 
@@ -293,8 +293,14 @@ function pageTwo() {
 function pageTwoImages() {
   imageMode(CENTER);
 
+  push();
+  tint(100, 210, 210);
   image(shadowImg, width / 2, height / 2, 800, 590);
+  pop();
+  push();
+  tint(255, 100);
   image(handImg, mouseX, mouseY, 140, 190);
+  pop();
 }
 
 //hand position point
@@ -369,7 +375,7 @@ function text2() {
   textFont(`Verdana`);
   textSize(25);
   fill(glitch);
-  text(`Touch my hand`, width / 2 - 150, height / 2 + 10);
+  text(`Touch my hand`, handPosition.x-80, handPosition.y );
 }
 
 function text3() {
@@ -378,7 +384,7 @@ function text3() {
     textFont(`Verdana`);
     textSize(20);
     fill(glitch);
-    text(`Click on It`, handPosition.x, handPosition.y - 150);
+    text(`Click on It`, handPosition.x-40, handPosition.y - 150);
   }
 }
 //checks if the main circle reaches its given size
@@ -590,7 +596,7 @@ function pageFour() {
 
 
   function islegOffscreen(){
-    if (userleg.x > width/2+40 || userleg.x < width/2-40 || userleg.y > height || userleg.y < 0){
+    if (userleg.x > width/2+30 || userleg.x < width/2-30 || userleg.y > height || userleg.y < 0){
     return text7();
   }
   else {
