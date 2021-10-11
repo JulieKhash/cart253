@@ -4,7 +4,7 @@
 let sunImg;
 let darkPlanetImg;
 
-let numStars = 200
+let numStars = 200;
 
 let sun ={
   x: 1800,
@@ -65,8 +65,6 @@ strokeWeight(1);
 ellipse(x, y, 2);
 }
 }
-
-
 
 
 // moves sun down and to the left
