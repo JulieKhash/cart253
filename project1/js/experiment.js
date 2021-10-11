@@ -251,12 +251,13 @@ function text1() {
 //displays title images
 function titleImages() {
   let col = random(0, 220);
-
+  push();
   imageMode(CENTER);
-  tint(col, 200, 200, 150);
+  // tint(col, 200, 200, 150);
 
   image(backgroundImg, width / 2, height / 2);
   image(crescentImg, width / 2, height / 3 + 210, 500, 276);
+  pop();
 }
 
 //PAGE TWO FUNCTIONS
@@ -270,9 +271,9 @@ function pageTwo() {
 
 function pageTwoImages() {
   imageMode(CENTER);
-  tint(100, 210, 210);
+  //tint(100, 210, 210);
   image(shadowImg, width / 2, height / 2, 800, 590);
-  tint(255, 100);
+  //tint(255, 100);
   image(handImg, mouseX, mouseY, 140, 190);
 }
 
@@ -285,8 +286,9 @@ function handposition() {
 
 function handAnimation() {
   if (isHandonHand()) {
+    push();
     let glitch = random(0, 255);
-    tint(100, 210, 210, 255);
+    //tint(100, 210, 210, 255);
     image(shadowShotImg, width / 2, height / 2, 800, 590);
 
     noStroke();
@@ -328,8 +330,9 @@ function handAnimation() {
     circle6.alpha += circle6.speed;
 
     text3();
-    tint(glitch);
+    //tint(glitch);
     image(handImg, mouseX, mouseY, 140, 190);
+    pop();
   }
 }
 
@@ -393,6 +396,7 @@ function aimposition() {
 
 //displays eye image at the center
 function eyeImage() {
+  push();
   imageMode(CENTER);
   tint(255, 255);
   image(focusImg, width / 2, height / 2, 600, 450);
@@ -402,6 +406,7 @@ function eyeImage() {
   line(offset, offset2 + 30, offset, offset2 - 30);
   stroke(255, 0);
   ellipse(offset, offset2, mousePointer.size); //mouse pointer
+  pop();
 }
 
 //controls second image with mouse
@@ -410,8 +415,10 @@ function controlImage() {
   let dy = mouseY - focusImg.height / 2 - offset2;
   offset += dx * easing;
   offset2 += dy * easing;
+  push();
   tint(255, 150); //
   image(focusImg, offset, offset2, 600, 450);
+  pop();
 }
 
 //shows focus animation if the aimed
@@ -824,12 +831,11 @@ function mousePressed() {
   else if (state ===`pageThree` && checkAim() && checkAimSize()){
     state = `pageFive`;
   }
-}
 
-//   else if (state === `pageFour` && substate ===`fireplace` && isOnButton()){
-//      substate = `ashes`;
-// }
-//   else if (isOnButton() && substate === `fireplace`){
-//   substate = `ashes`
-// }
-// }
+  else if (state === `pageFour` && substate ===`fireplace` && isOnButton()){
+     substate = `ashes`;
+}
+  else if (isOnButton() && substate === `fireplace`){
+  substate = `ashes`
+}
+}
