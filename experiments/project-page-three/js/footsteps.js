@@ -1,186 +1,151 @@
 
 "use strict";
 
-let fireImg;
-let burnImg;
-let ashesImg;
+let footStepImg;
+let nightImg;
 
-let currentInput = ``;
-let numAshes = 700
-let numKeysTyped = 0;
-
-let button = {
+let road = {
   x: 950,
-  y: 470,
-  size: 100
-}
-
-let ash = {
-  size: 10,
-  speed: 0.00005,
-  opacity: 250
-}
-
-let substate = `fireplace` //substate for page three
-
-
-function preload() {
-  fireImg = loadImage("assets/images/fire.gif");
-  burnImg = loadImage("assets/images/fire-flames.gif");
-  ashesImg = loadImage("assets/images/ashes-dust.gif");
+  y: 16
 }
 
 
-function setup() {
+let footsteps = {
+  x: 950,
+  y: 1000,
+  speed: 1
+}
+
+let userleg = {
+  x: 950,
+  y: 1200,
+  speed: 2,
+  vx: 0,
+  vy: 0,
+  w: 25,
+  h: 70
+}
+
+
+function preload(){
+  footStepImg = loadImage("assets/images/footprints.gif");
+  nightImg = loadImage("assets/images/night.gif");
+}
+
+
+function setup(){
   createCanvas(1900, 1300);
-  createInput();
-
 }
 
 
-function draw() {
-
+function draw(){
   background(0);
+  imageMode(CENTER);
 
-  if (substate === `fireplace`){
-    fireplace()
-  }
-  else if (substate === `ashes`){
-    ashes();
-  }
+
+  moveFootsteps();
+  resetFootsteps();
+  roadFooodsteps();
+
+  islegOffscreen()
+  isLegOnroad()
+  moveUserleg()
+  userFoot();
+
+  //text6();
+
+  //move footsteps upwards
+  //display images
+
+
+}
+function moveFootsteps(){
+footsteps.y -= footsteps.speed;
 }
 
-  function fireplace(){
-    displayFireImage1()
-    text7()
-    text6();
-    userTextinput();
-    makeButton();
-
-  }
-
-  function ashes(){
-    makeAshes();
-    checkAshsize()
-
-  }
-
-  // makes tiny red circles
-  function makeAshes(){
-
-  let glitchred = random(0, 250);
-  for (let i = 0; i < numAshes; i++){
-  let x = random(0, width);
-  let y = random(0, height);
-  ash.size -= ash.speed;
-  ash.size = constrain(ash.size, 2, 10);
-  noStroke()
-  fill(glitchred, 30, 0, ash.opacity)
-  strokeWeight(1);
-  ellipse(x, y, ash.size);
-  tint(100,70);
-  }
+function resetFootsteps(){
+if (footsteps.y <= height/3+40){
+  footsteps.y = 1000;
+}
 }
 
-  function checkAshsize(){
-    if (ash.size === 2){
-   noLoop();
-    //move to eclipse
+
+function islegOffscreen(){
+  if (userleg.x > width || userleg.x < 0 || userleg.y > height || userleg.y < 0){
+  return text7();
+}
+else {
+  return text6();
+}
+}
+
+
+
+function isLegOnroad(){
+  //let d = dist()
+  if (userleg.y <= 300){
+  background(100);
+  // move to page four
+}
+}
+
+function userFoot(){
+
+  userleg.vx +=userleg.speed;
+  userleg.vy +=userleg.speed;
+
+  let glitch = random(50, 150);
+  fill(glitch, 0, 0);
+  ellipse (userleg.x+30, userleg.y, userleg.w, userleg.h);
+  ellipse (userleg.x-20, userleg.y, userleg.w, userleg.h);
+}
+
+function moveUserleg(){
+  if (keyIsDown (LEFT_ARROW)) {
+    userleg.vx = -userleg.speed;
   }
+  else if (keyIsDown(RIGHT_ARROW)) {
+   userleg.vx = userleg.speed;
+  }
+  else {
+    userleg.vx= 0;
+  }
+  // control user's horizontal movement
+  if (keyIsDown(UP_ARROW)){
+  userleg.vy = -userleg.speed;
+  }
+  else if (keyIsDown(DOWN_ARROW)){
+  userleg.vy = userleg.speed;
+  }
+  else {
+    userleg.vy = 0;
+  }
+  userleg.x += userleg.vx;
+  userleg.y+=userleg.vy;
+}
+
+function roadFooodsteps(){
+image(nightImg, road.x, road.y);
+image(footStepImg, footsteps.x, footsteps.y, 286/2, 888/2);
+}
+
+function text6(){
+  let col = random(0, 220);
+  noStroke();
+  textFont(`Verdana`);
+  textSize(25);
+  fill(col);
+  textAlign(CENTER, CENTER);
+  text(`Follow the Footsteps`, width/5, height/2+200);
 }
 
 function text7(){
   let col = random(0, 220);
   noStroke();
   textFont(`Verdana`);
-  textSize(20);
-  fill(col);
+  textSize(25);
+  fill(col, 0, 0);
   textAlign(CENTER, CENTER);
-  text(`What is it you wish to burn away?`, width-500, height/2+400);
-}
+  text(`Don't lose the track!`, width/5, height/2+200);
 
-
-//displays first fire image
-function displayFireImage1(){
-imageMode(CENTER);
-image(fireImg, width/2+200, height/2, 500+100, 700+100);
-}
-
-//displays textfield text and removes when user starts typing
-  function text6(){
-  let col = random(0, 220);
-  noStroke();
-  textSize(30);
-  fill(col);
-  if (numKeysTyped >= 1){
-  fill(0,0);
-}
-  text(`write here`, width/3+ 30, height/4);
-}
-
-//displays user input text
-  function userTextinput(){
-  let col = random(0, 220);
-  textSize(90);
-  fill(col, 30, 0);
-  text(currentInput, width/3+70, height/4);
-}
-
-//checks and limits the number of character input
-function keyTyped() {
-  numKeysTyped = numKeysTyped + 1;
-  if (numKeysTyped < 30){
-  currentInput += key;
-}
-}
-
-//displays a button
-function makeButton(){
-  if (numKeysTyped > 3){
-    let glitter = random(0, 90);
-    fill(255, 0, 0, glitter);
-    ellipse(button.x, button.y, button.size);
-    fill(random(50, 190), 0, 0);
-    textSize(25);
-    text(`burn`, width/2, height/2-180)
-    displayFireImage2()
-}
-}
-//displays another image after first image
-function displayFireImage2(){
-    imageMode(CENTER);
-    tint(random(0, 50), 100);
-    image(ashesImg, width/2+100, height/2, 800, 480);
-    tint(100,70);
-    image(burnImg, width/2+100, height/2, 800, 480);
-    tint(0,0);
-    image(fireImg, width/2+200, height/2, 500*2-200, 700*2-200);
-}
-
-//calculates the distance between the mouse and the red button
-function isOnButton(){
-let d = dist(mouseX, mouseY, button.x, button.y);
-if (d < button.size/2){
-  return true;
-}
-else {
-  return false
-}
-}
-
-// controls what user can do when typed
-function keyPressed(){
-  if (keyCode === BACKSPACE){
-    currentInput = ``;
-  }
-  else if (keyCode === ENTER){
-
-  }
-}
-
-// changes to another sunstate after button is pressed
-function mousePressed(){
-  if (substate === `fireplace` && isOnButton()){
-      substate = `ashes`;
-   }
 }
