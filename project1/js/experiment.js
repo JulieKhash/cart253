@@ -16,9 +16,6 @@ let shadowShotImg;
 let focusImg;
 let footStepImg;
 let nightImg;
-// let fireImg;
-// let burnImg;
-// let ashesImg;
 let sunImg;
 let darkPlanetImg;
 let lightImg;
@@ -220,9 +217,6 @@ let ash = {
 let currentInput = ``;
 let state = `pageFour`;
 
-
-
-
 function preload() {
 
   backgroundImg = loadImage("assets/images/signs.gif");
@@ -232,10 +226,6 @@ function preload() {
   focusImg = loadImage("assets/images/focus.gif");
   footStepImg = loadImage("assets/images/footprints.gif");
   nightImg = loadImage("assets/images/night.gif");
-
-  // fireImg = loadImage("assets/images/fire.gif");
-  // burnImg = loadImage("assets/images/fire-flames.gif");
-  // ashesImg = loadImage("assets/images/ashes-dust.gif");
   sunImg = loadImage("assets/images/sun.png");
   darkPlanetImg =  loadImage("assets/images/darkplanet.png");
   lightImg = loadImage("assets/images/light.png");
@@ -243,12 +233,10 @@ function preload() {
   faceImg = loadImage("assets/images/face.png");
   birdsImg = loadImage("assets/images/fly.gif");
 
-
 }
 
 function setup() {
   createCanvas(1900, 1300);
-  createInput();
   angleMode(DEGREES);
 }
 
@@ -404,7 +392,7 @@ function text2() {
   textFont(`Verdana`);
   textSize(25);
   fill(glitch);
-  text(`Touch my hand`, handPosition.x-80, handPosition.y );
+  text(`Touch my hand`, handPosition.x-20, handPosition.y );
 }
 
 function text3() {
@@ -413,7 +401,7 @@ function text3() {
     textFont(`Verdana`);
     textSize(20);
     fill(glitch);
-    text(`Click on It`, handPosition.x-40, handPosition.y - 150);
+    text(`Click on It`, handPosition.x-20, handPosition.y - 150);
   }
 }
 //checks if the main circle reaches its given size
@@ -603,13 +591,11 @@ function pageFour() {
     moveFootsteps();
     resetFootsteps();
     roadFooodsteps();
-    islegOffscreen()
+    Offtrack();
     moveUserleg()
     userFoot();
 
-    movetoPage5();
-  //Moves to Page 5!
-
+    movetoPage5(); //Moves to Page 5!
 
 
   }
@@ -624,12 +610,21 @@ function pageFour() {
   }
 
 
-  function islegOffscreen(){
-    if (userleg.x > width/2+30 || userleg.x < width/2-30 || userleg.y > height || userleg.y < 0){
+  function Offtrack(){
+    if (islegOffdistance()){
     return text7();
   }
   else {
     return text6();
+  }
+  }
+
+  function islegOffdistance(){
+    if (userleg.x > width/2+30 || userleg.x < width/2-30 || userleg.y > height || userleg.y < 0){
+    return true;
+  }
+  else {
+    return false;
   }
   }
 
@@ -655,10 +650,16 @@ function movetoPage5(){
     userleg.vy +=userleg.speed;
 
     let glitch = random(50, 150);
-    fill(glitch, 0, 0);
+    if (islegOffdistance()){
+      fill(glitch, 0, 0);
+    }
+    else {
+      fill(0, 0, glitch);
+    }
     ellipse (userleg.x+30, userleg.y, userleg.w, userleg.h);
     ellipse (userleg.x-20, userleg.y, userleg.w, userleg.h);
   }
+
 
   function moveUserleg(){
     if (keyIsDown (LEFT_ARROW)) {
@@ -709,8 +710,6 @@ function movetoPage5(){
     text(`Don't lose the track!`, width/5, height/2+200);
 
   }
-
-
 
 //////////////////////////////////////////////////////////////////////////////
 //PAGE FIVE FUNCTIONS
@@ -989,12 +988,9 @@ function keyPressed() {
   if (keyCode === ENTER && state === `title`) {
     state = `pageTwo`;
   }
-  else if(keyCode === BACKSPACE){
-    currentInput = ``;
-  }
-  else if(keyCode === ENTER && `fireplace`){
-    return false;
-  }
+  else if(keyCode === SPACEBAR && state === `pageSix`){
+    state = `title`;
+}
 }
 
 
@@ -1009,9 +1005,4 @@ function mousePressed() {
   else if (state ===`pageFour` && isOnPlanet() && checkPlanetSize()){
     state = `pageSix`;
   }
-
     }
-
-
-
-// && isOnPlanet()&& checkPlanetSize()
