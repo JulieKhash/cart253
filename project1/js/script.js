@@ -17,6 +17,9 @@ let focusImg;
 let fireImg;
 let burnImg;
 let ashesImg;
+let sunImg;
+let darkPlanetImg;
+
 
 let handPosition = {
   x: 810,
@@ -127,13 +130,30 @@ let ellipse6 = {
   strokeSize: 10,
 };
 
+let sun ={
+  x: 1800,
+  y: 100,
+  vx: 0.7,
+  vy: 0.3,
+  size: 1100,
+  angle: 6
+};
+
+let planet ={
+  x: 200,
+  y: 1000,
+  vx: 0.9,
+  vy: 0.6,
+  size: 650,
+  angle: 60
+};
+
 let offset = 0; //for image control
 let offset2 = 0;
 let easing = 0.05;
 
-
-let currentInput = ``;
-let numAshes = 700
+let numAshes = 700;
+let numStars = 200;
 let numKeysTyped = 0;
 
 let button = {
@@ -147,7 +167,8 @@ let ash = {
   speed: 0.00005,
   opacity: 250
 }
-let state = `title`;
+let currentInput = ``;
+let state = `pageFour`;
 let substate = `fireplace` //sub-state for page three
 
 
@@ -161,11 +182,14 @@ function preload() {
   fireImg = loadImage("assets/images/fire.gif");
   burnImg = loadImage("assets/images/fire-flames.gif");
   ashesImg = loadImage("assets/images/ashes-dust.gif");
+  sunImg = loadImage("assets/images/sun.png");
+  darkPlanetImg =  loadImage("assets/images/darkplanet.png");
 }
 
 function setup() {
   createCanvas(1900, 1300);
   createInput();
+  angleMode(DEGREES);
 }
 
 function draw() {
@@ -184,6 +208,9 @@ function draw() {
   }
   else if (state ===`pageFour` && substate === `fireplace`) {
     ashes();
+  }
+  else if (substate === `fireplace`){
+    pageFive();
   }
     }
 // PAGE ONE FUNCTIONS
@@ -512,16 +539,25 @@ function pageFour() {
     displayFireImage1()
     text7()
     text6();
-     blockWord();
+    blockWord();
     userTextinput();
     makeButton();
+
+    //checkAshsize()
+
 
   }
 
   function ashes(){
+    //checkAshsize();
     makeAshes();
-    checkAshsize()
+
+
+    // if (checkAshsize()){
+    //     pageFive();
+    // }
   }
+
 
   // makes tiny red circles
   function makeAshes(){
@@ -530,7 +566,7 @@ function pageFour() {
   let x = random(0, width);
   let y = random(0, height);
   ash.size -= ash.speed;
-  ash.size = constrain(ash.size, 1, 10);
+  ash.size = constrain(ash.size, 5, 10);
   noStroke()
   fill(glitchred, 30, 0, ash.opacity)
   strokeWeight(1);
@@ -538,13 +574,12 @@ function pageFour() {
   tint(100,70);
   }
 }
+// function checkAshsize(){
+//   if (numAshes >= 700){
+//     noLoop();
+//   }
+// }
 
-  function checkAshsize(){
-    if (ash.size === 10){
-     randomSeed();
-    //move to eclipse
-  }
-}
 
 // displays the text
 function text7(){
@@ -571,7 +606,7 @@ image(fireImg, width/2+200, height/2, 500+100, 700+100);
   noStroke();
   textSize(30);
   fill(col);
-  if (numKeysTyped > 1){
+  if (numKeysTyped >= 1){
   fill(0,0);
 }
   text(`write here`, width/3+ 30, height/4);
@@ -634,23 +669,122 @@ else {
 }
 }
 
-// controls what user can do when typed
-// function keyPressed(){
-//   if (keyCode === BACKSPACE){
-//     currentInput = ``;
-//   }
-//   else if (keyCode === ENTER){
-//
-//   }
-// }
 
-// changes to another sunstate after button is pressed
-// function mousePressed(){
-//  else if (substate === `fireplace` && isOnButton()){
-//       substate = `ashes`;
-//    }
-// }
-//
+
+//PAGE FIVE FUNCTIONS
+function pageFive() {
+
+let glitter= random(0,30);
+background(glitter);
+
+checkPlanetSize();
+moveSun();
+movePlanet();
+eclipseMode();
+text8()
+imageMode(CENTER);
+
+}
+
+// makes stars
+function makeStars(){
+let glitch = random(0, 250);
+for (let i = 0; i < numStars; i++){
+let x = random(0, width);
+let y = random(0, height);
+noStroke()
+fill(glitch, 150);
+strokeWeight(1);
+ellipse(x, y, 2);
+}
+}
+
+
+// moves sun down and to the left
+function moveSun(){
+sun.x -= sun.vx;
+sun.y += sun.vy;
+sun.size +=0.7;
+//rotates sun
+push();
+translate (sun.x, sun.y);
+rotate(sun.angle);
+image(sunImg, 0, 0, sun.size, sun.size);
+sun.angle+=0.2;
+pop();
+}
+
+// moves promlanet up and to the right
+function movePlanet(){
+planet.x += planet.vx;
+planet.y -= planet.vy;
+planet.size -=0.3;
+//rotates sun
+push();
+translate (planet.x, planet.y);
+rotate(planet.angle);
+image(darkPlanetImg, 0, 0, planet.size, planet.size);
+planet.angle+=0.4;
+pop();
+}
+
+//check the distance between the planent and the sun
+function isOverlap(){
+let d = dist(planet.x, planet.y, sun.x, sun.y);
+if (d < planet.size/14){
+  return true;
+}
+else {
+  return false;
+}
+}
+
+//chanhes planet/sun paramentres after eclipse
+function eclipseMode(){
+  if (isOverlap()){
+  planet.vy = 0.01;
+  planet.vx = 0.01;
+  sun.vy = 0.01;
+  sun.vx = 0.01;
+  planet.size -=1;
+  planet.size = constrain(planet.size,  200, 650);
+  makeStars();
+  tint(10, 200);
+  }
+}
+
+//displays a text
+function text8(){
+  let col = random(0, 220);
+  noStroke();
+  textFont(`Verdana`);
+  textSize(20);
+  fill(col);
+  textAlign(CENTER, CENTER);
+  if (isOverlap()){
+    fill(0,0);
+  }
+   else{
+ text(`Wait for an Eclipse`, width/2+100, height/2+200);
+}
+}
+
+//checks planet size for reference
+function checkPlanetSize(){
+  if(planet.size <= 330){
+  return true;
+  }
+  else {
+    return false;
+  }
+}
+
+//move to other state
+
+
+
+//if the sun size reaches ... move to other page
+
 
 
 
