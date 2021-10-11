@@ -170,6 +170,8 @@ let ash = {
 let currentInput = ``;
 let state = `pageFour`;
 let substate = `fireplace` //sub-state for page three
+//let stateEclipse = `pageFive`;
+
 
 
 function preload() {
@@ -207,12 +209,17 @@ function draw() {
     pageFour();
   }
   else if (state ===`pageFour` && substate === `fireplace`) {
+    fireplace();
+  }
+  else if (state ===`pageFour` && substate === `ashes`) {
     ashes();
   }
-  else if (substate === `fireplace`){
+  else if (state ===`pageFive`){
     pageFive();
   }
     }
+
+
 // PAGE ONE FUNCTIONS
 //Dispays first page of the program
 function titlePage() {
@@ -531,7 +538,7 @@ function pageFour() {
     fireplace()
   }
   else if (substate === `ashes`){
-    makeAshes();
+    ashes();
   }
 }
 
@@ -542,22 +549,16 @@ function pageFour() {
     blockWord();
     userTextinput();
     makeButton();
-
-    //checkAshsize()
-
-
   }
 
   function ashes(){
     //checkAshsize();
     makeAshes();
+    if (checkAshsize()){
+        pageFive();
+    }
 
-
-    // if (checkAshsize()){
-    //     pageFive();
-    // }
-  }
-
+}
 
   // makes tiny red circles
   function makeAshes(){
@@ -566,7 +567,7 @@ function pageFour() {
   let x = random(0, width);
   let y = random(0, height);
   ash.size -= ash.speed;
-  ash.size = constrain(ash.size, 5, 10);
+  ash.size = constrain(ash.size, 2, 10);
   noStroke()
   fill(glitchred, 30, 0, ash.opacity)
   strokeWeight(1);
@@ -574,11 +575,16 @@ function pageFour() {
   tint(100,70);
   }
 }
-// function checkAshsize(){
-//   if (numAshes >= 700){
-//     noLoop();
-//   }
-// }
+function checkAshsize(){
+  if (ash.size <= 2){
+  return true;
+}
+else {
+  false;
+}
+  //move to eclipse
+}
+
 
 
 // displays the text
@@ -698,7 +704,6 @@ strokeWeight(1);
 ellipse(x, y, 2);
 }
 }
-
 
 // moves sun down and to the left
 function moveSun(){
@@ -822,8 +827,10 @@ function mousePressed() {
   else if (state ===`pageThree` && checkAim() && checkAimSize()){
     state = `pageFour`;
   }
-  else if (state === `pageFour` && `fireplace` && isOnButton()){
+  else if (state === `pageFour` && substate ===`fireplace` && isOnButton()){
      substate = `ashes`;
 }
-
+ else if (state === `pageFour` && substate ===`ashes`){
+   state = `pageFive`;
+}
 }

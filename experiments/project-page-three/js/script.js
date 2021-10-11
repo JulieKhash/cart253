@@ -46,7 +46,7 @@ function draw() {
     fireplace()
   }
   else if (substate === `ashes`){
-    makeAshes();
+    ashes();
   }
 }
 
@@ -56,11 +56,13 @@ function draw() {
     text6();
     userTextinput();
     makeButton();
+
   }
 
   function ashes(){
     makeAshes();
     checkAshsize()
+
   }
 
   // makes tiny red circles
@@ -71,7 +73,7 @@ function draw() {
   let x = random(0, width);
   let y = random(0, height);
   ash.size -= ash.speed;
-  ash.size = constrain(ash.size, 1, 10);
+  ash.size = constrain(ash.size, 2, 10);
   noStroke()
   fill(glitchred, 30, 0, ash.opacity)
   strokeWeight(1);
@@ -81,8 +83,8 @@ function draw() {
 }
 
   function checkAshsize(){
-    if (ash.size === 10){
-     randomSeed();
+    if (ash.size === 2){
+   noLoop();
     //move to eclipse
   }
 }
@@ -154,7 +156,6 @@ function displayFireImage2(){
     tint(0,0);
     image(fireImg, width/2+200, height/2, 500*2-200, 700*2-200);
 }
-
 
 //calculates the distance between the mouse and the red button
 function isOnButton(){
