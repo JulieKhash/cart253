@@ -218,7 +218,7 @@ let ash = {
 }
 
 let currentInput = ``;
-let state = `pageFive`;
+let state = `pageFour`;
 
 
 
@@ -607,10 +607,10 @@ function pageFour() {
     moveUserleg()
     userFoot();
 
-    movetoPage5()  //Moves to Page 5!
+    movetoPage5();
+  //Moves to Page 5!
 
-    //move footsteps upwards
-    //display images
+
 
   }
   function moveFootsteps(){
@@ -711,6 +711,7 @@ function movetoPage5(){
   }
 
 
+
 //////////////////////////////////////////////////////////////////////////////
 //PAGE FIVE FUNCTIONS
 function pageFive() {
@@ -741,7 +742,6 @@ strokeWeight(1);
 ellipse(x, y, 2);
 }
 }
-
 
 // moves sun down and to the left
 function moveSun(){
@@ -856,17 +856,15 @@ return false;
 }
 
 
-// if mouse clicked move to other state
 
 //move to other state
 ///////////////////////////////////////////////////////////////////////////
 // PAGE SIX FUNCTIONS
 function pageSix() {
-  push();
+
   let glitter= random(0,25);
   background(glitter);
   imageMode(CENTER);
-
 
   showFace();
   displayHand();
@@ -926,7 +924,6 @@ function pageSix() {
   }
 
 
-
    function moveLight(){
    light.vx =  random(-light.speed, light.speed);
    light.vy =  random(-light.speed, light.speed);
@@ -962,6 +959,7 @@ function pageSix() {
   }
 }
 
+// displays text
 function text10(){
 let glitch = random(0, 255);
 textFont(`Verdana`);
@@ -973,9 +971,7 @@ if (isCaught()){
 text(`Catch the Light`, width/2+100, height/2+10);
 }
 
-
-
-  //
+  // writes a text
   function text11(){
   let glitch = random(0, 255);
   textFont(`Verdana`);
@@ -983,8 +979,6 @@ text(`Catch the Light`, width/2+100, height/2+10);
   fill(glitch);
   text(`We will meet again`, width/2-220, height/2+10);
 }
-
-pop();
 
 
 
@@ -1005,7 +999,6 @@ function keyPressed() {
 
 
 
-
 function mousePressed() {
   if (state === `pageTwo` && isHandonHand() && checkCircleSize()) {
     state = `pageThree`;
@@ -1013,7 +1006,12 @@ function mousePressed() {
   else if (state ===`pageThree` && checkAim() && checkAimSize()){
     state = `pageFour`;
   }
-  else if (state ===`pageFive` && isOnPlanet()){
+  else if (state ===`pageFour` && isOnPlanet() && checkPlanetSize()){
     state = `pageSix`;
   }
-}
+
+    }
+
+
+
+// && isOnPlanet()&& checkPlanetSize()
