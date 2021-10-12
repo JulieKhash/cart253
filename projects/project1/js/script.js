@@ -139,7 +139,7 @@ let footsteps = {
 };
 let userleg = {
   x: 950,
-  y: 1200,
+  y: 1170,
   speed: 2,
   vx: 0,
   vy: 0,
