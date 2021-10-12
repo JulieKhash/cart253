@@ -130,7 +130,7 @@ let ellipse6 = {
 };
 let road = {
   x: 950,
-  y: 16
+  y: 100
 };
 let footsteps = {
   x: 950,
@@ -216,7 +216,7 @@ function preload() {
 // initial setup
 function setup() {
   createCanvas(1900, 1300);
-  musicSFX.play();
+  //musicSFX.play();
   angleMode(DEGREES);
 };
 // everything that's happening in the program
@@ -586,7 +586,7 @@ function moveFootsteps() {
 };
 // sets back the footsteps when reached given point
 function resetFootsteps() {
-  if (footsteps.y <= height / 3 + 40) {
+  if (footsteps.y <= height / 3 + 95) {
     footsteps.y = 1000;
   };
 };
@@ -610,7 +610,7 @@ function islegOffdistance() {
 
 //checkks if userleg reached this point
 function isLegOnroad() {
-  if (userleg.y <= 300) {
+  if (userleg.y <= 390) {
     return true;
   } else {
     return false;
@@ -661,7 +661,10 @@ function moveUserleg() {
 
 // shows yellow animation footsteps
 function roadFooodsteps() {
-  image(nightImg, road.x, road.y);
+  push();
+  tint(200, 100, 0, 210);
+  image(nightImg, road.x, road.y); // image of walking figure
+  pop();
   image(footStepImg, footsteps.x, footsteps.y, 286 / 2, 888 / 2);
 };
 
@@ -949,6 +952,7 @@ function finalPage() {
 function keyPressed() {
   if (keyCode === ENTER && state === `title`) {
     state = `pageTwo`;
+    musicSFX.play();
   } else if (keyCode === ENTER && state === `pageSix`) {
     state = `finalPage`;
   };
