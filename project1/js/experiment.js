@@ -7,6 +7,7 @@ author, and this description to match your project!
 */
 
 "use strict";
+let musicSFX;
 
 let backgroundImg;
 let crescentImg;
@@ -218,6 +219,7 @@ let currentInput = ``;
 let state = `title`;
 
 function preload() {
+  musicSFX = loadSound("assets/sounds/Germind-Secret-Signs.mp3");
 
   backgroundImg = loadImage("assets/images/signs.gif");
   shadowImg = loadImage("assets/images/shadow.gif");
@@ -237,6 +239,7 @@ function preload() {
 
 function setup() {
   createCanvas(1900, 1300);
+  musicSFX.play();
   angleMode(DEGREES);
 }
 

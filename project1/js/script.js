@@ -20,7 +20,6 @@ let ashesImg;
 let sunImg;
 let darkPlanetImg;
 
-
 let handPosition = {
   x: 810,
   y: 665,
@@ -130,22 +129,22 @@ let ellipse6 = {
   strokeSize: 10,
 };
 
-let sun ={
+let sun = {
   x: 1800,
   y: 100,
   vx: 0.7,
   vy: 0.3,
   size: 1100,
-  angle: 6
+  angle: 6,
 };
 
-let planet ={
+let planet = {
   x: 200,
   y: 1000,
   vx: 0.9,
   vy: 0.6,
   size: 650,
-  angle: 60
+  angle: 60,
 };
 
 let offset = 0; //for image control
@@ -159,22 +158,20 @@ let numKeysTyped = 0;
 let button = {
   x: 1200,
   y: 600,
-  size: 400
-}
+  size: 400,
+};
 
 let ash = {
   sizeX: 10,
   sizeY: 100,
   speed: 0.00005,
-  opacity: 150
-}
+  opacity: 150,
+};
 
 let currentInput = ``;
 let state = `title`;
-let substate = `fireplace` //sub-state for page three
+let substate = `fireplace`; //sub-state for page three
 //let stateEclipse = `pageFive`;
-
-
 
 function preload() {
   crescentImg = loadImage("assets/images/moon.gif");
@@ -187,7 +184,7 @@ function preload() {
   burnImg = loadImage("assets/images/fire-flames.gif");
   ashesImg = loadImage("assets/images/ashes-dust.gif");
   sunImg = loadImage("assets/images/sun.png");
-  darkPlanetImg =  loadImage("assets/images/darkplanet.png");
+  darkPlanetImg = loadImage("assets/images/darkplanet.png");
 }
 
 function setup() {
@@ -207,19 +204,16 @@ function draw() {
     pageTwo();
   } else if (state === `pageThree`) {
     pageThree();
-  } else if (state ===`pageFour`) {
+  } else if (state === `pageFour`) {
     pageFour();
-  }
-  else if (state ===`pageFour` && substate === `fireplace`) {
+  } else if (state === `pageFour` && substate === `fireplace`) {
     fireplace();
-  }
-  else if (substate === `ashes`) {
+  } else if (substate === `ashes`) {
     ashes();
-  }
-  else if (state ===`pageFive`){
+  } else if (state === `pageFive`) {
     pageFive();
   }
-    }
+}
 
 /////////////////////////////////////////////////////////////////////////////
 // PAGE ONE FUNCTIONS
@@ -513,11 +507,10 @@ function showClicktext() {
   }
 }
 
-function checkAimSize(){
-  if (ellipse6.size === 300){
+function checkAimSize() {
+  if (ellipse6.size === 300) {
     return true;
-  }
-  else{
+  } else {
     return false;
   }
 }
@@ -535,266 +528,238 @@ function text5() {
 ///////////////////////////////////////////////////////////////////
 //PAGE FOUR FUNCTIONS
 function pageFour() {
-
   background(0);
 
-  if (substate === `fireplace`){
-    fireplace()
-  }
-  else if (substate === `ashes`){
+  if (substate === `fireplace`) {
+    fireplace();
+  } else if (substate === `ashes`) {
     ashes();
-  }
-  else if (state === `pageFive`){
+  } else if (state === `pageFive`) {
     pageFive();
-}
-}
-
-  function fireplace(){
-    displayFireImage();
-    text7();
-    text6();
-    blockWord();
-    userTextinput();
-    makeButton();
   }
-
-  function ashes(){
-
-    makeAshes();
-    checkOpacity();
-
 }
 
-  // makes tiny red circles
+function fireplace() {
+  displayFireImage();
+  text7();
+  text6();
+  blockWord();
+  userTextinput();
+  makeButton();
+}
 
-  function makeAshes(){
-    push()
-    let glitchred = random(0, 250);
-    for (let i = 0; i < numAshes; i++){
+function ashes() {
+  makeAshes();
+  checkOpacity();
+}
+
+// makes tiny red circles
+
+function makeAshes() {
+  push();
+  let glitchred = random(0, 250);
+  for (let i = 0; i < numAshes; i++) {
     let x = random(0, width);
     let y = random(0, height);
     ash.sizeX -= ash.speed;
     ash.sizeY -= ash.speed;
-    ash.opacity -=0.0006;
+    ash.opacity -= 0.0006;
     ash.opacity = constrain(ash.opacity, 0, 150);
-    noStroke()
+    noStroke();
 
-    fill(glitchred, 20, 0, ash.opacity)
+    fill(glitchred, 20, 0, ash.opacity);
     ellipse(x, y, ash.sizeX, ash.sizeY);
 
     pop();
-
   }
 }
 
 // moves to eclipse state based on ash opacity
-  function checkOpacity(){
-    if (ash.opacity <= 1){
+function checkOpacity() {
+  if (ash.opacity <= 1) {
     pageFive();
   }
 }
 
-
 // displays the text
-function text7(){
+function text7() {
   let col = random(0, 220);
   noStroke();
   textFont(`Verdana`);
   textSize(25);
   fill(col);
   textAlign(CENTER, CENTER);
-  text(`What is it you wish to burn away?`, width-500, height/2+380);
+  text(`What is it you wish to burn away?`, width - 500, height / 2 + 380);
 }
 
-
 //displays first fire image
-function displayFireImage(){
-push();
-imageMode(CENTER);
-image(ashesImg, width/2+250, height/2);
-//tint(255, 150);
-image(fireImg, width/2+200, height/2, 500+100, 700+100);
-pop();
+function displayFireImage() {
+  push();
+  imageMode(CENTER);
+  image(ashesImg, width / 2 + 250, height / 2);
+  //tint(255, 150);
+  image(fireImg, width / 2 + 200, height / 2, 500 + 100, 700 + 100);
+  pop();
 }
 
 //displays a textfield text and removes it when user starts typing
-  function text6(){
+function text6() {
   let col = random(0, 220);
-  if (numKeysTyped === 0)
-  noStroke();
+  if (numKeysTyped === 0) noStroke();
   textSize(30);
   fill(col);
-  if (numKeysTyped >= 1){
-  fill(0,0);
-}
-  text(`write here`, width/3+ 30, height/4);
-
+  if (numKeysTyped >= 1) {
+    fill(0, 0);
+  }
+  text(`write here`, width / 3 + 30, height / 4);
 }
 // blocks the word enter that appears in the text box by default :(
-function blockWord(){
-  if (currentInput === `Enter`){
-     currentInput = ``;
+function blockWord() {
+  if (currentInput === `Enter`) {
+    currentInput = ``;
   }
 }
 
 //displays user input text
-  function userTextinput(){
+function userTextinput() {
   let col = random(0, 220);
   textSize(90);
   fill(col, 30, 0);
-  text(currentInput, width/3+70, height/4);
+  text(currentInput, width / 3 + 70, height / 4);
 }
 
 //checks and limits the number of character input
 function keyTyped() {
   numKeysTyped = numKeysTyped + 1;
-  if (numKeysTyped < 30){
-  currentInput += key;
-}
+  if (numKeysTyped < 30) {
+    currentInput += key;
+  }
 }
 
 //displays a button
-function makeButton(){
-  if (numKeysTyped > 3){
+function makeButton() {
+  if (numKeysTyped > 3) {
     let glitter = random(0, 90);
     fill(255, 0, 0, glitter);
     ellipse(button.x, button.y, button.size);
     fill(random(50, 190), 0, 0);
     textSize(25);
     text(`burn`, button.x, button.y);
+  }
 }
-}
-
 
 //calculates the distance between the mouse and the red button
-function isOnButton(){
-let d = dist(mouseX, mouseY, button.x, button.y);
-if (d < button.size/2){
-  return true;
+function isOnButton() {
+  let d = dist(mouseX, mouseY, button.x, button.y);
+  if (d < button.size / 2) {
+    return true;
+  } else {
+    return false;
+  }
 }
-else {
-  return false
-}
-}
-
-
 
 //PAGE FIVE FUNCTIONS
 function pageFive() {
+  let glitter = random(0, 30);
+  background(glitter);
 
-let glitter = random(0,30);
-background(glitter);
-
-checkPlanetSize();
-moveSun();
-movePlanet();
-eclipseMode();
-text8()
-imageMode(CENTER);
-
+  checkPlanetSize();
+  moveSun();
+  movePlanet();
+  eclipseMode();
+  text8();
+  imageMode(CENTER);
 }
 
 //makes stars
-function makeStars(){
-let glitch = random(0, 250);
-for (let i = 0; i < numStars; i++){
-let x = random(0, width);
-let y = random(0, height);
-noStroke();
-fill(glitch, 150);
-ellipse(x, y, 2);
-}
+function makeStars() {
+  let glitch = random(0, 250);
+  for (let i = 0; i < numStars; i++) {
+    let x = random(0, width);
+    let y = random(0, height);
+    noStroke();
+    fill(glitch, 150);
+    ellipse(x, y, 2);
+  }
 }
 
 // moves sun down and to the left
-function moveSun(){
-sun.x -= sun.vx;
-sun.y += sun.vy;
-sun.size +=0.7;
-//rotates sun
-push();
-translate (sun.x, sun.y);
-rotate(sun.angle);
-image(sunImg, 0, 0, sun.size, sun.size);
-sun.angle+=0.2;
-pop();
+function moveSun() {
+  sun.x -= sun.vx;
+  sun.y += sun.vy;
+  sun.size += 0.7;
+  //rotates sun
+  push();
+  translate(sun.x, sun.y);
+  rotate(sun.angle);
+  image(sunImg, 0, 0, sun.size, sun.size);
+  sun.angle += 0.2;
+  pop();
 }
 
 // moves promlanet up and to the right
-function movePlanet(){
-planet.x += planet.vx;
-planet.y -= planet.vy;
-planet.size -=0.3;
-//rotates sun
-push();
-translate (planet.x, planet.y);
-rotate(planet.angle);
-image(darkPlanetImg, 0, 0, planet.size, planet.size);
-planet.angle+=0.4;
-pop();
+function movePlanet() {
+  planet.x += planet.vx;
+  planet.y -= planet.vy;
+  planet.size -= 0.3;
+  //rotates sun
+  push();
+  translate(planet.x, planet.y);
+  rotate(planet.angle);
+  image(darkPlanetImg, 0, 0, planet.size, planet.size);
+  planet.angle += 0.4;
+  pop();
 }
 
 //check the distance between the planent and the sun
-function isOverlap(){
-let d = dist(planet.x, planet.y, sun.x, sun.y);
-if (d < planet.size/14){
-  return true;
-}
-else {
-  return false;
-}
+function isOverlap() {
+  let d = dist(planet.x, planet.y, sun.x, sun.y);
+  if (d < planet.size / 14) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 //chanhes planet/sun paramentres after eclipse
-function eclipseMode(){
-  if (isOverlap()){
-  planet.vy = 0.01;
-  planet.vx = 0.01;
-  sun.vy = 0.01;
-  sun.vx = 0.01;
-  planet.size -=1;
-  planet.size = constrain(planet.size,  200, 650);
-  makeStars();
-  tint(10, 200);
+function eclipseMode() {
+  if (isOverlap()) {
+    planet.vy = 0.01;
+    planet.vx = 0.01;
+    sun.vy = 0.01;
+    sun.vx = 0.01;
+    planet.size -= 1;
+    planet.size = constrain(planet.size, 200, 650);
+    makeStars();
+    tint(10, 200);
   }
 }
 
 //displays a text
-function text8(){
+function text8() {
   let col = random(0, 220);
   noStroke();
   textFont(`Verdana`);
   textSize(20);
   fill(col);
   textAlign(CENTER, CENTER);
-  if (isOverlap()){
-    fill(0,0);
+  if (isOverlap()) {
+    fill(0, 0);
+  } else {
+    text(`Wait for an Eclipse`, width / 2 + 100, height / 2 + 200);
   }
-   else{
- text(`Wait for an Eclipse`, width/2+100, height/2+200);
-}
 }
 
 //checks planet size for reference
-function checkPlanetSize(){
-  if(planet.size <= 330){
-  return true;
-  }
-  else {
+function checkPlanetSize() {
+  if (planet.size <= 330) {
+    return true;
+  } else {
     return false;
   }
 }
 
 //move to other state
-
-
-
-
-
-
-
-
-
 
 ////////////////////////////////////////////////////////////////////////////
 
@@ -805,23 +770,17 @@ function checkPlanetSize(){
 function keyPressed() {
   if (keyCode === ENTER && state === `title`) {
     state = `pageTwo`;
-  }
-  else if(keyCode === BACKSPACE){
+  } else if (keyCode === BACKSPACE) {
     currentInput = ``;
-  }
-  else if(keyCode === ENTER && `fireplace`){
+  } else if (keyCode === ENTER && `fireplace`) {
     return false;
   }
 }
 
-
-
-
 function mousePressed() {
   if (state === `pageTwo` && isHandonHand() && checkCircleSize()) {
     state = `pageThree`;
-  }
-  else if (state ===`pageThree` && checkAim() && checkAimSize()){
+  } else if (state === `pageThree` && checkAim() && checkAimSize()) {
     state = `pageFive`;
   }
 }
