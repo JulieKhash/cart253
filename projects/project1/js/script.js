@@ -221,7 +221,6 @@ function setup() {
 };
 // everything that's happening in the program
 function draw() {
-
   background(0);
 
   if (state === `title`) { //main
