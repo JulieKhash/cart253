@@ -610,7 +610,7 @@ function islegOffdistance() {
 
 //checkks if userleg reached this point
 function isLegOnroad() {
-  if (userleg.y <= 390) {
+  if (userleg.y <= 350) {
     return true;
   } else {
     return false;
