@@ -215,7 +215,7 @@ let ash = {
 }
 
 let currentInput = ``;
-let state = `pageFive`;
+let state = `title`;
 
 function preload() {
 
@@ -258,7 +258,7 @@ function draw() {
     pageSix();
   }
     else if (state === `finalPage`) {
-  finalPage();
+    finalPage();
 }
 }
 
@@ -983,7 +983,7 @@ function keyPressed() {
   if (keyCode === ENTER && state === `title`) {
     state = `pageTwo`;
   } else if (keyCode === ENTER && state === `pageSix`) {
-    state = `final`;
+    state = `finalPage`;
   }
 }
 
