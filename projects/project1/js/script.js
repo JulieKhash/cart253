@@ -661,10 +661,10 @@ function moveUserleg() {
 
 // shows yellow animation footsteps
 function roadFooodsteps() {
-//  push();
+  push();
   tint(255, 210);
   image(nightImg, road.x, road.y); // image of walking figure
-//  pop();
+  pop();
   image(footStepImg, footsteps.x, footsteps.y, 286 / 2, 888 / 2);
 };
 
