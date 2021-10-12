@@ -26,7 +26,6 @@ let handCatcherImg;
 let faceImg;
 let birdsImg;
 
-
 let handPosition = {
   x: 810,
   y: 665,
