@@ -246,6 +246,7 @@ function draw() {
 //Dispays first page of the program
 function titlePage() {
   text1();
+  text12();
   titleText();
   titleImages();
 };
@@ -269,6 +270,17 @@ function text1() {
   textAlign(CENTER, CENTER);
   text(`Press Enter`, width / 2, height / 3 + 400);
 };
+
+// displays text
+function text12() {
+  let col = random(0, 220);
+  textFont(`Verdana`);
+  textSize(15);
+  fill(col, 100);
+  textAlign(CENTER, CENTER);
+  text(`use arrow keys when needed`, width / 2, height / 2 + 300);
+};
+
 
 //displays cerscent moon and the head sillouhete
 function titleImages() {
