@@ -33,6 +33,7 @@ let handPosition = {
   place: 125,
   alpha: 100,
 };
+//vars for ellectric ripple effect
 let circle1 = {
   x: undefined,
   y: undefined,
@@ -47,7 +48,6 @@ let circle2 = {
   speed: 1.5,
   alpha: 200,
 };
-
 let circle3 = {
   x: undefined,
   y: undefined,
@@ -76,19 +76,17 @@ let circle6 = {
   speed: 50,
   alpha: 100,
 };
-
 let aimPosition = {
   x: 950,
   y: 650,
   place: 100,
 };
-
 let mousePointer = {
   x: undefined,
   y: undefined,
   size: 100,
 };
-// Focus Animation ellipses
+// Focus animation ellipses
 let ellipse1 = {
   x: 950,
   y: 650,
@@ -140,7 +138,6 @@ let footsteps = {
   y: 1000,
   speed: 1
 };
-
 let userleg = {
   x: 950,
   y: 1200,
@@ -150,7 +147,6 @@ let userleg = {
   w: 25,
   h: 70
 };
-
 let sun = {
   x: 1800,
   y: 100,
@@ -159,7 +155,6 @@ let sun = {
   size: 1100,
   angle: 6
 };
-
 let planet = {
   x: 200,
   y: 1000,
@@ -168,7 +163,6 @@ let planet = {
   size: 650,
   angle: 60
 };
-
 let light = {
   x: 1000,
   y: 350,
@@ -177,7 +171,6 @@ let light = {
   vy: 0,
   speed: 15
 };
-
 let handCatcher = {
   x: 650,
   y: 1100,
@@ -187,12 +180,11 @@ let handCatcher = {
   vy: 0,
   speed: 3
 };
-
-let offset = 0; //for image control
+//vars for focus image control offset
+let offset = 0;
 let offset2 = 0;
 let easing = 0.05;
 
-let numAshes = 700;
 let numStars = 200;
 let numKeysTyped = 0;
 
@@ -202,9 +194,9 @@ let button = {
   size: 400
 };
 
-let currentInput = ``;
 let state = `title`;
 
+// all the media files in the program
 function preload() {
   musicSFX = loadSound("assets/sounds/Germind-Secret-Signs.mp3");
 
@@ -222,13 +214,13 @@ function preload() {
   faceImg = loadImage("assets/images/face.png");
   birdsImg = loadImage("assets/images/fly.gif");
 };
-
+// initial setup
 function setup() {
   createCanvas(1900, 1300);
   musicSFX.play();
   angleMode(DEGREES);
 };
-
+// everything that's happening in the program
 function draw() {
 
   background(0);
@@ -241,11 +233,11 @@ function draw() {
     pageThree();
   } else if (state === `pageFour`) { //follow footsteps
     pageFour();
-  } else if (state === `pageFive`) {
+  } else if (state === `pageFive`) { //eclipse
     pageFive();
-  } else if (state === `pageSix`) {
+  } else if (state === `pageSix`) { //catch the light
     pageSix();
-  } else if (state === `finalPage`) {
+  } else if (state === `finalPage`) { //final
     finalPage();
   };
 };
@@ -360,7 +352,7 @@ function handAnimation() {
     ellipse(handPosition.x, handPosition.y, circle6.size)
     circle6.alpha += circle6.speed;
 
-    text3();
+    text3(); // shows chick text
     image(handImg, mouseX, mouseY, 140, 190);
   };
 };
@@ -481,7 +473,7 @@ function text4() {
   textAlign(CENTER, CENTER);
   text(`Focus your Mind`, width / 2 + 200, height / 2 + 300);
 };
-
+// makes ripple effect for the right shot
 function focusAnimation() {
   let strokeGlitch = random(0, 255);
   //1
@@ -538,13 +530,13 @@ function focusAnimation() {
   noFill();
   ellipse(ellipse6.x, ellipse6.y, ellipse6.size);
 };
-
+// shows click when user places mouse
 function showClicktext() {
   if (checkAimSize() && checkAim()) {
     text5();
   };
 };
-
+// checls if the circle size is this size
 function checkAimSize() {
   if (ellipse6.size === 300) {
     return true;
@@ -563,7 +555,7 @@ function text5() {
   text(`click`, ellipse6.x, ellipse6.y - 60);
 };
 
-///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
 //PAGE FOUR FUNCTIONS
 function pageFour() {
   background(0);
@@ -578,18 +570,17 @@ function pageFour() {
 
   movetoPage5(); //Moves to Page 5!
 };
-
+// moves yellow footsteps
 function moveFootsteps() {
   footsteps.y -= footsteps.speed;
 };
-
+// sets back the footsteps when reached given point
 function resetFootsteps() {
   if (footsteps.y <= height / 3 + 40) {
     footsteps.y = 1000;
   };
 };
-
-
+//shows warning sings when user is off track
 function Offtrack() {
   if (islegOffdistance()) {
     return text7();
@@ -598,6 +589,7 @@ function Offtrack() {
   };
 };
 
+//checks if the userleg is off the given distance
 function islegOffdistance() {
   if (userleg.x > width / 2 + 30 || userleg.x < width / 2 - 30 || userleg.y > height || userleg.y < 0) {
     return true;
@@ -606,7 +598,7 @@ function islegOffdistance() {
   };
 };
 
-
+//checkks if userleg reached this point
 function isLegOnroad() {
   if (userleg.y <= 300) {
     return true;
@@ -614,15 +606,15 @@ function isLegOnroad() {
     return false;
   };
 };
-
+//moves to other state if this conditions are met
 function movetoPage5() {
   if (isLegOnroad()) {
     pageFive();
   };
 };
 
+//shows user's foots/ chages color if off they get sidetracked
 function userFoot() {
-
   userleg.vx += userleg.speed;
   userleg.vy += userleg.speed;
 
@@ -657,6 +649,7 @@ function moveUserleg() {
   userleg.y += userleg.vy;
 };
 
+// shows yellow animation footsteps
 function roadFooodsteps() {
   image(nightImg, road.x, road.y);
   image(footStepImg, footsteps.x, footsteps.y, 286 / 2, 888 / 2);
@@ -698,7 +691,6 @@ function pageFive() {
 
 //makes stars
 function makeStars() {
-
   let glitch = random(0, 250);
   for (let i = 0; i < numStars; i++) {
     let x = random(0, width);
@@ -820,7 +812,6 @@ function isOnPlanet() {
 ////////////////////////////////////////////////////////////////////////////
 // PAGE SIX FUNCTIONS
 function pageSix() {
-
   let glitter = random(0, 25);
   background(glitter);
   imageMode(CENTER);
@@ -833,7 +824,7 @@ function pageSix() {
   controlHand();
   bird();
 };
-
+// controls user hands with arrow keys
 function controlHand() {
   //control user's vertical movement
   if (keyIsDown(LEFT_ARROW)) {
@@ -942,7 +933,6 @@ function finalPage() {
   fill(glitch);
   text(`We will meet again`, width / 2, height / 2);
 };
-
 ////////////////////////////////////////////////////////////////////////////
 
 // changes the scenes when certain key is pressed
