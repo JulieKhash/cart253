@@ -1,10 +1,12 @@
-/**
+/**************************************
 Project 1 - Secret Signs
 Julie Khashimova
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
-*/
+Step into the mysterious world of signs. Follows them to reveal the TRUTH!
+
+music by Germind
+all gifs from giphy.com
+***************************************/
 
 "use strict";
 let musicSFX;
@@ -31,22 +33,20 @@ let handPosition = {
   place: 125,
   alpha: 100,
 };
-
 let circle1 = {
   x: undefined,
   y: undefined,
   size: 90,
   speed: 2,
   alpha: 200,
-}
-
+};
 let circle2 = {
   x: undefined,
   y: undefined,
   size: 40,
   speed: 1.5,
   alpha: 200,
-}
+};
 
 let circle3 = {
   x: undefined,
@@ -54,29 +54,28 @@ let circle3 = {
   size: 110,
   speed: 2,
   alpha: 190,
-}
+};
 let circle4 = {
   x: undefined,
   y: undefined,
   size: 140,
   speed: 2,
   alpha: 190,
-}
+};
 let circle5 = {
   x: undefined,
   y: undefined,
   size: 160,
   speed: 2,
   alpha: 190,
-}
+};
 let circle6 = {
   x: undefined,
   y: undefined,
   size: 10,
   speed: 50,
   alpha: 100,
-}
-
+};
 
 let aimPosition = {
   x: 950,
@@ -89,7 +88,6 @@ let mousePointer = {
   y: undefined,
   size: 100,
 };
-
 // Focus Animation ellipses
 let ellipse1 = {
   x: 950,
@@ -97,55 +95,51 @@ let ellipse1 = {
   size: 50,
   speed: 9,
   strokeSize: 10
-}
+};
 let ellipse2 = {
   x: 950,
   y: 650,
   size: 40,
   speed: 8,
   strokeSize: 10
-}
+};
 let ellipse3 = {
   x: 950,
   y: 650,
   size: 30,
   speed: 7,
   strokeSize: 10
-}
+};
 let ellipse4 = {
   x: 950,
   y: 650,
-
   size: 20,
   speed: 6,
   strokeSize: 10
-}
+};
 let ellipse5 = {
   x: 950,
   y: 650,
   size: 10,
   speed: 4,
   strokeSize: 10
-}
+};
 let ellipse6 = {
   x: 950,
   y: 650,
   size: 5,
   speed: 3,
   strokeSize: 10
-}
-
+};
 let road = {
   x: 950,
   y: 16
-}
-
-
+};
 let footsteps = {
   x: 950,
   y: 1000,
   speed: 1
-}
+};
 
 let userleg = {
   x: 950,
@@ -155,7 +149,7 @@ let userleg = {
   vy: 0,
   w: 25,
   h: 70
-}
+};
 
 let sun = {
   x: 1800,
@@ -182,7 +176,7 @@ let light = {
   vx: 0,
   vy: 0,
   speed: 15
-}
+};
 
 let handCatcher = {
   x: 650,
@@ -192,7 +186,7 @@ let handCatcher = {
   vx: 0,
   vy: 0,
   speed: 3
-}
+};
 
 let offset = 0; //for image control
 let offset2 = 0;
@@ -206,14 +200,7 @@ let button = {
   x: 1200,
   y: 600,
   size: 400
-}
-
-let ash = {
-  sizeX: 10,
-  sizeY: 100,
-  speed: 0.00005,
-  opacity: 150
-}
+};
 
 let currentInput = ``;
 let state = `title`;
@@ -234,14 +221,13 @@ function preload() {
   handCatcherImg = loadImage("assets/images/handtransparent.png");
   faceImg = loadImage("assets/images/face.png");
   birdsImg = loadImage("assets/images/fly.gif");
-
-}
+};
 
 function setup() {
   createCanvas(1900, 1300);
   musicSFX.play();
   angleMode(DEGREES);
-}
+};
 
 function draw() {
 
@@ -259,11 +245,10 @@ function draw() {
     pageFive();
   } else if (state === `pageSix`) {
     pageSix();
-  }
-    else if (state === `finalPage`) {
+  } else if (state === `finalPage`) {
     finalPage();
-}
-}
+  };
+};
 
 /////////////////////////////////////////////////////////////////////////////
 // PAGE ONE FUNCTIONS
@@ -272,7 +257,7 @@ function titlePage() {
   text1();
   titleText();
   titleImages();
-}
+};
 
 //displays the title
 function titleText() {
@@ -282,7 +267,7 @@ function titleText() {
   fill(col);
   textAlign(CENTER, CENTER);
   text(`SECRET SIGNS`, width / 2, height / 4.5);
-}
+};
 
 // displays text
 function text1() {
@@ -292,14 +277,13 @@ function text1() {
   fill(col);
   textAlign(CENTER, CENTER);
   text(`Press Enter`, width / 2, height / 3 + 400);
-}
+};
 
 //displays cerscent moon and the head sillouhete
 function titleImages() {
   imageMode(CENTER);
   image(backgroundImg, width / 2, height / 2 - 50);
-
-}
+};
 
 //PAGE TWO FUNCTIONS
 function pageTwo() {
@@ -308,7 +292,7 @@ function pageTwo() {
   text2();
   handAnimation();
   isHandonHand();
-}
+};
 
 // dipslays moving shadow figure and user's hands
 function pageTwoImages() {
@@ -322,14 +306,14 @@ function pageTwoImages() {
   tint(255, 100);
   image(handImg, mouseX, mouseY, 140, 190);
   pop();
-}
+};
 
 //hand position point
 function handposition() {
   noStroke();
   fill(200, handPosition.alpha);
   ellipse(handPosition.x, handPosition.y, handPosition.place);
-}
+};
 
 // displays ellectric ripplic animation within the hand position
 function handAnimation() {
@@ -378,8 +362,8 @@ function handAnimation() {
 
     text3();
     image(handImg, mouseX, mouseY, 140, 190);
-  }
-}
+  };
+};
 
 //checks if users hand is on shadow's hand
 function isHandonHand() {
@@ -388,8 +372,8 @@ function isHandonHand() {
     return true;
   } else {
     return false;
-  }
-}
+  };
+};
 
 function text2() {
   let glitch = random(0, 255);
@@ -397,7 +381,7 @@ function text2() {
   textSize(25);
   fill(glitch);
   text(`Touch my hand`, handPosition.x - 20, handPosition.y);
-}
+};
 
 function text3() {
   let glitch = random(0, 255);
@@ -406,16 +390,16 @@ function text3() {
     textSize(20);
     fill(glitch);
     text(`Click on It`, handPosition.x - 20, handPosition.y - 150);
-  }
-}
+  };
+};
 //checks if the main circle reaches its given size
 function checkCircleSize() {
   if (circle6.size == 500) {
     return true;
   } else {
     return false;
-  }
-}
+  };
+};
 
 /////////////////////////////////////////////////////////////////////////
 //PAGE THREE FUNCTIONS
@@ -430,20 +414,18 @@ function pageThree() {
   displayAim();
   text4();
   showClicktext();
-}
+};
 
 //aim position
 function aimposition() {
   stroke(0);
   noFill();
   ellipse(aimPosition.x, aimPosition.y, aimPosition.place);
-}
+};
 
 //displays eye image at the center
 function eyeImage() {
-  //push();
   imageMode(CENTER);
-  //tint(255, 255);
   image(focusImg, width / 2, height / 2, 600, 450);
   //pointer
   stroke(255, 0);
@@ -451,8 +433,7 @@ function eyeImage() {
   line(offset, offset2 + 30, offset, offset2 - 30);
   stroke(255, 0);
   ellipse(offset, offset2, mousePointer.size); //mouse pointer
-  //pop();
-}
+};
 
 //controls second image with mouse
 function controlImage() {
@@ -464,14 +445,14 @@ function controlImage() {
   tint(255, 150); //
   image(focusImg, offset, offset2, 600, 450);
   pop();
-}
+};
 
 //shows focus animation if the aimed
 function showFocus() {
   if (checkAim()) {
     focusAnimation();
-  }
-}
+  };
+};
 
 //checks the distances between aim and image positioning
 function checkAim() {
@@ -480,8 +461,8 @@ function checkAim() {
     return true;
   } else {
     return false;
-  }
-}
+  };
+};
 
 //red aim position
 function displayAim() {
@@ -489,7 +470,7 @@ function displayAim() {
   strokeWeight(2);
   line(aimPosition.x - 30, aimPosition.y, aimPosition.x + 30, aimPosition.y);
   line(aimPosition.x, aimPosition.y + 30, aimPosition.x, aimPosition.y - 30);
-}
+};
 
 function text4() {
   let col = random(0, 220);
@@ -499,7 +480,7 @@ function text4() {
   fill(col);
   textAlign(CENTER, CENTER);
   text(`Focus your Mind`, width / 2 + 200, height / 2 + 300);
-}
+};
 
 function focusAnimation() {
   let strokeGlitch = random(0, 255);
@@ -551,27 +532,26 @@ function focusAnimation() {
   //6
   ellipse6.size += ellipse6.speed;
   ellipse6.size = constrain(ellipse6.size, 5, 300);
-  //ellipse6.strokeSize -= 0.01;
   ellipse6.strokeSize = constrain(ellipse6.strokeSize, 0.03, 9);
   stroke(strokeGlitch);
   strokeWeight(ellipse6.strokeSize);
   noFill();
   ellipse(ellipse6.x, ellipse6.y, ellipse6.size);
-}
+};
 
 function showClicktext() {
   if (checkAimSize() && checkAim()) {
     text5();
-  }
-}
+  };
+};
 
 function checkAimSize() {
   if (ellipse6.size === 300) {
     return true;
   } else {
     return false;
-  }
-}
+  };
+};
 
 function text5() {
   let col = random(0, 220);
@@ -581,37 +561,33 @@ function text5() {
   fill(col);
   textAlign(CENTER, CENTER);
   text(`click`, ellipse6.x, ellipse6.y - 60);
-}
+};
 
 ///////////////////////////////////////////////////////////////////
 //PAGE FOUR FUNCTIONS
 function pageFour() {
-
   background(0);
   imageMode(CENTER);
-
 
   moveFootsteps();
   resetFootsteps();
   roadFooodsteps();
   Offtrack();
-  moveUserleg()
+  moveUserleg();
   userFoot();
 
   movetoPage5(); //Moves to Page 5!
-
-
-}
+};
 
 function moveFootsteps() {
   footsteps.y -= footsteps.speed;
-}
+};
 
 function resetFootsteps() {
   if (footsteps.y <= height / 3 + 40) {
     footsteps.y = 1000;
-  }
-}
+  };
+};
 
 
 function Offtrack() {
@@ -619,16 +595,16 @@ function Offtrack() {
     return text7();
   } else {
     return text6();
-  }
-}
+  };
+};
 
 function islegOffdistance() {
   if (userleg.x > width / 2 + 30 || userleg.x < width / 2 - 30 || userleg.y > height || userleg.y < 0) {
     return true;
   } else {
     return false;
-  }
-}
+  };
+};
 
 
 function isLegOnroad() {
@@ -636,14 +612,14 @@ function isLegOnroad() {
     return true;
   } else {
     return false;
-  }
-}
+  };
+};
 
 function movetoPage5() {
   if (isLegOnroad()) {
     pageFive();
-  }
-}
+  };
+};
 
 function userFoot() {
 
@@ -655,12 +631,12 @@ function userFoot() {
     fill(glitch, 0, 0);
   } else {
     fill(0, 0, glitch);
-  }
+  };
   ellipse(userleg.x + 30, userleg.y, userleg.w, userleg.h);
   ellipse(userleg.x - 20, userleg.y, userleg.w, userleg.h);
-}
+};
 
-
+// moves users' legs when when arrow keys is pressed
 function moveUserleg() {
   if (keyIsDown(LEFT_ARROW)) {
     userleg.vx = -userleg.speed;
@@ -668,7 +644,7 @@ function moveUserleg() {
     userleg.vx = userleg.speed;
   } else {
     userleg.vx = 0;
-  }
+  };
   // control user's horizontal movement
   if (keyIsDown(UP_ARROW)) {
     userleg.vy = -userleg.speed;
@@ -676,15 +652,15 @@ function moveUserleg() {
     userleg.vy = userleg.speed;
   } else {
     userleg.vy = 0;
-  }
+  };
   userleg.x += userleg.vx;
   userleg.y += userleg.vy;
-}
+};
 
 function roadFooodsteps() {
   image(nightImg, road.x, road.y);
   image(footStepImg, footsteps.x, footsteps.y, 286 / 2, 888 / 2);
-}
+};
 
 function text6() {
   let col = random(0, 220);
@@ -694,7 +670,7 @@ function text6() {
   fill(col);
   textAlign(CENTER, CENTER);
   text(`Follow the Footsteps`, width / 5, height / 2 + 200);
-}
+};
 
 function text7() {
   let col = random(0, 220);
@@ -704,13 +680,11 @@ function text7() {
   fill(col, 0, 0);
   textAlign(CENTER, CENTER);
   text(`Don't lose the track!`, width / 5, height / 2 + 200);
+};
 
-}
-
-//////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
 //PAGE FIVE FUNCTIONS
 function pageFive() {
-
   let glitter = random(0, 30);
   background(glitter);
   imageMode(CENTER);
@@ -719,10 +693,8 @@ function pageFive() {
   moveSun();
   movePlanet();
   eclipseMode();
-  displayClick()
-
-
-}
+  displayClick();
+};
 
 //makes stars
 function makeStars() {
@@ -731,12 +703,12 @@ function makeStars() {
   for (let i = 0; i < numStars; i++) {
     let x = random(0, width);
     let y = random(0, height);
-    noStroke()
+    noStroke();
     fill(glitch, 150);
     strokeWeight(1);
     ellipse(x, y, 2);
-  }
-}
+  };
+};
 
 // moves sun down and to the left
 function moveSun() {
@@ -751,7 +723,7 @@ function moveSun() {
   image(sunImg, 0, 0, sun.size, sun.size);
   sun.angle += 0.2;
   pop();
-}
+};
 
 // moves planet up and to the right
 function movePlanet() {
@@ -775,13 +747,12 @@ function isOverlap() {
     return true;
   } else {
     return false;
-  }
-}
+  };
+};
 
-// planet and the sun stops after and shows stars overlap
+// planet and the sun stop when overlap, after shows stars, darkens color
 function eclipseMode() {
   if (isOverlap()) {
-
     planet.vy = 0;
     planet.vx = 0;
     sun.vy = 0;
@@ -789,17 +760,17 @@ function eclipseMode() {
     let glitter = random(0, 20);
     background(0, 0, glitter, 160);
     makeStars();
+  };
+};
 
-  }
-}
-
+// displays `Click` after eclipse
 function displayClick() {
   if (checkPlanetSize()) {
     text9();
   } else {
     text8();
-  }
-}
+  };
+};
 
 // displays a text before eclipse
 function text8() {
@@ -813,8 +784,8 @@ function text8() {
     fill(0, 0);
   } else {
     text(`Wait for an Eclipse`, width / 2 + 100, height / 2 + 200);
-  }
-}
+  };
+};
 
 // displays a text
 function text9() {
@@ -825,7 +796,7 @@ function text9() {
   fill(col);
   textAlign(CENTER, CENTER);
   text(`Click`, planet.x, planet.y);
-}
+};
 
 // checks the planet's size
 function checkPlanetSize() {
@@ -833,8 +804,8 @@ function checkPlanetSize() {
     return true;
   } else {
     return false;
-  }
-}
+  };
+};
 
 // checks if the mouse is on the planet
 function isOnPlanet() {
@@ -843,13 +814,10 @@ function isOnPlanet() {
     return true;
   } else {
     return false;
-  }
-}
+  };
+};
 
-
-
-//move to other state
-///////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
 // PAGE SIX FUNCTIONS
 function pageSix() {
 
@@ -862,11 +830,9 @@ function pageSix() {
   text10();
   moveLight();
   displayLight();
-
   controlHand();
   bird();
-
-}
+};
 
 function controlHand() {
   //control user's vertical movement
@@ -876,7 +842,8 @@ function controlHand() {
     handCatcher.vx = handCatcher.speed;
   } else {
     handCatcher.vx = 0;
-  }
+  };
+
   // control user's horizontal movement
   if (keyIsDown(UP_ARROW)) {
     handCatcher.vy = -handCatcher.speed;
@@ -884,12 +851,12 @@ function controlHand() {
     handCatcher.vy = handCatcher.speed;
   } else {
     handCatcher.vy = 0;
-  }
+  };
   handCatcher.x += handCatcher.vx;
   handCatcher.y += handCatcher.vy;
-}
+};
 
-
+// checks if the light is is caught
 function isCaught() {
   let d = dist(handCatcher.x, handCatcher.y, light.x, light.y);
   if (d < handCatcher.sizeY / 5 + light.size / 5) {
@@ -899,35 +866,34 @@ function isCaught() {
   }
 }
 
-
+// displays a face if the light is caught
 function showFace() {
   if (isCaught()) {
     light.size += light.speed;
     light.size = constrain(light.size, 300, 6000);
     fill(0, 0, 0, 100);
     image(faceImg, light.x, light.y);
-  }
-}
+  };
+};
 
-
+// moves the light randomly across the screeen
 function moveLight() {
   light.vx = random(-light.speed, light.speed);
   light.vy = random(-light.speed, light.speed);
-  //
+
   light.x = light.x + light.vx;
   light.y = light.y + light.vy;
 
   light.x = constrain(light.x, 200, width - 200);
   light.y = constrain(light.y, 200, height);
-}
+};
 
-
-
+// displays the light
 function displayLight() {
   image(lightImg, light.x, light.y, light.size, light.size);
-}
+};
 
-
+// displays user's hand
 function displayHand() {
 
   handCatcher.vx += handCatcher.speed;
@@ -936,14 +902,13 @@ function displayHand() {
   image(handCatcherImg, handCatcher.x, handCatcher.y, handCatcher.sizeX, handCatcher.sizeY);
 };
 
-
-// displasy bird and the farewell text;
+// displays bird and the farewell text
 function bird() {
   if (light.size === 6000) {
     image(birdsImg, light.x, light.y);
-    text11()
-  }
-}
+    text11();
+  };
+};
 
 // displays text
 function text10() {
@@ -953,9 +918,9 @@ function text10() {
   fill(glitch);
   if (isCaught()) {
     fill(0, 0);
-  }
+  };
   text(`Catch the Light`, width / 2 + 100, height / 2 + 10);
-}
+};
 
 // writes a text
 function text11() {
@@ -964,32 +929,32 @@ function text11() {
   textSize(25);
   fill(glitch);
   text(`We will meet again`, width / 2 - 220, height / 2 + 10);
-}
+};
 
-////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
 //FINAL Page
-function finalPage(){
+function finalPage() {
   background(0);
   let glitch = random(0, 255);
   textAlign(CENTER, CENTER);
   textFont(`Verdana`);
   textSize(25);
   fill(glitch);
-  text(`We will meet again`, width /2, height /2);
-}
-
+  text(`We will meet again`, width / 2, height / 2);
+};
 
 ////////////////////////////////////////////////////////////////////////////
 
-
+// changes the scenes when certain key is pressed
 function keyPressed() {
   if (keyCode === ENTER && state === `title`) {
     state = `pageTwo`;
   } else if (keyCode === ENTER && state === `pageSix`) {
     state = `finalPage`;
-  }
-}
+  };
+};
 
+// changes the scenes when mouse is pressed on certain areas
 function mousePressed() {
   if (state === `pageTwo` && isHandonHand() && checkCircleSize()) {
     state = `pageThree`;
@@ -997,5 +962,5 @@ function mousePressed() {
     state = `pageFour`;
   } else if (state === `pageFour` && isOnPlanet() && checkPlanetSize()) {
     state = `pageSix`;
-  }
-}
+  };
+};

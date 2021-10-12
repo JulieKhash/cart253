@@ -1,3 +1,6 @@
 # Template p5 project
 
-This is the README file for the entire project. For more official projects you should write information here about the nature of the project, your name, any special explanations of how the project works, etc.
+"Step into the mysterious world of signs. Follows them to reveal the TRUTH!"
+
+It is an interactive program that allows the user to plunge into an atmosphere of mystery and exploration.
+The combination of music, imagery, and interactivity are the main aspects of the simulation that make the visions a reality.
