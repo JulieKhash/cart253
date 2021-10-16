@@ -6,6 +6,7 @@ Step into the mysterious world of signs. Follows them to reveal the TRUTH!
 
 music by Germind
 all gifs from giphy.com
+all png images from pngimg.com
 ***************************************/
 
 "use strict";
