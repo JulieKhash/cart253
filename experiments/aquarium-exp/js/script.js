@@ -4,6 +4,7 @@
 
 let jarImg;
 let forestImg;
+let flyImg;
 
 let firefly = [];
 let fireflyNum = 100;
@@ -22,6 +23,7 @@ let jar = {
 function preload() {
   jarImg = loadImage("assets/images/jar4.png");
   forestImg = loadImage("assets/images/forest.jpg");
+  flyImg = loadImage("assets/images/fly1.png");
 }
 
 
@@ -41,7 +43,7 @@ function createFood(x, y, size){
   let firefly = {
     x: x,
     y: y,
-    size: 10,
+    size: 15,
     alpha: 100,
     speed: 2,
     vx: 0,
@@ -103,7 +105,12 @@ function checkFirefly(firefly){
 
 function displayFirefly(firefly){
   if(!firefly.caught){
-  fill(255, 255, 166, random(0, 200));
+  let glitter = random(0, 150);
+  push();
+  image(flyImg, firefly.x, firefly.y, 1181/40, 1181/40);
+  fill(255, 255, 166, glitter);
+  pop();
+  noStroke();
   ellipse(firefly.x, firefly.y, firefly.size);
 }
 }
@@ -119,6 +126,10 @@ function displayFirefly(firefly){
   image(jarImg, jar.x, jar.y, jar.sizeW, jar.sizeH);
 }
 
-function mousePressed(){
-firefly.caught = !firefly.caught;
-}
+// function mousePressed(){
+// firefly.caught = !firefly.caught;
+// }
+// --> catch flies when mouse is clicked
+// --> fill/collect flies inside the bottle
+// --> timer when all flies disappear with millis?
+//
