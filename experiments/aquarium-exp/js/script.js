@@ -3,113 +3,122 @@
 "use strict";
 
 let jarImg;
+let forestImg;
 
 let firefly = [];
+let fireflyNum = 100;
 
 let jar = {
   x: 0,
   y: 0,
-  sizeW: 155,
-  sizeH: 240,
+  sizeW: 155/2,
+  sizeH: 240/2,
 }
 
-
-let firefly1;
-let firefly2;
+// let firefly1;
+// let firefly2;
 
 
 function preload() {
-  jarImg = loadImage("assets/images/jar4.png")
+  jarImg = loadImage("assets/images/jar4.png");
+  forestImg = loadImage("assets/images/forest.jpg");
 }
-
 
 
 function setup() {
-  createCanvas(800, 800);
+  createCanvas(1100, 733);
 
-  firefly1 = createFirefly(random(0, width), random(0, height), 20);
-  //firefly2 = createFirefly(random(0, width), random(0, height));
+  for (let i = 0; i < fireflyNum; i++) {
+  firefly[i] = createFood(random(0, width), random(0, height));
+  }
+
+  // firefly[0] = createFood(random(0, width), random(0, height));
+  // firefly[1] = createFood(random(0, width), random(0, height));
 
 }
 
-  function createFirefly(x, y, size){
-  let firefly1 ={
-    x: 200,
-    y: 300,
+function createFood(x, y, size){
+  let firefly = {
+    x: x,
+    y: y,
     size: 10,
     alpha: 100,
     speed: 2,
     vx: 0,
     vy: 0,
-    active: false
+    caught: false
   };
-    return firefly;
+  return firefly
 }
 
 
 
 function draw() {
   background(0);
+  imageMode(CENTER);
+  image(forestImg, width/2, height/2, 1100, 733);
 
+  for (let i = 0; i < firefly.length; i++) {
+  moveFirefly(firefly[i]);
+}
 
-  checkFirefly(firefly1)
-  moveFirefly()
-  displayFirefly(firefly1);
+  for (let i = 0; i < firefly.length; i++){
+  checkFirefly(firefly[i]);
+}
 
+ for (let i = 0; i < firefly.length; i++){
+  displayFirefly(firefly[i]);
+}
   moveJar();
   displayJar();
 
 }
 
-  function moveFirefly(){
 
-
+  function moveFirefly(firefly){
     let change = random(0,1);
-    if (change < 0.05){
-    firefly1.vx = random(-firefly1.speed, firefly1.speed);
-    firefly1.vy = random(-firefly1.speed, firefly1.speed);
-}
-    // move firefly
-   firefly1.x += firefly1.vx;
-   firefly1.y += firefly1.vy;
+    if (change < 0.02) {
+    firefly.vx = random(-firefly.speed, firefly.speed);
+    firefly.vy = random(-firefly.speed, firefly.speed);
+};
+    firefly.x += firefly.vx;
+    firefly.y += firefly.vy;
 
-   // firefly2.x += firefly1.vx;
-   // firefly2.y += firefly1.vy;
-
-   //constrain the firefly to canvas
-   firefly1.x = constrain(firefly1.x, 0, width);
-   firefly1.y = constrain(firefly1.y, 0, height);
-
-   // firefly2.x = constrain(firefly1.x, 0, width);
-   // firefly2.y = constrain(firefly1.y, 0, height);
-
+    firefly.x = constrain(firefly.x, 0, width);
+    firefly.y = constrain(firefly.y, 0, height);
   }
 
-  function checkFirefly(firefly){
-    if (!firefly.active){
-    let d = dist(jar.x, jar.y, firefly.x, firefly.y);
-    if(d < jar.sizeW/2 + firefly.size/2){
-      firefly.active = true;
-    }
+
+
+function checkFirefly(firefly){
+  if (!firefly.caught){
+
+    let d = dist(jar.x, jar.y, firefly.x, firefly.y)
+    if(d < jar.sizeH/2 + firefly.size/2){
+    firefly.caught = true;
     }
   }
-
-
-  function displayFirefly(firefly){
-  let glitter = random(0, 200);
-  if(!firefly1.active){
-  fill(255, 252, 191, glitter);
-  ellipse(firefly1.x, firefly1.y, firefly1.size);
-  //ellipse(firefly2.x, firefly2.y, firefly2.size);
-  }
 }
+
+
+function displayFirefly(firefly){
+  if(!firefly.caught){
+  fill(255, 255, 166, random(0, 200));
+  ellipse(firefly.x, firefly.y, firefly.size);
+}
+}
+
 
   function moveJar(){
-    jar.x = mouseX,
-    jar.y = mouseY
+    jar.x = mouseX;
+    jar.y = mouseY;
   }
 
   function displayJar(){
   imageMode(CENTER);
   image(jarImg, jar.x, jar.y, jar.sizeW, jar.sizeH);
+}
+
+function mousePressed(){
+firefly.caught = !firefly.caught;
 }
