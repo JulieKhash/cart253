@@ -16,9 +16,10 @@ let beetleImg;
 let backgroundImg;
 
 let meerkats = [];
-let meerkatNum = 3;
+let meerkatNum = 5;
 let meerkatsInHole = 0;
 
+//user moving w mouse
 let user = {
   x: undefined,
   y: undefined,
@@ -34,36 +35,37 @@ let hole = {
   h: 50,
 };
 
-let beetle = {
-  x: undefined,
-  y: undefined,
-  w: 50,
-  h: 50,
-};
+let state = `title`; // can be title, simulation, winner, gamer over
 
-let state = `simulation`; // can be title, simulation, winner, gamer over
-
-/**
-Description of preload
-*/
+// all the images in the program
 function preload() {
   meerkatImg = loadImage("assets/images/meerkat.png");
   beetleImg = loadImage("assets/images/bettle.png");
   backgroundImg = loadImage("assets/images/background2.jpg");
 }
 
-/**
-Description of setup
-*/
+// inital setup
 function setup() {
   createCanvas(1000, 700);
   noCursor();
+  // create an array of meerkats
+  for (let i = 0; i < meerkatNum; i++) {
+    meerkats[i] = createMeerkat(random(0, width), random(0, height));
+  }
+}
+
+function reset(){
+  meerkats = [];
+  meerkatsInHole = 0;
+  user.eaten = false;
 
   for (let i = 0; i < meerkatNum; i++) {
     meerkats[i] = createMeerkat(random(0, width), random(0, height));
   }
 }
 
+
+// create meerkats
 function createMeerkat(x, y) {
   let meerkat = {
     x: x,
@@ -78,9 +80,7 @@ function createMeerkat(x, y) {
   return meerkat;
 }
 
-/**
-Description of draw()
-*/
+// executes everyting inside the program
 function draw() {
   background(100);
   imageMode(CENTER);
@@ -94,8 +94,10 @@ function draw() {
     simulation();
   } else if (state === `winner`) {
     winner();
+    reset();
   } else if (state === `gameover`) {
-  //  gameover();
+   gameover();
+   reset();
   }
 }
 
@@ -120,7 +122,7 @@ function title() {
   fill(50, 250, 200);
   textSize(35);
   textAlign(CENTER, CENTER);
-  text(`OUTSMART MEERKATS`, width / 2, height / 2 - 50);
+  text(`OUTSMART THE MEERKATS`, width / 2, height / 2 - 50);
   text(`OR`, width / 2, height / 2);
   text(`BECOME THEIR FOOD!`, width / 2, height / 2 + 50);
   fill(250, 250, 20);
@@ -188,7 +190,7 @@ function gameover() {
   fill(250, 0, 50);
   textSize(35);
   textAlign(CENTER, CENTER);
-  text(`Too bad you've became their SATISFACTION`, width / 2, height / 2);
+  text(`Too bad you've become their SATISFACTION`, width / 2, height / 2);
 }
 
 function moveMeerkat(meerkat) {
@@ -224,25 +226,20 @@ function displayUser(user) {
   if (!user.eaten) {
     fill(255, 0, 0);
     imageMode(CENTER);
-    //ellipse(user.x, user.ry, user.size);
     image(beetleImg, user.x, user.y, user.w / 5, user.h / 5);
   }
 }
 
-function reset() {
-  if (keyCode === 82 && state === `winner`) {
-    state = `title`;
-  } else if (keyCode === 82 && state === `gameover`) {
-    state = `title`;
-  }
-}
 
-function keyPressed() {
-  reset();
-}
 
 function mousePressed() {
   if (state === `title`) {
-    state = `simulation`;
+    state = `simulation`;  //if mouse is pressed move to a simulation page
+  }
+  else if (state === `winner`){
+    state = `title`
+  }
+  else if (state === `gameover`){
+    state = `title`
   }
 }
