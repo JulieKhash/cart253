@@ -162,8 +162,13 @@ function checkUserOverlap(meerkat){
 }
 
 function textGameOver(){
+  fill(100, 0, 20, 70);
+  rectMode(CENTER);
+  rect(width/2, height/2, 800, 100);
+  fill(200, 0, 50);
+  textSize(35);
   textAlign(CENTER, CENTER);
-  text(`Too bad you've became their Food`, width/2, height/2)
+  text(`Too bad you've became their SATISFACTION`, width/2, height/2);
 }
 
 
