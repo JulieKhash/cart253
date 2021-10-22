@@ -13,7 +13,7 @@ let beetleImg
 let backgroundImg;
 
 let meerkats = [];
-let meerkatNum = 6;
+let meerkatNum = 3;
 
 
 let user = {
@@ -96,25 +96,22 @@ function draw() {
     simulation();
   }
   else if (state ===`winner`){
-    // winner();
+    winner();
   }
-  else if(state ===`gameover`){
-    textGameOver();;
-  }
+  // else if(state ===`gameover`){
+  //   gameover();;
+  // }
 
 }
 
   function simulation(){
-
-    for (let i = 0; i < meerkats.length; i++)
-    onHole(meerkats[i]);
-
 
 
     moveUser();
     displayUser(user);
 
     for (let i = 0; i < meerkats.length; i++){
+    onHole(meerkats[i]);
     checkUserOverlap(meerkats[i]);
     controlMeerkat(meerkats[i]);
     moveMeerkat(meerkats[i]);
@@ -124,17 +121,35 @@ function draw() {
 
 
 
-function displayHole(){
+function displayHole(meerkat){
   fill(0);
   ellipse(hole.x, hole.y, hole.w, hole.h);
 }
+
+
+
 
 function onHole(meerkat){
   let d = dist(hole.x, hole.y, meerkat.x, meerkat.y);
   if(d < hole.h/2){
      meerkat.hidden = true;
-     // noLoop();
+     state = `winner`;
+  //meerkatNum += 1;
+  //if (meerkatNum ===3) {
+    // state = `winner`;
+// }
 }
+}
+
+function winner(){
+  fill(10, 0, 100, 100);
+  rectMode(CENTER);
+  rect(width/2, height/2, 800, 100);
+  fill(50, 180, 250);
+  textSize(35);
+  textAlign(CENTER, CENTER);
+  text(`Good Joob, smart BEET!`, width/2, height/2);
+
 }
 
   function controlMeerkat(meerkat){
@@ -158,13 +173,12 @@ function checkUserOverlap(meerkat){
     user.eaten = true;
     state = `gameover`;
     //textGameOver();
-
   }
 }
 
-function textGameOver(){
+function gameover(){
 
-  fill(100, 0, 20, 90);
+  fill(100, 0, 20, 100);
   rectMode(CENTER);
   rect(width/2, height/2, 800, 100);
   fill(250, 0, 50);
