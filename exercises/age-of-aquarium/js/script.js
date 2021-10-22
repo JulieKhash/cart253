@@ -37,7 +37,7 @@ let hole = {
 
 let state = `title`; // can be title, simulation, winner, gamer over
 
-// all the images in the program
+// all the visuals in the program
 function preload() {
   meerkatImg = loadImage("assets/images/meerkat.png");
   beetleImg = loadImage("assets/images/bettle.png");
@@ -54,7 +54,8 @@ function setup() {
   }
 }
 
-function reset(){
+// reset the game
+function reset() {
   meerkats = [];
   meerkatsInHole = 0;
   user.eaten = false;
@@ -63,7 +64,6 @@ function reset(){
     meerkats[i] = createMeerkat(random(0, width), random(0, height));
   }
 }
-
 
 // create meerkats
 function createMeerkat(x, y) {
@@ -80,7 +80,7 @@ function createMeerkat(x, y) {
   return meerkat;
 }
 
-// executes everyting inside the program
+// execute everyting inside the program
 function draw() {
   background(100);
   imageMode(CENTER);
@@ -96,15 +96,16 @@ function draw() {
     winner();
     reset();
   } else if (state === `gameover`) {
-   gameover();
-   reset();
+    gameover();
+    reset();
   }
 }
 
+// simulation screen: shows user, beetles and game process
 function simulation() {
   moveUser();
   displayUser(user);
-
+  // for loop performs the same action for every meerkat in the array
   for (let i = 0; i < meerkats.length; i++) {
     insideHoleMeerkats(meerkats[i]);
     checkIfInsideHole(meerkats[i]);
@@ -115,6 +116,7 @@ function simulation() {
   }
 }
 
+// title screeen
 function title() {
   fill(10, 100, 100, 100);
   rectMode(CENTER);
@@ -130,20 +132,20 @@ function title() {
   text(`Click`, width / 2, height / 2 + 110);
 }
 
+//draws a hole
 function displayHole(meerkat) {
-  fill(0);
+  fill(random(0, 20));
   ellipse(hole.x, hole.y, hole.w, hole.h);
 }
 
-// count the number of meerkats inside the hole
+// count the number of meerkats inside the hole, if all of them get inside change the state
 function insideHoleMeerkats(meerkat) {
   if (meerkat.hidden && meerkatsInHole === meerkats.length) {
-    state = `winner`
-    //winner();
-}
+    state = `winner`;
+  }
 }
 
-// check if meerkat reaches the hole, make it dissappear if so
+// check if meerkat reaches the hole, make it dissappear if so count it as hidden
 function checkIfInsideHole(meerkat) {
   let d = dist(hole.x, hole.y, meerkat.x, meerkat.y);
   if (!meerkat.hidden && d < hole.h / 2) {
@@ -152,16 +154,21 @@ function checkIfInsideHole(meerkat) {
   }
 }
 
+// winner screen
 function winner() {
-    fill(10, 0, 100, 100);
-    rectMode(CENTER);
-    rect(width / 2, height / 2, 800, 100);
-    fill(50, 180, 250);
-    textSize(35);
-    textAlign(CENTER, CENTER);
-    text(`Good Joob, smart BEET!`, width / 2, height / 2);
+  fill(10, 0, 100, 100);
+  rectMode(CENTER);
+  rect(width / 2, height / 2, 800, 150);
+  fill(50, 180, 250);
+  textSize(35);
+  textAlign(CENTER, CENTER);
+  text(`Good Joob, smart BEETL!`, width / 2, height / 2);
+  fill(250, 250, 20);
+  textSize(17);
+  text(`Click`, width / 2, height / 2 + 50);
 }
 
+// control meerkats with mouse
 function controlMeerkat(meerkat) {
   if (user.x > meerkat.x) {
     meerkat.vx = 2;
@@ -175,30 +182,31 @@ function controlMeerkat(meerkat) {
   }
 }
 
+//check if meerkats catch the user, if so game over
 function checkUserOverlap(meerkat) {
   let d = dist(user.x, user.y, meerkat.x, meerkat.y);
   if (d < user.w / 30 + meerkat.w / 30) {
-    user.eaten = true;
+    user.eaten = true; //makes user dissappear
     state = `gameover`;
   }
 }
 
+// game over screen
 function gameover() {
   fill(100, 0, 20, 100);
   rectMode(CENTER);
-  rect(width / 2, height / 2, 800, 100);
+  rect(width / 2, height / 2, 800, 150);
   fill(250, 0, 50);
   textSize(35);
   textAlign(CENTER, CENTER);
   text(`Too bad you've become their SATISFACTION`, width / 2, height / 2);
+  fill(250, 250, 20);
+  textSize(17);
+  text(`Click`, width / 2, height / 2 + 50);
 }
 
+// make meerkats move and constrain within a canvas
 function moveMeerkat(meerkat) {
-  let change = random(0, 1);
-  if (change <= 0.02) {
-    meerkat.vx = random(-meerkat.speed, meerkat.speed);
-    meerkat.vy = random(-meerkat.speed, meerkat.speed);
-  }
   meerkat.x += meerkat.vx;
   meerkat.y += meerkat.vy;
 
@@ -206,14 +214,15 @@ function moveMeerkat(meerkat) {
   meerkat.y = constrain(meerkat.y, 0, height);
 }
 
+// if merkats aren't hidden, diplay
 function displayMeerkat(meerkat) {
   if (!meerkat.hidden) {
     fill(0, 255, 0);
     image(meerkatImg, meerkat.x, meerkat.y, meerkat.w / 5, meerkat.h / 5);
-    //ellipse(meerkat.x, meerkat.y, meerkat.size);
   }
 }
 
+// user control with the mouse
 function moveUser() {
   user.x = mouseX;
   user.y = mouseY;
@@ -222,6 +231,7 @@ function moveUser() {
   user.y = constrain(user.y, 0, height);
 }
 
+// display user as a beetle
 function displayUser(user) {
   if (!user.eaten) {
     fill(255, 0, 0);
@@ -230,16 +240,13 @@ function displayUser(user) {
   }
 }
 
-
-
+// change screens by clicking a mouse
 function mousePressed() {
   if (state === `title`) {
-    state = `simulation`;  //if mouse is pressed move to a simulation page
-  }
-  else if (state === `winner`){
-    state = `title`
-  }
-  else if (state === `gameover`){
-    state = `title`
+    state = `simulation`; //if mouse is pressed move to a simulation page
+  } else if (state === `winner`) {
+    state = `title`;
+  } else if (state === `gameover`) {
+    state = `title`;
   }
 }
