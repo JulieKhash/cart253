@@ -1,7 +1,6 @@
 /**
 Title of Project
 Author Name
-
 This is a template. You must fill in the title,
 author, and this description to match your project!
 */
@@ -38,7 +37,7 @@ let beetle ={
   h: 50,
 }
 
-let state = `simulation` // can be title, simulation, winner, gamer over
+let state = `title` // can be title, simulation, winner, gamer over
 
 /**
 Description of preload
@@ -90,7 +89,7 @@ function draw() {
 
 
   if (state ===`title`) {
-    // title();
+   title();
   }
   else if (state ===`simulation`){
     simulation();
@@ -119,6 +118,21 @@ function draw() {
     }
   }
 
+
+  function title(){
+      fill(10, 100, 100, 100);
+      rectMode(CENTER);
+      rect(width/2, height/2, 800, 300);
+      fill(50, 250, 200);
+      textSize(35);
+      textAlign(CENTER, CENTER);
+      text(`OUTSMART MEERKATS`, width/2, height/2-50);
+      text(`OR`, width/2, height/2);
+      text(`BECOME THEIR FOOD!`, width/2, height/2+50);
+      fill(250, 250, 20);
+      textSize(20);
+      text(`Click`, width/2, height/2+110);
+    }
 
 
 function displayHole(meerkat){
@@ -228,4 +242,10 @@ function displayUser(user){
   //ellipse(user.x, user.y, user.size);
   image(beetleImg, user.x, user.y, user.w/5, user.h/5);
 }
+}
+
+function mousePressed(){
+  if (state === `title`){
+    state = `simulation`;
+  }
 }
