@@ -19,7 +19,9 @@ let meerkatNum = 6;
 let user = {
   x: undefined,
   y: undefined,
-  size: 90,
+  w: 558,
+  h: 567,
+  eaten: false
 }
 
 let hole = {
@@ -65,7 +67,8 @@ function createMeerkat(x,y){
 let meerkat = {
   x: x,
   y: y,
-  size: 50,
+  w: 392,
+  h: 330,
   vx: 0,
   vy: 0,
   speed: 2,
@@ -83,6 +86,9 @@ function draw() {
   imageMode(CENTER);
   image(backgroundImg, width/2, height/2, 1492-200, 1074-200);
 
+  displayHole();
+
+
   if (state ===`title`) {
     // title();
   }
@@ -96,26 +102,25 @@ function draw() {
     // gameover();
   }
 
-  displayHole();
-
 }
+
   function simulation(){
 
     for (let i = 0; i < meerkats.length; i++)
-    checkOverlap(meerkats[i]);
+    onHole(meerkats[i]);
+
+
 
     moveUser();
     displayUser(user);
 
     for (let i = 0; i < meerkats.length; i++){
+    checkUserOverlap(meerkats[i]);
     controlMeerkat(meerkats[i]);
     moveMeerkat(meerkats[i]);
     displayMeerkat(meerkats[i]);
-    
     }
   }
-
-
 
 
 function displayHole(){
@@ -123,7 +128,7 @@ function displayHole(){
   ellipse(hole.x, hole.y, hole.w, hole.h);
 }
 
-function checkOverlap(meerkat){
+function onHole(meerkat){
   let d = dist(hole.x, hole.y, meerkat.x, meerkat.y);
   if(d < hole.h/2){
      meerkat.hidden = true;
@@ -146,7 +151,20 @@ function checkOverlap(meerkat){
     meerkat.vy = -2;
   }
   }
-  // }
+
+function checkUserOverlap(meerkat){
+  let d = dist(user.x, user.y, meerkat.x, meerkat.y);
+  if (d < user.w/30 + meerkat.w/30){
+    user.eaten = true;
+    textGameOver();
+
+  }
+}
+
+function textGameOver(){
+  textAlign(CENTER, CENTER);
+  text(`Too bad you've became their Food`, width/2, height/2)
+}
 
 
 function  moveMeerkat(meerkat){
@@ -167,7 +185,7 @@ function  moveMeerkat(meerkat){
 function displayMeerkat(meerkat) {
   if(!meerkat.hidden){
   fill(0, 255, 0);
-  image(meerkatImg, meerkat.x, meerkat.y, 392/5, 330/5);
+  image(meerkatImg, meerkat.x, meerkat.y, meerkat.w/5, meerkat.h/5);
   //ellipse(meerkat.x, meerkat.y, meerkat.size);
 }
 }
@@ -182,29 +200,10 @@ function moveUser(){
 }
 
 function displayUser(user){
+  if(!user.eaten){
   fill(255, 0, 0);
   imageMode(CENTER);
   //ellipse(user.x, user.y, user.size);
-  image(beetleImg, user.x, user.y, 558/5, 567/5);
+  image(beetleImg, user.x, user.y, user.w/5, user.h/5);
 }
-
-
-
-
-// function mousePressed(meerkat){
-//   for (let i = 0; i < meerkats.length; i++){
-//
-//   if (user.x > meerkat.x){
-//     meerkat.vx = 2.5;
-//   }
-//   else if (user.x < meerkat.x){
-//     meerkat.vx = -2.5;
-//   }
-//   if (user.y > meerkat.y){
-//     meerkat.vy = 2.5;
-//   }
-//   else if (user.y < meerkat.y){
-//     meerkat.vy = -2.5;
-//   }
-// }
-// }
+}
