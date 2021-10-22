@@ -11,7 +11,7 @@ author, and this description to match your project!
 let jarImg;
 let flowerImg;
 
-let ball = {
+let meerkat = {
   x: 200,
   y: 200,
   size: 50,
@@ -89,9 +89,9 @@ function displayHole(){
 }
 
 function checkUserOverlap(){
-  let d = dist(hole.x, hole.y, ball.x, ball.y);
+  let d = dist(hole.x, hole.y, meerkat.x, meerkat.y);
   if(d < hole.h/2){
-     ball.hidden = true;
+     meerkat.hidden = true;
      // noLoop();
 }
 }
@@ -102,23 +102,23 @@ function moveBall(){
 
   let change = random(0,1);
   if (change <= 0.02){
-  ball.vx = random(-ball.speed, ball.speed);
-  ball.vy = random(-ball.speed, ball.speed);
+  meerkat.vx = random(-meerkat.speed, meerkat.speed);
+  meerkat.vy = random(-meerkat.speed, meerkat.speed);
 }
-  ball.x += ball.vx;
-  ball.y += ball.vy;
+  meerkat.x += meerkat.vx;
+  meerkat.y += meerkat.vy;
 
-  ball.x = constrain(ball.x, 0, width);
-  ball.y = constrain(ball.y, 0, height);
-  // ball.x = constrain(ball.x, user.x-100, user.x+100);
-  // ball.y = constrain(ball.y, user.y-100, user.y+100);
+  meerkat.x = constrain(meerkat.x, 0, width);
+  meerkat.y = constrain(meerkat.y, 0, height);
+  // meerkat.x = constrain(meerkat.x, user.x-100, user.x+100);
+  // meerkat.y = constrain(meerkat.y, user.y-100, user.y+100);
 
 }
 
 function displayBall() {
-  if(!ball.hidden){
+  if(!meerkat.hidden){
   fill(0, 255, 0);
-  ellipse(ball.x, ball.y, ball.size);
+  ellipse(meerkat.x, meerkat.y, meerkat.size);
 }
 }
 
@@ -139,16 +139,16 @@ function displayUser(){
 
 function mousePressed(){
 
-  if (user.x > ball.x){
-    ball.vx = 2.5;
+  if (user.x > meerkat.x){
+    meerkat.vx = 2.5;
   }
-  else if (user.x < ball.x){
-    ball.vx = -2.5;
+  else if (user.x < meerkat.x){
+    meerkat.vx = -2.5;
   }
-  if (user.y > ball.y){
-    ball.vy = 2.5;
+  if (user.y > meerkat.y){
+    meerkat.vy = 2.5;
   }
-  else if (user.y < ball.y){
-    ball.vy = -2.5;
+  else if (user.y < meerkat.y){
+    meerkat.vy = -2.5;
   }
 }
