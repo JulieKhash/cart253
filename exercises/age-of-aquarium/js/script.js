@@ -2,7 +2,7 @@
 Age of Aquarium - OUTSMART THE MEERKATS
 Julie Khashimova
 
-You are the beetle and meerkats are fond of you. Lure them back to their hole
+You are the beetle and the meerkats are fond of you. Lure them back to their hole
 or simply become thier food right away! Choice is yours, show them how smart you are
 
 - user controls beetle with their mouse and tries to avoid touching a meerkat.
