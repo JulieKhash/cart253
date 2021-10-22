@@ -12,8 +12,6 @@ let meerkatImg;
 let beetleImg
 let backgroundImg;
 
-
-
 let meerkats = [];
 let meerkatNum = 6;
 
@@ -38,7 +36,7 @@ let beetle ={
   h: 50,
 }
 
-
+let state = `simulation` // can be title, simulation, winner, gamer over
 
 /**
 Description of preload
@@ -85,22 +83,39 @@ function draw() {
   imageMode(CENTER);
   image(backgroundImg, width/2, height/2, 1492-200, 1074-200);
 
-
+  if (state ===`title`) {
+    // title();
+  }
+  else if (state ===`simulation`){
+    simulation();
+  }
+  else if (state ===`winner`){
+    // winner();
+  }
+  else if(state ===`gameover`){
+    // gameover();
+  }
 
   displayHole();
 
-  for (let i = 0; i < meerkats.length; i++)
-  checkOverlap(meerkats[i]);
-
-  moveUser();
-  displayUser(user);
-
-  for (let i = 0; i < meerkats.length; i++){
-  controlMeerkat(meerkats[i]);
-  moveMeerkat(meerkats[i]);
-  displayMeerkat(meerkats[i]);
 }
-}
+  function simulation(){
+
+    for (let i = 0; i < meerkats.length; i++)
+    checkOverlap(meerkats[i]);
+
+    moveUser();
+    displayUser(user);
+
+    for (let i = 0; i < meerkats.length; i++){
+    controlMeerkat(meerkats[i]);
+    moveMeerkat(meerkats[i]);
+    displayMeerkat(meerkats[i]);
+    
+    }
+  }
+
+
 
 
 function displayHole(){
@@ -146,8 +161,6 @@ function  moveMeerkat(meerkat){
 
   meerkat.x = constrain(meerkat.x, 0, width);
   meerkat.y = constrain(meerkat.y, 0, height);
-  // meerkat.x = constrain(meerkat.x, user.x-100, user.x+100);
-  // meerkat.y = constrain(meerkat.y, user.y-100, user.y+100);
 
 }
 
@@ -174,6 +187,8 @@ function displayUser(user){
   //ellipse(user.x, user.y, user.size);
   image(beetleImg, user.x, user.y, 558/5, 567/5);
 }
+
+
 
 
 // function mousePressed(meerkat){
