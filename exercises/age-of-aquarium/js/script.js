@@ -17,13 +17,15 @@ let ball = {
   size: 50,
   vx: 0,
   vy: 0,
-  speed: 2
+  speed: 2,
+  hidden: false
 }
 
 let user = {
   x: undefined,
   y: undefined,
-  size: 90
+  size: 90,
+  flower: false
 }
 
 let hole = {
@@ -40,22 +42,14 @@ let beetle ={
   h: 50,
 }
 
-let jar ={
-  x: 450,
-  y: 150,
-  w: 470,
-  h: 720
-}
-
-
 
 
 /**
 Description of preload
 */
 function preload() {
- jarImg = loadImage("assets/images/jar4.png");
- flowerImg = loadImage("assets/images/flower.png")
+ // jarImg = loadImage("assets/images/jar4.png");
+ // flowerImg = loadImage("assets/images/flower.png")
 }
 
 
@@ -74,10 +68,10 @@ function draw() {
   background(100);
 
 
-  displayHole()
-  displayJar();
+  displayHole();
 
-  //checkUserOverlap()
+
+  checkUserOverlap()
 
   moveUser();
   displayUser();
@@ -94,15 +88,13 @@ function displayHole(){
   ellipse(hole.x, hole.y, hole.w, hole.h);
 }
 
-
-// function checkUserOverlap(){
-//   let d = dist(user.x, user.y, ball.x, ball.y);
-//   if(d < user.size/2 + ball.size/2){
-//      return true;
-//   } else{
-//     return false;
-//   }
-// }
+function checkUserOverlap(){
+  let d = dist(hole.x, hole.y, ball.x, ball.y);
+  if(d < hole.h/2){
+     ball.hidden = true;
+     // noLoop();
+}
+}
 
 
 
@@ -124,8 +116,10 @@ function moveBall(){
 }
 
 function displayBall() {
+  if(!ball.hidden){
   fill(0, 255, 0);
   ellipse(ball.x, ball.y, ball.size);
+}
 }
 
 
@@ -136,29 +130,25 @@ function moveUser(){
 
 function displayUser(){
   fill(255, 0, 0);
+  imageMode(CENTER);
+  // image(flowerImg, user.x, user.y, 512/4, 512/4);
   ellipse(user.x, user.y, user.size);
 }
 
-function displayJar(){
-  imageMode(CENTER);
-  image(jarImg, jar.x, jar.y, jar.w/3, jar.h/3);
-}
 
 
 function mousePressed(){
 
   if (user.x > ball.x){
-    ball.vx = 2;
+    ball.vx = 2.5;
   }
   else if (user.x < ball.x){
-    ball.vx = -2;
+    ball.vx = -2.5;
   }
   if (user.y > ball.y){
-    ball.vy = 2;
+    ball.vy = 2.5;
   }
   else if (user.y < ball.y){
-    ball.vy = -2;
+    ball.vy = -2.5;
   }
-
-
 }
