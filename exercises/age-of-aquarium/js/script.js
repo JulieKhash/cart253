@@ -133,7 +133,6 @@ function displayHole(meerkat) {
   ellipse(hole.x, hole.y, hole.w, hole.h);
 }
 
-
 // count the number of meerkats inside the hole
 function insideHoleMeerkats(meerkat) {
   meerkatsInHole += 1;
@@ -153,15 +152,15 @@ function checkIfInsideHole(meerkat) {
 }
 
 function winner() {
-  if(insideHoleMeerkats(meerkat)){
-  fill(10, 0, 100, 100);
-  rectMode(CENTER);
-  rect(width / 2, height / 2, 800, 100);
-  fill(50, 180, 250);
-  textSize(35);
-  textAlign(CENTER, CENTER);
-  text(`Good Joob, smart BEET!`, width / 2, height / 2);
-}
+  if (insideHoleMeerkats(meerkat)) {
+    fill(10, 0, 100, 100);
+    rectMode(CENTER);
+    rect(width / 2, height / 2, 800, 100);
+    fill(50, 180, 250);
+    textSize(35);
+    textAlign(CENTER, CENTER);
+    text(`Good Joob, smart BEET!`, width / 2, height / 2);
+  }
 }
 
 function controlMeerkat(meerkat) {
