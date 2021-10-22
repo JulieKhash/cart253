@@ -9,20 +9,14 @@ author, and this description to match your project!
 "use strict";
 
 let meerkatImg;
-let flowerImg;
+let beetleImg
+let backgroundImg;
+
+
 
 let meerkats = [];
 let meerkatNum = 5;
 
-// let meerkat = {
-//   x: 200,
-//   y: 200,
-//   size: 50,
-//   vx: 0,
-//   vy: 0,
-//   speed: 2,
-//   hidden: false
-// }
 
 let user = {
   x: undefined,
@@ -51,7 +45,8 @@ Description of preload
 */
 function preload() {
   meerkatImg = loadImage("assets/images/meerkat.png");
- // flowerImg = loadImage("assets/images/flower.png")
+  beetleImg = loadImage("assets/images/bettle.png");
+  backgroundImg = loadImage("assets/images/background.jpg");
 }
 
 
@@ -86,6 +81,8 @@ Description of draw()
 */
 function draw() {
   background(100);
+  imageMode(CENTER);
+  image(backgroundImg, width/2, height/2);
 
 
 
@@ -121,16 +118,16 @@ function checkOverlap(meerkat){
   function controlMeerkat(meerkat){
   //for (let i = 0; i < meerkatNum; i++){
   if (user.x > meerkat.x){
-    meerkat.vx = 2.5;
+    meerkat.vx = 2;
   }
   else if (user.x < meerkat.x){
-    meerkat.vx = -2.5;
+    meerkat.vx = -2;
   }
   if (user.y > meerkat.y){
-    meerkat.vy = 2.5;
+    meerkat.vy = 2;
   }
   else if (user.y < meerkat.y){
-    meerkat.vy = -2.5;
+    meerkat.vy = -2;
   }
   }
   // }
@@ -156,8 +153,8 @@ function  moveMeerkat(meerkat){
 function displayMeerkat(meerkat) {
   if(!meerkat.hidden){
   fill(0, 255, 0);
-  image(meerkatImg, meerkat.x, meerkat.y, 392/4, 330/4);
-  ellipse(meerkat.x, meerkat.y, meerkat.size);
+  image(meerkatImg, meerkat.x, meerkat.y, 392/5, 330/5);
+  //ellipse(meerkat.x, meerkat.y, meerkat.size);
 }
 }
 
@@ -170,8 +167,8 @@ function moveUser(){
 function displayUser(user){
   fill(255, 0, 0);
   imageMode(CENTER);
-  // image(flowerImg, user.x, user.y, 512/4, 512/4);
-  ellipse(user.x, user.y, user.size);
+  //ellipse(user.x, user.y, user.size);
+  image(beetleImg, user.x, user.y, 558/5, 567/5);
 }
 
 
