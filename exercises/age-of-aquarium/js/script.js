@@ -8,6 +8,9 @@ author, and this description to match your project!
 
 "use strict";
 
+let jarImg;
+let flowerImg;
+
 let ball = {
   x: 200,
   y: 200,
@@ -30,6 +33,20 @@ let hole = {
   h: 50,
 }
 
+let beetle ={
+  x: undefined,
+  y: undefined,
+  w: 50,
+  h: 50,
+}
+
+let jar ={
+  x: 450,
+  y: 150,
+  w: 470,
+  h: 720
+}
+
 
 
 
@@ -37,7 +54,8 @@ let hole = {
 Description of preload
 */
 function preload() {
-
+ jarImg = loadImage("assets/images/jar4.png");
+ flowerImg = loadImage("assets/images/flower.png")
 }
 
 
@@ -57,6 +75,7 @@ function draw() {
 
 
   displayHole()
+  displayJar();
 
   //checkUserOverlap()
 
@@ -120,6 +139,12 @@ function displayUser(){
   ellipse(user.x, user.y, user.size);
 }
 
+function displayJar(){
+  imageMode(CENTER);
+  image(jarImg, jar.x, jar.y, jar.w/3, jar.h/3);
+}
+
+
 function mousePressed(){
 
   if (user.x > ball.x){
@@ -134,4 +159,6 @@ function mousePressed(){
   else if (user.y < ball.y){
     ball.vy = -2;
   }
+
+
 }
