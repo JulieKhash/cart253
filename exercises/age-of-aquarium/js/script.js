@@ -95,7 +95,7 @@ function draw() {
   } else if (state === `winner`) {
     winner();
   } else if (state === `gameover`) {
-    gameover();
+  //  gameover();
   }
 }
 
@@ -135,24 +135,22 @@ function displayHole(meerkat) {
 
 // count the number of meerkats inside the hole
 function insideHoleMeerkats(meerkat) {
-  meerkatsInHole += 1;
-  if (meerkatsInHole === meerkats.length) {
-    return true;
-  } else {
-    return false;
-  }
+  if (meerkat.hidden && meerkatsInHole === meerkats.length) {
+    state = `winner`
+    //winner();
+}
 }
 
 // check if meerkat reaches the hole, make it dissappear if so
 function checkIfInsideHole(meerkat) {
   let d = dist(hole.x, hole.y, meerkat.x, meerkat.y);
-  if (d < hole.h / 2) {
+  if (!meerkat.hidden && d < hole.h / 2) {
     meerkat.hidden = true;
+    meerkatsInHole += 1;
   }
 }
 
 function winner() {
-  if (insideHoleMeerkats(meerkat)) {
     fill(10, 0, 100, 100);
     rectMode(CENTER);
     rect(width / 2, height / 2, 800, 100);
@@ -160,7 +158,6 @@ function winner() {
     textSize(35);
     textAlign(CENTER, CENTER);
     text(`Good Joob, smart BEET!`, width / 2, height / 2);
-  }
 }
 
 function controlMeerkat(meerkat) {
