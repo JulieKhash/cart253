@@ -15,7 +15,7 @@ let backgroundImg;
 
 
 let meerkats = [];
-let meerkatNum = 5;
+let meerkatNum = 6;
 
 
 let user = {
@@ -26,7 +26,7 @@ let user = {
 
 let hole = {
   x: 450,
-  y: 60,
+  y: 70,
   w: 150,
   h: 50,
 }
@@ -46,7 +46,7 @@ Description of preload
 function preload() {
   meerkatImg = loadImage("assets/images/meerkat.png");
   beetleImg = loadImage("assets/images/bettle.png");
-  backgroundImg = loadImage("assets/images/background.jpg");
+  backgroundImg = loadImage("assets/images/background2.jpg");
 }
 
 
@@ -54,7 +54,8 @@ function preload() {
 Description of setup
 */
 function setup() {
-  createCanvas(900, 700);
+  createCanvas(1000, 700);
+  noCursor();
 
   for (let i = 0; i < meerkatNum; i++){
     meerkats[i] = createMeerkat(random(0, width), random(0, height));
@@ -82,7 +83,7 @@ Description of draw()
 function draw() {
   background(100);
   imageMode(CENTER);
-  image(backgroundImg, width/2, height/2);
+  image(backgroundImg, width/2, height/2, 1492-200, 1074-200);
 
 
 
@@ -162,6 +163,9 @@ function displayMeerkat(meerkat) {
 function moveUser(){
   user.x = mouseX;
   user.y = mouseY;
+
+  user.x = constrain(user.x, 0, width);
+  user.y = constrain(user.y, 0, height);
 }
 
 function displayUser(user){
