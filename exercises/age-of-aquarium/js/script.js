@@ -99,7 +99,7 @@ function draw() {
     // winner();
   }
   else if(state ===`gameover`){
-    // gameover();
+    textGameOver();;
   }
 
 }
@@ -123,6 +123,7 @@ function draw() {
   }
 
 
+
 function displayHole(){
   fill(0);
   ellipse(hole.x, hole.y, hole.w, hole.h);
@@ -137,7 +138,6 @@ function onHole(meerkat){
 }
 
   function controlMeerkat(meerkat){
-  //for (let i = 0; i < meerkatNum; i++){
   if (user.x > meerkat.x){
     meerkat.vx = 2;
   }
@@ -156,19 +156,22 @@ function checkUserOverlap(meerkat){
   let d = dist(user.x, user.y, meerkat.x, meerkat.y);
   if (d < user.w/30 + meerkat.w/30){
     user.eaten = true;
-    textGameOver();
+    state = `gameover`;
+    //textGameOver();
 
   }
 }
 
 function textGameOver(){
-  fill(100, 0, 20, 70);
+
+  fill(100, 0, 20, 90);
   rectMode(CENTER);
   rect(width/2, height/2, 800, 100);
-  fill(200, 0, 50);
+  fill(250, 0, 50);
   textSize(35);
   textAlign(CENTER, CENTER);
   text(`Too bad you've became their SATISFACTION`, width/2, height/2);
+
 }
 
 
