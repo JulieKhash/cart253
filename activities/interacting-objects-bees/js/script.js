@@ -1,33 +1,47 @@
-/**
-Title of Project
-Author Name
-
-This is a template. You must fill in the title,
-author, and this description to match your project!
-*/
 
 "use strict";
 
 
-/**
-Description of preload
-*/
-function preload() {
-
+let garden = {
+  //an array to store individual flower
+  flowers: [],
+  numFlowers: 15,
+  grassColor: {
+    r: 200,
+    g: 250,
+    b: 190
+  }
 }
 
-
-/**
-Description of setup
-*/
+// creates canvas and the flowers in the garden
 function setup() {
-
+  createCanvas(700, 700);
+  //create our flowers up to the number of the flowers;
+  for(let i = 0; i < garden.numFlowers; i ++) {
+    //create variables for our arguments for clarity
+    let x = random(0, width);
+    let y = random(0, height);
+    let size = random(30, 80);
+    let stemLength = random(50, 100);
+    let petalColor = {
+      r: random(100, 255),
+      g: random(100, 255),
+      b: random(100, 200)
+    }
+    //create a new flower usign the arguments
+    let flower = new Flower(x, y, size, stemLength, petalColor);
+    //add the flower to the array of numFlowers
+    garden.flowers.push(flower);
+  }
 }
 
 
-/**
-Description of draw()
-*/
 function draw() {
-
+  //display the grass
+  background(garden.grassColor.r, garden.grassColor.g, garden.grassColor.b);
+  //loop through all the flowers in the array and display them
+  for (let i = 0; i < garden.numFlowers; i++){
+    let flower = garden.flowers[i];
+    flower.display();
+  }
 }

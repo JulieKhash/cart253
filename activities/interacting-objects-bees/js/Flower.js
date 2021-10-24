@@ -1,10 +1,10 @@
 class Flower {
   // sets up a flower's properties
-  constructor() {
+  constructor(x, y, size, stemLength, petalColor) {
   //position and size information
   this.x = x;
   this.y = y;
-  thsi.size = size;
+  this.size = size;
   this.stemLength = stemLength;
   this.stemThickness = 10;
   this.petalThickness = 10;
