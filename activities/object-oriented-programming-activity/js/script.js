@@ -31,7 +31,7 @@ function draw() {
     if (ball.active) {
       ball.gravity(gravityForce);
       ball.move();
-      ball.bounce();
+      ball.bounce(paddle);
       ball.display();
     }
   }
