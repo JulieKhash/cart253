@@ -1,8 +1,8 @@
 class Ball {
-  constructor(x, y) {
+  constructor(x, y, size) {
     (this.x = x),
       (this.y = y),
-      (this.size = 50),
+      (this.size = size),
       (this.vx = 0),
       (this.vy = 0),
       (this.ax = 0), //ball's acceleration
@@ -35,15 +35,18 @@ class Ball {
     if (
       this.x > paddle.x - paddle.width / 2 && //the ball's x is greater than right side the paddle
       this.x < paddle.x + paddle.width / 2 && // the ball's x is less than the left side of the paddle
-      this.y + this.size / 2 > paddle.y - paddle.height / 2 && //the ball's bottom is greater thant the paddle's top
+      this.y + this.size / 2 > paddle.y - paddle.height / 2 && //the ball's bottom is greater thant(passes) the paddle's top
       this.y - this.size / 2 < paddle.y + paddle.height / 2   //the ball's top is less the paddles bottom
     ) {
 
       // bounce
-      let dx = this.x - paddle.x;
-      this.vx = this.vx + map(dx, -paddle.width / 2, paddle.width / 2, -2, 2);
+      let dx = this.x - paddle.x; // how far away was a ball from the center of the paddle when it bounced off
+      this.vx = this.vx + map(dx, -paddle.width / 2, paddle.width / 2, -2, 2); //change horizontal velocity
+      // -paddle.width2 - closer it is to the left of the paddle, it will be -2
+      // paddle.width -  closer it is to the right edge, it resutls in 2
 
-      this.vy = -this.vy; // travels upwords
+
+      this.vy = -this.vy; // travels upwards
       this.ay = 0; //
     }
   }

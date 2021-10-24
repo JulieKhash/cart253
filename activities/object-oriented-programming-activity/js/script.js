@@ -4,18 +4,19 @@ let paddle;
 
 let gravityForce = 0.0025;
 let balls = []; //empty array for balls
-let numBalls = 3; // number of balls
+let numBalls = 33; // number of balls
 
 function setup() {
-  createCanvas(800, 800);
+  createCanvas(900, 900);
 
-  paddle = new Paddle(200, 40);
+  paddle = new Paddle(350, 30);
 
   //create a new ball up to numBall, add the ball into the array
   for (let i = 0; i < numBalls; i++) {
     let x = random(0, width);
     let y = random(-400, -150);
-    let ball = new Ball(x, y);
+    let size = random(10, 50);
+    let ball = new Ball(x, y, size);
     balls.push(ball); // adds the ball into the array
   }
 }
