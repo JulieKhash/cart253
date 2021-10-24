@@ -46,7 +46,6 @@ function setup() {
 }
 
 function draw() {
-  //display the grass
   background(garden.grassColor.r, garden.grassColor.g, garden.grassColor.b);
   //loop through all the flowers in the array and display them
   for (let i = 0; i < garden.flowers.length; i++) {
@@ -54,14 +53,13 @@ function draw() {
     // check if this flower is alive before updating it
     if (flower.alive) {
       //update the flower by shrinking it and displaying it
-      flower.shrink(); // shrink living flowers every frame
+      flower.shrink();
       flower.display();
     }
   }
   // loop through all the bees in the arrat and display them
   for (let i = 0; i < garden.bees.length; i++) {
     let bee = garden.bees[i];
-    // check if this bee is alive
     if (bee.alive) {
       // update the bee by shrinking, moving, and displaying it
       bee.shrink();

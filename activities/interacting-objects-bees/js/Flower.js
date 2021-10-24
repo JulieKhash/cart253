@@ -1,19 +1,20 @@
 class Flower {
-  // sets up a flower's properties
+
+  // The constructor() sets up a flower's properties
   constructor(x, y, size, stemLength, petalColor) {
-    //position and size information
+    // Position and size information
     this.x = x;
     this.y = y;
     this.size = size;
-    this.maxsize = size;
+    this.maxSize = size; // NEW! To limit growth
     this.stemLength = stemLength;
     this.stemThickness = 10;
     this.petalThickness = 10;
-    this.maxPetalThickness = 10;
-    //color
+    this.maxPetalThickness = 10; // NEW! To limit growth
+    // Color information
     this.stemColor = {
-      r: 200,
-      g: 100,
+      r: 50,
+      g: 150,
       b: 50
     };
     this.petalColor = petalColor;
@@ -22,51 +23,52 @@ class Flower {
       g: 0,
       b: 0
     };
-    this.alive = true; // track whether this flower is alive
+    this.alive = true;
   }
 
-  // shrinks the flower
+  // Shrinks the flower
   shrink() {
-    //choose a random number to shrink
+    // Choose a random amount to shrink
     let shrinkage = random(0, 0.1);
-    //reduce the center of the flower
-    this.size = this.size - shrinkage;
-    //reduce the petal thickness (divide by 10 to make it less rapid)
+    // Reduce the petal thickness (divide by 10 to make it less rapid)
     this.petalThickness = this.petalThickness - shrinkage / 10;
+    // Reduce the centre of the flower
+    this.size = this.size - shrinkage;
 
-    //if any of the key properties reach 0 or less, the flower is dead
+    // If any of the key properties reach 0 or less, the flower is dead
     if (this.petalThickness <= 0 || this.size <= 0) {
       this.alive = false;
     }
   }
-  // polinate() handles the flower being pollinated(it grows)
-  pollinate() {
-    //choose the amount to grow
-    let growth = random(0, 0.5);
-    // increase the center of the flower
-    this.size = this.size + growth;
-    // increse the petal thickness
-    this.petalThickness = this.petalThickness + growth / 10;
 
-    this.size = constrain(this.size, 0, this.maxSize);
+  // NEW! pollinate() handles the flower being pollinated (it grows)
+  pollinate() {
+    // Choose a random amount to grow
+    let growth = random(0, 0.5);
+    // Increase the petal thickness (divide by 10 to make it less rapid)
+    this.petalThickness = this.petalThickness + growth / 10;
+    // Increase the centre of the flower
+    this.size = this.size + growth;
+
+    // Constrain the elements
     this.petalThickness = constrain(this.petalThickness, 0, this.maxPetalThickness);
+    this.size = constrain(this.size, 0, this.maxSize);
   }
 
-
-  // displays the flower on camvas
+  // display()
+  // Displays the flower on the canvas
   display() {
     push();
-    // draws a line for the stem
+    // Set the stroke weight for the petals and the stem
     strokeWeight(this.stemThickness);
+    // Draw a line for the stem
     stroke(this.stemColor.r, this.stemColor.g, this.stemColor.b);
     line(this.x, this.y, this.x, this.y + this.stemLength);
-    // draws a circle with a heavy outline for the flowers
+    // Draw a circle with a heavy outline for the flower
     strokeWeight(this.petalThickness);
     fill(this.centreColor.r, this.centreColor.g, this.centreColor.b);
     stroke(this.petalColor.r, this.petalColor.g, this.petalColor.b);
     ellipse(this.x, this.y, this.size);
     pop();
   }
-
-
 }
