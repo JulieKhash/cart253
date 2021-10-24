@@ -1,5 +1,5 @@
 class Bee {
-  constructor() {
+  constructor(x, y) {
     this.x = x;
     this.y = y;
     this.size = 40;
@@ -38,11 +38,26 @@ class Bee {
 // display() draws our bee onto the canvas
   display(){
     push();
-    // wings on either side
-    fill(255, 255, 255);
-    noStroke();
-    ellipse(this.x - this.size/2, this.y, this.size/2);
-    ellipse(this.x + this.size/2, this.y, this.size/2);
+    // Wings on either side
+      fill(255, 255, 255);
+      noStroke();
+      ellipse(this.x - this.size / 2, this.y, this.size / 2);
+      ellipse(this.x + this.size / 2, this.y, this.size / 2);
+      pop();
+
+      // Body
+      push();
+      fill(225, 225, 50);
+      noStroke();
+      ellipse(this.x, this.y, this.size);
+      pop();
+
+      // Eyes
+      push();
+      fill(0, 0, 0);
+      noStroke();
+      ellipse(this.x - this.size / 10, this.y, this.size / 10);
+      ellipse(this.x + this.size / 10, this.y, this.size / 10);
     pop();
   }
 }
