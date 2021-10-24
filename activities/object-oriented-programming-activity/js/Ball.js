@@ -19,8 +19,8 @@ move(){
   this.vx += this.ax;
   this.vy += this.ay;
 
-  this.vx = constrain(this.vx, -this.Maxspeed, this.Maxspeed);
-  this.vy = constrain(this.vy, -this.Maxspeed, this.Maxspeed);
+  this.vx = constrain(this.vx, -this.MaxSpeed, this.MaxSpeed);
+  this.vy = constrain(this.vy, -this.MaxSpeed, this.MaxSpeed);
 
   this.x += this.vx;
   this.y += this.vy;
@@ -37,7 +37,7 @@ bounce(){
 display(){
   push();
   fill(200, 100, 50);
-  noStroke();
+  stroke(0);
   ellipse(this.x, this.y, this.size);
   pop();
 }
