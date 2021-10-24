@@ -4,10 +4,12 @@ class Bee {
     this.y = y;
     this.size = 40;
     this.minSize = 10; //if we get smaller than this minimum we're dead
+    this.maxSize = 40;
     this.vx = 0;
     this.vy = 0;
     this.speed = 5;
     this.shrinkRate = 0.05; //how much smaller we get each frame
+    this.growRate = 0.05;
     this.jitteriness = 0.1; //how likely th ebee is to change direction
     this.alive =  true; // shows the bee in the beginning
   }
@@ -19,6 +21,24 @@ class Bee {
       this.alive = false;
     }
   }
+
+  // tryToPollinate attempts to pollinate the flower provided as a parameter
+  // if pollination succeds (both overlap) then both grow
+  tryToPollinate(flower){
+  // calculate the distance between the bee and the flower
+  let d = dist(this.x, this.y, flower.x, flower.y);
+  if (d < this.size/2 + flower.size/2 + flower.petalThickness){
+    this.grow(); // the bee should grow
+    flower.pollinate();
+  }
+  }
+
+  // grow() makes the bee to get bigger up to a maximu
+  grow(){
+    this.size = this.size + this.growRate;
+    this.size = constrain(this.size, this.minSize, this.maxSize);
+  }
+
   // move() moves the bee by potentially changing the direction
   // and then changing postion based on velocity
   move(){
