@@ -8,7 +8,7 @@ class Paddle {
   }
 
   move(){
-    this.x = mouseX;
+    this.x = mouseX;  //user conrtolled paddle
   }
 
   display(){
