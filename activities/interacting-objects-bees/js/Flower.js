@@ -20,7 +20,23 @@ class Flower {
     g: 0,
     b: 0
   };
+  this.alive = true; // track whether this flower is alive
 }
+
+// shrinks the flower
+  shrink(){
+    //choose a random number to shrink
+    let shrinkage = random(0, 0.1);
+    //reduce the petal thickness (divide by 10 to make it less rapid)
+    this.petalThickness = this.petalThickness - shrinkage/10;
+    //reduce the center of the flower
+    this.size = this.size - shrinkage;
+
+    //if any of the key properties reach 0 or less, the flower is dead
+    if (this.petalThickness <= 0 || this.size <= 0){
+      this.alive = false;
+    }
+  }
 
 
 // displays the flower on camvas

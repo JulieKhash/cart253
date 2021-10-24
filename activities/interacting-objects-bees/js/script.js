@@ -42,6 +42,11 @@ function draw() {
   //loop through all the flowers in the array and display them
   for (let i = 0; i < garden.numFlowers; i++){
     let flower = garden.flowers[i];
+    // check if this flower is alive before updating it
+    if (flower.alive){
+      //update the flower by shrinking it and displaying it
+    flower.shrink();   // shrink living flowers every frame
     flower.display();
+  }
   }
 }
