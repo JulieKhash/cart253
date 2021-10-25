@@ -1,25 +1,43 @@
+
+let flow;
+//let cam;
+let backgroundImg;
+
+function preload(){
+  flow = loadImage(`assets/images/flow.gif`);
+  backgroundImg = loadImage(`assets/images/forest1.jpg`);
+}
+
 function setup() {
-  createCanvas(710, 400, WEBGL);
+  createCanvas(1000, 1000, WEBGL);
+//  cam = createCapture()
 }
 
 function draw() {
   background(250);
-  rotateY(frameCount * 0.01);
-  normalMaterial();
+  imageMode(CENTER)
+//  image(backgroundImg, width/10, height/10);
 
-  for (let j = 0; j < 5; j++) {
-    push();
-    for (let i = 0; i < 80; i++) {
-      translate(
-        sin(frameCount * 0.001 + j) * 100,
-        sin(frameCount * 0.001 + j) * 100,
-        i * 0.1
-      );
-      rotateZ(frameCount * 0.002);
-      push();
-      sphere(8, 6, 4);
-      pop();
-    }
-    pop();
-  }
+  //camera(0, 0, (height/2) / tan(PI/6), 0, 0, 0, 1, 0, 0);
+  //translate(0, 0, mouseX)
+  let dx = mouseX - width/2;
+  let dy = mouseY - height/2;
+  let v = createVector(dx, dy, 0);
+  v.normalize();
+
+  directionalLight(0, 250, 250, v);
+  ambientLight(10, 100, 200)
+
+
+  //ambientMaterial(100, 30, 10);
+  //translate(mouseX - width/2 , mouseY - height/2);
+  rotateX(frameCount * 0.01);
+  rotateY(frameCount * 0.01);
+  rotateZ(frameCount * 0.02);
+  noStroke();
+  texture(flow);
+//  specularMaterial(255);
+  box(200);
+
+
 }
