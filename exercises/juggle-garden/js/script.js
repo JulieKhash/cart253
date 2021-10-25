@@ -9,25 +9,17 @@ author, and this description to match your project!
 "use strict";
 
 
-/**
-Description of preload
-*/
 function preload() {
 
 }
 
 
-/**
-Description of setup
-*/
 function setup() {
-
+  createCanvas(1000, 700);
 }
 
 
-/**
-Description of draw()
-*/
 function draw() {
+  background(100);
 
 }
