@@ -35,7 +35,6 @@ class EnergyBall {
     this.y = constrain(this.y, 0, height);
   }
 
-
   display(){
     push();
     fill(random(this.colorRed), random(this.colorGreen), random(this.colorBlue), random(this.alpha));
