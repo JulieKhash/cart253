@@ -2,10 +2,12 @@
 let flow;
 //let cam;
 let backgroundImg;
+let birdModel;
 
 function preload(){
-  flow = loadImage(`assets/images/flow.gif`);
+  flow = loadImage(`assets/images/eyee.gif`);
   backgroundImg = loadImage(`assets/images/forest1.jpg`);
+  birdModel = loadModel(`assets/images/eagle-stl.stl`, true)
 }
 
 function setup() {
@@ -26,7 +28,7 @@ function draw() {
   v.normalize();
 
   directionalLight(0, 250, 250, v);
-  ambientLight(10, 100, 200)
+  ambientLight(10, 150, 250)
 
 
   //ambientMaterial(100, 30, 10);
@@ -36,8 +38,9 @@ function draw() {
   rotateZ(frameCount * 0.02);
   noStroke();
   texture(flow);
-//  specularMaterial(255);
-  box(200);
-
+  //specularMaterial(255);
+//  box(200);
+  scale(5)
+  model(birdModel);
 
 }
