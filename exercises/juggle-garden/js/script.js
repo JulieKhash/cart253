@@ -15,7 +15,7 @@ let positive;
 let positiveCaught = 0;
 
 let negativeThoughts = [];
-let numNegative = 12;
+let numNegative = 20;
 let negative;
 
 let state = `title` //animation, instruction, simulation, win,  lose
@@ -62,10 +62,10 @@ function draw() {
    simulation();
  } else if (state === `instruction`){
    instruction();
- } else if (state === `winnig`){
-   win();
+ } else if (state === `winning`){
+   win;
  } else if (state === `losing`){
-   lose();
+   lose;
  }
 
 
@@ -77,6 +77,12 @@ function simulation(){
   ourNegativeThoughts()
 }
 
+// function win(){
+//   win;
+//   //negative.active = false;
+// //
+// }
+
 
 
 
@@ -87,8 +93,8 @@ function title(){
   textSize(70);
   textAlign(CENTER, CENTER);
   text(`Feed Your Energy Ball`, width/2, height/2);
-  textSize(30);
-  text(`press any key`, width/2, height/2+50);
+  textSize(20);
+  text(`press any key`, width/2, height/2+60);
   pop();
 }
 
@@ -96,22 +102,21 @@ function instruction(){
   background(random(170, 200), random(170, 200), random(170, 200));
   push();
   fill(255)
-  textSize(30);
+  textSize(25);
   textAlign(CENTER, CENTER);
-  text(`🔅 Use arrow keys`, width/2, height/2-60);
-  text(`⚪ Catch Positive Thoughts to Increase Your Energy`, width/2, height/2);
-  text(`⚫ Avoid Negative Thoughts or Wither`, width/2, height/2+60);
+  text(`🔅 use arrow keys`, width/2, height/2-60);
+  text(`⚪ catch positive thoughts to increase your energy`, width/2, height/2);
+  text(`⚫ avoid negative thoughts or wither`, width/2, height/2+60);
   pop();
 }
-
 
   function ourEnergyBall(){
   if(energyBall.active){
   energyBall.move();
   energyBall.display();
   energyBall.increaseEnergy(positive);
-  // energyBall.win();
-  energyBall.lose();
+  let win = energyBall.win();
+  let lose = energyBall.lose();
 
 //   for (let i = 0; i < positiveThoughts.length; i++){
 //     let positive = positiveThoughts[i];
@@ -134,7 +139,6 @@ for (let i = 0; i < positiveThoughts.length; i++){
 }
 }
 
-
 // negative balls
 function ourNegativeThoughts(){
 for (let i = 0; i < negativeThoughts.length; i++){
@@ -144,11 +148,15 @@ for (let i = 0; i < negativeThoughts.length; i++){
   negative.display();
   energyBall.fadeEnergy(negative);
 }
+
 }
 }
 
 function keyPressed(){
   if (state === `title`){
-  state = `instruction`
+  state = `instruction`;
   }
+ else if (state ===`instruction`){
+  state = `simulation`;
+}
 }

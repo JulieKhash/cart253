@@ -32,7 +32,6 @@ class Negative {
 }
 
 
-
   display(){
     push();
     fill(this.color, random(200, this.alpha));
