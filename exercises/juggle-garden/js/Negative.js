@@ -1,5 +1,5 @@
-class Positive {
-  constructor(x, y, vx, vy,size) {
+class Negative {
+  constructor(x, y, vx, vy, size) {
     this.x = x,
     this.y = y,
     this.vx = vx,
@@ -9,7 +9,7 @@ class Positive {
     // this.speed = 2
     // this.maxSpeed = 9,
     this.size = size,
-    this.color = 255,
+    this.color = 0,
     this.alpha = 255,
     this.active = true;
   }
@@ -30,8 +30,6 @@ class Positive {
   //  this.size += 3;
   }
 }
-
-
 
 
 

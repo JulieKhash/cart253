@@ -1,10 +1,10 @@
 class EnergyBall {
-  constructor(x, y, size) {
+  constructor(x, y,size) {
     this.x = width/2,
     this.y = height/2,
     this.vx = 0,
     this.vy = 0,
-    this.speed = 2,
+    this.speed = 3,
     this.size = size
     this.colorRed = 255,
     this.colorGreen = 200,
@@ -34,6 +34,13 @@ class EnergyBall {
     this.x = constrain(this.x, 0, width);
     this.y = constrain(this.y, 0, height);
   }
+
+   //fade()
+
+   // grow(){
+   //   if
+   // }
+
 
   display(){
     push();

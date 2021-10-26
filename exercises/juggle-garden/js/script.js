@@ -10,8 +10,12 @@ author, and this description to match your project!
 let energyBall;
 
 let positiveThoughts = [];
-let numPositive = 5;
+let numPositive = 7;
 let positive;
+
+let negativeThoughts = [];
+let numNegative = 7;
+let negative;
 
 function preload() {
 
@@ -27,25 +31,45 @@ function setup() {
   for(let i = 0; i < numPositive; i++){
   let x = random(0, width);
   let y = random(0, 100);
-  positive = new Positive(x, y);
+  let vx = random(-1, 5);
+  let vy = random(-3, 8);
+  let size = random(15, 40);
+  positive = new Positive(x, y, vx, vy, size);
   positiveThoughts.push(positive);
 }
+
+  for(let i = 0; i < numNegative; i++){
+  let x = random(0, width);
+  let y = random(0, 100);
+  let vx = random(-2, 5);
+  let vy = random(-1, 6);
+  let size = random(15, 40);
+  negative = new Negative(x, y, vx, vy, size);
+  negativeThoughts.push(negative);
+  }
 }
 
 
 function draw() {
-  background(100);
+  background(0, 100, 200);
 
   if(energyBall.active){
   energyBall.move();
   energyBall.display();
 }
 
-
+// positive balls
 for (let i = 0; i < positiveThoughts.length; i++){
   let positive = positiveThoughts[i];
-  // positive.bounce();
   positive.move();
   positive.display();
 }
+
+// negative balls
+for (let i = 0; i < negativeThoughts.length; i++){
+  let negative = negativeThoughts[i];
+  negative.move();
+  negative.display();
+}
+
 }
