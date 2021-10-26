@@ -10,11 +10,11 @@ author, and this description to match your project!
 let energyBall;
 
 let positiveThoughts = [];
-let numPositive = 7;
+let numPositive = 23;
 let positive;
 
 let negativeThoughts = [];
-let numNegative = 7;
+let numNegative = 2;
 let negative;
 
 function preload() {
@@ -51,25 +51,38 @@ function setup() {
 
 
 function draw() {
-  background(0, 100, 200);
+  background(50);
 
   if(energyBall.active){
   energyBall.move();
   energyBall.display();
+  energyBall.increaseEnergy(positive);
+
+//   for (let i = 0; i < positiveThoughts.length; i++){
+//     let positive = positiveThoughts[i];
+//     if(positive.active){
+//         energyBall.increaseEnergy(positive);
+// }
+// }
 }
+
 
 // positive balls
 for (let i = 0; i < positiveThoughts.length; i++){
   let positive = positiveThoughts[i];
+  if(positive.active){
   positive.move();
   positive.display();
+  energyBall.increaseEnergy(positive);
+}
 }
 
 // negative balls
 for (let i = 0; i < negativeThoughts.length; i++){
   let negative = negativeThoughts[i];
+  if(negative.active){
   negative.move();
   negative.display();
 }
-
+}
 }

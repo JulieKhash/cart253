@@ -35,7 +35,7 @@ class Negative {
 
   display(){
     push();
-    fill(this.color);
+    fill(this.color, random(200, this.alpha));
     ellipse(this.x, this.y, this.size);
     pop()
   }

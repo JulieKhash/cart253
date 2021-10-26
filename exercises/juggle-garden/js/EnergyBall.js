@@ -5,7 +5,8 @@ class EnergyBall {
     this.vx = 0,
     this.vy = 0,
     this.speed = 3,
-    this.size = size
+    this.size = size,
+    this.growRate = 1;
     this.colorRed = 255,
     this.colorGreen = 200,
     this.colorBlue = 100,
@@ -36,10 +37,18 @@ class EnergyBall {
   }
 
    //fade()
+   increaseEnergy(positive){
+     let d = dist(this.x, this.y, positive.x, positive.y);
+     if (d < this.size/2 + positive.size/2){
+       this.grow();
+       positive.active = false;
+     }
+   }
 
-   // grow(){
-   //   if
-   // }
+   grow(){
+     this.size += this.growRate;
+     this.size = constrain(this.size, 80, 300);
+   }
 
 
   display(){
