@@ -18,6 +18,8 @@ let negativeThoughts = [];
 let numNegative = 12;
 let negative;
 
+let state = `title` //animation, instruction, simulation, win,  lose
+
 function preload() {
 
 }
@@ -54,6 +56,56 @@ function setup() {
 function draw() {
   background(50);
 
+  if (state ===`title`){
+   title();
+ } else if (state === `simulation`){
+   simulation();
+ } else if (state === `instruction`){
+   instruction();
+ } else if (state === `winnig`){
+   win();
+ } else if (state === `losing`){
+   lose();
+ }
+
+
+}
+
+function simulation(){
+  ourEnergyBall()
+  ourPositiveThoughts()
+  ourNegativeThoughts()
+}
+
+
+
+
+function title(){
+  background(random(170, 200), random(170, 200), random(170, 200));
+  push();
+  fill(255)
+  textSize(70);
+  textAlign(CENTER, CENTER);
+  text(`Feed Your Energy Ball`, width/2, height/2);
+  textSize(30);
+  text(`press any key`, width/2, height/2+50);
+  pop();
+}
+
+function instruction(){
+  background(random(170, 200), random(170, 200), random(170, 200));
+  push();
+  fill(255)
+  textSize(30);
+  textAlign(CENTER, CENTER);
+  text(`🔅 Use arrow keys`, width/2, height/2-60);
+  text(`⚪ Catch Positive Thoughts to Increase Your Energy`, width/2, height/2);
+  text(`⚫ Avoid Negative Thoughts or Wither`, width/2, height/2+60);
+  pop();
+}
+
+
+  function ourEnergyBall(){
   if(energyBall.active){
   energyBall.move();
   energyBall.display();
@@ -68,8 +120,10 @@ function draw() {
 // }
 // }
 }
+}
 
 // positive balls
+function ourPositiveThoughts(){
 for (let i = 0; i < positiveThoughts.length; i++){
   let positive = positiveThoughts[i];
   if(positive.active){
@@ -78,8 +132,11 @@ for (let i = 0; i < positiveThoughts.length; i++){
   energyBall.increaseEnergy(positive);
 }
 }
+}
+
 
 // negative balls
+function ourNegativeThoughts(){
 for (let i = 0; i < negativeThoughts.length; i++){
   let negative = negativeThoughts[i];
   if(negative.active){
@@ -88,4 +145,10 @@ for (let i = 0; i < negativeThoughts.length; i++){
   energyBall.fadeEnergy(negative);
 }
 }
+}
+
+function keyPressed(){
+  if (state === `title`){
+  state = `instruction`
+  }
 }
