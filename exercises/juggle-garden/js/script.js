@@ -15,7 +15,7 @@ let positive;
 let positiveCaught = 0;
 
 let negativeThoughts = [];
-let numNegative = 22;
+let numNegative = 12;
 let negative;
 
 function preload() {
