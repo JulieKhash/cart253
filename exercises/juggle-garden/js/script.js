@@ -10,12 +10,12 @@ author, and this description to match your project!
 let energyBall;
 
 let positiveThoughts = [];
-let numPositive = 3;
+let numPositive = 1;
 let positive;
 let positiveCaught = 0;
 
 let negativeThoughts = [];
-let numNegative = 12;
+let numNegative = 22;
 let negative;
 
 function preload() {
@@ -58,7 +58,8 @@ function draw() {
   energyBall.move();
   energyBall.display();
   energyBall.increaseEnergy(positive);
-  energyBall.win();
+  // energyBall.win();
+  energyBall.lose();
 
 //   for (let i = 0; i < positiveThoughts.length; i++){
 //     let positive = positiveThoughts[i];

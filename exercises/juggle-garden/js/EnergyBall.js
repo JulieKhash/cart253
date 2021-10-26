@@ -7,7 +7,7 @@ class EnergyBall {
     this.speed = 3,
     this.size = size,
     this.growRate = 1;
-    this.shrinkRate = 3;
+    this.shrinkRate = 6;
     this.colorRed = 255,
     this.colorGreen = 200,
     this.colorBlue = 100,
@@ -37,6 +37,12 @@ class EnergyBall {
     this.y = constrain(this.y, 0, height);
   }
 
+  lose(){
+    if(this.size === 0){
+      noLoop();
+    }
+  }
+
 
    fadeEnergy(negative){
      let d = dist(this.x, this.y, negative.x, negative.y);
@@ -47,19 +53,17 @@ class EnergyBall {
    }
  }
 
-
    shrink(){
      this.size -= this.shrinkRate;
-     this.size = constrain(this.size, 3, 50);
+     this.size = constrain(this.size, 0, 50);
    }
+
 
    win(){
      if (!positive.active && positiveCaught === positiveThoughts.length){
        noLoop();
      }
    }
-
-
 
    increaseEnergy(positive){
      let d = dist(this.x, this.y, positive.x, positive.y);
