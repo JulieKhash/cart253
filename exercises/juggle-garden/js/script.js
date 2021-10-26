@@ -10,11 +10,11 @@ author, and this description to match your project!
 let energyBall;
 
 let positiveThoughts = [];
-let numPositive = 23;
+let numPositive = 3;
 let positive;
 
 let negativeThoughts = [];
-let numNegative = 2;
+let numNegative = 12;
 let negative;
 
 function preload() {
@@ -83,6 +83,7 @@ for (let i = 0; i < negativeThoughts.length; i++){
   if(negative.active){
   negative.move();
   negative.display();
+  energyBall.fadeEnergy(negative);
 }
 }
 }
