@@ -10,7 +10,7 @@ author, and this description to match your project!
 let energyBall;
 
 let positiveThoughts = [];
-let numPositive = 3;
+let numPositive = 5;
 let positive;
 
 function preload() {
@@ -25,7 +25,9 @@ function setup() {
   energyBall = new EnergyBall(width/2, height/2, size);
 
   for(let i = 0; i < numPositive; i++){
-  positive = new Positive(random(0, width), random(0, height));
+  let x = random(0, width);
+  let y = random(0, 100);
+  positive = new Positive(x, y);
   positiveThoughts.push(positive);
 }
 }
@@ -39,8 +41,11 @@ function draw() {
   energyBall.display();
 }
 
+
 for (let i = 0; i < positiveThoughts.length; i++){
   let positive = positiveThoughts[i];
+  // positive.bounce();
+  positive.move();
   positive.display();
 }
 }
