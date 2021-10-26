@@ -20,10 +20,6 @@ let negative;
 
 let state = `title` //animation, instruction, simulation, win,  lose
 
-function preload() {
-
-}
-
 
 function setup() {
   createCanvas(1000, 700);
@@ -52,23 +48,20 @@ function setup() {
   }
 }
 
-
 function draw() {
   background(50);
 
   if (state ===`title`){
    title();
- } else if (state === `simulation`){
-   simulation();
  } else if (state === `instruction`){
    instruction();
+ } else if (state === `simulation`){
+   simulation();
  } else if (state === `winning`){
-   win;
+   winning();
  } else if (state === `losing`){
-   lose;
+   losing();
  }
-
-
 }
 
 function simulation(){
@@ -76,15 +69,6 @@ function simulation(){
   ourPositiveThoughts()
   ourNegativeThoughts()
 }
-
-// function win(){
-//   win;
-//   //negative.active = false;
-// //
-// }
-
-
-
 
 function title(){
   background(random(170, 200), random(170, 200), random(170, 200));
@@ -97,6 +81,34 @@ function title(){
   text(`press any key`, width/2, height/2+60);
   pop();
 }
+
+function winning(){
+  background(random(230, 250), random(230, 250), random(230, 250));
+  textWinning();
+}
+
+function textWinning() {
+  push();
+  textSize(20);
+  textAlign(CENTER, CENTER);
+  text(`Radiance!`, width / 2, height / 2);
+  pop();
+}
+
+function losing(){
+  background(random(0, 10));
+  textLosing();
+}
+
+function textLosing(){
+    push();
+    textSize(20);
+    textAlign(CENTER, CENTER);
+    fill(90);
+    text(`Darkness`, width / 2, height / 2);
+    pop();
+  }
+
 
 function instruction(){
   background(random(170, 200), random(170, 200), random(170, 200));
@@ -115,7 +127,7 @@ function instruction(){
   energyBall.move();
   energyBall.display();
   energyBall.increaseEnergy(positive);
-  let win = energyBall.win();
+  let win = energyBall.radianceEnd();
   let lose = energyBall.lose();
 
 //   for (let i = 0; i < positiveThoughts.length; i++){
@@ -148,7 +160,6 @@ for (let i = 0; i < negativeThoughts.length; i++){
   negative.display();
   energyBall.fadeEnergy(negative);
 }
-
 }
 }
 

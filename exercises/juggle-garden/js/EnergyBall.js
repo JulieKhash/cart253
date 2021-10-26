@@ -37,19 +37,11 @@ class EnergyBall {
 
   lose() {
     if (this.size === 0) {
-      energyBall.textLosing();
-      // positive.active = false;
+      state = `losing`;
     }
   }
 
-  textLosing() {
-    background(random(0, 10));
-    push();
-    textSize(20);
-    textAlign(CENTER, CENTER);
-    text(`Darkness`, width / 2, height / 2);
-    pop();
-  }
+
 
   fadeEnergy(negative) {
     let d = dist(this.x, this.y, negative.x, negative.y);
@@ -64,20 +56,10 @@ class EnergyBall {
     this.size = constrain(this.size, 0, 50);
   }
 
-  win() {
+  radianceEnd() {
     if (!positive.active && positiveCaught === positiveThoughts.length) {
-      //negative.active = false;
-      background(random(230, 250), random(230, 250), random(230, 250));
-      energyBall.textWinning();
+      state = `winning`
     }
-  }
-
-  textWinning() {
-    push();
-    textSize(20);
-    textAlign(CENTER, CENTER);
-    text(`Radiance!`, width / 2, height / 2);
-    pop();
   }
 
   increaseEnergy(positive) {
