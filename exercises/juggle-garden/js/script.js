@@ -12,6 +12,7 @@ let energyBall;
 let positiveThoughts = [];
 let numPositive = 3;
 let positive;
+let positiveCaught = 0;
 
 let negativeThoughts = [];
 let numNegative = 12;
@@ -57,6 +58,7 @@ function draw() {
   energyBall.move();
   energyBall.display();
   energyBall.increaseEnergy(positive);
+  energyBall.win();
 
 //   for (let i = 0; i < positiveThoughts.length; i++){
 //     let positive = positiveThoughts[i];
@@ -65,7 +67,6 @@ function draw() {
 // }
 // }
 }
-
 
 // positive balls
 for (let i = 0; i < positiveThoughts.length; i++){

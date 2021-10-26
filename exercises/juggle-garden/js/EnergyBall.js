@@ -42,6 +42,7 @@ class EnergyBall {
      let d = dist(this.x, this.y, negative.x, negative.y);
      if (d < this.size/2 + negative.size/2){
        this.shrink();
+       //this.alpha -=20;
        negative.active = false;
    }
  }
@@ -49,18 +50,27 @@ class EnergyBall {
 
    shrink(){
      this.size -= this.shrinkRate;
-     this.size = constrain(this.size, 3, 30);
+     this.size = constrain(this.size, 3, 50);
+   }
+
+   win(){
+     if (!positive.active && positiveCaught === positiveThoughts.length){
+       noLoop();
+     }
    }
 
 
 
    increaseEnergy(positive){
      let d = dist(this.x, this.y, positive.x, positive.y);
-     if (d < this.size/2 + positive.size/2){
+     if (positive.active && d < this.size/2 + positive.size/2){
        this.grow();
        positive.active = false;
+       positiveCaught +=1;
+
      }
    }
+
 
    grow(){
      this.size += this.growRate;
