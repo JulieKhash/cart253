@@ -19,7 +19,6 @@ class Car extends Vehicle {
     }
   }
 
-
   wrap(){
     super.wrap();
 
@@ -30,8 +29,6 @@ class Car extends Vehicle {
       this.y += height
     }
   }
-
-
 
   display() {
     push();
