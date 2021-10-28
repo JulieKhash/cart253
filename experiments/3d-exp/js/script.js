@@ -16,11 +16,11 @@ function setup() {
 }
 
 function draw() {
-  background(250);
+  background(0);
   imageMode(CENTER)
-//  image(backgroundImg, width/10, height/10);
+ //image(backgroundImg, width/10, height/10);
 
-  //camera(0, 0, (height/2) / tan(PI/6), 0, 0, 0, 1, 0, 0);
+  camera(0, 0, (height/2) / tan(PI/6), 0, 0, 0, 1, 0, 0);
   //translate(0, 0, mouseX)
   let dx = mouseX - width/2;
   let dy = mouseY - height/2;
@@ -38,9 +38,9 @@ function draw() {
   rotateZ(frameCount * 0.02);
   noStroke();
   texture(flow);
+  scale(1.5);
   //specularMaterial(255);
-//  box(200);
-  scale(5)
-  model(birdModel);
+  box(200);
+//  model(birdModel);
 
 }
