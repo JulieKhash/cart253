@@ -25,21 +25,22 @@ function setup() {
   jumpButton = createButton( `jump`);
   jumpButton.mousePressed(jumpMusic);
 
-  sliderVolume = createSlider(0, 1, 0.5, 0.01);
-  sliderRate = createSlider(0, 2, 1, 0.01);
-  sliderPan = createSlider(0, 1, 0.5, 0.01);
+  // sliderVolume = createSlider(0, 1, 0.5, 0.01);
+  // sliderRate = createSlider(0, 2, 1, 0.01);
+  // sliderPan = createSlider(0, 1, 0.5, 0.01);
 
-  amp = new p5.Amplitute();
+  amp = new p5.Amplitude();
 }
 
 
 function togglePlaying(){
   if(! music.isPlaying()){
     music.play();
-
-    music.setVolume(sliderVolume.value())
-    music.rate(sliderRate.value());
-    music.pan(sliderPan.value());
+    music.setVolume(0.5);
+    //
+    // music.setVolume(sliderVolume.value())
+    // music.rate(sliderRate.value());
+    // music.pan(sliderPan.value());
 
     button.html("pause");
   } else {
@@ -48,10 +49,6 @@ function togglePlaying(){
   }
 }
 
-
-function changeBackground(){
-  background(random(255), random(255), 0);
-}
 
 function jumpMusic(){
   let musicLen = music.duration();
@@ -64,8 +61,10 @@ function jumpMusic(){
 function draw() {
   background(0);
 
-  let vol = amp.getLevel()
+  let vol = amp.getLevel(); //method that gets the volume in numbers and assigned to "vol" variable
 
-  fill(255, 0, 0);
-  ellipse(width/2, height/2, vol);
+  let diam = map(vol, 0, 0.5, 20, 400);  // map volume (0, 0.5) to the larger size maybe(10, 60);
+
+  fill(diam*5, 0, diam*10);
+  ellipse(width/2, height/2, diam, diam);
 }
