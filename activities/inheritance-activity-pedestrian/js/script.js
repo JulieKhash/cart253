@@ -1,10 +1,15 @@
 "use strict";
 
+let pedestrian;
 
-let state = `title` // can be simulation, success, dead
+let state = `simulation` // can be simulation, success, dead
 
 function setup() {
   createCanvas(800, 800);
+
+  let x = width/2;
+  let y = height;
+  pedestrian = new Pedestrian(x, y);
 
 }
 
@@ -29,7 +34,9 @@ displayText(`Pedestrian Life`);
 }
 
 function simulation(){
-
+  pedestrian.handInput();
+  pedestrian.move();
+  pedestrian.display();
 }
 
 function success(){
