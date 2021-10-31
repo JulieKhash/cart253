@@ -11,7 +11,7 @@ class Truck extends Vehicle {
 
     push();
     rectMode(CENTER);
-    fill(10, 135, 10);
+    fill(100, 200, 0);
     rect(this.x, this.y, this.width, this.height);
     pop();
   }

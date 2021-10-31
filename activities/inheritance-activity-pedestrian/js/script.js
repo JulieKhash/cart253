@@ -39,6 +39,18 @@ function setup() {
       vehicles.push(motorcycle);
   }
 
+// set random disrections
+  for(let i = 0; i < vehicles.length; i++){
+    let vehicle = vehicles[i];
+    let r = random(0, 1);
+    if (r < 0.5) {
+    vehicle.vx = -vehicle.speed;  //so it moves to the left
+    }
+    else {
+      vehicle.vx = vehicle.speed;
+    }
+  }
+
 }
 
 
@@ -65,6 +77,24 @@ function simulation(){
   pedestrian.handInput();
   pedestrian.move();
   pedestrian.display();
+
+
+  for (let i = 0; i < vehicles.length; i++){
+    let vehicle = vehicles[i];
+    vehicle.move();
+    vehicle.wrap();
+    vehicle.display();
+
+    pedestrian.checkHit(vehicle);
+  }
+
+  if (!pedestrian.alive){
+    state = `dead`;
+  }
+
+  if (pedestrian.y < 0){
+    state = `success`;
+  }
 }
 
 function success(){
