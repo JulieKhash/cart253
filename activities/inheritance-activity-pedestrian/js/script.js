@@ -13,12 +13,6 @@ function setup() {
 function draw() {
   background(0);
 
-  function displayText(){
-    fontSize(50);
-    fill(200);
-    text(`Pedestrian Life`, width/2, height/2);
-  }
-
   if (state === `title`){
     title();
   } else if (state === `simulation`){
@@ -27,5 +21,37 @@ function draw() {
     success();
   } else if (state === `dead`){
     dead();
+  }
+}
+
+function title(){
+displayText(`Pedestrian Life`);
+}
+
+function simulation(){
+
+}
+
+function success(){
+displayText(`You crossed the road!`);
+}
+
+function dead(){
+displayText(`You died`);
+}
+
+
+function displayText(string){
+  push();
+  textSize(50);
+  textAlign(CENTER, CENTER)
+  fill(200);
+  text(string, width/2, height/2);
+  pop();
+}
+
+function keyPressed(){
+  if (state === `title` && keyCode === ENTER){
+    state = `simulation`
   }
 }
