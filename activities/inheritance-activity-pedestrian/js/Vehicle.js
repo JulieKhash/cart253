@@ -6,14 +6,21 @@ class Vehicle {
     this.height = undefined;
     this.vx = 0;
     this.vy = 0;
+    this.speed = undefined;
   }
 
   move(){
-
+    this.x += this.vx;
+    this.y += this.vy;
   }
-
+  // a vehicle wraps around right and left edges of the screen
   wrap(){
-
+    if (this.x > width){
+      this.x -= width;
+    }
+    else if (this.x < 0){
+      this.x += width;
+    }
   }
 
   display(){
