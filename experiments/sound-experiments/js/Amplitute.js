@@ -36,7 +36,7 @@ function setup() {
 function togglePlaying(){
   if(! music.isPlaying()){
     music.play();
-    music.setVolume(0.5);
+    music.setVolume(0.5);  //method for setting up the music's volumes
     //
     // music.setVolume(sliderVolume.value())
     // music.rate(sliderRate.value());
@@ -48,7 +48,6 @@ function togglePlaying(){
     button.html("play");
   }
 }
-
 
 function jumpMusic(){
   let musicLen = music.duration();
