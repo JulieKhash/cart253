@@ -2,6 +2,12 @@
 
 let pedestrian;
 
+let vehicles = [];  //an array to store in all vehicles (cars, trucks, motorcycles);
+
+let numCars = 10;
+let numTrucks = 8;
+let numMotorcycles = 5;
+
 let state = `simulation` // can be simulation, success, dead
 
 function setup() {
@@ -10,6 +16,28 @@ function setup() {
   let x = width/2;
   let y = height;
   pedestrian = new Pedestrian(x, y);
+
+  //loop for cars, adds cars into the vehicles' array
+  for (let i = 0; i < numCars; i++){
+    let x = random(0, width);
+    let y = random(0, height-100);
+    let car = new Car(x, y);
+    vehicles.push(car);
+}
+  // for trucks
+  for (let i = 0; i < numTrucks; i++){
+      let x = random(0, width);
+      let y = random(0, height-100);
+      let truck = new Truck(x, y);
+      vehicles.push(truck);
+}
+  // for motorcycles
+  for (let i = 0; i < numMotorcycles; i++){
+      let x = random(0, width);
+      let y = random(0, height-100);
+      let motorcycle = new Motorcycle(x, y);
+      vehicles.push(motorcycle);
+  }
 
 }
 
