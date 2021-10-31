@@ -1,12 +1,12 @@
 class Motorcycle extends Vehicle {
-  constructor(x,y) {
+  constructor(x, y) {
     super(x, y);
     this.width = 40;
     this.height = 10;
     this.speed = 8;
   }
 
-  display(){
+  display() {
     super.display();
 
     push();

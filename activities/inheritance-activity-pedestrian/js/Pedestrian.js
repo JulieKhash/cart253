@@ -9,42 +9,40 @@ class Pedestrian {
     this.alive = true;
   }
 
-  handInput(){
-    if (keyIsDown(LEFT_ARROW)){
+  handInput() {
+    if (keyIsDown(LEFT_ARROW)) {
       this.vx = -this.speed;
-    }
-    else if (keyIsDown(RIGHT_ARROW)){
+    } else if (keyIsDown(RIGHT_ARROW)) {
       this.vx = this.speed;
-    }
-    else {
+    } else {
       this.vx = 0;
     }
 
-    if (keyIsDown(UP_ARROW)){
+    if (keyIsDown(UP_ARROW)) {
       this.vy = -this.speed;
-    }
-    else if (keyIsDown(DOWN_ARROW)){
+    } else if (keyIsDown(DOWN_ARROW)) {
       this.vy = this.speed;
-    }
-    else {
+    } else {
       this.vy = 0;
     }
   }
 
-  move(){
+  move() {
     this.x += this.vx;
     this.y += this.vy;
   }
 
-  checkHit(vehicle){
-    if (this.x > vehicle.x - vehicle.width/2 &&
-        this.x < vehicle.x + vehicle.width/2 &&
-        this.y > vehicle.y - vehicle.height/2 &&
-        this.y < vehicle.y + vehicle.height/2)
-       this.alive = false;
-     }
+  checkHit(vehicle) {
+    if (
+      this.x > vehicle.x - vehicle.width / 2 &&
+      this.x < vehicle.x + vehicle.width / 2 &&
+      this.y > vehicle.y - vehicle.height / 2 &&
+      this.y < vehicle.y + vehicle.height / 2
+    )
+      this.alive = false;
+  }
 
-  display(){
+  display() {
     push();
     ellipse(this.x, this.y, this.size);
     pop();
