@@ -2,34 +2,60 @@
 
 "use strict";
 let song;
+let amplitude;
 
-/**
-Description of preload
-*/
+let clownImg;
+
+var circles = [];
+var lastTouchX;
+var lastTouchY;
+
 function preload() {
-  song = loadSound(`assets/sounds/funnel.mp3`);
-
+  song = loadSound('assets/sounds/funnel.mp3');
+  clownImg = loadImage(`assets/images/light.png`)
 }
-
 
 function setup() {
-  createCanvas(700, 700, WEBGL);
+  createCanvas(windowWidth, windowHeight);
+
+  amplitude = new p5.Amplitude();
+  song.play();
+
+  lastTouchX = width / 2;
+  lastTouchY = height / 2;
+}
+
+function draw() {
+
+  fill(0, 10);
+  rect(0, 0, windowWidth, windowHeight);
+
+  for (var i = 0; i < circles.length; i++) {
+    circles[i].display();
+  }
 
 }
 
+//change to touchEnded()
+function mousePressed() {
+  lastTouchX = mouseX;
+  lastTouchY = mouseY;
+  circles.push(new Circle());
+}
 
-function draw() {
-  background(40);
+function Circle() {
+  this.x = lastTouchX;
+  this.y = lastTouchY;
 
-//translate(width/2, height/2);
+  this.display = function() {
+    var level = amplitude.getLevel();
+    var size = map(level, 0, 1, 10, 200);
+    noStroke();
+    //if statement to change fill
+    fill(0, 166, 160);
+    //if statement to change fill
+    imageMode(CENTER);
+    image(clownImg, this.x, this.y, size, size);
 
-push();
-rotateZ(frameCount * 0.01);
-rotateX(frameCount * 0.01);
-rotateY(frameCount * 0.01);
-
-strokeWeight(3);
-noFill();
-box(100, 100, 100, width/2, height/2);
-pop();
+  }
 }
