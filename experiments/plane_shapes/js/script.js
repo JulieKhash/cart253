@@ -19,8 +19,8 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(700, 400, WEBGL);
-  angleMode(DEGREES);
+  createCanvas(1000, 800, WEBGL);
+//  angleMode(DEGREES);
 }
 
 function draw() {
@@ -56,12 +56,15 @@ function draw() {
   pop();
 
   push();
-  noFill();
-  stroke(0, random(200), random(255));
-  rotateZ(frameCount * -0.02);
-  rotateX(frameCount * -0.02);
-  rotateY(frameCount * -0.02);
-  plane(100);
+  camera(0, 0, 20 + sin(frameCount * 0.01) * 10, 0, 0, 0, 0, 1, 0);
+  //noFill();
+  noStroke();
+  //stroke(0, random(200), random(255));
+  // rotateZ(frameCount * -0.02);
+  // rotateX(frameCount * -0.02);
+  // rotateY(frameCount * -0.02);
+  texture(angel)
+  plane(400);
   pop();
 
 push();
@@ -81,20 +84,20 @@ stroke(0, random(200), random(255));
   cone(100, 200);
   pop();
 
-  push();
+  // push();
   //translate(width/2-350, height/2-200);
-
-  let angle = 0
-  rotate(angle);
-  angle+=0.1;
-
-  // ang.vx += random(-ang.speed, ang.speed);
-  // ang.vy += random(-ang.speed, ang.speed);
-
-  ang.x += 0.1;
-  ang.y += 0.1;
-
-  imageMode(CENTER);
-  image(angel,ang.x, ang.y, 3000/7, 3000/7);
-  pop()
+  //
+  // let angle = 0
+  // rotate(angle);
+  // angle+=0.1;
+  //
+  // // ang.vx += random(-ang.speed, ang.speed);
+  // // ang.vy += random(-ang.speed, ang.speed);
+  //
+  // ang.x += 0.1;
+  // ang.y += 0.1;
+  //
+  // imageMode(CENTER);
+  // image(angel,ang.x, ang.y, 3000/7, 3000/7);
+  // pop()
 }

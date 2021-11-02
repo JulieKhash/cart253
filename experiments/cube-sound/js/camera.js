@@ -6,6 +6,7 @@ var img;
 let frozenImg;
 let sharks;
 let jelly
+let angel;
 
 let jel = {
   x: undefined,
@@ -22,10 +23,11 @@ var cameras = [];
 
 function preload() {
   img = loadImage('assets/images/fgg.gif');
-  frozenImg = loadImage('assets/images/juggletr.png');
+  frozenImg = loadImage('assets/images/Frozen.png');
   jelly = loadImage('assets/images/strata.gif');
   song = loadSound(`assets/sounds/funnel.mp3`);
   sharks = loadImage('assets/images/fire-flames.gif');
+    angel = loadImage(`assets/images/angel.png`);
 }
 
 function setup() {
@@ -53,11 +55,15 @@ function draw() {
       stroke(random(0,255), random(0,255), 0);
       strokeWeight(0.1);
       texture(sharks)
-      sphere(20, 20, 20);
+      //box(20, 20, 20);
       pop();
     }
 
   }
+
+
+
+
 
 
   push();
