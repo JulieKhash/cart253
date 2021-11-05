@@ -2,17 +2,18 @@ let angel;
 let fire
 
 function preload() {
-  angel = loadImage(`assets/images/eye.gif`);
-  fire = loadImage('assets/images/glory.gif');
+  angel = loadImage(`assets/images/man.png`);
+  fire = loadImage('assets/images/jaly.png');
 
 }
 
 function setup() {
-  createCanvas(1000, 1000, WEBGL);
+  createCanvas(windowWidth, windowHeight, WEBGL);
 }
 
 function draw() {
   background(random(25), random(40), random(60));
+
   // push()
   // imageMode(CENTER);
   // translate( width/2, height/2)
@@ -27,11 +28,11 @@ function draw() {
 
   //camera(200, 200, 20 + sin(frameCount * 0.01) * 100, 0, 0, 0, 0, 1, 0);
   push();
-  rotateX(frameCount * 0.01);
-  rotateY(frameCount * 0.01);
-  rotateZ(frameCount * 0.01);
+  rotateX(frameCount * 0.03);
+  rotateY(frameCount * 0.03);
+  rotateZ(frameCount * 0.03);
   texture(angel);
-  box(100);
+  plane(400);
   pop();
 
   push();
@@ -44,18 +45,19 @@ function draw() {
   pop();
 
   push();
-  rotateX(frameCount * 0.02);
-  rotateY(frameCount * 0.02);
-  rotateZ(frameCount * 0.02);
+  rotateX(frameCount * 0.01);
+  rotateY(frameCount * 0.01);
+  rotateZ(frameCount * 0.01);
   //texture(angel);
   plane(400);
   pop();
 
   push();
   noFill();
-  rotateX(frameCount * -0.02);
-  rotateY(frameCount * -0.02);
-  rotateZ(frameCount * -0.02);
+  rotateX(frameCount * -0.01);
+  rotateY(frameCount * -0.01);
+  rotateZ(frameCount * -0.01);
+  texture(fire);
   //texture(angel);
   plane(500);
   pop();
@@ -64,9 +66,27 @@ function draw() {
   rotateX(frameCount * 0.01);
   rotateY(frameCount * 0.01);
   rotateZ(frameCount * 0.01);
-  texture(angel);
+  texture(fire);
   ellipse(-500, -500, 200);
   pop();
+
+  push();
+  rotateX(frameCount * -0.01);
+  rotateY(frameCount * -0.01);
+  rotateZ(frameCount * -0.01);
+  texture(fire);
+  ellipse(-500, -500, 200);
+  pop();
+
+  translate(240, 0, 0);
+push();
+strokeWeight(0.5);
+noFill();
+rotateZ(frameCount * 0.01);
+rotateX(frameCount * 0.01);
+rotateY(frameCount * 0.01);
+torus(100, 10);
+pop();
 
 
 
