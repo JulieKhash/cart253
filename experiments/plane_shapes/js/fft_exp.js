@@ -12,7 +12,7 @@ let angelImg;
 
 function preload(){
   lightImg = loadImage(`assets/images/sun.png`);
-  music = loadSound(`assets/sounds/germind.mp3`);
+  music = loadSound(`assets/sounds/music.mp3`);
 }
 
 function setup() {
@@ -28,7 +28,9 @@ function draw() {
   background(0);
 
   let spectrum = fft.analyze(); //gets the length of the array - 1024 freq bands by default
-  let lowFreq = fft.getEnergy("bass");
+  let lowFreq = fft.getEnergy("bass");   //get a low-freq range
+  let highFreq = fft.getEnergy("treble");
+
   let size = width/ spectrum.length; //calculate the width of rectancles
 
   //translate(width/2, height/2);
@@ -46,10 +48,10 @@ function draw() {
 
     let x = map(amp, 0, spectrum.length, -100, width);
     let y = map(amp, 0, spectrum.length, height, 0);
-    stroke(lowFreq, 1*i, 1*i);
+    stroke(lowFreq, 1*i, highFreq*i);  //red is bass
     //fill(i, 0, 255);
     noFill();
     //rectMode(CENTER);
-    ellipse(x, y, size+i);
+    rect(x, y, size+i);
   }
 }
