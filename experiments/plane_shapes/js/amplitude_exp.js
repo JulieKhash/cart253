@@ -18,8 +18,6 @@ function setup() {
   //music.setVolume(0.5);
   amp = new p5.Amplitude();
   music.play();
-
-
 }
 
 function draw() {
@@ -30,5 +28,5 @@ function draw() {
   let diam = map(vol, 0, 0.3, 10, 600);
 
   fill(255);
-  ellipse(200, 200, diam);
+  ellipse(200, 200, diam)
 }
