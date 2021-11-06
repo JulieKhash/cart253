@@ -16,8 +16,8 @@ let angelImg;
 let userHand;
 
 function preload(){
-  lightImg = loadImage(`assets/images/light.png`);
-  userHand = loadImage(`assets/images/hand.png`);
+  lightImg = loadImage(`assets/images/angel2.png`);
+  userHand = loadImage(`assets/images/bat.png`);
   music = loadSound(`assets/sounds/body.mp3`);
 }
 
@@ -29,6 +29,8 @@ function setup() {
 function draw() {
   background(0);
 
+
+  push();
   for(let i = 0; i < numCircles; i++){
     // fill(0, circleColor, circleColor, circleAlpha);   //transparency
     // //circleColor+=0.3;
@@ -45,9 +47,9 @@ function draw() {
    translate(width/20, height/20);
    //rotate(i/2 + frameCount/40);
 
-   //rotateX(frameCount * -0.01);
-   //rotateY(frameCount * -0.01);
-   rotateZ(frameCount * -0.01);
+   rotateX(frameCount * -0.004);
+   rotateY(frameCount * -0.004);
+   rotateZ(frameCount * -0.004);
 
     let centX = width/2;
     let centY = height/2;
@@ -55,5 +57,6 @@ function draw() {
     rectMode(CENTER);
     texture(lightImg)
     ellipse(0, -300, diam*i);
+    pop();
   }
 }
