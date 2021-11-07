@@ -19,7 +19,7 @@ let size = 300
 
 function preload(){
   lightImg = loadImage(`assets/images/blue.png`);
-  sunImg = loadImage(`assets/images/light.png`);
+  sunImg = loadImage(`assets/images/thunder.png`);
   music = loadSound(`assets/sounds/dream.mp3`);
 }
 
@@ -30,7 +30,9 @@ function setup() {
 
 function draw() {
   background(0);
-  //orbitControl();
+  // orbitControl();
+
+
 
   for (let i = 0; i < numCircles; i++) {
     // fill(0, circleColor, circleColor, circleAlpha);   //transparency
@@ -58,4 +60,5 @@ function draw() {
     translate(-15, 0, sin(frameCount / 30) * 95);
     box(100);
   }
+
 }

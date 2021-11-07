@@ -17,6 +17,7 @@ function setup() {
 
   //music.setVolume(0.5);
   amp = new p5.Amplitude();
+  //amp.setInput(music);
   music.play();
 }
 

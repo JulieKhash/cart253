@@ -1,6 +1,7 @@
 "use strict"
 
 let music;
+let amp;
 let fft;
 
 let numRect = 3;
@@ -21,15 +22,18 @@ let angelImg;
 
 function preload(){
   lightImg = loadImage(`assets/images/light.png`);
-  music = loadSound(`assets/sounds/dream.mp3`);
+  music = loadSound(`assets/sounds/rock.mp3`);
 }
 
 function setup() {
   createCanvas(1000, 1000);
 
   //music.setVolume(0.5);
+  amp = new p5.Amplitude();
+  //amp.setInput(music);
   fft = new p5.FFT(0.8, 256); // we set up 512 as the number of freq bands
   music.loop();
+
 
 }
 
@@ -47,6 +51,7 @@ function draw(){
 
 
 
+  let amplitude = amp.getLevel();
 
   let spectrum = fft.analyze();
 
@@ -54,24 +59,27 @@ function draw(){
   let midFrequency = fft.getEnergy(`mid`);
   let highFrequency = fft.getEnergy(`treble`);
 
+// volume for beats
+  amplitude = map(amplitude, 0, 0.3, 300, 550);
 
-  highFrequency = map(highFrequency, 0, 5, 30, 100);
+  lowFrequency = map(lowFrequency, 200, 300, 100, 400);
+  midFrequency = map(midFrequency, 100, 230, 100, 400 )
+  highFrequency = map(highFrequency, 0, 5, 5, 70);
 
 
-  //red rectangles with low freq
+  //red rectangles with low freq/ bass
 
     for(let i = 0; i < numRect; i++){
     push();
     rectMode(CENTER);
     stroke(lowFrequency, 0, 0, lowFrequency);
     strokeWeight(lowFrequency/50);
-    rect(i*200+300, height/2-300, lowFrequency, lowFrequency);
+    rect(i*200+300, height/2, lowFrequency, lowFrequency);
     pop();
   }
 
   //green rectangles with low freq
     for(let i = 0; i < numRect; i++){
-
     push();
     rectMode(CENTER);
     stroke(random(midFrequency), midFrequency, 0, midFrequency);
@@ -84,9 +92,11 @@ function draw(){
   for(let i = 0; i < numRect; i++){
   push();
   rectMode(CENTER);
-  stroke(0, 0, highFrequency);
+  stroke(0, 0, amplitude);
+  strokeWeight(amplitude/50);
+
   //texture(lightImg);
-  rect(i*200+300, height/2+300, highFrequency, highFrequency);
+  rect(i*200+300, height/2, amplitude, amplitude);
   pop();
 }
 
@@ -95,6 +105,13 @@ translate(width/2, height/2);
 rotate(frameCount*1)
 imageMode(CENTER);
 image(lightImg,0, 0, highFrequency, highFrequency);
-pop()
-console.log(highFrequency)
+pop();
+
+if (amplitude >540){
+  image(lightImg, 330, 130, highFrequency/2, highFrequency/2);
+}
+
+
+
+console.log(amplitude)
 }
