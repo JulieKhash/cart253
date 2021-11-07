@@ -16,7 +16,7 @@ let angelImg;
 
 function preload(){
   lightImg = loadImage(`assets/images/light.png`);
-  music = loadSound(`assets/sounds/music.mp3`);
+  music = loadSound(`assets/sounds/dream.mp3`);
 }
 
 function setup() {
@@ -25,7 +25,7 @@ function setup() {
   music.setVolume(0.4);
   amp = new p5.Amplitude();
   //amp.setInput(music);
-  fft = new p5.FFT(0.8, 64); // we set up 512 as the number of freq bands
+  fft = new p5.FFT(0.8, 512); // we set up 512 as the number of freq bands
   music.loop();
 
 
@@ -38,7 +38,7 @@ function draw(){
 
   //let amplitude = amp.getLevel();
    let waveform = fft.waveform();
-   let spectrum = fft.analyze();
+   let spectrum = fft.analyze();  //gets an array of frequency bands
 
   let lowFrequency = fft.getEnergy(`bass`);
   let midFrequency = fft.getEnergy(`mid`);
@@ -47,16 +47,16 @@ function draw(){
 // volume for beats
 //  amplitude = map(amplitude, 0, 0.3, 300, 550);
 
-  // lowFrequency = map(lowFrequency, 0, 255, 50, 300);
-  // midFrequency = map(midFrequency, 0, 255, 100, 400 )
-  // highFrequency = map(highFrequency, 0, 255, 10, 500);
+  lowFrequency = map(lowFrequency, 0, 255, 5, 200);
+  midFrequency = map(midFrequency, 0, 255, 5, 300)
+  highFrequency = map(highFrequency, 0, 255, 5, 500);
 
 
   for (let i = 0; i < waveform.length; i++){
     let x = map(i, 0, waveform.length, 0, width);
     let y = map(waveform[i], -1, 1, 0, height);
-    fill(i*lowFrequency/2, i*midFrequency/2, highFrequency/2);
-    ellipse(x, y, 10);
+    fill(lowFrequency, i, i);
+    rect(x, y, 10);
   }
 
 
