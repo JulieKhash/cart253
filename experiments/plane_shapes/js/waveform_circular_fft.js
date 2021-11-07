@@ -24,7 +24,7 @@ function setup() {
 
   music.setVolume(0.4);
   amp = new p5.Amplitude();
-  fft = new p5.FFT(); // we set up 512 as the number of freq bands
+  fft = new p5.FFT(0.8, 512); // we set up 512 as the number of freq bands
   music.loop();
 
 }
@@ -32,21 +32,24 @@ function setup() {
 
 function draw(){
   background(0);
+  orbitControl();
+
   noFill();
 
 
   let spectrum = fft.analyze();  //gets an array of frequency bands
 
-  let lowFrequency = fft.getEnergy(`bass`);
-  let midFrequency = fft.getEnergy(`mid`);
-  let highFrequency = fft.getEnergy(`treble`);
+  let lowFrequency = map(fft.getEnergy(`bass`),0, 255, 5, 200);
+  let midFrequency = map(fft.getEnergy(`mid`),0, 255, 5, 300);
+  let highFrequency = map(fft.getEnergy(`treble`), 0, 255, 5, 500);
 
 // volume for beats
 //  amplitude = map(amplitude, 0, 0.3, 300, 550);
 
-  lowFrequency = map(lowFrequency, 0, 255, 5, 200);
-  midFrequency = map(midFrequency, 0, 255, 5, 300)
-  highFrequency = map(highFrequency, 0, 255, 5, 500);
+  // lowFrequency = map(lowFrequency, 0, 255, 5, 200);
+  // midFrequency = map(midFrequency, 0, 255, 5, 300)
+  // highFrequency = map(highFrequency, 0, 255, 5, 500);
+
 
   let highestAmplitude = lowFrequency + midFrequency + highFrequency
 
@@ -55,24 +58,23 @@ function draw(){
   for (let i = 0; i < spectrum.length; i++){
     // let x = map(i, 0, spectrum.length, 0, width);
     // let y = map(spectrum[i], 0, 255, height/, 0);
-    rotateX(frameCount * -0.001);
-    rotateY(frameCount * -0.002);
-    rotateZ(frameCount * -0.003);
+    // rotateX(frameCount * -0.001);
+    // rotateY(frameCount * -0.002);
+    // rotateZ(frameCount * -0.003);
 
 
 
-
-    rotate(frameCount * 0.05)
+    rotate(frameCount * 0.03)
     let r = 200;
     let x = r * cos(i);
     let y = r * sin(i);
     //stroke(highFrequency, midFrequency,lowFrequency )
     stroke(highFrequency*2, midFrequency/2 , 10, highFrequency/2);
+    //strokeWeight(0.3);
 
     rectMode(CENTER);
     //texture(lightImg)
-    rect(x, y+lowFrequency-highFrequency, highFrequency/2);
-
+    rect(x, y+lowFrequency-highFrequency, highFrequency/3);
 
   }
   endShape();
