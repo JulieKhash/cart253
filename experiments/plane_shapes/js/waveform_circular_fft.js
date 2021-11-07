@@ -20,7 +20,7 @@ function preload(){
 }
 
 function setup() {
-  createCanvas(1000, 1000);
+  createCanvas(1000, 1000, WEBGL);
 
   music.setVolume(0.4);
   amp = new p5.Amplitude();
@@ -48,17 +48,32 @@ function draw(){
   midFrequency = map(midFrequency, 0, 255, 5, 300)
   highFrequency = map(highFrequency, 0, 255, 5, 500);
 
-  translate(height/2, width/2);
+  let highestAmplitude = lowFrequency + midFrequency + highFrequency
+
+  translate(height/2-500, width/2-500);
   beginShape();
   for (let i = 0; i < spectrum.length; i++){
     // let x = map(i, 0, spectrum.length, 0, width);
     // let y = map(spectrum[i], 0, 255, height/, 0);
+    rotateX(frameCount * -0.001);
+    rotateY(frameCount * -0.002);
+    rotateZ(frameCount * -0.003);
+
+
+
+
     rotate(frameCount * 0.05)
     let r = 200;
     let x = r * cos(i);
     let y = r * sin(i);
-    fill(highFrequency*2, midFrequency/2 , 10);
+    //stroke(highFrequency, midFrequency,lowFrequency )
+    stroke(highFrequency*2, midFrequency/2 , 10, highFrequency/2);
+
+    rectMode(CENTER);
+    //texture(lightImg)
     rect(x, y+lowFrequency-highFrequency, highFrequency/2);
+
+
   }
   endShape();
 
