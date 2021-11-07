@@ -11,7 +11,7 @@ let numEllipses = 5;
 let size = 300
 
 function preload(){
-  lightImg = loadImage(`assets/images/angel.png`);
+  lightImg = loadImage(`assets/images/angel4.png`);
   sunImg = loadImage(`assets/images/light.png`);
   music = loadSound(`assets/sounds/dream.mp3`);
 }

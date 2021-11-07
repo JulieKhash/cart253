@@ -3,6 +3,9 @@
 
 let diam = 20;
 let numCircles= 10;
+
+let numLotus= 9;
+
 let circleColor = 255;
 let circleAlpha = 1;
 let colorChangeRate = 0.01
@@ -16,8 +19,8 @@ let angelImg;
 let userHand;
 
 function preload(){
-  lightImg = loadImage(`assets/images/angel2.png`);
-  userHand = loadImage(`assets/images/bat.png`);
+  lightImg = loadImage(`assets/images/angel4.png`);
+  userHand = loadImage(`assets/images/lotus.png`);
   music = loadSound(`assets/sounds/body.mp3`);
 }
 
@@ -31,6 +34,7 @@ function draw() {
 
 
   push();
+  //angels
   for(let i = 0; i < numCircles; i++){
     // fill(0, circleColor, circleColor, circleAlpha);   //transparency
     // //circleColor+=0.3;
@@ -59,4 +63,35 @@ function draw() {
     ellipse(0, -300, diam*i);
     pop();
   }
+
+
+  //lotus
+  push();
+  for(let i = 0; i < numLotus; i++){
+    // fill(0, circleColor, circleColor, circleAlpha);   //transparency
+    // //circleColor+=0.3;
+    //
+    // circleAlpha += colorChangeRate;
+    // if (circleAlpha >= circleColor){
+    //   circleAlpha = 1;
+    // }
+
+    stroke(0, i*20, i*20);
+    //noStroke();
+
+   noFill();
+   translate(width/20, height/20);
+   //rotate(i/2 + frameCount/40);
+
+   // rotateX(frameCount * 0.004);
+   // rotateY(frameCount * 0.004);
+   rotateZ(frameCount * 0.004);
+
+
+    rectMode(CENTER);
+    texture(userHand)
+    ellipse(0, -300, diam*i);
+    pop();
+  }
+
 }

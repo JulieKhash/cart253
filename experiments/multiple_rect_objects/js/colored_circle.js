@@ -1,35 +1,20 @@
-
 "use strict";
 
 let diam = 20;
-let numCircles= 10;
+let numCircles = 20;
 let circleColor = 255;
 let circleAlpha = 1;
-let colorChangeRate = 0.01
-
-
-let music;
-let amp;
-
-let lightImg;
-let angelImg;
-let userHand;
-
-function preload(){
-  lightImg = loadImage(`assets/images/light.png`);
-  userHand = loadImage(`assets/images/hand.png`);
-  music = loadSound(`assets/sounds/body.mp3`);
-}
-
+let colorChangeRate = 0.01;
 
 function setup() {
   createCanvas(1000, 1000, WEBGL);
+  perspective(PI / 3.0, width / height, 0.1, 1000);
 }
 
 function draw() {
   background(0);
 
-  for(let i = 0; i < numCircles; i++){
+  for (let i = 0; i < numCircles; i++) {
     // fill(0, circleColor, circleColor, circleAlpha);   //transparency
     // //circleColor+=0.3;
     //
@@ -37,23 +22,20 @@ function draw() {
     // if (circleAlpha >= circleColor){
     //   circleAlpha = 1;
     // }
-
-    stroke(0, i*20, i*20);
+    //orbitControl();
+    stroke(0, i * 20, i * 20);
     //noStroke();
 
-   noFill();
-   translate(width/20, height/20);
-   //rotate(i/2 + frameCount/40);
+    noFill();
+    //translate(width/20, height/20);
+    //rotate(i/2 + frameCount/40);
 
-   //rotateX(frameCount * -0.01);
-   //rotateY(frameCount * -0.01);
-   rotateZ(frameCount * -0.01);
-
-    let centX = width/2;
-    let centY = height/2;
+    //rotateX(frameCount * -0.01);
+    // rotateY(frameCount * -0.01);
+    rotateZ(frameCount * -0.001);
 
     rectMode(CENTER);
-    texture(lightImg)
-    ellipse(0, -300, diam*i);
+    translate(-15, 0, sin(frameCount / 30) * 95);
+    box(100);
   }
 }
