@@ -28,10 +28,10 @@ function preload(){
 function setup() {
   createCanvas(1000, 1000);
 
-  //music.setVolume(0.5);
+  music.setVolume(0.4);
   amp = new p5.Amplitude();
   //amp.setInput(music);
-  fft = new p5.FFT(0.8, 256); // we set up 512 as the number of freq bands
+  fft = new p5.FFT(); // we set up 512 as the number of freq bands
   music.loop();
 
 
@@ -62,9 +62,9 @@ function draw(){
 // volume for beats
   amplitude = map(amplitude, 0, 0.3, 300, 550);
 
-  lowFrequency = map(lowFrequency, 200, 300, 100, 400);
-  midFrequency = map(midFrequency, 100, 230, 100, 400 )
-  highFrequency = map(highFrequency, 0, 5, 5, 70);
+  lowFrequency = map(lowFrequency, 0, 255, 50, 300);
+  midFrequency = map(midFrequency, 0, 255, 100, 400 )
+  highFrequency = map(highFrequency, 0, 255, 10, 500);
 
 
   //red rectangles with low freq/ bass
@@ -113,5 +113,5 @@ if (amplitude >540){
 
 
 
-console.log(amplitude)
+//console.log(amplitude)
 }
