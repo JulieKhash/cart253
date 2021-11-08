@@ -2,8 +2,8 @@ let angel;
 let fire
 
 function preload() {
-  angel = loadImage(`assets/images/man.png`);
-  fire = loadImage('assets/images/jaly.png');
+  angel = loadImage(`assets/images/circ1.png`);
+  fire = loadImage('assets/images/fire-flames.gif');
 
 }
 
@@ -57,7 +57,7 @@ function draw() {
   rotateX(frameCount * -0.01);
   rotateY(frameCount * -0.01);
   rotateZ(frameCount * -0.01);
-  texture(fire);
+  //texture(fire);
   //texture(angel);
   plane(500);
   pop();
@@ -78,15 +78,16 @@ function draw() {
   ellipse(-500, -500, 200);
   pop();
 
-  translate(240, 0, 0);
-push();
-strokeWeight(0.5);
-noFill();
-rotateZ(frameCount * 0.01);
-rotateX(frameCount * 0.01);
-rotateY(frameCount * 0.01);
-torus(100, 10);
-pop();
+
+  push();
+  rotateX(frameCount * -0.01);
+  rotateY(frameCount * -0.01);
+  rotateZ(frameCount * -0.01);
+  texture(fire);
+  ellipse(500, 500, 200);
+  pop();
+
+
 
 
 
