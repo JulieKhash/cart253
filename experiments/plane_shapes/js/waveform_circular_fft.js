@@ -67,7 +67,8 @@ function draw(){
   rotate(frameCount * 0.001);
 
   if (highestVolume > 65) {
-  image(eyeImg, 0, 0, 3400/highFrequency + highestVolume, 5100/highFrequency+ highestVolume);
+  rotate(frameCount * 0.05);
+  image(eyeImg, 0, 0, highFrequency + highestVolume, highFrequency+ highestVolume);
 } else
   image(lightImg, 0, 0, 3400/highFrequency + highestVolume, 5100/highFrequency+ highestVolume);
   pop();
@@ -77,9 +78,10 @@ function draw(){
   for (let i = 0; i < spectrum.length; i++){
     // let x = map(i, 0, spectrum.length, 0, width);
     // let y = map(spectrum[i], 0, 255, height/, 0);
+
     // rotateX(frameCount * -0.001);
-    // rotateY(frameCount * -0.002);
-    // rotateZ(frameCount * -0.003);
+    // rotateY(frameCount * -0.001);
+    // rotateZ(frameCount * -0.001 );
 
 
 
