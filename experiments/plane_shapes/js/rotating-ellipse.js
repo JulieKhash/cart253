@@ -59,10 +59,16 @@ push()
   rotateX(frameCount * -0.008);
   rotateY(frameCount * -0.008);
   rotateZ(frameCount * -0.008);
-  texture(lightImg)
+
+  if (diam > 300){
+    texture(sunImg);
+  } else {
+  texture(lightImg);
+}
   rectMode(CENTER)
   ellipse(0, 0, size+diam/2, size+diam/2);
 
-pop()
 
+pop()
+console.log(diam);
 }
