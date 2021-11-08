@@ -19,8 +19,8 @@ let angelImg;
 let userHand;
 
 function preload(){
-  lightImg = loadImage(`assets/images/angel4.png`);
-  userHand = loadImage(`assets/images/lotus.png`);
+  lightImg = loadImage(`assets/images/batman7.png`);
+  userHand = loadImage(`assets/images/fireball.gif`);
   music = loadSound(`assets/sounds/body.mp3`);
 }
 
@@ -31,6 +31,7 @@ function setup() {
 
 function draw() {
   background(0);
+  orbitControl();
 
 
   push();

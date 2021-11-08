@@ -27,9 +27,7 @@ function setup() {
   //amp.setInput(music);
   fft = new p5.FFT(0.8, 512); // we set up 512 as the number of freq bands
   music.loop();
-
 }
-
 
 function draw(){
   background(0);

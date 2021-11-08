@@ -28,8 +28,6 @@ function draw() {
   orbitControl();
 
 
-
-
   let vol = amp.getLevel();
   let diam = map(vol, 0, 0.3, 10, 600);
   background(0, diam/7, diam/6);
