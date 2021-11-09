@@ -4,10 +4,6 @@ let diam = 20;
 let numCircles = 20;
 let numStars = 50;
 
-let circleColor = 255;
-let circleAlpha = 1;
-let colorChangeRate = 0.01;
-
 let music;
 let amp;
 let fft;

@@ -3,6 +3,7 @@ let amp;
 let fft;
 
 let numRect = 3;
+let numEllipses = 30;
 
 let size = 100;
 //spectre
@@ -73,24 +74,19 @@ function draw() {
   );
   pop();
   // appearing circles experimental when the volume gets loud --- need to create a loop for these
+  push();
   if (highestVolume > 100) {
     background(highestVolume, highestVolume, highestVolume);
-    push();
-    rotateX(frameCount * 0.01);
-    rotateY(frameCount * 0.01);
-    rotateZ(frameCount * 0.01);
-    texture(eyeImg);
-    ellipse(-500, -500, 200);
-    pop();
+    for (let j = 0; j < numEllipses; j++){
+      rotateX(frameCount * -0.01);
+      rotateY(frameCount *  0.01);
+      rotateZ(frameCount * -0.01);
 
-    push();
-    rotateX(frameCount * -0.09);
-    rotateY(frameCount * -0.09);
-    rotateZ(frameCount * -0.09);
-    texture(eyeImg);
-    ellipse(-500, -500, highestVolume);
-    pop();
+      texture(eyeImg);
+      ellipse(500+j, 500, size);
+    }
   }
+    pop();
 
   translate(height / 2 - 500, width / 2 - 500);
 
@@ -111,7 +107,7 @@ function draw() {
     //strokeWeight(0.3);
 
     rectMode(CENTER);
-    //texture(lightImg)
+    //texture(eyeImg)
     rect(x, y + lowFrequency - highFrequency, highFrequency / 3);
   }
 

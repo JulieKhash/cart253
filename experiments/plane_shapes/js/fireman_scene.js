@@ -8,10 +8,10 @@ let amp
 
 let numRects = 4;
 let rectSize = 400;
-let numEllipses = 4;
+let numEllipses = 25;
 
 function preload() {
-  fireman = loadImage(`assets/images/batman12.png`);
+  fireman = loadImage(`assets/images/batman15.png`);
   fire = loadImage('assets/images/fireball.gif');
   music = loadSound(`assets/sounds/distortion.mp3`);
 }
@@ -29,9 +29,7 @@ function draw() {
 
   let volume = amp.getLevel();
   let highestVolume = map(volume, 0, 0.3, 0.5, 3);
-  background(2, 0, highestVolume*20);
-
-
+  background(2, 0, highestVolume*30);
 
   push();
 
@@ -57,24 +55,32 @@ function draw() {
     noFill();
     rectMode(CENTER);
     //texture(fireman)
-    rect(0, 0, rectSize*i);
+    ellipse(0, 0, rectSize*i);
     pop();
   }
   push();
+  rotateX(frameCount * -0.008);
+  rotateY(frameCount * -0.008);
+  rotateZ(frameCount * -0.008);
+
+
   imageMode(CENTER);
-  image(fireman, 0, 0,  3000/2, 4000/2)
+  image(fireman, 0, 150,  3000/2, 4000/2);
+  // texture(fireman);
+  // ellipse(0, 0, rectSize);
   pop();
 
   push();
   for (let j = 0; j < numEllipses; j++){
-    rotateX(frameCount * -0.01);
-    rotateY(frameCount * -0.01);
-    rotateZ(frameCount * -0.01);
+    //rotate(frameCount*0.003);
+    rotateX(frameCount * -0.006);
+    rotateY(frameCount * - 0.006);
+    rotateZ(frameCount * -0.006);
 
     texture(fire);
-    ellipse(500, 500, 200);
-    pop();
+    ellipse(500+j, 500, 150);
   }
+    pop();
 
 
 
