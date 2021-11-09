@@ -2,9 +2,9 @@ let angel;
 let fire
 
 function preload() {
-  angel = loadImage(`assets/images/batman6.png`);
+  angel = loadImage(`assets/images/batman12.png`);
   fire = loadImage('assets/images/fireball.gif');
-  fire2 = loadImage('assets/images/fire-flames.gif');
+  fire2 = loadImage('assets/images/firegif.gif');
 
 }
 
@@ -44,7 +44,7 @@ function draw() {
 
   texture(fire);
   noStroke();
-  // fill(100, 20, 20)
+  // fill(100, 20, 20, 100)
   sphere(100);
   pop();
 
@@ -53,16 +53,16 @@ function draw() {
   rotateX(frameCount * -0.01);
   rotateY(frameCount * -0.01);
   rotateZ(frameCount * -0.01);
-  //texture(angel);
-  plane(300);
+
+  plane(700);
   pop();
 
   push();
   rotateX(frameCount * 0.01);
   rotateY(frameCount * 0.01);
   rotateZ(frameCount * 0.01);
-  //texture(angel);
-  plane(400);
+
+  plane(800);
   pop();
 
   push();
@@ -70,9 +70,7 @@ function draw() {
   rotateX(frameCount * -0.01);
   rotateY(frameCount * -0.01);
   rotateZ(frameCount * -0.01);
-  // texture(fire);
-  //texture(angel);
-  plane(500);
+  plane(900);
   pop();
 
   push();
@@ -104,10 +102,11 @@ function draw() {
   push();
   imageMode(CENTER);
   //rotateZ(frameCount * -0.05);
-  rotate(frameCount * 0.05);
+  rotate(frameCount * 0.01);
 
 
     image(angel, 0, 0, 3000/2, 4000/2);
+    //image(fire2, 100, 0, 300,400);
 
 
   pop();
