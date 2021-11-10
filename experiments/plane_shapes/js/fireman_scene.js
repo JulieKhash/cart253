@@ -11,7 +11,7 @@ let rectSize = 400;
 let numEllipses = 25;
 
 function preload() {
-  fireman = loadImage(`assets/images/batman15.png`);
+  fireman = loadImage(`assets/images/circusMan1.png`);
   fire = loadImage('assets/images/fireball.gif');
   music = loadSound(`assets/sounds/distortion.mp3`);
 }
@@ -59,15 +59,15 @@ function draw() {
     pop();
   }
   push();
-  rotateX(frameCount * -0.008);
-  rotateY(frameCount * -0.008);
-  rotateZ(frameCount * -0.008);
+  rotateX(frameCount * -0.003);
+  rotateY(frameCount * -0.003);
+  rotateZ(frameCount * -0.003);
 
 
   imageMode(CENTER);
-  image(fireman, 0, 150,  3000/2, 4000/2);
+  image(fireman, 0, 250,  3000/3, 4000/3);
   // texture(fireman);
-  // ellipse(0, 0, rectSize);
+  ellipse(0, 0, 2000);
   pop();
 
   push();
