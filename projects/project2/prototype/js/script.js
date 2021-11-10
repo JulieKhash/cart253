@@ -5,7 +5,7 @@ Julie Khashimova
 
 "use strict";
 
-let handCursorImg;
+let handImg;
 
 let musicXylophone;
 let amp;
@@ -18,7 +18,7 @@ Description of preload
 */
 function preload() {
   musicXylophone = loadSound(`assets/sounds/dream.mp3`);
-  handCursorImg = loadImage(`assets/images/cursor.png`);
+  handImg = loadImage(`assets/images/cursor.png`);
 }
 
 
@@ -33,7 +33,6 @@ function setup() {
   let ellipse = new Ellipse(0, 0, 300);
   ellipses.push(ellipse);
 }
-
 }
 
 function draw() {
@@ -45,6 +44,7 @@ let diameter = map(initialVolume, 0, 0.3, 10, 600);
 //make bacgkround responsive to music beats
 background(0, diameter/7, diameter/6);
 
+// displays rotating circles
 push();
 for (let i = 0; i < ellipses.length; i++){
 let ellipse  = ellipses[i];
@@ -53,19 +53,14 @@ let ellipse  = ellipses[i];
 }
 pop();
 
+//displays hand image, size changing according to the amplitude
 push();
 let size = 300
-let first_dance = new First_Dance(0, 0, size+diameter/2, handCursorImg);
+let first_dance = new First_Dance(0, 0, size+diameter/2, handImg);
 first_dance.rotate();
 first_dance.display();
 pop();
-
-
-// display image
-
-
 }
-
 
 
 // toggles between playing/pausing the music when the mouse is pressed

@@ -1,4 +1,4 @@
-class First_Dance {
+class First_Dance  {
   constructor(x, y, size, templateImage) {
     this.x = 0;
     this.y = 0;
