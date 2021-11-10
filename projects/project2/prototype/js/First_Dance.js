@@ -1,3 +1,5 @@
+// should be the fisrt dance scene that will have a character object that moves with the sound
+// need to figure out how to inherit from the Ellipse class
 class First_Dance  {
   constructor(x, y, size, templateImage) {
     this.x = 0;

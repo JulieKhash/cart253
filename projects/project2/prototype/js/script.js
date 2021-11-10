@@ -6,30 +6,36 @@ Julie Khashimova
 "use strict";
 
 let handImg;
+let fireImg;
 
 let musicXylophone;
+let musicHaunting;
 let amp;
 
 let numEllipses = 5;
 let ellipses = []  //an empty array to store our ellipses
 
-/**
-Description of preload
-*/
+
 function preload() {
   musicXylophone = loadSound(`assets/sounds/dream.mp3`);
+  musicHaunting = loadSound(`assets/sounds/hanuting.mp3`);
   handImg = loadImage(`assets/images/cursor.png`);
+  fireImg = loadImage(`assets/images/fire-flames.gif`);
 }
 
 
-// initial setup of the canvas
+// initial setup of the canvas, the simulation will happen in 3D by using 2D shapes
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
-// make an instance of js object
+// make an amplitude analyzer
   amp = new p5.Amplitude();
 
+  amp.setInput(musicXylophone);
+  amp.setInput(musicHaunting);
+
+
+// makes a given number of ellipses
   for (let i = 0; i < numEllipses; i++){
-  //let size = 300;
   let ellipse = new Ellipse(0, 0, 300);
   ellipses.push(ellipse);
 }
@@ -61,7 +67,6 @@ first_dance.rotate();
 first_dance.display();
 pop();
 }
-
 
 // toggles between playing/pausing the music when the mouse is pressed
 function mousePressed(){
