@@ -53,15 +53,17 @@ let ellipse  = ellipses[i];
 }
 pop();
 
-// display image
 push();
-image(handCursorImg, 0, 0);
+let size = 300
+let first_dance = new First_Dance(0, 0, size+diameter/2, handCursorImg);
+first_dance.rotate();
+first_dance.display();
 pop();
 
-// push();
-// imageMode(CENTER);
-// image(handCursorImg, mouseX, mouseY, 140/2, 190/2);
-// pop();
+
+// display image
+
+
 }
 
 

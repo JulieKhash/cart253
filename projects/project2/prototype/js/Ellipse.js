@@ -4,11 +4,10 @@ class Ellipse {
     this.y = y;
     this.size = size;
     this.strokeColor = 255;
-    this.strokeSize = 1
+    this.strokeSize = 1;
     this.minRotation = 0.009;
     this.active = true;
-
-
+    // this.image = image
   }
 
 // rotates the ellipses in x, y, z positions
@@ -24,10 +23,10 @@ rotate(){
     // imageMode(CENTER);.
     // image(this.cursor, this.cursorX, this.cursorY);
     // pop();
-    push();
-    imageMode(CENTER);
-    image(this.image, this.x, this.y);
-    pop();
+    // push();
+    // imageMode(CENTER);
+    // image(this.image, this.x, this.y);
+    // pop();
 
     push();
     noFill();
