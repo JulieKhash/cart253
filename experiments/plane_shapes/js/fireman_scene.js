@@ -11,7 +11,7 @@ let rectSize = 400;
 let numEllipses = 25;
 
 function preload() {
-  fireman = loadImage(`assets/images/circusMan1.png`);
+  fireman = loadImage(`assets/images/circusMan.png`);
   fire = loadImage('assets/images/fireball.gif');
   music = loadSound(`assets/sounds/distortion.mp3`);
 }
