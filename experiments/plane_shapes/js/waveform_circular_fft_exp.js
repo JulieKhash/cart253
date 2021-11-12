@@ -5,6 +5,9 @@ let fft;
 let numRect = 3;
 let numEllipses = 30;
 
+let minRotationSpeed = 0.001;
+let maxRotationSpeed = 0.01;
+
 let dancer3Img;
 let lightImg;
 
@@ -20,7 +23,7 @@ function setup() {
 
   music.setVolume(0.4);
   amp = new p5.Amplitude();
-  fft = new p5.FFT(0.8, 512); // we set up 512 as the number of freq bands
+  fft = new p5.FFT(0.8, 512); // make 512 bins/samples by using the power of two
   music.play();
 }
 
@@ -55,16 +58,15 @@ function draw() {
 
   background(mapVolume, 0, 0);
 
-
   push();
   if (mapVolume > 100) {
     background(mapVolume, mapVolume, mapVolume);
 
     for (let j = 0; j < numEllipses; j++){
-      rotateX(frameCount * -0.01);
-      rotateY(frameCount *  0.01);
-      rotateZ(frameCount * -0.01);
-      stroke(mapTreble, mapMid / 2, 10, mapTreble / 2)
+      rotateX(frameCount * -maxRotationSpeed);
+      rotateY(frameCount *  maxRotationSpeed);
+      rotateZ(frameCount * -maxRotationSpeed);
+      stroke(mapTreble, mapMid / 2, 10)
       let size = 400;
       texture(lightImg);
       ellipse(size+j, size, size/3);
@@ -72,21 +74,19 @@ function draw() {
   }
     pop();
 
-
-  // translate(height / 2 - 500, width / 2 - 500);
 push();
   for (let i = 0; i < spectrum.length; i++) {
 
     // rotateX(frameCount * -0.001);
     // rotateY(frameCount * -0.001);
-    rotateZ(frameCount * -0.001);
+    rotateZ(frameCount * -minRotationSpeed);
 
-    rotate(frameCount * 0.03 + mapVolume);
+    rotate(frameCount * maxRotationSpeed*3 + mapVolume);
 
     let x = radius * cos(i);
     let y = radius * sin(i);
     //stroke(mapTreble, mapMid,mapBass )
-    stroke(mapTreble, mapMid / 2, 10, mapTreble / 2);
+    stroke(mapTreble, mapMid / 2, 0);
     //strokeWeight(0.3);
     rectMode(CENTER);
     //texture(lightImg)
@@ -97,24 +97,24 @@ push();
 
     push();
     imageMode(CENTER);
-    rotate(frameCount * 0.001);
+    rotate(frameCount * minRotationSpeed);
 
     if (mapVolume > 65) {
-      rotate(frameCount * 0.05);
-      image(lightImg, 0,0,  mapVolume+ mapTreble, mapVolume+ mapTreble);
+      rotate(frameCount * maxRotationSpeed*5);
+      image(lightImg, 0,0,  mapVolume + mapTreble, mapVolume+ mapTreble);
     }
     //rotateX(frameCount * -0.007);
     else {
-    rotateY(frameCount * -0.007);
+    rotateY(frameCount * -minRotationSpeed*7);
     //rotateZ(frameCount * -0.007);
     image(dancer3Img, 0,  0, 3000 / mapTreble + mapVolume, 4000 / mapTreble + mapVolume);
 }
 
     if (mapVolume > 110){
-    rotateY(frameCount * -0.008);
+    rotate(frameCount * minRotationSpeed*8);
     image(dancer3Img, 0,  0, 3000 / mapTreble + mapVolume, 4000 / mapTreble + mapVolume);
     }
-
+pop();
 
   console.log(mapVolume);
 }
