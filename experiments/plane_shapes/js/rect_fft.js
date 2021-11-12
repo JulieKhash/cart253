@@ -7,22 +7,21 @@ let fft;
 let numRect = 3;
 
 let size = 100;
-//spectre
-let lowSpec = 0.03;
-let midSpec = 0.125;
-let highSpec = 0.20;
 
-let lowScore = []
-let midScore = 0
-let highScore = 0
+let minVolume = 300;
+let midVolume = 400;
+let highVolume = 550;
 
 
 let lightImg;
 let angelImg;
 
+
+let imageActive = false
+
 function preload(){
   lightImg = loadImage(`assets/images/light.png`);
-  music = loadSound(`assets/sounds/rock.mp3`);
+  music = loadSound(`assets/sounds/dream.mp3`);
 }
 
 function setup() {
@@ -55,63 +54,62 @@ function draw(){
 
   let spectrum = fft.analyze();
 
-  let lowFrequency = fft.getEnergy(`bass`);
-  let midFrequency = fft.getEnergy(`mid`);
-  let highFrequency = fft.getEnergy(`treble`);
+  let lowFrequency = fft.getEnergy(60, 250);   // low range
+  let midFrequency = fft.getEnergy(250, 500);  // low-mid range
+  let highFrequency = fft.getEnergy(500, 800); // mid range
 
 // volume for beats
-  amplitude = map(amplitude, 0, 0.3, 300, 550);
+  amplitude = map(amplitude, 0, 0.3, minVolume, highVolume);
 
-  lowFrequency = map(lowFrequency, 0, 255, 50, 300);
-  midFrequency = map(midFrequency, 0, 255, 100, 400 )
-  highFrequency = map(highFrequency, 0, 255, 10, 500);
+  lowFrequency = map(lowFrequency, 0, 255, 0, 200);  //scales freq range to a suitable num
+  midFrequency = map(midFrequency, 0, 255, 1, 300);
+  highFrequency = map(highFrequency, 0, 255, 1, 900);
 
 
   //red rectangles with low freq/ bass
-
-    for(let i = 0; i < numRect; i++){
     push();
+    for(let i = 0; i < numRect; i++){
     rectMode(CENTER);
     stroke(lowFrequency, 0, 0, lowFrequency);
     strokeWeight(lowFrequency/50);
     rect(i*200+300, height/2, lowFrequency, lowFrequency);
-    pop();
   }
+  pop();
 
-  //green rectangles with low freq
-    for(let i = 0; i < numRect; i++){
+  //green rectangles mid range
     push();
+    for(let i = 0; i < numRect; i++){
     rectMode(CENTER);
     stroke(random(midFrequency), midFrequency, 0, midFrequency);
     strokeWeight(midFrequency/50);
     rect(i*200+300, height/2, midFrequency, midFrequency);
-    pop();
   }
+    pop();
 
 //blue rect with high freq
-  for(let i = 0; i < numRect; i++){
   push();
+  for(let i = 0; i < numRect; i++){
   rectMode(CENTER);
   stroke(0, 0, amplitude);
   strokeWeight(amplitude/50);
 
   //texture(lightImg);
   rect(i*200+300, height/2, amplitude, amplitude);
-  pop();
 }
+  pop();
 
 push();
 translate(width/2, height/2);
 rotate(frameCount*1)
 imageMode(CENTER);
 image(lightImg,0, 0, highFrequency, highFrequency);
-pop();
 
-if (amplitude >540){
-  image(lightImg, 330, 130, highFrequency/2, highFrequency/2);
+if (amplitude > midVolume){
+  imageActive === true;
+  image(lightImg, 330, 130, midFrequency, midFrequency);
 }
+  pop();
 
 
-
-//console.log(amplitude)
+console.log(amplitude)
 }

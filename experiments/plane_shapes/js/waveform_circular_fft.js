@@ -32,7 +32,7 @@ function setup() {
 
 function draw() {
   background(0);
-  orbitControl();
+  orbitControl(2, 2, 0.2); //x, y sensitiity to a mouse
 
   noFill();
 
