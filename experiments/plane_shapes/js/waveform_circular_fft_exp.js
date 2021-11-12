@@ -110,6 +110,12 @@ push();
     image(dancer3Img, 0,  0, 3000 / mapTreble + mapVolume, 4000 / mapTreble + mapVolume);
 }
 
+// light bicomes larger
+    if (mapVolume > 110){
+    rotate(frameCount * minRotationSpeed*8);
+    image(lightImg, 0,0,  mapVolume + mapTreble*2, mapVolume+ mapTreble*2);
+    }
+
     if (mapVolume > 110){
     rotate(frameCount * minRotationSpeed*8);
     image(dancer3Img, 0,  0, 3000 / mapTreble + mapVolume, 4000 / mapTreble + mapVolume);
