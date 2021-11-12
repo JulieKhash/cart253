@@ -8,15 +8,15 @@ let music;
 let amp;
 let fft;
 
-let numRects = 4;
+let numRects = 6;
 let rectSize = 400;
-let numEllipses = 15;
+let numEllipses = 10;
 
 function preload() {
   fireman = loadImage(`assets/images/circusMan.png`);
   fire = loadImage('assets/images/fireball.gif');
   eyeImg = loadImage('assets/images/redlight.png');
-  music = loadSound(`assets/sounds/distortion.mp3`);
+  music = loadSound(`assets/sounds/one-two.mp3`);
 }
 
 function setup() {
@@ -52,10 +52,10 @@ function draw() {
   let mapMid = map(mid, 0, 255, 5, radius * 2);
   let scaleMid = map(mid, 0, 255, 1, 5);
 
-  let mapTreble = map(treble, 0, 255, 5, radius * 3);
+  let mapTreble = map(treble, 0, 255, 5, radius * 10);
   let scaleTreble = (treble, 0, 255, 1, 10);
 
-  background(0, 0, mapVolume/4);
+  background(0, 0, mapVolume/3);
 
   push();
 
@@ -87,7 +87,7 @@ function draw() {
     rotateY(frameCount * 0.005);
     rotateZ(frameCount * 0.005);
 
-    stroke(mapTreble*2, mapMid/3, mapMid/3, mapMid);
+    stroke(mapMid/3, mapMid, mapTreble*2, mapMid);
     strokeWeight(scaleVolume/5);
     noFill();
     rectMode(CENTER);
@@ -95,15 +95,6 @@ function draw() {
     ellipse(0, 0, rectSize*i);
   }
     pop();
-
-// red flash
-    push()
-    if (mapTreble > 210){
-      texture(eyeImg);
-      noStroke();
-      ellipse(0, 0, mapBass+mapTreble);
-      pop();
-    }
 
 
 //fire balls
@@ -130,27 +121,32 @@ function draw() {
 
     push();
     // rotate(frameCount * 0.001 + scaleTreble)
+    if (mapMid > 150){
+      // for (let i = 0; i < 1; i++) {
+      texture(eyeImg);
+      rotate(frameCount* -0.01);
+      rotateX(frameCount * -0.005);
+      rotateY(frameCount * -0.005);
+      rotateZ(frameCount * 0.005);
+      noStroke();
+      ellipse(0, 0, mapBass+mapMid*10);
+    }
+  // }
+    else {
     rotateX(frameCount * -0.005);
     rotateY(frameCount * -0.005);
-    rotateZ(frameCount * -0.005);
-// move rapid
-    // if (mapTreble > 200){
-    //   rotateX(frameCount * -0.01);
-    //   //should be opposite direction (flip image)
-    //   imageMode(CENTER);
-    //   //scale(1, -1);
-    //   image(fireman, 0, 250,  3000/3+mapVolume, 4000/3+mapVolume);
-    // }
+
     imageMode(CENTER);
     image(fireman, 0, 250,  3000/3+mapVolume, 4000/3+mapVolume);
 
     // texture(fireman);
     noFill();
-    stroke(mapTreble*2, mapMid/3, mapMid/3, mapMid);
+    stroke(mapMid/3, mapMid/3, mapTreble*2, mapMid);
     strokeWeight(scaleVolume/5);
     ellipse(0, 0, 2000);
-    pop();
+  //  pop();
+}
+pop();
 
-
-console.log(mapTreble);
+console.log(mapMid);
 }
