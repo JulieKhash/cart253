@@ -16,6 +16,8 @@ let numMainSpheres = 3;
 let minRotationSpeed = 0.001;
 let maxRotationSpeed = 0.01;
 
+let soundThreshold = 200;
+
 function preload() {
   fireman = loadImage(`assets/images/circusMan.png`);
   fire = loadImage('assets/images/fireball.gif');
@@ -24,7 +26,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight, WEBGL);
+  createCanvas(1700, 1000, WEBGL);
 
   amp = new p5.Amplitude();
   music.setVolume(0.4);
@@ -34,104 +36,97 @@ function setup() {
 
 function draw() {
   orbitControl(6, 6, 0.2);
-
   translate(0, 0, 0);
 
-
   let radius = width/6;
-
+  // get the volume to detect the beats
   let volume = amp.getLevel();
   let mapVolume = map(volume, 0, 0.3, 10, 200);
   let scaleVolume = map(volume, 0, 0.3, 0.5, 20);
 
   let spectrum = fft.analyze(); //gets an array of frequency bands
 
+ // amplitude of certain frequency bands
   let bass = fft.getEnergy(`bass`);
   let mid = fft.getEnergy(`mid`);
   let treble = fft.getEnergy(`treble`);
-
+// map frequency value to a  "good" number
   let mapBass = map(bass, 0, 255, 5, radius);
-  // let scaleBass = map(bass, 0, 255, 1, 10);
-
   let mapMid = map(mid, 0, 255, 5, radius * 2);
-  // let scaleMid = map(mid, 0, 255, 1, 5);
-
   let mapTreble = map(treble, 0, 255, 5, radius * 10);
-  // let scaleTreble = (treble, 0, 255, 1, 5);
 
   background(0, 0, mapVolume/2);
 
+  let minRotationValue = frameCount * minRotationSpeed;
+  let maxRotationValue = frameCount * minRotationSpeed;
+
+// center fire ball
   push();
   translate(-10, 0, 0);
   noStroke();
-  rotateX(frameCount * maxRotationSpeed);
-  rotateY(frameCount * maxRotationSpeed);
-  rotateZ(frameCount * maxRotationSpeed);
+  rotateX(maxRotationValue);
+  rotateY(maxRotationValue);
+  rotateZ(maxRotationValue);
   texture(fire);
-  // fill(100, 20, 20, 100)
-  sphere(100 + scaleVolume);
-
+  sphere(100 + scaleVolume * 2);
   pop();
 
-//orbit ellipses
+// orbital ellipses
   push();
   for (let i = 0; i < numRects; i++){
 
-    rotateX(frameCount * minRotationSpeed*5);
-    rotateY(frameCount * minRotationSpeed*5);
-    rotateZ(frameCount * minRotationSpeed*5);
+    rotateX(minRotationValue*5);
+    rotateY(minRotationValue*5);
+    rotateZ(minRotationValue*5);
 
+    noFill();
     stroke(mapMid/3 * scaleVolume/2, mapMid/3 * scaleVolume/2, mapTreble*2 + mapMid, mapMid);
     strokeWeight(scaleVolume/4);
-    noFill();
     rectMode(CENTER);
     ellipse(0, 0, rectSize*i + scaleVolume);
   }
     pop();
 
 
-//fire balls
+//floating fire balls
   push();
-
   for (let j = 0; j < numEllipses; j++){
 
     let x = radius * cos(j);
     let y = radius * sin(j);
     translate(x+ 200, y+ 100, 200);
-    rotate(frameCount* -minRotationSpeed*3);
+    rotate(-minRotationValue*3);
     noStroke();
-  //  rotateX(frameCount * -0.006);
-
-    rotateY(frameCount *  minRotationSpeed*3);
-    rotateZ(frameCount * -minRotationSpeed*3);
+    
+    rotateY(minRotationValue*3);
+    rotateZ(-minRotationValue*3);
 
     texture(fire);
     sphere(20+j + scaleVolume/2);
   }
-// }
     pop();
 
 //make the light appear
     push();
     // rotate(frameCount * 0.001 + scaleTreble)
-    if (mapMid > 150){
+    if (mapMid > 200){
       // for (let i = 0; i < 1; i++) {
       texture(eyeImg);
-      rotate(frameCount* -maxRotationSpeed);
-      rotateX(frameCount * -minRotationSpeed*5);
-      rotateY(frameCount * -minRotationSpeed*5);
-      rotateZ(frameCount * minRotationSpeed*5);
+      rotate(-maxRotationValue);
+      rotateX(-minRotationValue*5);
+      rotateY(-minRotationValue*5);
+      rotateZ(minRotationValue*5);
       noStroke();
-      ellipse(0, 0, mapBass + mapMid*5 + mapTreble*5);
+      ellipse(0, 0, mapBass + mapMid*5 + mapTreble*3);
     }
   // }
     else {
-    rotate(frameCount* -maxRotationSpeed);
-    rotateX(frameCount * minRotationSpeed*5);
-    rotateY(frameCount * minRotationSpeed*5);
+    rotate(-maxRotationValue);
+    rotateX(minRotationValue*5);
+    rotateY(minRotationValue*5);
 
     imageMode(CENTER);
-    image(fireman, 0, 250,  3000/3+mapVolume + mapTreble/2, 4000/3+mapVolume + mapTreble/2);
+    image(fireman, 0, 250,  3000/3+ mapVolume + mapTreble/2, 4000/3+mapVolume + mapTreble/2);
 
     noFill();
     stroke(mapMid/3, mapMid/3, mapTreble*2, mapMid);

@@ -47,13 +47,13 @@ function draw() {
   let treble = fft.getEnergy(`treble`);
 
   let mapBass = map(bass, 0, 255, 5, radius);
-  let scaleBass = map(bass, 0, 255, 1, 1.3);
+  // let scaleBass = map(bass, 0, 255, 1, 1.3);
 
   let mapMid = map(mid, 0, 255, 5, radius * 2);
-  let scaleMid = map(mid, 0, 255, 1, 1.3);
+  // let scaleMid = map(mid, 0, 255, 1, 1.3);
 
   let mapTreble = map(treble, 0, 255, 5, radius * 3);
-  let scaleTreble = (treble, 0, 255, 1, 10);
+  // let scaleTreble = (treble, 0, 255, 1, 10);
 
 
   background(mapVolume, 0, 0);
@@ -75,7 +75,7 @@ function draw() {
   }
     pop();
 
-//second time ellipses
+//second time ellipses rotating inside the shape
     push();
     if (mapVolume > 130) {
       background(mapVolume, mapVolume, mapVolume);
@@ -91,9 +91,33 @@ function draw() {
         let size = 200;
         texture(lightImg);
         ellipse(size+j/2, size, size/3);
+          if (mapBass > 225){
+              noStroke();
+              ellipse(size+j/2 + 100, size, size/3 + mapBass/5);
       }
     }
+  }
       pop();
+
+// third time ellipses rotating around the sahpe
+//       push();
+//       if (mapBass > 225){
+//         for (let j = 0; j < 15; j++){
+//
+//           // rotateX(frameCount * -maxRotationSpeed);
+//           // rotateY(frameCount *  maxRotationSpeed);
+//           rotateZ(frameCount * -maxRotationSpeed);
+//           rotate(frameCount * maxRotationSpeed*3 + mapVolume);
+//
+//           //stroke(mapTreble, mapMid / 2, 10)
+//           noStroke();
+//           let size = 200;
+//           texture(lightImg);
+//           ellipse(size + j + 100 , size, size/2 + mapBass/5);
+//       }
+// }
+//       pop()
+
 
 push();
   for (let i = 0; i < spectrum.length; i++) {
@@ -143,5 +167,6 @@ push();
     }
 pop();
 
-  console.log(volume);
+
+  console.log(mapBass);
 }
