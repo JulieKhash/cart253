@@ -11,11 +11,15 @@ let fft;
 let numRects = 6;
 let rectSize = 400;
 let numEllipses = 10;
+let numMainSpheres = 3;
+
+let minRotationSpeed = 0.001;
+let maxRotationSpeed = 0.01;
 
 function preload() {
   fireman = loadImage(`assets/images/circusMan.png`);
   fire = loadImage('assets/images/fireball.gif');
-  eyeImg = loadImage('assets/images/redlight.png');
+  eyeImg = loadImage('assets/images/light.png');
   music = loadSound(`assets/sounds/one-two.mp3`);
 }
 
@@ -47,106 +51,95 @@ function draw() {
   let treble = fft.getEnergy(`treble`);
 
   let mapBass = map(bass, 0, 255, 5, radius);
-  let scaleBass = map(bass, 0, 255, 1, 10);
+  // let scaleBass = map(bass, 0, 255, 1, 10);
 
   let mapMid = map(mid, 0, 255, 5, radius * 2);
-  let scaleMid = map(mid, 0, 255, 1, 5);
+  // let scaleMid = map(mid, 0, 255, 1, 5);
 
   let mapTreble = map(treble, 0, 255, 5, radius * 10);
-  let scaleTreble = (treble, 0, 255, 1, 10);
+  // let scaleTreble = (treble, 0, 255, 1, 5);
 
-  background(0, 0, mapVolume/3);
+  background(0, 0, mapVolume/2);
 
   push();
-
-  rotateX(frameCount * 0.03);
-  rotateY(frameCount * 0.03);
-  rotateZ(frameCount * 0.03);
-  texture(fire);
+  translate(-10, 0, 0);
   noStroke();
+  rotateX(frameCount * maxRotationSpeed);
+  rotateY(frameCount * maxRotationSpeed);
+  rotateZ(frameCount * maxRotationSpeed);
+  texture(fire);
   // fill(100, 20, 20, 100)
   sphere(100 + scaleVolume);
-  pop();
 
-  push()
-  translate(300, 0, 0);
-  rotateX(frameCount * 0.03);
-  rotateY(frameCount * 0.03);
-  rotateZ(frameCount * 0.03);
-  texture(fire);
-  noStroke();
-  // fill(100, 20, 20, 100)
-  sphere(50 + scaleVolume);
   pop();
 
 //orbit ellipses
   push();
   for (let i = 0; i < numRects; i++){
 
-    rotateX(frameCount * 0.005);
-    rotateY(frameCount * 0.005);
-    rotateZ(frameCount * 0.005);
+    rotateX(frameCount * minRotationSpeed*5);
+    rotateY(frameCount * minRotationSpeed*5);
+    rotateZ(frameCount * minRotationSpeed*5);
 
-    stroke(mapMid/3, mapMid, mapTreble*2, mapMid);
-    strokeWeight(scaleVolume/5);
+    stroke(mapMid/3 * scaleVolume/2, mapMid/3 * scaleVolume/2, mapTreble*2 + mapMid, mapMid);
+    strokeWeight(scaleVolume/4);
     noFill();
     rectMode(CENTER);
-    //texture(fireman)
-    ellipse(0, 0, rectSize*i);
+    ellipse(0, 0, rectSize*i + scaleVolume);
   }
     pop();
 
 
 //fire balls
   push();
-  // if (mapVolume > 90){
+
   for (let j = 0; j < numEllipses; j++){
 
     let x = radius * cos(j);
     let y = radius * sin(j);
-    translate(x+200, y+100, 0);
-    rotate(frameCount* -0.003);
+    translate(x+ 200, y+ 100, 200);
+    rotate(frameCount* -minRotationSpeed*3);
     noStroke();
   //  rotateX(frameCount * -0.006);
 
-    rotateY(frameCount *  0.003);
-    rotateZ(frameCount * -0.003);
+    rotateY(frameCount *  minRotationSpeed*3);
+    rotateZ(frameCount * -minRotationSpeed*3);
 
     texture(fire);
-    // ellipse(500+j, 500, 150);
-    sphere(20+j + scaleBass);
+    sphere(20+j + scaleVolume/2);
   }
 // }
     pop();
 
+//make the light appear
     push();
     // rotate(frameCount * 0.001 + scaleTreble)
     if (mapMid > 150){
       // for (let i = 0; i < 1; i++) {
       texture(eyeImg);
-      rotate(frameCount* -0.01);
-      rotateX(frameCount * -0.005);
-      rotateY(frameCount * -0.005);
-      rotateZ(frameCount * 0.005);
+      rotate(frameCount* -maxRotationSpeed);
+      rotateX(frameCount * -minRotationSpeed*5);
+      rotateY(frameCount * -minRotationSpeed*5);
+      rotateZ(frameCount * minRotationSpeed*5);
       noStroke();
-      ellipse(0, 0, mapBass+mapMid*10);
+      ellipse(0, 0, mapBass + mapMid*5 + mapTreble*5);
     }
   // }
     else {
-    rotateX(frameCount * -0.005);
-    rotateY(frameCount * -0.005);
+    rotate(frameCount* -maxRotationSpeed);
+    rotateX(frameCount * minRotationSpeed*5);
+    rotateY(frameCount * minRotationSpeed*5);
 
     imageMode(CENTER);
-    image(fireman, 0, 250,  3000/3+mapVolume, 4000/3+mapVolume);
+    image(fireman, 0, 250,  3000/3+mapVolume + mapTreble/2, 4000/3+mapVolume + mapTreble/2);
 
-    // texture(fireman);
     noFill();
     stroke(mapMid/3, mapMid/3, mapTreble*2, mapMid);
     strokeWeight(scaleVolume/5);
-    ellipse(0, 0, 2000);
-  //  pop();
+    // texture(fireman)
+    ellipse(0, 0, 1900 + mapTreble/2);
 }
 pop();
 
-console.log(mapMid);
+console.log(mapBass);
 }
