@@ -58,6 +58,7 @@ function draw() {
 
   background(mapVolume, 0, 0);
 
+//rotating light ellipses
   push();
   if (mapVolume > 100) {
     background(mapVolume, mapVolume, mapVolume);
@@ -74,6 +75,26 @@ function draw() {
   }
     pop();
 
+//second time ellipses
+    push();
+    if (mapVolume > 130) {
+      background(mapVolume, mapVolume, mapVolume);
+
+      for (let j = 0; j < numEllipses; j++){
+
+        // rotateX(frameCount * -maxRotationSpeed);
+        // rotateY(frameCount *  maxRotationSpeed);
+        rotateZ(frameCount * -maxRotationSpeed);
+        rotate(frameCount * maxRotationSpeed*3 + mapVolume);
+
+        stroke(mapTreble, mapMid / 2, 10)
+        let size = 200;
+        texture(lightImg);
+        ellipse(size+j/2, size, size/3);
+      }
+    }
+      pop();
+
 push();
   for (let i = 0; i < spectrum.length; i++) {
 
@@ -86,7 +107,7 @@ push();
     let x = radius * cos(i);
     let y = radius * sin(i);
     //stroke(mapTreble, mapMid,mapBass )
-    stroke(mapTreble, mapMid / 2, 0);
+    stroke(mapTreble, mapMid / 2, 0, volume);
     //strokeWeight(0.3);
     rectMode(CENTER);
     //texture(lightImg)
@@ -122,5 +143,5 @@ push();
     }
 pop();
 
-  console.log(mapVolume);
+  console.log(volume);
 }

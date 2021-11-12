@@ -101,8 +101,7 @@ function draw() {
     if (mapTreble > 210){
       texture(eyeImg);
       noStroke();
-      //scale(scaleTreble/3)
-      ellipse(0, 0, mapBass+ mapTreble);
+      ellipse(0, 0, mapBass+mapTreble);
       pop();
     }
 
