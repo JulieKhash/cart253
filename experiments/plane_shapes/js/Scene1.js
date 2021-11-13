@@ -26,8 +26,9 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
 
-  music.setVolume(0.5);
+
   amp = new p5.Amplitude();
+  // music.setVolume(0.5);
   music.play();
 }
 
@@ -61,14 +62,14 @@ function draw() {
     ellipse(0, 0, size, mapMouseX * i + mapVolume);
   }
   pop();
-  
+
 // angel and light
   push()
   rotateX(-minRotationValue * 8);
   rotateY(-minRotationValue * 8);
   rotateZ(-minRotationValue * 8);
 
-  if (mapVolume > 300) {
+  if (mapVolume > 250) {
     texture(lightImg);
   } else {
     texture(angelImg);

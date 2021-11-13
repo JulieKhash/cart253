@@ -11,6 +11,8 @@ let maxRotationSpeed = 0.01;
 let dancer3Img;
 let lightImg;
 
+//use true/false to make the objects appear/disapper
+//optional: currentTime() to detect the time of the song
 
 function preload() {
   dancer3Img = loadImage(`assets/images/ChameleonMan.png`);
@@ -21,9 +23,9 @@ function preload() {
 function setup() {
   createCanvas(1400, 1000, WEBGL);
 
-  music.setVolume(0.4);
+  // music.setVolume(0.4);
   amp = new p5.Amplitude();
-  fft = new p5.FFT(0.8, 512); // make 512 bins/samples by using the power of two
+  fft = new p5.FFT(0.8, 512); // make 512 bins/samples, the power of two
   music.play();
 }
 
