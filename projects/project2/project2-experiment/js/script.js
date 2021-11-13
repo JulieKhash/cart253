@@ -35,7 +35,7 @@ function setup() {
 
   // makes a given number of ellipses
     for (let i = 0; i < numEllipses; i++){
-    let ellipse = new Ellipse(0, 0, 300);
+    let ellipse = new EllipseAngel(0, 0, 300, 255, 1);
     ellipses.push(ellipse);
 }
 }
@@ -54,9 +54,8 @@ function draw() {
   // displays rotating circles
   push();
   for (let i = 0; i < ellipses.length; i++){
-  let ellipse = ellipses[i];
-   ellipse.rotate();
-   ellipse.display();
+   ellipses[i].rotate();
+   ellipses[i].display();
   }
   pop();
 
