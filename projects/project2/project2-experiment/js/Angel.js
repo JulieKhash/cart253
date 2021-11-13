@@ -1,13 +1,14 @@
-class Angel {
+class Angel extends Shape{
   constructor(image) {
+    super()
     this.x = 0;
     this.y = 0;
     this.size = 300;
 
     this.image = image
 
-    this.minRotationSpeed = 0.001;
-    this.maxRotationSpeed = 0.01;
+    // this.minRotationSpeed = 0.001;
+    // this.maxRotationSpeed = 0.01;
 }
 
   rotate(){
@@ -18,7 +19,7 @@ class Angel {
 
   display(){
     texture(this.image)
-    ellipse(this.x, this.y, this.size);
+    ellipse(this.x, this.y, this.size+ mapVolume/2);
   }
 
   // draw(){

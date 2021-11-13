@@ -19,7 +19,10 @@ let size = 300;
 this.minRotationSpeed = 0.001;
 this.maxRotationSpeed = 0.01;
 
-let angel
+let angel;
+
+let volume;
+let mapVolume;
 
 function preload() {
   angelImg = loadImage(`assets/images/AngelMan.png`);
@@ -47,8 +50,8 @@ function draw() {
   orbitControl(6, 6, 0.2);
   background(50);
 
-  let volume = amp.getLevel();
-  let mapVolume = map(volume, 0, 0.3, 10, 600);
+  volume = amp.getLevel();
+  mapVolume = map(volume, 0, 0.3, 10, 600);
 
   background(0, mapVolume / 7, mapVolume / 6);
 

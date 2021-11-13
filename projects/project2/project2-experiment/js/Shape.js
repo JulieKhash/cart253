@@ -14,7 +14,6 @@ class Shape {
 
     this.volume;
     this.mapVolume;
-
   }
 
 

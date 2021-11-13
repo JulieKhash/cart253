@@ -5,7 +5,6 @@ class Ellipse1 extends Shape {
     this.strokeColor = 255
     this.strokeSize = 1;
 }
-
 rotate(){
 
   this.mapMouseX = map(mouseX, 0, width, 0, 400);
