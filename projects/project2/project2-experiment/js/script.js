@@ -12,6 +12,9 @@ let angelImg;
 let musicXylophone;
 let amp;
 
+let numEllipses = 5;
+let ellipses = []  //an empty array to store our ellipses
+
 
 function preload() {
   angelImg = loadImage(`assets/images/AngelMan.png`);
@@ -24,13 +27,29 @@ function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
 
   amp = new p5.Amplitude();
-  // music.setVolume(0.5);
-  music.play();
+  musicXylophone.play();
+
+  // makes a given number of ellipses
+    for (let i = 0; i < numEllipses; i++){
+    let ellipse = new Ellipse(0, 0, 300);
+    ellipses.push(ellipse);
 }
-
-
+}
 
 function draw() {
   orbitControl(6, 6, 0.2);
 
+
+  // displays rotating circles
+  push();
+  for (let i = 0; i < ellipses.length; i++){
+  let ellipse = ellipses[i];
+   ellipse.getAmplitude();
+   ellipse.mouseControl();
+   ellipse.rotate();
+   ellipse.display();
+  }
+  pop();
+
+console.log(ellipses);
 }

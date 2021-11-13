@@ -1,18 +1,38 @@
-// class for Ellipses;
 class Ellipse {
-  constructor(x, y, size, strokeColor, strokeSize) {
-    super(x, y);
-
+  constructor(x, y, size) {
+    this.x = x;
+    this.y = y;
     this.size = size;
-    this.strokeColor = strokeColor;
-    this.strokeSize = strokeSize;
+    this.strokeColor = 255;
+    this.strokeSize = 1;
+
+    this.active = true;
+
+    this.minRotationSpeed = 0.001;
+    this.maxRotationSpeed = 0.01;
 
   }
 
-//rotate ellipses based on x, y, z axes
- rotate_object() {
-  super.rotate_object(){
+
+  getAmplitude(){
+    this.volume = amp.getLevel();
+    this.mapVolume = map(this.volume, 0, 0.3, 10, 600);
+
+    background(0, this.mapVolume / 7, this.mapVolume / 6);
+
+    this.minRotationValue = frameCount * this.minRotationSpeed;
+    this.maxRotationValue = frameCount * this.maxRotationSpeed;
   }
+
+  mouseControl(){
+    this.mouseX = map(mouseX, 0, width, 0, 400);
+  }
+
+// rotates the ellipses in x, y, z positions
+ rotate(){
+  rotateX(-this.minRotationValue*9);
+  rotateY(-this.minRotationValue*9);
+  rotateZ(-this.minRotationValue*9);
 }
 
   display(){

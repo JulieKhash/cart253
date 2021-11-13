@@ -1,10 +1,8 @@
 //super class for Shapes
 class Shapes {
   constructor(x, y) {
-    this.x = 0;
-    this.y = 0;
-
-
+    this.x = x;
+    this.y = y;
 
     this.minRotationSpeed = 0.001;
     this.maxRotationSpeed = 0.01;
