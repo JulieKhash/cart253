@@ -1,4 +1,4 @@
-class Angel extends Shape{
+class Angel extends Shape {
   constructor(angelImg, lightImg) {
     super()
     this.x = 0;
@@ -11,18 +11,15 @@ class Angel extends Shape{
     this.imageLight = lightImg;
 
     this.soundThreshold = 250;
-
-    // this.minRotationSpeed = 0.001;
-    // this.maxRotationSpeed = 0.01;
-}
-
-  rotate(){
-    rotateX(frameCount * -this.minRotationSpeed*8);
-    rotateY(frameCount * -this.minRotationSpeed*8);
-    rotateZ(frameCount * -this.minRotationSpeed*8);
   }
 
-  display(){
+  rotate() {
+    rotateX(frameCount * -this.minRotationSpeed * 8);
+    rotateY(frameCount * -this.minRotationSpeed * 8);
+    rotateZ(frameCount * -this.minRotationSpeed * 8);
+  }
+
+  display() {
 
     push();
     noFill();
@@ -34,7 +31,7 @@ class Angel extends Shape{
     } else {
       texture(angelImg);
     }
-    ellipse(this.x, this.y, this.size+ mapVolume/2);
+    ellipse(this.x, this.y, this.size + mapVolume / 2);
     pop();
   }
 

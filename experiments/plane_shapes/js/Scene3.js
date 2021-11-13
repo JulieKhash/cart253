@@ -21,9 +21,9 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(1400, 1000, WEBGL);
+  createCanvas(1700, 1000, WEBGL);
 
-  // music.setVolume(0.4);
+  music.setVolume(0.4);
   amp = new p5.Amplitude();
   fft = new p5.FFT(0.8, 512); // make 512 bins/samples, the power of two
   music.play();

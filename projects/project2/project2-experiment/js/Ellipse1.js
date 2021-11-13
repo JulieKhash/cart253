@@ -1,13 +1,18 @@
 class Ellipse1 extends Shape {
-  constructor(x, y) {
-    super(x, y);
+  constructor() {
+    super();
+    this.x = 0;
+    this.y = 0;
     this.size = 300;
     this.strokeColor = 255
     this.strokeSize = 1;
+
+    this.mapMouseX;
 }
+
 rotate(){
 
-  this.mapMouseX = map(mouseX, 0, width, 0, 400);
+  this.mapMouseX = map(mouseX, 0, width, 0, 200);
 
   rotateX(frameCount * -this.minRotationSpeed*9);
   rotateY(frameCount * -this.minRotationSpeed*9);

@@ -31,7 +31,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
 
   amp = new p5.Amplitude();
-  //music.setVolume(0.5);
+  music.setVolume(0.5);
   fft = new p5.FFT(0.8, 512);
   music.play();
 }
@@ -137,5 +137,5 @@ function draw() {
   }
   pop();
 
-  console.log(volume);
+  console.log(mapMid);
 }

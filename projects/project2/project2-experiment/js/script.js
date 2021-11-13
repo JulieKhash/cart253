@@ -6,6 +6,9 @@ Author Name
 
 "use strict";
 
+let currentState;
+let fontRegular
+
 let lightImg;
 let angelImg;
 
@@ -25,6 +28,7 @@ let volume;
 let mapVolume;
 
 function preload() {
+  fontRegular = loadFont('assets/fonts/KIMONOG.ttf');
   angelImg = loadImage(`assets/images/AngelMan.png`);
   lightImg = loadImage(`assets/images/light.png`);
   musicXylophone = loadSound(`assets/sounds/dream.mp3`);
@@ -33,6 +37,7 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
+  currentState = new Title();
 
   musicXylophone.play();
   amp = new p5.Amplitude();
@@ -40,13 +45,14 @@ function setup() {
 
   // makes a given number of ellipses
     for (let i = 0; i <  numEllipses; i++){
-    let ellipse = new Ellipse1(0, 0);
+    let ellipse = new Ellipse1();
     ellipses.push(ellipse);
 }
     angel  = new Angel(angelImg, lightImg);
 }
 
 function draw() {
+
   orbitControl(6, 6, 0.2);
   background(50);
   translate(0, 0, 0);
@@ -66,15 +72,14 @@ function draw() {
    ellipses[i].display();
    // ellipses[i].keyPressed();
   }
-
   pop();
-
 
   push();
   angel.rotate();
   angel.display();
   pop();
 
+ currentState.draw();
   // push()
   // stroke(255);
   // strokeWeight(1);
@@ -92,7 +97,5 @@ function draw() {
   // ellipse(0, 0, size + mapVolume / 2);
   // pop();
 
-
-
-console.log();
+console.log(currentState);
 }
