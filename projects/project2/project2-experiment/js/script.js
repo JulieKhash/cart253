@@ -26,8 +26,9 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
 
-  amp = new p5.Amplitude();
   musicXylophone.play();
+  amp = new p5.Amplitude();
+  amp.setInput(musicXylophone);
 
   // makes a given number of ellipses
     for (let i = 0; i < numEllipses; i++){
@@ -38,18 +39,25 @@ function setup() {
 
 function draw() {
   orbitControl(6, 6, 0.2);
+  background(50);
 
+  let volume = amp.getLevel();
+  let mapVolume = map(volume, 0, 0.3, 10, 600);
+
+  background(0, mapVolume / 7, mapVolume / 6);
 
   // displays rotating circles
+
   push();
   for (let i = 0; i < ellipses.length; i++){
   let ellipse = ellipses[i];
-   ellipse.getAmplitude();
-   ellipse.mouseControl();
-   ellipse.rotate();
+
+   //ellipse.mouseControl();
+   ellipse.rotateObject();
    ellipse.display();
   }
   pop();
+
 
 console.log(ellipses);
 }

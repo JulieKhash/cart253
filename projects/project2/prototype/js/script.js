@@ -59,7 +59,7 @@ let ellipse  = ellipses[i];
 }
 pop();
 
-//displays hand image, size changing according to the amplitude
+// displays hand image, size changing according to the amplitude
 push();
 let size = 300
 let first_dance = new First_Dance(0, 0, size+diameter/2, handImg);
