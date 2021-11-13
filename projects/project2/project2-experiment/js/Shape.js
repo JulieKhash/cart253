@@ -1,4 +1,4 @@
-class Ellipse {
+class Shape {
   constructor(x, y, size, strokeColor, strokeSize) {
     this.x = x;
     this.y = y;
@@ -11,10 +11,14 @@ class Ellipse {
     this.maxRotationSpeed = 0.01;
 
     this.active = true;
+
+    this.volume;
+    this.mapVolume;
+
   }
+
 
 display(){
 
 }
-
 }

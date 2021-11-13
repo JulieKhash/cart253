@@ -1,7 +1,9 @@
-class EllipseAngel extends Ellipse {
-  constructor(x, y, size, strokeColor, strokeSize) {
-    super(x, y, size, strokeColor, strokeSize);
-
+class Ellipse1 extends Shape {
+  constructor(x, y) {
+    super(x, y);
+    this.size = 300;
+    this.strokeColor = 255
+    this.strokeSize = 1;
 }
 
 rotate(){
@@ -23,4 +25,8 @@ display(){
   pop();
 }
 
+
+// keyPressed(){
+//   musicXylophone.loop();
+// }
 }
