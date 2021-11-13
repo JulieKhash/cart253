@@ -1,11 +1,16 @@
 class Angel extends Shape{
-  constructor(image) {
+  constructor(angelImg, lightImg) {
     super()
     this.x = 0;
     this.y = 0;
     this.size = 300;
+    this.strokeColor = 255
+    this.strokeSize = 1;
 
-    this.image = image
+    this.imageAngel = angelImg;
+    this.imageLight = lightImg;
+
+    this.soundThreshold = 250;
 
     // this.minRotationSpeed = 0.001;
     // this.maxRotationSpeed = 0.01;
@@ -18,8 +23,19 @@ class Angel extends Shape{
   }
 
   display(){
-    texture(this.image)
+
+    push();
+    noFill();
+    stroke(this.strokeColor);
+    strokeWeight(this.strokeSize);
+
+    if (mapVolume > this.soundThreshold) {
+      texture(lightImg);
+    } else {
+      texture(angelImg);
+    }
     ellipse(this.x, this.y, this.size+ mapVolume/2);
+    pop();
   }
 
   // draw(){

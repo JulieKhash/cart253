@@ -43,12 +43,13 @@ function setup() {
     let ellipse = new Ellipse1(0, 0);
     ellipses.push(ellipse);
 }
-    angel  = new Angel(lightImg);
+    angel  = new Angel(angelImg, lightImg);
 }
 
 function draw() {
   orbitControl(6, 6, 0.2);
   background(50);
+  translate(0, 0, 0);
 
   volume = amp.getLevel();
   mapVolume = map(volume, 0, 0.3, 10, 600);

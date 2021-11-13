@@ -20,7 +20,7 @@ display(){
   noFill();
   stroke(this.strokeColor);
   strokeWeight(this.strokeSize);
-  ellipse(this.x, this.y, this.size, this.mapMouseX * 5);
+  ellipse(this.x, this.y, this.size, this.mapMouseX * 5 + mapVolume);
   pop();
 }
 
@@ -29,3 +29,8 @@ display(){
 //   musicXylophone.loop();
 // }
 }
+
+
+// class Ellipse2
+
+// class Ellipse 3
