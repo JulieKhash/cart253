@@ -2,32 +2,35 @@
 Title of Project
 Author Name
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
 */
 
 "use strict";
 
+let lightImg;
+let angelImg;
 
-/**
-Description of preload
-*/
+let musicXylophone;
+let amp;
+
+
 function preload() {
-
+  angelImg = loadImage(`assets/images/AngelMan.png`);
+  lightImg = loadImage(`assets/images/light.png`);
+  musicXylophone = loadSound(`assets/sounds/dream.mp3`);
 }
 
 
-/**
-Description of setup
-*/
 function setup() {
+  createCanvas(windowWidth, windowHeight, WEBGL);
 
+  amp = new p5.Amplitude();
+  // music.setVolume(0.5);
+  music.play();
 }
 
 
-/**
-Description of draw()
-*/
+
 function draw() {
+  orbitControl(6, 6, 0.2);
 
 }
