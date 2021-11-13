@@ -11,32 +11,16 @@ class Ellipse {
     this.minRotationSpeed = 0.001;
     this.maxRotationSpeed = 0.01;
 
-    this.mouseX;
-    this.volume;
-    this.mapVolume;
 
   }
 
 
-  // getAmplitude(){
-  //     musicXylophone.play();
-  //
-  //     this.volume = amp.getLevel();
-  //     this.mapVolume = map(this.volume, 0, 0.3, 10, 600);
 
-    // this.volume = amp.getLevel();
-    // this.mapVolume = map(this.volume, 0, 0.3, 10, 600);
-    // background(0, this.mapVolume / 7, this.mapVolume / 6);
-
-    //this.mouseX = map(mouseX, 0, width, 0, 400);
-  // }
-
-  // mouseControl(){
-  //   this.mouseX = map(mouseX, 0, width, 0, 400);
-  // }
 
 // rotates the ellipses in x, y, z positions
- rotateObject(){
+ rotate(){
+
+  this.mapMouseX = map(mouseX, 0, width, 0, 400);
 
   rotateX(frameCount * -this.minRotationSpeed*9);
   rotateY(frameCount * -this.minRotationSpeed*9);
@@ -48,7 +32,7 @@ class Ellipse {
     noFill();
     stroke(this.strokeColor);
     strokeWeight(this.strokeSize);
-    ellipse(this.x, this.y, this.size, mouseX);
+    ellipse(this.x, this.y, this.size, this.mapMouseX * 5);
     pop();
   }
 }
