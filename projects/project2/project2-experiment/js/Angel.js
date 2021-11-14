@@ -14,9 +14,9 @@ class Angel extends Shape {
   }
 
   rotate() {
-    rotateX(frameCount * -this.minRotationSpeed * 8);
-    rotateY(frameCount * -this.minRotationSpeed * 8);
-    rotateZ(frameCount * -this.minRotationSpeed * 8);
+    rotateX(frameCount * -this.minRotationSpeed * 7);
+    rotateY(frameCount * -this.minRotationSpeed * 7);
+    rotateZ(frameCount * -this.minRotationSpeed * 7);
   }
 
   display() {

@@ -25,7 +25,7 @@ class Title {
   }
 
   draw(){
-      background(0, 0, 20);
+      background(220, 220, 220);
       this.displayTitle();
   }
 

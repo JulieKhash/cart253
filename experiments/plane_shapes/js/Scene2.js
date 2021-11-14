@@ -28,7 +28,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight, WEBGL);
+  createCanvas(1700, 1000, WEBGL);
 
   amp = new p5.Amplitude();
   music.setVolume(0.5);
@@ -137,5 +137,5 @@ function draw() {
   }
   pop();
 
-  console.log(mapMid);
+  console.log(mapVolume);
 }
