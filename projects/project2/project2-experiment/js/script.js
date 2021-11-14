@@ -104,7 +104,7 @@ function draw() {
   //get the sound level to detect the beats
   volume = amp.getLevel();
   //map the volume number to a bigger size
-  mapVolume = map(volume, 0, 0.3, 10, 600);
+  mapVolume = map(volume, 0, 0.3, 10, 100);
   //scale volume to a "good" number
   scaleVolume = map(volume, 0, 0.3, 0.5, 20);
 
@@ -147,9 +147,10 @@ pop();
 
 
 
+
 // dancing angel screen
 function danceAngel() {
-  background(0, mapVolume / 7, mapVolume / 6);
+  background(0, mapVolume - 15, mapVolume);
 
   // rotating ellipses
   for (let i = 0; i < ellipses1.length; i++) {
@@ -174,6 +175,7 @@ function keyPressed() {
   } else if (state === `danceAngel` && keyCode === ENTER) {
     musicXylophone.stop();
     state = `danceFire`;
+
     musicOneTwo.play();
   }
 }

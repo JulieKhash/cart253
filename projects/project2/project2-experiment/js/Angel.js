@@ -4,19 +4,19 @@ class Angel extends Shape {
     this.x = 0;
     this.y = 0;
     this.size = 300;
-    this.strokeColor = 255
+    this.strokeColor = 250
     this.strokeSize = 1;
 
     this.imageAngel = angelImg;
     this.imageLight = lightImg;
 
-    this.soundThreshold = 250;
+    this.soundThreshold = 60;
   }
 
   rotate() {
-    rotateX(frameCount * -this.minRotationSpeed * 7);
-    rotateY(frameCount * -this.minRotationSpeed * 7);
-    rotateZ(frameCount * -this.minRotationSpeed * 7);
+    rotateX(frameCount * -this.minRotationSpeed * 8);
+    rotateY(frameCount * -this.minRotationSpeed * 8);
+    rotateZ(frameCount * -this.minRotationSpeed * 8);
   }
 
   display() {
@@ -31,7 +31,7 @@ class Angel extends Shape {
     } else {
       texture(angelImg);
     }
-    ellipse(this.x, this.y, this.size + mapVolume / 2);
+    ellipse(this.x, this.y, this.size + mapVolume * 3);
     pop();
   }
 
