@@ -5,7 +5,7 @@ Author Name
 */
 "use strict";
 
-let state  = `title`
+let state = `title`
 
 let titlescreen;
 
@@ -23,10 +23,13 @@ let musicOneTwo;
 
 //all the analyzers
 let amp;
+let fft;
+let scaleVolume;
+let spectrum;
 
 
 let numEllipses = 5;
-let ellipses = []  //an empty array to store our ellipses
+let ellipses = [] //an empty array to store our ellipses
 
 
 let angel;
@@ -40,6 +43,7 @@ function preload() {
   angelImg = loadImage(`assets/images/FireMan.png`);
   fireballImg = loadImage(`assets/images/fireball.gif`);
   lightImg = loadImage(`assets/images/light.png`);
+
   musicXylophone = loadSound(`assets/sounds/dream.mp3`);
   musicOneTwo = loadSound(`assets/sounds/one-two.mp3`);
 }
@@ -55,14 +59,17 @@ function setup() {
   amp.setInput(musicXylophone);
   amp.setInput(musicOneTwo);
 
+  fft = new p5.FFT(0.8, 512); //reduction of bins/samples down to 512 (by power of two)
+
+
   // makes a given number of ellipses
-    for (let i = 0; i <  numEllipses; i++){
+  for (let i = 0; i < numEllipses; i++) {
     let ellipse = new Ellipse1();
     ellipses.push(ellipse);
-}
-    angel  = new Angel(angelImg, lightImg);
-
   }
+  angel = new Angel(angelImg, lightImg);
+
+}
 
 
 function draw() {
@@ -70,40 +77,61 @@ function draw() {
   orbitControl(6, 6, 0.2);
   translate(0, 0, 0);
 
+  let radius = width / 6;
+
+  //get the sound level to detect the beats
   volume = amp.getLevel();
+  //map the volume number to a bigger size
   mapVolume = map(volume, 0, 0.3, 10, 600);
+  //scale volume to a "good" number
+  scaleVolume = map(volume, 0, 0.3, 0.5, 20);
+
+  // gets an array of frequency bands
+  spectrum = fft.analyze();
+  // amplitude of specific frequency bands
+  let bass = fft.getEnergy(`bass`); //bass for low frequency bands
+  let mid = fft.getEnergy(`mid`);   // mid for mid frequency bands
+  let treble = fft.getEnergy(`treble`);  //treble for high bands(sometimes mid and treble are mixed up)
+
+  // map frequency value to a "good" number
+  let mapBass = map(bass, 0, 255, 5, radius);
+  let mapMid = map(mid, 0, 255, 5, radius * 2);
+  let mapTreble = map(treble, 0, 255, 5, radius * 10);
 
 
-  if (state === `title`){
+
+
+
+  if (state === `title`) {
     titleScreen();
-  } else if (state === `danceAngel`){
+  } else if (state === `danceAngel`) {
     danceAngel();
-  } else if (state === `danceFire`){
+  } else if (state === `danceFire`) {
     danceAngel();
   }
 
 }
 
-function danceAngel(){
-background(0, mapVolume / 7, mapVolume / 6);
+function danceAngel() {
+  background(0, mapVolume / 7, mapVolume / 6);
 
-// rotating ellipses
-for (let i = 0; i < ellipses.length; i++){
- ellipses[i].rotate();
- ellipses[i].display();
- // ellipses[i].keyPressed();
-}
-angel.rotate();
-angel.display();
+  // rotating ellipses
+  for (let i = 0; i < ellipses.length; i++) {
+    ellipses[i].rotate();
+    ellipses[i].display();
+    // ellipses[i].keyPressed();
+  }
+  angel.rotate();
+  angel.display();
 
 }
 
 // main screen
-function titleScreen(){
+function titleScreen() {
   titlescreen.draw();
 }
 
-function keyPressed(){
+function keyPressed() {
   if (state === `title` && keyCode === ENTER) {
     state = `danceAngel`;
     musicXylophone.play();
@@ -115,22 +143,22 @@ function keyPressed(){
   }
 }
 
-  // push()
-  // stroke(255);
-  // strokeWeight(1);
-  //
-  // rotateX(frameCount * -this.minRotationSpeed*8);
-  // rotateY(frameCount * -this.minRotationSpeed*8);
-  // rotateZ(frameCount * -this.minRotationSpeed*8);
-  //
-  // if (mapVolume > 250) {
-  //   texture(lightImg);
-  // } else {
-  //   texture(angelImg);
-  // }
-  // rectMode(CENTER)
-  // ellipse(0, 0, size + mapVolume / 2);
-  // pop();
+// push()
+// stroke(255);
+// strokeWeight(1);
+//
+// rotateX(frameCount * -this.minRotationSpeed*8);
+// rotateY(frameCount * -this.minRotationSpeed*8);
+// rotateZ(frameCount * -this.minRotationSpeed*8);
+//
+// if (mapVolume > 250) {
+//   texture(lightImg);
+// } else {
+//   texture(angelImg);
+// }
+// rectMode(CENTER)
+// ellipse(0, 0, size + mapVolume / 2);
+// pop();
 
 // console.log(currentState);
 // }
