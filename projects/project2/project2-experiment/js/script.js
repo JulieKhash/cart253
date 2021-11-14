@@ -73,7 +73,6 @@ function setup() {
   titlescreen = new Title();
 
 
-  // musicXylophone.play();
   amp = new p5.Amplitude();
   amp.setInput(musicXylophone);
   amp.setInput(musicOneTwo);
@@ -83,7 +82,6 @@ function setup() {
 
 
   // makes a given number of ellipses for the angel scene
-
   for (let i = 0; i < numEllipses1; i++) {
     let ellipse1 = new Ellipse1(300 * i);
     ellipses1.push(ellipse1);
@@ -98,23 +96,13 @@ function setup() {
 
   //fireballs for the fire scene
   fireball1 = new Fireball1();
-
-
-  for (let i = 0; i < numSmallFireballs; i++) {
-    let radius = width / 6;
-    let x = radius * cos(i);
-    let y = radius * sin(i);
-    fireball2 = new Fireball2(x, y, 10 + i);
-    fireballs.push(fireball2);
-  }
-
-
+  fireball2 = new Fireball2();
 }
 
 
 function draw() {
   orbitControl(6, 6, 0.2);
-  translate(0, 0, 0);
+  translate(0, 0, 0);  //postion the scene in the center
 
   //let radius = width / 6;
 
@@ -146,7 +134,6 @@ function draw() {
   } else if (state === `danceFire`) {
     danceFire();
   }
-
 }
 
 
@@ -164,7 +151,6 @@ function danceFire() {
 
   //fireball in the center
   push();
-  translate(-10, 0, 0);
   fireball1.rotate();
   fireball1.display();
   pop();
@@ -174,12 +160,12 @@ function danceFire() {
   // let radius = width / 6;
   // let x = radius * cos(i);
   // let y = radius * sin(i);
-  for (let j = 0; j < fireballs.length; j++){
-  translate(100+j,  100, 200);
-  fireball2.rotate();
-  fireball2.display();
-}
-pop()
+  // for (let j = 0; j < fireballs.length; j++) {
+   //translate(200, 100, 200);
+    fireball2.rotate();
+    fireball2.display();
+  // }
+  pop()
 
 }
 
