@@ -39,3 +39,9 @@ class Angel extends Shape {
   //   this.display();
   // }
 }
+
+// class fireman
+
+
+
+// class ChameleonMan

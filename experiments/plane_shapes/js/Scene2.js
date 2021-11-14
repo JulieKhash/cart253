@@ -113,7 +113,7 @@ function draw() {
 
   //make the light appear
   push();
-  if (mapMid > 140) {
+  if (mapMid > 200) {
     texture(eyeImg);
     rotate(-maxRotationValue);
     rotateX(-minRotationValue * 5);
@@ -137,5 +137,5 @@ function draw() {
   }
   pop();
 
-  console.log(mapVolume);
+  console.log(mapMid);
 }

@@ -44,9 +44,12 @@ let ellipses2 = [] //an empty array to store our ellipses
 
 
 let angel;
+let fireball;
 
 let volume;
 let mapVolume;
+
+
 
 function preload() {
   font = loadFont('assets/fonts/KIMONOG.ttf');
@@ -64,7 +67,6 @@ function setup() {
   createCanvas(1700, 1000, WEBGL);
 
   titlescreen = new Title();
-  // danceAngelscreen = new
 
 
   // musicXylophone.play();
@@ -79,17 +81,22 @@ function setup() {
   // makes a given number of ellipses for the angel scene
 
   for (let i = 0; i < numEllipses1; i++) {
-    let ellipse1 = new Ellipse1();
+    let ellipse1 = new Ellipse1(300 * i);
     ellipses1.push(ellipse1);
   }
     angel = new Angel(angelImg, lightImg);
 
     //ellipses for the fire scene
     for (let i = 0; i < numEllipses2; i++) {
-      let ellipse2 = new Ellipse2();
+      let ellipse2 = new Ellipse2(250 * i);
       ellipses2.push(ellipse2);
     }
 
+    //fireballs for the fire scene
+    push();
+    translate (-10, 0, 0);
+    fireball = new Fireball1();
+    pop();
 
 }
 
@@ -106,7 +113,7 @@ function draw() {
   //map the volume number to a bigger size
   mapVolume = map(volume, 0, 0.3, 10, 100);
   //scale volume to a "good" number
-  scaleVolume = map(volume, 0, 0.3, 0.5, 20);
+  scaleVolume = map(volume, 0, 0.3, 0.5, 5);
 
   // gets an array of frequency bands
   spectrum = fft.analyze();
@@ -115,12 +122,12 @@ function draw() {
   mid = fft.getEnergy(`mid`);   // mid for mid frequency bands
   treble = fft.getEnergy(`treble`);  //treble for high bands(sometimes mid and treble are mixed up)
 
-  // map frequency value to a "good" number
-  mapBass = map(bass, 0, 255, 5, radius);
-  mapMid = map(mid, 0, 255, 5, radius * 2);
-  mapTreble = map(treble, 0, 255, 5, radius * 10);
+  // map frequency value to a "good" amount
+  mapBass = map(bass, 0, 255, 5, 300);
+  mapMid = map(mid, 0, 255, 5, 600);
+  mapTreble = map(treble, 0, 255, 5, 3000);
 
-console.log(mapVolume)
+console.log(mapMid)
 
   if (state === `title`) {
     titleScreen();
@@ -134,7 +141,7 @@ console.log(mapVolume)
 
 
 function danceFire(){
-background(0, 0, mapVolume / 2);
+background(0, 0, mapVolume);
 
 push();
 for (let i = 0; i < ellipses2.length; i++) {

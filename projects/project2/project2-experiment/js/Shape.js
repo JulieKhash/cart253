@@ -3,6 +3,7 @@ class Shape {
     this.x = x;
     this.y = y;
     this.size = size;
+    this.radius = width/6;
 
     this.strokeColor = strokeColor;
     this.strokeSize = strokeSize;
