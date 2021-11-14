@@ -11,18 +11,23 @@ let titlescreen;
 
 let font;
 
+//all the images
 let lightImg;
 let angelImg;
+let firemanImg;
+let fireballImg
 
+//all the music
 let musicXylophone;
+let musicOneTwo;
+
+//all the analyzers
 let amp;
+
 
 let numEllipses = 5;
 let ellipses = []  //an empty array to store our ellipses
 
-let size = 300;
-this.minRotationSpeed = 0.001;
-this.maxRotationSpeed = 0.01;
 
 let angel;
 
@@ -32,8 +37,11 @@ let mapVolume;
 function preload() {
   font = loadFont('assets/fonts/KIMONOG.ttf');
   angelImg = loadImage(`assets/images/AngelMan.png`);
+  angelImg = loadImage(`assets/images/FireMan.png`);
+  fireballImg = loadImage(`assets/images/fireball.gif`);
   lightImg = loadImage(`assets/images/light.png`);
   musicXylophone = loadSound(`assets/sounds/dream.mp3`);
+  musicOneTwo = loadSound(`assets/sounds/one-two.mp3`);
 }
 
 
@@ -45,6 +53,7 @@ function setup() {
   // musicXylophone.play();
   amp = new p5.Amplitude();
   amp.setInput(musicXylophone);
+  amp.setInput(musicOneTwo);
 
   // makes a given number of ellipses
     for (let i = 0; i <  numEllipses; i++){
@@ -69,10 +78,11 @@ function draw() {
     titleScreen();
   } else if (state === `danceAngel`){
     danceAngel();
+  } else if (state === `danceFire`){
+    danceAngel();
   }
 
 }
-
 
 function danceAngel(){
 background(0, mapVolume / 7, mapVolume / 6);
@@ -86,18 +96,22 @@ for (let i = 0; i < ellipses.length; i++){
 angel.rotate();
 angel.display();
 
-
 }
 
+// main screen
 function titleScreen(){
   titlescreen.draw();
 }
 
-
 function keyPressed(){
-  if (state === `title` || keyCode === ENTER) {
+  if (state === `title` && keyCode === ENTER) {
     state = `danceAngel`;
     musicXylophone.play();
+  } else if (state === `danceAngel` && keyCode === ENTER) {
+    musicXylophone.stop();
+    //state = `danceFire`;
+    //musicXylophone.stop();
+    //musicOneTwo.play();
   }
 }
 
