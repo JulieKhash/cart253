@@ -35,13 +35,39 @@ class Angel extends Shape {
     pop();
   }
 
-  // draw(){
-  //   this.display();
-  // }
 }
 
 // class fireman
+class FireMan extends Shape {
+  constructor() {
+    super()
+    this.x = 0;
+    this.y = 0;
+    this.size = 300;
+    this.strokeColor = 250
+    this.strokeSize = 1;
 
+    this.imageFireMan = firemanlImg;
+
+  }
+
+  rotate() {
+    rotate(frameCount * -this.maxRotationSpeed)
+    rotateX(frameCount * this.minRotationSpeed * 5);
+    rotateY(frameCount * this.minRotationSpeed * 5);
+
+  }
+
+  display() {
+
+    push();
+    imageMode(CENTER);
+    image(this.imageFireMan, 0, 250, (3000 / 4) + mapVolume + mapTreble / 2, (4000 / 4)
+     + mapVolume + mapTreble / 2);
+     pop()
+
+  }
+}
 
 
 // class ChameleonMan

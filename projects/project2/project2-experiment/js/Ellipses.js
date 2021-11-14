@@ -55,7 +55,7 @@ rotate(){
 display(){
   push();
   noFill();
-  stroke((mapMid/4) * scaleVolume, (mapMid/4) * scaleVolume, mapTreble*2 + mapMid * 2, mapMid/2);
+  stroke((mapMid/4) * scaleVolume, (mapMid/4) * scaleVolume, mapTreble*2 + mapMid + scaleVolume, mapMid/3);
   strokeWeight(scaleVolume/3);
   ellipse(this.x, this.y, this.size + scaleVolume * 4);
   pop();

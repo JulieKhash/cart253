@@ -5,7 +5,7 @@ Author Name
 */
 "use strict";
 
-let state = `danceFire`
+let state = `title`
 
 let titlescreen;
 
@@ -39,7 +39,7 @@ let numEllipses1 = 5;
 let ellipses1 = [] //an empty array to store our ellipses
 
 //ellipses for the fire scene
-let numEllipses2 = 6;
+let numEllipses2 = 7;
 let ellipses2 = [] //an empty array to store our ellipses
 
 
@@ -67,11 +67,9 @@ function preload() {
 
 
 function setup() {
-  createCanvas(1700, 1000, WEBGL);
-
+  createCanvas(1700, 1000, WEBGL); //WEBGL for 3D canvas
 
   titlescreen = new Title();
-
 
   amp = new p5.Amplitude();
   amp.setInput(musicXylophone);
@@ -108,13 +106,16 @@ function draw() {
 
   //get the sound level to detect the beats
   volume = amp.getLevel();
+
   //map the volume number to a bigger size
   mapVolume = map(volume, 0, 0.3, 10, 100);
+
   //scale volume to a "good" number
   scaleVolume = map(volume, 0, 0.3, 0.5, 5);
 
   // gets an array of frequency bands
   spectrum = fft.analyze();
+
   // amplitude of specific frequency bands
   bass = fft.getEnergy(`bass`); //bass for low frequency bands
   mid = fft.getEnergy(`mid`); // mid for mid frequency bands
@@ -125,8 +126,9 @@ function draw() {
   mapMid = map(mid, 0, 255, 5, 600);
   mapTreble = map(treble, 0, 255, 5, 3000);
 
-  console.log(mapMid)
+  console.log(mapVolume)
 
+// states for different scenes
   if (state === `title`) {
     titleScreen();
   } else if (state === `danceAngel`) {
@@ -136,10 +138,10 @@ function draw() {
   }
 }
 
-
+////////Scene2: dancing fire
 function danceFire() {
-  background(0, 0, mapVolume);
-
+  //dark blue background, responds to the sound amplitude
+  background(0, 0, mapVolume/2);
 
   //rotating orbits
   push();
@@ -157,24 +159,14 @@ function danceFire() {
 
   //fireballs rotating around the orbits
   push();
-  // let radius = width / 6;
-  // let x = radius * cos(i);
-  // let y = radius * sin(i);
-  // for (let j = 0; j < fireballs.length; j++) {
-   //translate(200, 100, 200);
     fireball2.rotate();
     fireball2.display();
-  // }
   pop()
-
 }
 
 
 
-
-
-
-// dancing angel screen
+///////// Scene1: dancing angel
 function danceAngel() {
   background(0, mapVolume - 15, mapVolume);
 

@@ -5,9 +5,6 @@ class Shape {
     this.size = size;
     this.radius = width/6;
 
-    this.strokeColor = strokeColor;
-    this.strokeSize = strokeSize;
-
     // this.minRotationValue = frameCount * this.minRotationSpeed;
     // this.minRotationValue = frameCount * this.maxRotationSpeed;
 

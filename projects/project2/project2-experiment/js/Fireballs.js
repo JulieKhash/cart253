@@ -1,3 +1,4 @@
+// a class for the central fire ball
 class Fireball1 extends Shape {
   constructor() {
     super();
@@ -7,15 +8,13 @@ class Fireball1 extends Shape {
   }
 
   rotate() {
-    translate(-100, 0, -100);
+    //translate(-100, 0, -100);
 
     rotate(frameCount * this.maxRotationSpeed * 5)
     rotateX(frameCount * this.maxRotationSpeed)
     rotateY(frameCount * this.maxRotationSpeed)
     rotateZ(frameCount * this.maxRotationSpeed)
-
   }
-
 
   display() {
     push();
@@ -27,7 +26,7 @@ class Fireball1 extends Shape {
   }
 }
 
-
+// a class for the small fireballs rotating along the orbit
 class Fireball2 extends Shape {
   constructor() {
     super();
@@ -35,10 +34,12 @@ class Fireball2 extends Shape {
     this.y = undefined;
     this.size = 20;
     this.numSmallSpheres = 10;
+
+    this.active = false;
   }
 
   rotate() {
-    rotate(frameCount * -this.minRotationSpeed * 3)
+    rotate(frameCount * -this.minRotationSpeed * 5)
     rotateY(frameCount * this.minRotationSpeed * 3)
     rotateZ(frameCount * -this.minRotationSpeed * 3)
   }
@@ -46,14 +47,14 @@ class Fireball2 extends Shape {
   display() {
     push();
 
-    for(let i = 0; i < this.numSmallSpheres; i++) {
+    for (let i = 0; i < this.numSmallSpheres; i++) {
       this.x = this.radius * cos(i);
       this.y = this.radius * sin(i);
       translate(this.x + 100, this.y + 50, 100);
       noStroke()
       texture(fireballImg);
       sphere(this.size + i + scaleVolume * 2);
-  }
+    }
     pop();
-}
+  }
 }
