@@ -1,3 +1,4 @@
+//defining an Ellipse1 class for the Angel Dance scene
 class Ellipse1 extends Shape {
   constructor() {
     super();
@@ -17,6 +18,7 @@ rotate(){
   rotateX(frameCount * -this.minRotationSpeed*9);
   rotateY(frameCount * -this.minRotationSpeed*9);
   rotateZ(frameCount * -this.minRotationSpeed*9);
+
 }
 
 display(){
@@ -29,12 +31,35 @@ display(){
   pop();
 }
 
-keyPressed(){
-  musicXylophone.loop();
-}
 }
 
+// an Ellipse2 class for the Fire Dance scene
+class Ellipse2 extends Shape {
+  constructor() {
+    super();
+    this.x = 0;
+    this.y = 0;
+    this.size = 400;
+    this.strokeColor = undefined;
+    this.strokeSize = undefined;
+}
 
-// class Ellipse2
+rotate(){
+
+  rotateX(frameCount * this.minRotationSpeed*5);
+  rotateY(frameCount * this.minRotationSpeed*5);
+  rotateZ(frameCount * this.minRotationSpeed*5);
+  
+}
+
+display(){
+  push();
+  noFill();
+  stroke(mapMid / 3 * scaleVolume / 2, mapMid / 3 * scaleVolume / 2, mapTreble * 2 + mapMid, mapMid);
+  strokeWeight(scaleVolume / 4);
+  ellipse(this.x, this.y, this.size * 6 + scaleVolume);
+  pop();
+}
+}
 
 // class Ellipse 3

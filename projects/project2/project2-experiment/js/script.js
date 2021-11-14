@@ -28,8 +28,8 @@ let scaleVolume;
 let spectrum;
 
 
-let numEllipses = 5;
-let ellipses = [] //an empty array to store our ellipses
+let numEllipses1 = 5;
+let ellipses1 = [] //an empty array to store our ellipses
 
 
 let angel;
@@ -40,7 +40,7 @@ let mapVolume;
 function preload() {
   font = loadFont('assets/fonts/KIMONOG.ttf');
   angelImg = loadImage(`assets/images/AngelMan.png`);
-  angelImg = loadImage(`assets/images/FireMan.png`);
+  firemanImg = loadImage(`assets/images/FireMan.png`);
   fireballImg = loadImage(`assets/images/fireball.gif`);
   lightImg = loadImage(`assets/images/light.png`);
 
@@ -58,16 +58,20 @@ function setup() {
   amp = new p5.Amplitude();
   amp.setInput(musicXylophone);
   amp.setInput(musicOneTwo);
+  musicOneTwo.setVolume(0.5); //reduction of volume by half
 
   fft = new p5.FFT(0.8, 512); //reduction of bins/samples down to 512 (by power of two)
 
 
-  // makes a given number of ellipses
-  for (let i = 0; i < numEllipses; i++) {
-    let ellipse = new Ellipse1();
-    ellipses.push(ellipse);
+  // makes a given number of ellipses for the angel scene
+  for (let i = 0; i < numEllipses1; i++) {
+    let ellipse1 = new Ellipse1();
+    ellipses1.push(ellipse1);
   }
-  angel = new Angel(angelImg, lightImg);
+    angel = new Angel(angelImg, lightImg);
+
+    //makes a given number of ellipses for the angel scene
+
 
 }
 
@@ -116,9 +120,9 @@ function danceAngel() {
   background(0, mapVolume / 7, mapVolume / 6);
 
   // rotating ellipses
-  for (let i = 0; i < ellipses.length; i++) {
-    ellipses[i].rotate();
-    ellipses[i].display();
+  for (let i = 0; i < ellipses1.length; i++) {
+    ellipses1[i].rotate();
+    ellipses1[i].display();
     // ellipses[i].keyPressed();
   }
   angel.rotate();
