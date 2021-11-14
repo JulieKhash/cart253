@@ -44,7 +44,9 @@ let ellipses2 = [] //an empty array to store our ellipses
 
 
 let angel;
-let fireball;
+let fireball1;
+let fireball2;
+let numSmallFireballs;
 
 let volume;
 let mapVolume;
@@ -79,6 +81,7 @@ function setup() {
 
 
   // makes a given number of ellipses for the angel scene
+  let radius = width / 6;
 
   for (let i = 0; i < numEllipses1; i++) {
     let ellipse1 = new Ellipse1(300 * i);
@@ -94,10 +97,20 @@ function setup() {
 
     //fireballs for the fire scene
     push();
-    translate (-10, 0, 0);
-    fireball = new Fireball1();
+    translate(-10, 0, 0);
+    fireball1 = new Fireball1();
     pop();
 
+    push();
+
+    for (let i = 0; i < numSmallFireballs; i++){
+      let x = radius * cos(i);
+      let y = radius * sin(i);
+      translate(x + 200, y + 100, 200);
+      fireball2 = new Fireball2(x, y, 20 * i);
+  }
+  pop();
+  
 }
 
 
@@ -106,7 +119,7 @@ function draw() {
   orbitControl(6, 6, 0.2);
   translate(0, 0, 0);
 
-  let radius = width / 6;
+  //let radius = width / 6;
 
   //get the sound level to detect the beats
   volume = amp.getLevel();
@@ -143,13 +156,27 @@ console.log(mapMid)
 function danceFire(){
 background(0, 0, mapVolume);
 
+
+//rotating orbits
 push();
 for (let i = 0; i < ellipses2.length; i++) {
   ellipses2[i].rotate();
   ellipses2[i].display();
 }
 pop();
+
+//fireball in the center
+fireball1.rotate();
+fireball1.display();
+
+//fireballs rotating around the orbits
+fireball2.rotate();
+fireball2.display();
 }
+
+
+
+
 
 
 
