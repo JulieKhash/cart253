@@ -5,7 +5,7 @@ Author Name
 */
 "use strict";
 
-let state = `title`
+let state = `danceFire`
 
 let titlescreen;
 
@@ -69,6 +69,7 @@ function preload() {
 function setup() {
   createCanvas(1700, 1000, WEBGL);
 
+
   titlescreen = new Title();
 
 
@@ -96,26 +97,22 @@ function setup() {
   }
 
   //fireballs for the fire scene
-  push();
-  translate(-10, 0, 0);
   fireball1 = new Fireball1();
-  pop();
 
-push();
+
   for (let i = 0; i < numSmallFireballs; i++) {
     let radius = width / 6;
-    // let x = radius * cos(i);
-    // let y = radius * sin(i);
-    translate(200,  100, 200);
-    fireball2 = new Fireball2(0, 0, 100);
+    let x = radius * cos(i);
+    let y = radius * sin(i);
+    fireball2 = new Fireball2(x, y, 10 + i);
     fireballs.push(fireball2);
   }
-pop()
+
+
 }
 
 
 function draw() {
-
   orbitControl(6, 6, 0.2);
   translate(0, 0, 0);
 
@@ -166,12 +163,19 @@ function danceFire() {
   pop();
 
   //fireball in the center
+  push();
+  translate(-10, 0, 0);
   fireball1.rotate();
   fireball1.display();
+  pop();
 
   //fireballs rotating around the orbits
   push();
+  // let radius = width / 6;
+  // let x = radius * cos(i);
+  // let y = radius * sin(i);
   for (let j = 0; j < fireballs.length; j++){
+  translate(100+j,  100, 200);
   fireball2.rotate();
   fireball2.display();
 }

@@ -13,6 +13,7 @@ class Fireball1 extends Shape {
     rotateZ(frameCount * this.maxRotationSpeed)
   }
 
+
   display() {
     push();
     noStroke()
@@ -40,8 +41,10 @@ class Fireball2 extends Shape {
 
   display() {
     push();
-    noStroke()
-    texture(fireballImg)
+    noFill();
+    stroke(255);
+    //noStroke()
+    //texture(fireballImg)
     sphere(this.size + scaleVolume * 2);
     pop();
 
