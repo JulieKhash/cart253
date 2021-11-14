@@ -46,7 +46,8 @@ let ellipses2 = [] //an empty array to store our ellipses
 let angel;
 let fireball1;
 let fireball2;
-let numSmallFireballs;
+let numSmallFireballs = 5;
+let fireballs = [];
 
 let volume;
 let mapVolume;
@@ -81,36 +82,35 @@ function setup() {
 
 
   // makes a given number of ellipses for the angel scene
-  let radius = width / 6;
 
   for (let i = 0; i < numEllipses1; i++) {
     let ellipse1 = new Ellipse1(300 * i);
     ellipses1.push(ellipse1);
   }
-    angel = new Angel(angelImg, lightImg);
+  angel = new Angel(angelImg, lightImg);
 
-    //ellipses for the fire scene
-    for (let i = 0; i < numEllipses2; i++) {
-      let ellipse2 = new Ellipse2(250 * i);
-      ellipses2.push(ellipse2);
-    }
-
-    //fireballs for the fire scene
-    push();
-    translate(-10, 0, 0);
-    fireball1 = new Fireball1();
-    pop();
-
-    push();
-
-    for (let i = 0; i < numSmallFireballs; i++){
-      let x = radius * cos(i);
-      let y = radius * sin(i);
-      translate(x + 200, y + 100, 200);
-      fireball2 = new Fireball2(x, y, 20 * i);
+  //ellipses for the fire scene
+  for (let i = 0; i < numEllipses2; i++) {
+    let ellipse2 = new Ellipse2(250 * i);
+    ellipses2.push(ellipse2);
   }
+
+  //fireballs for the fire scene
+  push();
+  translate(-10, 0, 0);
+  fireball1 = new Fireball1();
   pop();
-  
+
+push();
+  for (let i = 0; i < numSmallFireballs; i++) {
+    let radius = width / 6;
+    // let x = radius * cos(i);
+    // let y = radius * sin(i);
+    translate(200,  100, 200);
+    fireball2 = new Fireball2(0, 0, 100);
+    fireballs.push(fireball2);
+  }
+pop()
 }
 
 
@@ -132,15 +132,15 @@ function draw() {
   spectrum = fft.analyze();
   // amplitude of specific frequency bands
   bass = fft.getEnergy(`bass`); //bass for low frequency bands
-  mid = fft.getEnergy(`mid`);   // mid for mid frequency bands
-  treble = fft.getEnergy(`treble`);  //treble for high bands(sometimes mid and treble are mixed up)
+  mid = fft.getEnergy(`mid`); // mid for mid frequency bands
+  treble = fft.getEnergy(`treble`); //treble for high bands(sometimes mid and treble are mixed up)
 
   // map frequency value to a "good" amount
   mapBass = map(bass, 0, 255, 5, 300);
   mapMid = map(mid, 0, 255, 5, 600);
   mapTreble = map(treble, 0, 255, 5, 3000);
 
-console.log(mapMid)
+  console.log(mapMid)
 
   if (state === `title`) {
     titleScreen();
@@ -153,29 +153,31 @@ console.log(mapMid)
 }
 
 
-function danceFire(){
-background(0, 0, mapVolume);
+function danceFire() {
+  background(0, 0, mapVolume);
 
 
-//rotating orbits
-push();
-for (let i = 0; i < ellipses2.length; i++) {
-  ellipses2[i].rotate();
-  ellipses2[i].display();
+  //rotating orbits
+  push();
+  for (let i = 0; i < ellipses2.length; i++) {
+    ellipses2[i].rotate();
+    ellipses2[i].display();
+  }
+  pop();
+
+  //fireball in the center
+  fireball1.rotate();
+  fireball1.display();
+
+  //fireballs rotating around the orbits
+  push();
+  for (let j = 0; j < fireballs.length; j++){
+  fireball2.rotate();
+  fireball2.display();
 }
-pop();
+pop()
 
-//fireball in the center
-fireball1.rotate();
-fireball1.display();
-
-//fireballs rotating around the orbits
-fireball2.rotate();
-fireball2.display();
 }
-
-
-
 
 
 
