@@ -30,9 +30,9 @@ display(){
 }
 
 
-// keyPressed(){
-//   musicXylophone.loop();
-// }
+keyPressed(){
+  musicXylophone.loop();
+}
 }
 
 

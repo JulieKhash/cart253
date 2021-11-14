@@ -3,11 +3,13 @@ Title of Project
 Author Name
 
 */
-
 "use strict";
 
-let currentState;
-let fontRegular
+let state  = `title`
+
+let titlescreen;
+
+let font;
 
 let lightImg;
 let angelImg;
@@ -28,7 +30,7 @@ let volume;
 let mapVolume;
 
 function preload() {
-  fontRegular = loadFont('assets/fonts/KIMONOG.ttf');
+  font = loadFont('assets/fonts/KIMONOG.ttf');
   angelImg = loadImage(`assets/images/AngelMan.png`);
   lightImg = loadImage(`assets/images/light.png`);
   musicXylophone = loadSound(`assets/sounds/dream.mp3`);
@@ -36,10 +38,11 @@ function preload() {
 
 
 function setup() {
-  createCanvas(windowWidth, windowHeight, WEBGL);
-  currentState = new Title();
+  createCanvas(1700, 1000, WEBGL);
 
-  musicXylophone.play();
+  titlescreen = new Title();
+
+  // musicXylophone.play();
   amp = new p5.Amplitude();
   amp.setInput(musicXylophone);
 
@@ -49,37 +52,55 @@ function setup() {
     ellipses.push(ellipse);
 }
     angel  = new Angel(angelImg, lightImg);
-}
+
+  }
+
 
 function draw() {
 
   orbitControl(6, 6, 0.2);
-  background(50);
   translate(0, 0, 0);
 
   volume = amp.getLevel();
   mapVolume = map(volume, 0, 0.3, 10, 600);
 
-  background(0, mapVolume / 7, mapVolume / 6);
 
-/////////////////////////////////////////
-// First firstScene
-  // displays rotating circles
-  push();
-
-  for (let i = 0; i < ellipses.length; i++){
-   ellipses[i].rotate();
-   ellipses[i].display();
-   // ellipses[i].keyPressed();
+  if (state === `title`){
+    titleScreen();
+  } else if (state === `danceAngel`){
+    danceAngel();
   }
-  pop();
 
-  push();
-  angel.rotate();
-  angel.display();
-  pop();
+}
 
- currentState.draw();
+
+function danceAngel(){
+background(0, mapVolume / 7, mapVolume / 6);
+
+// rotating ellipses
+for (let i = 0; i < ellipses.length; i++){
+ ellipses[i].rotate();
+ ellipses[i].display();
+ // ellipses[i].keyPressed();
+}
+angel.rotate();
+angel.display();
+
+
+}
+
+function titleScreen(){
+  titlescreen.draw();
+}
+
+
+function keyPressed(){
+  if (state === `title` || keyCode === ENTER) {
+    state = `danceAngel`;
+    musicXylophone.play();
+  }
+}
+
   // push()
   // stroke(255);
   // strokeWeight(1);
@@ -97,5 +118,5 @@ function draw() {
   // ellipse(0, 0, size + mapVolume / 2);
   // pop();
 
-console.log(currentState);
-}
+// console.log(currentState);
+// }
