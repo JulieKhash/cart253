@@ -39,7 +39,7 @@ class Fireball2 extends Shape {
   }
 
   rotate() {
-    rotate(frameCount * -this.minRotationSpeed * 5)
+    rotate(frameCount *  this.minRotationSpeed * 5)
     rotateY(frameCount * this.minRotationSpeed * 3)
     rotateZ(frameCount * -this.minRotationSpeed * 3)
   }
