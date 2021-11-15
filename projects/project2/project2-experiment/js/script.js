@@ -25,6 +25,8 @@ let musicOneTwo;
 //all the sound analyzers
 let amp;
 let fft;
+let volume;
+let mapVolume;
 let scaleVolume;
 let spectrum;
 let bass;
@@ -51,8 +53,6 @@ let fireball2;
 let numSmallFireballs = 5;
 let fireballs = [];
 
-let volume;
-let mapVolume;
 
 
 
@@ -136,13 +136,15 @@ function draw() {
     titleScreen();
   } else if (state === `danceAngel`) {
     danceAngel();
-  } else if (state === `danceFire`) {
-    danceFire();
+  } else if (state === `danceCosmos`) {
+    danceCosmos();
+  } else if (state === `danceDynamic`) {
+    danceDynamic();
   }
 }
 
 ////////Scene2: dancing fire
-function danceFire() {
+function danceCosmos() {
   //dark blue background, responds to the sound amplitude
   background(0, 0, mapVolume/2);
 
@@ -169,7 +171,6 @@ function danceFire() {
 //shows rotating fireman figure
   push();
   fireman.rotate();
-  fireman.displayLight();
   fireman.display();
   pop();
 }
@@ -202,8 +203,11 @@ function keyPressed() {
     musicXylophone.play();
   } else if (state === `danceAngel` && keyCode === ENTER) {
     musicXylophone.stop();
-    state = `danceFire`;
-
+    state = `danceCosmos`;
+    musicOneTwo.play();
+  } else if (state === `danceCosmos` && keyCode === ENTER) {
+    musicOneTwo.stop();
+    state = `danceDynamic`;
     musicOneTwo.play();
   }
 }

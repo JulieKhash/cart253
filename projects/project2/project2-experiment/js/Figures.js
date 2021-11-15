@@ -37,6 +37,7 @@ class Angel extends Shape {
 
 }
 
+
 // class fireman
 class FireMan extends Shape {
   constructor(fireman, lightImg) {
@@ -60,12 +61,16 @@ class FireMan extends Shape {
 
   }
 
-
   rotateLight(){
     rotate(frameCount * -this.maxRotationSpeed)
     rotateX(frameCount * -this.minRotationSpeed * 5);
     rotateY(frameCount * -this.minRotationSpeed * 5);
     rotateZ(frameCount * -this.minRotationSpeed * 5);
+  }
+
+
+  display(){
+    this.displayLight();
   }
 
   displayLight() {
@@ -80,7 +85,6 @@ class FireMan extends Shape {
  }
   pop();
 }
-
 
 displayFireman(){
     push();

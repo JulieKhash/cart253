@@ -17,6 +17,7 @@ let lightImg;
 function preload() {
   dancer3Img = loadImage(`assets/images/ChameleonMan.png`);
   lightImg = loadImage(`assets/images/light.png`);
+  light2Img = loadImage(`assets/images/blue.png`);
   music = loadSound(`assets/sounds/rock2.mp3`);
 }
 
@@ -95,6 +96,7 @@ function draw() {
         ellipse(size+j/2, size, size/3);
           if (mapBass > 225){
               noStroke();
+              texture(light2Img);
               ellipse(size+j/2 + 100, size, size/3 + mapBass/5);
       }
     }
