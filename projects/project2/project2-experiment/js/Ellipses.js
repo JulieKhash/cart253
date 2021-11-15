@@ -62,7 +62,6 @@ class Ellipse2 extends Shape {
   }
 }
 
-
 // a class of rotating ellipses for the Dynamic Dance scene
 class Ellipse3 extends Shape {
   constructor(x, y, size, lightImg) {
@@ -76,7 +75,7 @@ class Ellipse3 extends Shape {
     this.maxSoundThreshold = 50;
     this.lightImg = lightImg;
 
-    this.active = false;
+    this.active = true;
   }
 
 //makes the background flashy with the higher volume
@@ -92,19 +91,21 @@ class Ellipse3 extends Shape {
     rotateZ(frameCount * -this.maxRotationSpeed);
   }
 
+
+
   display() {
     push();
     // makes the ellipses appear and stay once reached the soundThreshold
-    if (this.active || mapVolume >= this.maxSoundThreshold || mapVolume >25) {
+    // if (this.active || mapVolume >= this.maxSoundThreshold) {
+    if (!this.active && currentTime > 101 && currentTime < 277) {
 
-      this.active = true;
+
       noFill();
       stroke(mapTreble, mapMid / 2, 0, mapVolume);
       texture(lightImg);
       ellipse(this.x, this.y, this.size);
-    } else if (this.active === true || mapVolume < 30){
+    }  else {
       this.active = false;
-
     }
       pop();
 

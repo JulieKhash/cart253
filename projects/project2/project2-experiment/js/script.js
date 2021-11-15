@@ -39,6 +39,8 @@ let mapBass;
 let mapMid;
 let mapTreble;
 
+let currentTime;
+
 //ellipses for the angel scene
 let numEllipses1 = 5;
 let ellipse1;
@@ -92,6 +94,7 @@ function setup() {
   amp.setInput(musicOneTwo);
   amp.setInput(musicRock);
   musicRock.setVolume(0.4);
+
   //musicOneTwo.setVolume(0.5); //reduction of volume by half
 
   fft = new p5.FFT(0.8, 512); //reduction of bins/samples down to 512 (by power of two)
@@ -134,6 +137,10 @@ function draw() {
   orbitControl(6, 6, 0.2);
   translate(0, 0, 0); //postion the scene in the center
 
+  currentTime = musicRock.currentTime();
+  console.log(currentTime);
+
+
   //let radius = width / 6;
 
   //get the sound level to detect the beats
@@ -158,7 +165,7 @@ function draw() {
   mapMid = map(mid, 0, 255, 5, 600);
   mapTreble = map(treble, 0, 255, 5, 900);
 
-  console.log(mapVolume)
+  //console.log(mapVolume)
 
   // states for different scenes
   if (state === `title`) {
@@ -271,5 +278,6 @@ function keyPressed() {
 
 function jumpSong() {
   let len = musicRock.duration();
-  musicRock.jump(270);
+  // musicRock.jump(270);
+
 }
