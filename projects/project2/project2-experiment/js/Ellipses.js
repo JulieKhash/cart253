@@ -71,6 +71,7 @@ class Ellipse3 extends Shape {
     this.size = size;
     this.strokeColor = undefined;
     this.strokeSize = undefined;
+
     this.minSoundThreshold = 30;
     this.maxSoundThreshold = 50;
     this.lightImg = lightImg;
@@ -108,7 +109,7 @@ class Ellipse3 extends Shape {
     //stroke(mapTreble, mapMid / 2, 10)
     if (!this.active || mapVolume > this.maxSoundThreshold){
       texture(lightImg);
-      ellipse(this.x, this.y, this.size + mapBass/5);
+      ellipse(this.x, this.y, this.size + mapBass/3);
     }
     pop();
     }

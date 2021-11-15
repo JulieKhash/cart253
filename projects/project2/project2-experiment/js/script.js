@@ -127,15 +127,16 @@ function setup() {
   //ellipses for the dynamic scene 1
   for (let i = 0; i < numEllipses3; i++) {
     let size = 400;
-    ellipse3 = new Ellipse3(size + 100 + i, size, size/4, lightImg);
+    ellipse3 = new Ellipse3(size + 100 + i, size, size / 4, lightImg);
     ellipses3.push(ellipse3);
   }
 
   //ellipses for the dynamic scene 2
   for (let i = 0; i < numEllipses3; i++) {
-    let x = 100
+    let x = 150
+    let y = 200;
     let size = 50;
-    ellipseFX1 = new Ellipse3(x + i/2, size, size/4, lightImg);
+    ellipseFX1 = new Ellipse3(x + i, y, size, lightImg);
     ellipsesFX1.push(ellipseFX1);
   }
 
@@ -144,7 +145,7 @@ function setup() {
     let x = 250
     let y = 100;
     let size = 50;
-    ellipseFX2 = new Ellipse3(x + i/2 + 100, y, size, lightImg);
+    ellipseFX2 = new Ellipse3(x + i / 2 + 100, y, size, lightImg);
     ellipsesFX2.push(ellipseFX2);
   }
 
@@ -189,7 +190,7 @@ function draw() {
   mapMid = map(mid, 0, 255, 5, 600);
   mapTreble = map(treble, 0, 255, 5, 900);
 
-  console.log(mapBass)
+  console.log(mapVolume)
 
   // states for different scenes
   if (state === `title`) {
@@ -220,17 +221,15 @@ function danceDynamic() {
   for (let j = 0; j < ellipses3.length; j++) {
     ellipsesFX1[j].rotate2();
     ellipsesFX1[j].display2();
-}
+  }
   pop();
 
   push();
   for (let k = 0; k < ellipses3.length; k++) {
     ellipsesFX2[k].rotate3();
     ellipsesFX2[k].display3();
-}
+  }
   pop();
-
-
 
 
   push();
@@ -320,6 +319,6 @@ function keyPressed() {
 
 function jumpSong() {
   let len = musicRock.duration();
- // musicRock.jump(170);
+  musicRock.jump(100);
 
 }

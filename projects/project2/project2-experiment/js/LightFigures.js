@@ -107,8 +107,8 @@ class ChameleonMan extends Shape {
     this.sizeH = undefined;
     this.imageChameleonMan = chameleonManImg
 
-    this.minSoundThreshold = 30;
-    this.maxSoundThresold = 50;
+    this.minVolumeThreshold = 25;
+    this.maxVolumeThresold = 45;
   }
 
   rotateLight2() {
@@ -119,7 +119,11 @@ class ChameleonMan extends Shape {
     rotate(frameCount * this.maxRotationSpeed * 5);
   }
 
-  rotate() {
+  rotateMan2() {
+    rotate(frameCount * this.minRotationSpeed*8);
+  }
+
+  rotateMan1() {
     rotate(frameCount * this.minRotationSpeed);
     rotateY(frameCount * -this.minRotationSpeed * 5);
   }
@@ -128,26 +132,28 @@ class ChameleonMan extends Shape {
   display() {
     push();
     imageMode(CENTER);
-    if (mapVolume > this.minSoundThreshold) {
+    if (mapVolume > this.minVolumeThreshold) {
       this.rotateLight1();
       this.size = mapVolume + mapTreble, mapVolume + mapTreble
       image(lightImg, this.x, this.y, this.size, this.size);
     } else {
-      this.rotate();
+      this.rotateMan1();
       this.sizeW = 3000 / mapTreble + mapVolume * 2;
       this.sizeH = 4000 / mapTreble + mapVolume * 2;
       image(chameleonManImg, this.x, this.y, this.sizeW, this.sizeH);
-      pop();
     }
+      pop();
   }
 
   // displays rotating figure and light that adds the double effect
   display2() {
     push();
-    this.rotateLight2();
-    if (mapVolume > this.maxSoundThresold) {
+    imageMode(CENTER);
+    if (mapVolume > this.maxVolumeThresold) {
+      this.rotateLight2();
       this.size = mapVolume + mapTreble * 2
       image(lightImg, this.x, this.y, this.size, this.size);
+      this.rotateMan2();
       this.sizeW = 3000 / mapTreble + mapVolume * 2;
       this.sizeH = 4000 / mapTreble + mapVolume * 2;
       image(chameleonManImg, this.x, this.y, this.sizeW, this.sizeH);
