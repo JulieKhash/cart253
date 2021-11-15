@@ -44,6 +44,8 @@ let ellipses2 = [] //an empty array to store our ellipses
 
 
 let angel;
+let fireman;
+
 let fireball1;
 let fireball2;
 let numSmallFireballs = 5;
@@ -85,6 +87,7 @@ function setup() {
     ellipses1.push(ellipse1);
   }
   angel = new Angel(angelImg, lightImg);
+  fireman = new FireMan(firemanImg, lightImg);
 
   //ellipses for the fire scene
   for (let i = 0; i < numEllipses2; i++) {
@@ -126,7 +129,7 @@ function draw() {
   mapMid = map(mid, 0, 255, 5, 600);
   mapTreble = map(treble, 0, 255, 5, 3000);
 
-  console.log(mapVolume)
+  console.log(mapMid)
 
 // states for different scenes
   if (state === `title`) {
@@ -162,6 +165,13 @@ function danceFire() {
     fireball2.rotate();
     fireball2.display();
   pop()
+
+//shows rotating fireman figure
+  push();
+  fireman.rotate();
+  fireman.displayLight();
+  fireman.display();
+  pop();
 }
 
 

@@ -39,15 +39,17 @@ class Angel extends Shape {
 
 // class fireman
 class FireMan extends Shape {
-  constructor() {
+  constructor(fireman, lightImg) {
     super()
     this.x = 0;
     this.y = 0;
     this.size = 300;
     this.strokeColor = 250
     this.strokeSize = 1;
+    this.soundThreshold = 250;
 
-    this.imageFireMan = firemanlImg;
+    this.imageFireMan = firemanImg;
+    this.imageLight = lightImg
 
   }
 
@@ -58,16 +60,37 @@ class FireMan extends Shape {
 
   }
 
-  display() {
 
+  rotateLight(){
+    rotate(frameCount * -this.maxRotationSpeed)
+    rotateX(frameCount * -this.minRotationSpeed * 5);
+    rotateY(frameCount * -this.minRotationSpeed * 5);
+    rotateZ(frameCount * -this.minRotationSpeed * 5);
+  }
+
+  displayLight() {
+  push();
+ if (mapMid > this.soundThreshold) {
+   this.rotateLight();
+   noStroke();
+   texture(lightImg);
+   ellipse(this.x, this.y, mapBass + mapMid * 2 + mapTreble);
+ } else {
+   this.displayFireman()
+ }
+  pop();
+}
+
+
+displayFireman(){
     push();
     imageMode(CENTER);
     image(this.imageFireMan, 0, 250, (3000 / 4) + mapVolume + mapTreble / 2, (4000 / 4)
      + mapVolume + mapTreble / 2);
      pop()
-
   }
 }
+
 
 
 // class ChameleonMan
