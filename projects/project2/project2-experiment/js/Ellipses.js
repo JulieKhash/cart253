@@ -103,6 +103,7 @@ class Ellipse3 extends Shape {
     rotateZ(frameCount * -this.maxRotationSpeed);
   }
 
+
   display2() {
     push();
     noStroke();
@@ -117,9 +118,9 @@ class Ellipse3 extends Shape {
     display3(){
       push();
       noStroke();
-      if (!this.active || mapBass > 300){
+      if (!this.active || mapBass > 270){
         texture(lightImg);
-        ellipse(this.x, this.y, this.size + mapBass/4);
+        ellipse(this.x, this.y, this.size + mapBass/3);
       }
       pop();
       }

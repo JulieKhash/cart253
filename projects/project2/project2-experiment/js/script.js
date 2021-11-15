@@ -133,9 +133,9 @@ function setup() {
 
   //ellipses for the dynamic scene 2
   for (let i = 0; i < numEllipses3; i++) {
-    let x = 150
+    let x = 120
     let y = 200;
-    let size = 50;
+    let size = 30;
     ellipseFX1 = new Ellipse3(x + i, y, size, lightImg);
     ellipsesFX1.push(ellipseFX1);
   }
