@@ -33,7 +33,7 @@ display(){
 
 }
 
-// an Ellipse2 class for the Fire Dance scene
+// a class Ellipse2 for the Fire Dance scene
 class Ellipse2 extends Shape {
   constructor(size) {
     super();
@@ -62,4 +62,43 @@ display(){
 }
 }
 
-// class Ellipse 3
+// a class Ellipse3 for the Fire Dance scene
+class Ellipse3 extends Shape{
+  constructor(x, lightImg) {
+    super();
+    this.x = x;
+    this.y = y;
+    this.size = size;
+    this.strokeColor = undefined;
+    this.strokeSize = undefined;
+    this.maxSoundThreshold = 50;
+    this.lightImg = lightImg;
+
+    this.active = false;
+  }
+
+  rotate(){
+    rotateX(frameCount * -this.maxRotationSpeed);
+    rotateY(frameCount *  this.maxRotationSpeed);
+    rotateZ(frameCount * -this.maxRotationSpeed);
+  }
+
+
+  effect(){
+    if (mapVolume > this.maxSoundThresold){
+      background(mapVolume*2, mapVolume*2, mapVolume*2);
+    }
+  }
+
+  display(){
+    if (mapVolume > this.maxSoundThresold){
+    this.effect()
+    this.active = true;
+    this.size = 350;
+    tecture(lightImg);
+    ellipse(this.size, this.size, this.size/3);
+
+
+  }
+
+}
