@@ -1,5 +1,6 @@
 class Rectangle extends Shape {
   constructor() {
+    super();
     this.x = undefined;
     this.y = undefined;
     this.size = undefined;
@@ -13,9 +14,8 @@ class Rectangle extends Shape {
   }
 
   rotate(){
-
-    rotate(frameCount* maxRotationSpeed * 3 + mapVolume * 2);
-    rotateZ(frameCount * -minRotationSpeed);
+    rotate(frameCount* this.maxRotationSpeed * 3 + mapVolume*2);
+    rotateZ(frameCount * -this.minRotationSpeed);
   }
 
 
@@ -25,11 +25,20 @@ class Rectangle extends Shape {
     for (let i = 0; i < spectrum.length; i++) {
       let x = this.radius * cos(i);
       let y = this.radius * sin(i);
+      this.size = mapTreble / 3
+      this.rotate();
+      noFill();
       stroke(mapTreble, mapMid/2, 0, volume);
       rectMode(CENTER);
-      rect(x, y + mapBass - mapTreble, mapTreble / 3);
+      rect(x, y + mapBass - mapTreble, this.size);
   }
       pop();
 }
+
+// for (let i = 0; i < this.numRect; i++){
+//    rect(x, y + mapBass - mapTreble, this.size + mapTreble / 3);
+// }
+
+
 }
 }

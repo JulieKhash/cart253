@@ -53,6 +53,8 @@ let fireman;
 let fireball1;
 let fireball2;
 
+let centralVisualizer;
+
 
 
 function preload() {
@@ -102,6 +104,9 @@ function setup() {
   //fireballs for the cosmos scene
   fireball1 = new Fireball1();
   fireball2 = new Fireball2();
+
+  //centrial rectangles
+  centralVisualizer = new Rectangle();
 }
 
 
@@ -150,6 +155,12 @@ function draw() {
 
 function danceDynamic(){
   background(mapVolume, 0, 0);
+
+  push();
+  translate(0, 0, 0);
+  //centralVisualizer.rotate();
+  centralVisualizer.display();
+  pop();
 }
 
 
