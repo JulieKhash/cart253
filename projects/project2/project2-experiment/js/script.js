@@ -22,6 +22,7 @@ let chameleonManImg;
 //all the music
 let musicXylophone;
 let musicOneTwo;
+let musicRock;
 
 //all the sound analyzers
 let amp;
@@ -51,9 +52,6 @@ let fireman;
 
 let fireball1;
 let fireball2;
-let numSmallFireballs = 5;
-let fireballs = [];
-
 
 
 
@@ -63,7 +61,7 @@ function preload() {
   firemanImg = loadImage(`assets/images/FireMan.png`);
   fireballImg = loadImage(`assets/images/fireball.gif`);
   lightImg = loadImage(`assets/images/light.png`);
-  chameleonManImg = load(`assets/images/ChameleonMan.png`)
+  chameleonManImg = loadImage(`assets/images/ChameleonMan.png`)
 
   musicXylophone = loadSound(`assets/sounds/dream.mp3`);
   musicOneTwo = loadSound(`assets/sounds/one-two.mp3`);
@@ -79,9 +77,12 @@ function setup() {
   amp = new p5.Amplitude();
   amp.setInput(musicXylophone);
   amp.setInput(musicOneTwo);
+  amp.setInput(musicRock);
   //musicOneTwo.setVolume(0.5); //reduction of volume by half
 
   fft = new p5.FFT(0.8, 512); //reduction of bins/samples down to 512 (by power of two)
+  fft.setInput(musicOneTwo);
+  fft.setInput(musicRock);
 
 
   // makes a given number of ellipses for the angel scene
@@ -92,13 +93,13 @@ function setup() {
   angel = new Angel(angelImg, lightImg);
   fireman = new FireMan(firemanImg, lightImg);
 
-  //ellipses for the fire scene
+  //ellipses for the cosmos scene
   for (let i = 0; i < numEllipses2; i++) {
     let ellipse2 = new Ellipse2(250 * i);
     ellipses2.push(ellipse2);
   }
 
-  //fireballs for the fire scene
+  //fireballs for the cosmos scene
   fireball1 = new Fireball1();
   fireball2 = new Fireball2();
 }
@@ -119,10 +120,10 @@ function draw() {
   //scale volume to a "good" number
   scaleVolume = map(volume, 0, 0.3, 0.5, 5);
 
-  // gets an array of frequency bands
+  // get an array of frequency bands
   spectrum = fft.analyze();
 
-  // amplitude of specific frequency bands
+  // get an amplitude of specific frequency bands
   bass = fft.getEnergy(`bass`); //bass for low frequency bands
   mid = fft.getEnergy(`mid`); // mid for mid frequency bands
   treble = fft.getEnergy(`treble`); //treble for high bands(sometimes mid and treble are mixed up)
@@ -145,6 +146,14 @@ function draw() {
     danceDynamic();
   }
 }
+
+
+function danceDynamic(){
+  background(mapVolume, 0, 0);
+}
+
+
+
 
 ////////Scene2: dancing fire
 function danceCosmos() {
@@ -210,6 +219,6 @@ function keyPressed() {
   } else if (state === `danceCosmos` && keyCode === ENTER) {
     musicOneTwo.stop();
     state = `danceDynamic`;
-    musicOneTwo.play();
+    musicRock.play();
   }
 }
