@@ -172,15 +172,15 @@ function draw() {
 
 function danceDynamic() {
   background(mapVolume * 2, 0, 0);
+  ellipse3.effect(); 
 
   // rotating ellipses
-   push();
-   for (let i = 0; i < ellipses3.length; i++) {
-     ellipses3[i].rotate();
-     ellipses3[i].display();
-     ellipse3.effect();
-   }
-     pop();
+  push();
+  for (let i = 0; i < ellipses3.length; i++) {
+    ellipses3[i].rotate();
+    ellipses3[i].display();
+  }
+  pop();
 
   push();
   //centralVisualizer.rotate();
@@ -268,7 +268,7 @@ function keyPressed() {
   }
 }
 
-function jumpSong(){
+function jumpSong() {
   let len = musicRock.duration();
   musicRock.jump(100);
 }
