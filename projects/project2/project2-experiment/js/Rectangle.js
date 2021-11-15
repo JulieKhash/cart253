@@ -8,7 +8,6 @@ class Rectangle extends Shape {
     this.stroke = undefined;
     this.strokeWeight = undefined;
 
-    this.numRect = 30;
 
     this.active = true;
   }
@@ -20,17 +19,18 @@ class Rectangle extends Shape {
 
 
   display(){
+
     if (this.active) {
     push();
     for (let i = 0; i < spectrum.length; i++) {
       let x = this.radius * cos(i);
       let y = this.radius * sin(i);
-      this.size = mapTreble / 3
+      this.size = mapTreble / 4
       this.rotate();
       noFill();
-      stroke(mapTreble, mapMid/2, 0, volume);
+      stroke(mapTreble, mapMid/2, 0, mapVolume);
       rectMode(CENTER);
-      rect(x, y + mapBass - mapTreble, this.size);
+      rect(x, y +  mapTreble / 4 - mapBass, this.size);
   }
       pop();
 }

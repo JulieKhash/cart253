@@ -80,6 +80,7 @@ function setup() {
   amp.setInput(musicXylophone);
   amp.setInput(musicOneTwo);
   amp.setInput(musicRock);
+  musicRock.setVolume(0.4);
   //musicOneTwo.setVolume(0.5); //reduction of volume by half
 
   fft = new p5.FFT(0.8, 512); //reduction of bins/samples down to 512 (by power of two)
@@ -136,9 +137,9 @@ function draw() {
   // map frequency value to a "good" amount
   mapBass = map(bass, 0, 255, 5, 300);
   mapMid = map(mid, 0, 255, 5, 600);
-  mapTreble = map(treble, 0, 255, 5, 3000);
+  mapTreble = map(treble, 0, 255, 5, 900);
 
-  console.log(mapMid)
+  console.log(mapBass)
 
 // states for different scenes
   if (state === `title`) {
@@ -154,7 +155,7 @@ function draw() {
 
 
 function danceDynamic(){
-  background(mapVolume, 0, 0);
+  background(mapVolume*2, 0, 0);
 
   push();
   translate(0, 0, 0);
