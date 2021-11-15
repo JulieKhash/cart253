@@ -12,7 +12,7 @@ class Visualizer extends Shape {
   }
 
   rotate() {
-    rotate(frameCount * this.maxRotationSpeed * 3 + mapVolume * 2);
+    rotate(frameCount * this.maxRotationSpeed*2 + mapVolume*2);
     rotateZ(frameCount * -this.minRotationSpeed);
   }
 
@@ -22,13 +22,12 @@ class Visualizer extends Shape {
     if (this.active && currentTime < 305) {
       push();
       for (let i = 0; i < spectrum.length; i++) {
-
+        this.rotate();
         let x = this.radius * cos(i);
         let y = this.radius * sin(i);
         this.size = mapTreble / 3
-        this.rotate();
         noFill();
-        stroke(mapTreble, mapMid / 2, 0, mapVolume);
+        stroke(mapTreble, mapMid/2+10, mapVolume/4, mapVolume/2);
         rectMode(CENTER);
         rect(x, y + mapTreble - mapBass, this.size);
       }

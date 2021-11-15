@@ -60,6 +60,9 @@ let numEllipsesFX1 = 20;
 let ellipseFX1;
 let ellipsesFX1 = [];
 
+let numEllipsesFX2 = 20;
+let ellipseFX2;
+let ellipsesFX2 = [];
 
 
 let angel;
@@ -121,18 +124,28 @@ function setup() {
     ellipses2.push(ellipse2);
   }
 
-  //ellipses for the dynamic scene
+  //ellipses for the dynamic scene 1
   for (let i = 0; i < numEllipses3; i++) {
     let size = 400;
     ellipse3 = new Ellipse3(size + 100 + i, size, size/4, lightImg);
     ellipses3.push(ellipse3);
   }
 
-  //ellipses for the dynamic scene
-  for (let i = 0; i < numEllipsesFX1; i++) {
-    let size = 200;
-    ellipseFX1 = new Ellipse3(size/2 + i, size, size/3, lightImg);
+  //ellipses for the dynamic scene 2
+  for (let i = 0; i < numEllipses3; i++) {
+    let x = 100
+    let size = 50;
+    ellipseFX1 = new Ellipse3(x + i/2, size, size/4, lightImg);
     ellipsesFX1.push(ellipseFX1);
+  }
+
+  //ellipses for the dynamic scene 3
+  for (let i = 0; i < numEllipses3; i++) {
+    let x = 250
+    let y = 100;
+    let size = 50;
+    ellipseFX2 = new Ellipse3(x + i/2 + 100, y, size, lightImg);
+    ellipsesFX2.push(ellipseFX2);
   }
 
   //fireballs for the cosmos scene
@@ -158,7 +171,7 @@ function draw() {
   volume = amp.getLevel();
 
   //map the volume number to a bigger size
-  mapVolume = map(volume, 0, 0.3, 10, 100);
+  mapVolume = map(volume, 0, 0.3, 0.1, 100);
 
   //scale volume to a "good" number
   scaleVolume = map(volume, 0, 0.3, 0.5, 5);
@@ -176,7 +189,7 @@ function draw() {
   mapMid = map(mid, 0, 255, 5, 600);
   mapTreble = map(treble, 0, 255, 5, 900);
 
-  console.log(mapVolume)
+  console.log(mapBass)
 
   // states for different scenes
   if (state === `title`) {
@@ -204,11 +217,21 @@ function danceDynamic() {
   pop();
 
   push();
-  for (let j = 0; j < ellipsesFX1.length; j++) {
+  for (let j = 0; j < ellipses3.length; j++) {
     ellipsesFX1[j].rotate2();
     ellipsesFX1[j].display2();
 }
   pop();
+
+  push();
+  for (let k = 0; k < ellipses3.length; k++) {
+    ellipsesFX2[k].rotate3();
+    ellipsesFX2[k].display3();
+}
+  pop();
+
+
+
 
   push();
   centralVisualizer.display();
@@ -297,6 +320,6 @@ function keyPressed() {
 
 function jumpSong() {
   let len = musicRock.duration();
-  musicRock.jump(150);
+ // musicRock.jump(170);
 
 }

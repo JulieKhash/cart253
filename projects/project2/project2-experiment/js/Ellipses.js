@@ -93,20 +93,36 @@ class Ellipse3 extends Shape {
 
 
   rotate2(){
+    rotate(frameCount * this.maxRotationSpeed*2 + mapVolume);
     rotateZ(frameCount * -this.maxRotationSpeed);
-    rotate(frameCount * this.maxRotationSpeed*3 + mapVolume*2);
+  }
+
+  rotate3(){
+    rotate(frameCount * this.maxRotationSpeed*2 + mapVolume);
+    rotateZ(frameCount * -this.maxRotationSpeed);
   }
 
   display2() {
     push();
-    // noStroke();
-    stroke(mapTreble, mapMid / 2, 10)
-    if (!this.active || mapVolume > this.maxSoundThreshold + 10){
+    noStroke();
+    //stroke(mapTreble, mapMid / 2, 10)
+    if (!this.active || mapVolume > this.maxSoundThreshold){
       texture(lightImg);
       ellipse(this.x, this.y, this.size + mapBass/5);
     }
     pop();
     }
+
+    display3(){
+      push();
+      noStroke();
+      if (!this.active || mapBass > 300){
+        texture(lightImg);
+        ellipse(this.x, this.y, this.size + mapBass/4);
+      }
+      pop();
+      }
+
 
 
   display() {
