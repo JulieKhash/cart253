@@ -108,7 +108,7 @@ class ChameleonMan extends Shape{
     this.imageChameleonMan = chameleonManImg
 
     this.minSoundThreshold = 30;
-    this.maxSoundThresold = 60;
+    this.maxSoundThresold = 50;
   }
 
   rotateLight2(){
@@ -121,7 +121,7 @@ class ChameleonMan extends Shape{
 
   rotate(){
     rotate(frameCount * this.minRotationSpeed);
-    rotateY(frameCount * -this.minRotationSpeed*7);
+    rotateY(frameCount * -this.minRotationSpeed*5);
   }
 
 //
