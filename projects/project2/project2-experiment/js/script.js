@@ -166,7 +166,7 @@ function danceDynamic(){
   pop();
 
   push();
-  chameleonman.rotate();
+  //chameleonman.rotate();
   chameleonman.display();
   pop();
 }

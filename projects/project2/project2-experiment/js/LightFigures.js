@@ -113,9 +113,7 @@ class ChameleonMan extends Shape{
 
 
   rotateLight1(){
-    push();
     rotate(frameCount * this.maxRotationSpeed*5);
-    pop();
   }
 
   rotate(){
@@ -131,6 +129,7 @@ class ChameleonMan extends Shape{
       this.size = mapVolume + mapTreble, mapVolume + mapTreble
       image(lightImg, this.x, this.y,  this.size, this.size);
 } else {
+    this.rotate();
     this.sizeW = 3000 / mapTreble + mapVolume*2;
     this.sizeH = 4000 / mapTreble + mapVolume*2;
     image(chameleonManImg, this.x, this.y, this.sizeW, this.sizeH);
