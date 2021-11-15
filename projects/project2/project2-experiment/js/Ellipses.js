@@ -92,13 +92,28 @@ class Ellipse3 extends Shape {
   }
 
 
+  rotate2(){
+    rotateZ(frameCount * -this.maxRotationSpeed);
+    rotate(frameCount * this.maxRotationSpeed*3 + mapVolume*2);
+  }
+
+  display2() {
+    push();
+    // noStroke();
+    stroke(mapTreble, mapMid / 2, 10)
+    if (!this.active || mapVolume > this.maxSoundThreshold + 10){
+      texture(lightImg);
+      ellipse(this.x, this.y, this.size + mapBass/5);
+    }
+    pop();
+    }
+
 
   display() {
     push();
-    // makes the ellipses appear and stay once reached the soundThreshold
+    // makes the rotating ellipses appear and stay when soundThreshold reached
     // if (this.active || mapVolume >= this.maxSoundThreshold) {
     if (!this.active && currentTime > 102.1 && currentTime < 277) {
-
 
       noFill();
       stroke(mapTreble, mapMid / 2, 0, mapVolume);
@@ -108,7 +123,6 @@ class Ellipse3 extends Shape {
       this.active = false;
     }
       pop();
-
   }
 }
 

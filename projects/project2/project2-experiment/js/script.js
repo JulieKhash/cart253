@@ -56,6 +56,10 @@ let numEllipses3 = 30;
 let ellipse3;
 let ellipses3 = [];
 
+let numEllipsesFX1 = 20;
+let ellipseFX1;
+let ellipsesFX1 = [];
+
 
 
 let angel;
@@ -124,6 +128,13 @@ function setup() {
     ellipses3.push(ellipse3);
   }
 
+  //ellipses for the dynamic scene
+  for (let i = 0; i < numEllipsesFX1; i++) {
+    let size = 200;
+    ellipseFX1 = new Ellipse3(size/2 + i, size, size/3, lightImg);
+    ellipsesFX1.push(ellipseFX1);
+  }
+
   //fireballs for the cosmos scene
   fireball1 = new Fireball1();
   fireball2 = new Fireball2();
@@ -138,7 +149,7 @@ function draw() {
   translate(0, 0, 0); //postion the scene in the center
 
   currentTime = musicRock.currentTime();
-  console.log(currentTime);
+  //console.log(currentTime);
 
 
   //let radius = width / 6;
@@ -165,7 +176,7 @@ function draw() {
   mapMid = map(mid, 0, 255, 5, 600);
   mapTreble = map(treble, 0, 255, 5, 900);
 
-  //console.log(mapVolume)
+  console.log(mapVolume)
 
   // states for different scenes
   if (state === `title`) {
@@ -193,6 +204,13 @@ function danceDynamic() {
   pop();
 
   push();
+  for (let j = 0; j < ellipsesFX1.length; j++) {
+    ellipsesFX1[j].rotate2();
+    ellipsesFX1[j].display2();
+}
+  pop();
+
+  push();
   centralVisualizer.display();
   pop();
 
@@ -203,6 +221,7 @@ function danceDynamic() {
   chameleonman.display2();
   pop();
 }
+
 
 
 
@@ -278,6 +297,6 @@ function keyPressed() {
 
 function jumpSong() {
   let len = musicRock.duration();
-  musicRock.jump(95);
+  musicRock.jump(150);
 
 }
