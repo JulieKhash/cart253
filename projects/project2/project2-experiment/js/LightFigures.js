@@ -20,7 +20,6 @@ class Angel extends Shape {
   }
 
   display() {
-
     push();
     noFill();
     stroke(this.strokeColor);
@@ -98,3 +97,34 @@ displayFireman(){
 
 
 // class ChameleonMan
+class ChameleonMan extends Shape{
+  super();
+  constructor() {
+    this.x = 0;
+    this.y = 0;
+    this.sizeW = undefined;
+    this.sizeH = undefined;
+    this.imageChameleonMan = chameleonManImg
+
+    this.minSoundThreshold = 65;
+    this.maxSoundThresold = 110;
+
+  }
+
+  rotate(){
+    rotate(frameCount * this.maxRotationSpeed*5);
+  }
+
+  display(){
+    push();
+    imageMode(CENTER);
+    this.sizeW = 3000 / mapTreble + mapVolume*2;
+    this.sizeH = 4000 / mapTreble + mapVolume*2;
+    image(chameleonManImg, this.x, this.y, this.sizeW, this.sizeH);
+
+  
+    pop();
+  }
+
+
+}

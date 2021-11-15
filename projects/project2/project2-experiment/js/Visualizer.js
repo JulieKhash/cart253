@@ -1,4 +1,4 @@
-class Rectangle extends Shape {
+class Visualizer extends Shape {
   constructor() {
     super();
     this.x = undefined;
@@ -7,7 +7,6 @@ class Rectangle extends Shape {
 
     this.stroke = undefined;
     this.strokeWeight = undefined;
-
 
     this.active = true;
   }
@@ -23,21 +22,18 @@ class Rectangle extends Shape {
     if (this.active) {
     push();
     for (let i = 0; i < spectrum.length; i++) {
+
       let x = this.radius * cos(i);
       let y = this.radius * sin(i);
-      this.size = mapTreble / 4
+      this.size = mapTreble / 3
       this.rotate();
       noFill();
       stroke(mapTreble, mapMid/2, 0, mapVolume);
       rectMode(CENTER);
-      rect(x, y +  mapTreble / 4 - mapBass, this.size);
+      rect(x, y + mapTreble - mapBass, this.size);
   }
       pop();
 }
-
-// for (let i = 0; i < this.numRect; i++){
-//    rect(x, y + mapBass - mapTreble, this.size + mapTreble / 3);
-// }
 
 
 }

@@ -107,7 +107,7 @@ function setup() {
   fireball2 = new Fireball2();
 
   //centrial rectangles
-  centralVisualizer = new Rectangle();
+  centralVisualizer = new Visualizer();
 }
 
 
