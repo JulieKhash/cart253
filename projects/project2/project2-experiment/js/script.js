@@ -278,6 +278,6 @@ function keyPressed() {
 
 function jumpSong() {
   let len = musicRock.duration();
-  // musicRock.jump(270);
+  musicRock.jump(95);
 
 }

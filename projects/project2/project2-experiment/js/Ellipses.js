@@ -97,7 +97,7 @@ class Ellipse3 extends Shape {
     push();
     // makes the ellipses appear and stay once reached the soundThreshold
     // if (this.active || mapVolume >= this.maxSoundThreshold) {
-    if (!this.active && currentTime > 101 && currentTime < 277) {
+    if (!this.active && currentTime > 102.1 && currentTime < 277) {
 
 
       noFill();

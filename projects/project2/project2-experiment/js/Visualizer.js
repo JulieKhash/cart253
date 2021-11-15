@@ -19,7 +19,7 @@ class Visualizer extends Shape {
 
   display() {
 
-    if (this.active) {
+    if (this.active && currentTime < 305) {
       push();
       for (let i = 0; i < spectrum.length; i++) {
 
@@ -33,8 +33,10 @@ class Visualizer extends Shape {
         rect(x, y + mapTreble - mapBass, this.size);
       }
       pop();
-    }
+    } else {
+       this.active = false;
 
 
   }
+}
 }
