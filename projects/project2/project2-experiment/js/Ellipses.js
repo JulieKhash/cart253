@@ -67,8 +67,8 @@ class Ellipse3 extends Shape{
   constructor(x, lightImg) {
     super();
     this.x = x;
-    this.y = y;
-    this.size = size;
+    // this.y = y;
+    this.size = undefined;
     this.strokeColor = undefined;
     this.strokeSize = undefined;
     this.maxSoundThreshold = 50;
@@ -84,21 +84,17 @@ class Ellipse3 extends Shape{
   }
 
 
-  effect(){
-    if (mapVolume > this.maxSoundThresold){
-      background(mapVolume*2, mapVolume*2, mapVolume*2);
-    }
-  }
-
   display(){
+    push();
     if (mapVolume > this.maxSoundThresold){
+    background(mapVolume*2, mapVolume*2, mapVolume*2);
     this.effect()
-    this.active = true;
+    // this.active = true;
     this.size = 350;
     tecture(lightImg);
     ellipse(this.size, this.size, this.size/3);
-
-
+    pop();
   }
+}
 
 }

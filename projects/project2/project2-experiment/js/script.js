@@ -44,7 +44,11 @@ let ellipses1 = [] //an empty array to store our ellipses
 
 //ellipses for the fire scene
 let numEllipses2 = 7;
-let ellipses2 = [] //an empty array to store our ellipses
+let ellipses2 = []
+
+//ellipses for the dynamic scene
+let numEllipses3 = 30;
+let ellipses3 = []
 
 
 let angel;
@@ -102,6 +106,12 @@ function setup() {
   for (let i = 0; i < numEllipses2; i++) {
     let ellipse2 = new Ellipse2(250 * i);
     ellipses2.push(ellipse2);
+  }
+
+  //ellipses for the dynamic scene
+  for (let i = 0; i < numEllipses3; i++) {
+    let ellipse3 = new Ellipse3(1*i, lightImg);
+    ellipses3.push(ellipse3);
   }
 
   //fireballs for the cosmos scene
@@ -168,6 +178,13 @@ function danceDynamic(){
   //chameleonman.rotate();
   chameleonman.display();
   chameleonman.display2();
+  pop();
+
+  push();
+  for (let i = 0; i < ellipses3.length; i++) {
+    ellipses3[i].rotate();
+    ellipses3[i].display();
+  }
   pop();
 }
 
