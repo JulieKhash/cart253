@@ -16,7 +16,8 @@ let font;
 let lightImg;
 let angelImg;
 let firemanImg;
-let fireballImg
+let fireballImg;
+let chameleonManImg;
 
 //all the music
 let musicXylophone;
@@ -62,9 +63,11 @@ function preload() {
   firemanImg = loadImage(`assets/images/FireMan.png`);
   fireballImg = loadImage(`assets/images/fireball.gif`);
   lightImg = loadImage(`assets/images/light.png`);
+  chameleonManImg = load(`assets/images/ChameleonMan.png`)
 
   musicXylophone = loadSound(`assets/sounds/dream.mp3`);
   musicOneTwo = loadSound(`assets/sounds/one-two.mp3`);
+  musicRock = loadSound(`assets/sounds/electro-rock.mp3`);
 }
 
 
@@ -189,7 +192,6 @@ function danceAngel() {
   }
   angel.rotate();
   angel.display();
-
 }
 
 // main screen
