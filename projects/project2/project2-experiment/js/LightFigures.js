@@ -60,7 +60,7 @@ class FireMan extends Shape {
 
   }
 
-  rotateLight(){
+  rotateLight() {
     rotate(frameCount * -this.maxRotationSpeed)
     rotateX(frameCount * -this.minRotationSpeed * 5);
     rotateY(frameCount * -this.minRotationSpeed * 5);
@@ -68,36 +68,36 @@ class FireMan extends Shape {
   }
 
 
-  display(){
+  display() {
     this.displayLight();
   }
 
   displayLight() {
-  push();
- if (mapMid > this.soundThreshold) {
-   this.rotateLight();
-   noStroke();
-   texture(lightImg);
-   ellipse(this.x, this.y, mapBass + mapMid * 2 + mapTreble);
- } else {
-   this.displayFireman()
- }
-  pop();
-}
+    push();
+    if (mapMid > this.soundThreshold) {
+      this.rotateLight();
+      noStroke();
+      texture(lightImg);
+      ellipse(this.x, this.y, mapBass + mapMid * 2 + mapTreble);
+    } else {
+      this.displayFireman()
+    }
+    pop();
+  }
 
-displayFireman(){
+  displayFireman() {
     push();
     imageMode(CENTER);
-    image(this.imageFireMan, 0, 250, (3000 / 4) + mapVolume + mapTreble / 2, (4000 / 4)
-     + mapVolume + mapTreble / 2);
-     pop()
+    image(this.imageFireMan, 0, 250, (3000 / 4) + mapVolume + mapTreble / 2, (4000 / 4) +
+      mapVolume + mapTreble / 2);
+    pop()
   }
 }
 
 
 
 // class for Chameleon Man
-class ChameleonMan extends Shape{
+class ChameleonMan extends Shape {
   constructor(chameleonManImg, lightImg) {
     super();
     this.x = 0;
@@ -111,49 +111,49 @@ class ChameleonMan extends Shape{
     this.maxSoundThresold = 50;
   }
 
-  rotateLight2(){
-    rotate(frameCount * this.minRotationSpeed*8);
+  rotateLight2() {
+    rotate(frameCount * this.minRotationSpeed * 8);
   }
 
-  rotateLight1(){
-    rotate(frameCount * this.maxRotationSpeed*5);
+  rotateLight1() {
+    rotate(frameCount * this.maxRotationSpeed * 5);
   }
 
-  rotate(){
+  rotate() {
     rotate(frameCount * this.minRotationSpeed);
-    rotateY(frameCount * -this.minRotationSpeed*5);
+    rotateY(frameCount * -this.minRotationSpeed * 5);
   }
 
-//
-  display(){
+  //
+  display() {
     push();
     imageMode(CENTER);
-    if(mapVolume > this.minSoundThreshold) {
+    if (mapVolume > this.minSoundThreshold) {
       this.rotateLight1();
       this.size = mapVolume + mapTreble, mapVolume + mapTreble
-      image(lightImg, this.x, this.y,  this.size, this.size);
-} else {
-    this.rotate();
-    this.sizeW = 3000 / mapTreble + mapVolume*2;
-    this.sizeH = 4000 / mapTreble + mapVolume*2;
-    image(chameleonManImg, this.x, this.y, this.sizeW, this.sizeH);
+      image(lightImg, this.x, this.y, this.size, this.size);
+    } else {
+      this.rotate();
+      this.sizeW = 3000 / mapTreble + mapVolume * 2;
+      this.sizeH = 4000 / mapTreble + mapVolume * 2;
+      image(chameleonManImg, this.x, this.y, this.sizeW, this.sizeH);
+      pop();
+    }
+  }
+
+  // displays rotating figure and light that adds the double effect
+  display2() {
+    push();
+    this.rotateLight2();
+    if (mapVolume > this.maxSoundThresold) {
+      this.size = mapVolume + mapTreble * 2
+      image(lightImg, this.x, this.y, this.size, this.size);
+      this.sizeW = 3000 / mapTreble + mapVolume * 2;
+      this.sizeH = 4000 / mapTreble + mapVolume * 2;
+      image(chameleonManImg, this.x, this.y, this.sizeW, this.sizeH);
+    }
     pop();
   }
-}
-
-// displays rotating figure and light that adds the double effect
-display2(){
-  push();
-  this.rotateLight2();
-  if(mapVolume > this.maxSoundThresold) {
-    this.size = mapVolume + mapTreble*2
-    image(lightImg, this.x, this.y,  this.size, this.size);
-    this.sizeW = 3000 / mapTreble + mapVolume*2;
-    this.sizeH = 4000 / mapTreble + mapVolume*2;
-    image(chameleonManImg, this.x, this.y, this.sizeW, this.sizeH);
-  }
-  pop();
-}
 
 
 

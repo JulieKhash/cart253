@@ -3,7 +3,7 @@ class Shape {
     this.x = x;
     this.y = y;
     this.size = size;
-    this.radius = width/6;
+    this.radius = width / 6;
 
     // this.minRotationValue = frameCount * this.minRotationSpeed;
     // this.minRotationValue = frameCount * this.maxRotationSpeed;
@@ -17,7 +17,7 @@ class Shape {
   }
 
 
-display(){
+  display() {
 
-}
+  }
 }

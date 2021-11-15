@@ -9,31 +9,31 @@ class Ellipse1 extends Shape {
     this.strokeSize = 1;
 
     this.mapMouseX;
+  }
+
+  rotate() {
+
+    this.mapMouseX = map(mouseX, 0, width, 0, 200);
+
+    rotateX(frameCount * -this.minRotationSpeed * 8);
+    rotateY(frameCount * -this.minRotationSpeed * 8);
+    rotateZ(frameCount * -this.minRotationSpeed * 8);
+
+  }
+
+  display() {
+
+    push();
+    noFill();
+    stroke(this.strokeColor);
+    strokeWeight(this.strokeSize);
+    ellipse(this.x, this.y, this.size, this.mapMouseX * 5 + mapVolume * 2);
+    pop();
+  }
+
 }
 
-rotate(){
-
-  this.mapMouseX = map(mouseX, 0, width, 0, 200);
-
-  rotateX(frameCount * -this.minRotationSpeed*8);
-  rotateY(frameCount * -this.minRotationSpeed*8);
-  rotateZ(frameCount * -this.minRotationSpeed*8);
-
-}
-
-display(){
-
-  push();
-  noFill();
-  stroke(this.strokeColor);
-  strokeWeight(this.strokeSize);
-  ellipse(this.x, this.y, this.size, this.mapMouseX * 5 + mapVolume*2);
-  pop();
-}
-
-}
-
-// a class Ellipse2 for the Fire Dance scene
+// a class Ellipse2 for the Cosmos Dance scene
 class Ellipse2 extends Shape {
   constructor(size) {
     super();
@@ -42,28 +42,29 @@ class Ellipse2 extends Shape {
     this.size = size;
     this.strokeColor = undefined;
     this.strokeSize = undefined;
+  }
+
+  rotate() {
+
+    rotateX(frameCount * this.minRotationSpeed * 4);
+    rotateY(frameCount * this.minRotationSpeed * 4);
+    rotateZ(frameCount * this.minRotationSpeed * 4);
+
+  }
+
+  display() {
+    push();
+    noFill();
+    stroke((mapMid / 4) * scaleVolume, (mapMid / 4) * scaleVolume, mapTreble * 2 + mapMid + scaleVolume, mapMid / 3);
+    strokeWeight(scaleVolume / 3);
+    ellipse(this.x, this.y, this.size + scaleVolume * 4);
+    pop();
+  }
 }
 
-rotate(){
 
-  rotateX(frameCount * this.minRotationSpeed*4);
-  rotateY(frameCount * this.minRotationSpeed*4);
-  rotateZ(frameCount * this.minRotationSpeed*4);
-
-}
-
-display(){
-  push();
-  noFill();
-  stroke((mapMid/4) * scaleVolume, (mapMid/4) * scaleVolume, mapTreble*2 + mapMid + scaleVolume, mapMid/3);
-  strokeWeight(scaleVolume/3);
-  ellipse(this.x, this.y, this.size + scaleVolume * 4);
-  pop();
-}
-}
-
-// a class Ellipse3 for the Fire Dance scene
-class Ellipse3 extends Shape{
+// a class Ellipse3 for the Dynamic Dance scene
+class Ellipse3 extends Shape {
   constructor(x, lightImg) {
     super();
     this.x = x;
@@ -77,24 +78,34 @@ class Ellipse3 extends Shape{
     this.active = false;
   }
 
-  rotate(){
+  effect(){
+    //makes the background flashy as with the higher volume
+    if  (mapVolume > this.maxSoundThreshold){
+    background(mapVolume * 2, mapVolume * 2, mapVolume * 2);
+  }
+}
+
+  rotate() {
     rotateX(frameCount * -this.maxRotationSpeed);
-    rotateY(frameCount *  this.maxRotationSpeed);
+    rotateY(frameCount * this.maxRotationSpeed);
     rotateZ(frameCount * -this.maxRotationSpeed);
   }
 
-
-  display(){
+  display() {
     push();
-    if (mapVolume > this.maxSoundThresold){
-    background(mapVolume*2, mapVolume*2, mapVolume*2);
-    this.effect()
-    // this.active = true;
-    this.size = 350;
-    tecture(lightImg);
-    ellipse(this.size, this.size, this.size/3);
-    pop();
+    // makes the ellipses appear and stay once reached the soundThreshold
+    if (this.active || mapVolume > this.maxSoundThreshold) {
+
+      // this.effect()
+      this.active = true;
+      this.size = 400;
+      noFill();
+      stroke(mapTreble, mapMid / 2, 0, mapVolume);
+      texture(lightImg);
+      ellipse(this.x, this.size, this.size/3);
+    }
+      pop();
+
   }
-}
 
 }

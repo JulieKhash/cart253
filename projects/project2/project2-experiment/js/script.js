@@ -40,15 +40,19 @@ let mapTreble;
 
 //ellipses for the angel scene
 let numEllipses1 = 5;
+let ellipse1;
 let ellipses1 = [] //an empty array to store our ellipses
 
 //ellipses for the fire scene
 let numEllipses2 = 7;
-let ellipses2 = []
+let ellipse2;
+let ellipses2 = [];
 
 //ellipses for the dynamic scene
 let numEllipses3 = 30;
-let ellipses3 = []
+let ellipse3;
+let ellipses3 = [];
+
 
 
 let angel;
@@ -95,22 +99,22 @@ function setup() {
 
   // makes a given number of ellipses for the angel scene
   for (let i = 0; i < numEllipses1; i++) {
-    let ellipse1 = new Ellipse1(300);
+    ellipse1 = new Ellipse1(300);
     ellipses1.push(ellipse1);
   }
   angel = new Angel(angelImg, lightImg);
   fireman = new FireMan(firemanImg, lightImg);
-  chameleonman= new ChameleonMan(chameleonManImg, lightImg);
+  chameleonman = new ChameleonMan(chameleonManImg, lightImg);
 
   //ellipses for the cosmos scene
   for (let i = 0; i < numEllipses2; i++) {
-    let ellipse2 = new Ellipse2(250 * i);
+    ellipse2 = new Ellipse2(250 * i);
     ellipses2.push(ellipse2);
   }
 
   //ellipses for the dynamic scene
   for (let i = 0; i < numEllipses3; i++) {
-    let ellipse3 = new Ellipse3(1*i, lightImg);
+    ellipse3 = new Ellipse3(400 + i, lightImg);
     ellipses3.push(ellipse3);
   }
 
@@ -125,7 +129,7 @@ function setup() {
 
 function draw() {
   orbitControl(6, 6, 0.2);
-  translate(0, 0, 0);  //postion the scene in the center
+  translate(0, 0, 0); //postion the scene in the center
 
   //let radius = width / 6;
 
@@ -153,7 +157,7 @@ function draw() {
 
   console.log(mapVolume)
 
-// states for different scenes
+  // states for different scenes
   if (state === `title`) {
     titleScreen();
   } else if (state === `danceAngel`) {
@@ -166,25 +170,29 @@ function draw() {
 }
 
 
-function danceDynamic(){
-  background(mapVolume*2, 0, 0);
+function danceDynamic() {
+  background(mapVolume * 2, 0, 0);
+
+  // rotating ellipses
+   push();
+   for (let i = 0; i < ellipses3.length; i++) {
+     ellipses3[i].rotate();
+     ellipses3[i].display();
+     ellipse3.effect();
+   }
+     pop();
 
   push();
   //centralVisualizer.rotate();
   centralVisualizer.display();
   pop();
 
+
+
   push();
   //chameleonman.rotate();
   chameleonman.display();
   chameleonman.display2();
-  pop();
-
-  push();
-  for (let i = 0; i < ellipses3.length; i++) {
-    ellipses3[i].rotate();
-    ellipses3[i].display();
-  }
   pop();
 }
 
@@ -194,7 +202,7 @@ function danceDynamic(){
 ////////Scene2: dancing fire
 function danceCosmos() {
   //dark blue background, responds to the sound amplitude
-  background(0, 0, mapVolume/2);
+  background(0, 0, mapVolume / 2);
 
   //rotating orbits
   push();
@@ -212,11 +220,11 @@ function danceCosmos() {
 
   //fireballs rotating around the orbits
   push();
-    fireball2.rotate();
-    fireball2.display();
+  fireball2.rotate();
+  fireball2.display();
   pop()
 
-//shows rotating fireman figure
+  //shows rotating fireman figure
   push();
   fireman.rotate();
   fireman.display();
@@ -256,5 +264,11 @@ function keyPressed() {
     musicOneTwo.stop();
     state = `danceDynamic`;
     musicRock.play();
+    jumpSong();
   }
+}
+
+function jumpSong(){
+  let len = musicRock.duration();
+  musicRock.jump(100);
 }
