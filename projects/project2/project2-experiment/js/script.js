@@ -160,7 +160,6 @@ function danceDynamic(){
   background(mapVolume*2, 0, 0);
 
   push();
-  translate(0, 0, 0);
   //centralVisualizer.rotate();
   centralVisualizer.display();
   pop();
@@ -168,6 +167,7 @@ function danceDynamic(){
   push();
   //chameleonman.rotate();
   chameleonman.display();
+  chameleonman.display2();
   pop();
 }
 

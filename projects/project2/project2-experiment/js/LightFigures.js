@@ -96,7 +96,7 @@ displayFireman(){
 
 
 
-// class ChameleonMan
+// class for Chameleon Man
 class ChameleonMan extends Shape{
   constructor(chameleonManImg, lightImg) {
     super();
@@ -108,9 +108,12 @@ class ChameleonMan extends Shape{
     this.imageChameleonMan = chameleonManImg
 
     this.minSoundThreshold = 30;
-    this.maxSoundThresold = 110;
+    this.maxSoundThresold = 60;
   }
 
+  rotateLight2(){
+    rotate(frameCount * this.minRotationSpeed*8);
+  }
 
   rotateLight1(){
     rotate(frameCount * this.maxRotationSpeed*5);
@@ -121,6 +124,7 @@ class ChameleonMan extends Shape{
     rotateY(frameCount * -this.minRotationSpeed*7);
   }
 
+//
   display(){
     push();
     imageMode(CENTER);
@@ -136,6 +140,21 @@ class ChameleonMan extends Shape{
     pop();
   }
 }
+
+// displays rotating figure and light that adds the double effect
+display2(){
+  push();
+  this.rotateLight2();
+  if(mapVolume > this.maxSoundThresold) {
+    this.size = mapVolume + mapTreble*2
+    image(lightImg, this.x, this.y,  this.size, this.size);
+    this.sizeW = 3000 / mapTreble + mapVolume*2;
+    this.sizeH = 4000 / mapTreble + mapVolume*2;
+    image(chameleonManImg, this.x, this.y, this.sizeW, this.sizeH);
+  }
+  pop();
+}
+
 
 
 }
