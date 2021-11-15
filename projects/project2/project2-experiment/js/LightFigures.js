@@ -98,33 +98,45 @@ displayFireman(){
 
 // class ChameleonMan
 class ChameleonMan extends Shape{
-  super();
-  constructor() {
+  constructor(chameleonManImg, lightImg) {
+    super();
     this.x = 0;
     this.y = 0;
+    this.size = undefined;
     this.sizeW = undefined;
     this.sizeH = undefined;
     this.imageChameleonMan = chameleonManImg
 
-    this.minSoundThreshold = 65;
+    this.minSoundThreshold = 30;
     this.maxSoundThresold = 110;
+  }
 
+
+  rotateLight1(){
+    push();
+    rotate(frameCount * this.maxRotationSpeed*5);
+    pop();
   }
 
   rotate(){
-    rotate(frameCount * this.maxRotationSpeed*5);
+    rotate(frameCount * this.minRotationSpeed);
+    rotateY(frameCount * -this.minRotationSpeed*7);
   }
 
   display(){
     push();
     imageMode(CENTER);
+    if(mapVolume > this.minSoundThreshold) {
+      this.rotateLight1();
+      this.size = mapVolume + mapTreble, mapVolume + mapTreble
+      image(lightImg, this.x, this.y,  this.size, this.size);
+} else {
     this.sizeW = 3000 / mapTreble + mapVolume*2;
     this.sizeH = 4000 / mapTreble + mapVolume*2;
     image(chameleonManImg, this.x, this.y, this.sizeW, this.sizeH);
-
-  
     pop();
   }
+}
 
 
 }

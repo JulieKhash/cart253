@@ -49,6 +49,7 @@ let ellipses2 = [] //an empty array to store our ellipses
 
 let angel;
 let fireman;
+let chameleonman;
 
 let fireball1;
 let fireball2;
@@ -90,11 +91,12 @@ function setup() {
 
   // makes a given number of ellipses for the angel scene
   for (let i = 0; i < numEllipses1; i++) {
-    let ellipse1 = new Ellipse1(300 * i);
+    let ellipse1 = new Ellipse1(300);
     ellipses1.push(ellipse1);
   }
   angel = new Angel(angelImg, lightImg);
   fireman = new FireMan(firemanImg, lightImg);
+  chameleonman= new ChameleonMan(chameleonManImg, lightImg);
 
   //ellipses for the cosmos scene
   for (let i = 0; i < numEllipses2; i++) {
@@ -139,7 +141,7 @@ function draw() {
   mapMid = map(mid, 0, 255, 5, 600);
   mapTreble = map(treble, 0, 255, 5, 900);
 
-  console.log(mapBass)
+  console.log(mapVolume)
 
 // states for different scenes
   if (state === `title`) {
@@ -161,6 +163,11 @@ function danceDynamic(){
   translate(0, 0, 0);
   //centralVisualizer.rotate();
   centralVisualizer.display();
+  pop();
+
+  push();
+  chameleonman.rotate();
+  chameleonman.display();
   pop();
 }
 
@@ -203,7 +210,7 @@ function danceCosmos() {
 
 ///////// Scene1: dancing angel
 function danceAngel() {
-  background(0, mapVolume - 15, mapVolume);
+  background(0, mapVolume - 10, mapVolume);
 
   // rotating ellipses
   for (let i = 0; i < ellipses1.length; i++) {
