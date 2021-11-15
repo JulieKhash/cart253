@@ -14,6 +14,7 @@ let font;
 
 //all the images
 let lightImg;
+let light2Img;
 let angelImg;
 let firemanImg;
 let fireballImg;
@@ -72,6 +73,7 @@ function preload() {
   firemanImg = loadImage(`assets/images/FireMan.png`);
   fireballImg = loadImage(`assets/images/fireball.gif`);
   lightImg = loadImage(`assets/images/light.png`);
+  light2Img = loadImage(`assets/images/blue.png`);
   chameleonManImg = loadImage(`assets/images/ChameleonMan.png`)
 
   musicXylophone = loadSound(`assets/sounds/dream.mp3`);
@@ -114,7 +116,8 @@ function setup() {
 
   //ellipses for the dynamic scene
   for (let i = 0; i < numEllipses3; i++) {
-    ellipse3 = new Ellipse3(400 + i, lightImg);
+    let size = 400;
+    ellipse3 = new Ellipse3(size + 100 + i, size, size/4, lightImg);
     ellipses3.push(ellipse3);
   }
 
@@ -172,7 +175,7 @@ function draw() {
 
 function danceDynamic() {
   background(mapVolume * 2, 0, 0);
-  ellipse3.effect(); 
+  ellipse3.effect();
 
   // rotating ellipses
   push();
@@ -183,10 +186,8 @@ function danceDynamic() {
   pop();
 
   push();
-  //centralVisualizer.rotate();
   centralVisualizer.display();
   pop();
-
 
 
   push();
@@ -270,5 +271,5 @@ function keyPressed() {
 
 function jumpSong() {
   let len = musicRock.duration();
-  musicRock.jump(100);
+  musicRock.jump(270);
 }

@@ -63,23 +63,24 @@ class Ellipse2 extends Shape {
 }
 
 
-// a class Ellipse3 for the Dynamic Dance scene
+// a class of rotating ellipses for the Dynamic Dance scene
 class Ellipse3 extends Shape {
-  constructor(x, lightImg) {
+  constructor(x, y, size, lightImg) {
     super();
     this.x = x;
-    // this.y = y;
-    this.size = undefined;
+    this.y = y;
+    this.size = size;
     this.strokeColor = undefined;
     this.strokeSize = undefined;
+    this.minSoundThreshold = 30;
     this.maxSoundThreshold = 50;
     this.lightImg = lightImg;
 
     this.active = false;
   }
 
+//makes the background flashy with the higher volume
   effect(){
-    //makes the background flashy as with the higher volume
     if  (mapVolume > this.maxSoundThreshold){
     background(mapVolume * 2, mapVolume * 2, mapVolume * 2);
   }
@@ -87,25 +88,42 @@ class Ellipse3 extends Shape {
 
   rotate() {
     rotateX(frameCount * -this.maxRotationSpeed);
-    rotateY(frameCount * this.maxRotationSpeed);
+    rotateY(frameCount *  this.maxRotationSpeed);
     rotateZ(frameCount * -this.maxRotationSpeed);
   }
 
   display() {
     push();
     // makes the ellipses appear and stay once reached the soundThreshold
-    if (this.active || mapVolume > this.maxSoundThreshold) {
+    if (this.active || mapVolume >= this.maxSoundThreshold || mapVolume >25) {
 
-      // this.effect()
       this.active = true;
-      this.size = 400;
       noFill();
       stroke(mapTreble, mapMid / 2, 0, mapVolume);
       texture(lightImg);
-      ellipse(this.x, this.size, this.size/3);
+      ellipse(this.x, this.y, this.size);
+    } else if (this.active === true || mapVolume < 30){
+      this.active = false;
+
     }
       pop();
 
   }
-
 }
+
+// a class Ellipse4 that adds the flashy effect inside the Visualizer
+// class Ellipse4 extends Shape {
+//   constructor(x, y, size, lightImg) {
+//   super();
+//   this.x = x;
+//   this.y = y;
+//   this.size = size;
+//   this.strokeColor = undefined;
+//   this.strokeSize = undefined;
+//   this.maxSoundThreshold = 50;
+//   this.lightImg = lightImg;
+//
+//   this.active = false;
+//
+// }
+// }
