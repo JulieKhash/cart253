@@ -311,16 +311,23 @@ function keyPressed() {
     musicXylophone.stop();
     state = `danceCosmos`;
     musicOneTwo.play();
-  } else if (state === `danceCosmos` && keyCode === ENTER) {
-    musicOneTwo.stop();
-    state = `danceDynamic`;
-    musicRock.play();
-    jumpSong();
+    jumpSong1();
+  // } else if (state === `danceCosmos` && keyCode === ENTER) {
+  //   musicOneTwo.stop();
+  //   state = `danceDynamic`;
+  //   musicRock.play();
+  //   jumpSong();
   }
 }
 
 function jumpSong() {
   let len = musicRock.duration();
   musicRock.jump(100);
+
+}
+
+function jumpSong1() {
+  let len = musicOneTwo.duration();
+ musicOneTwo.jump(350);
 
 }

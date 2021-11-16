@@ -42,6 +42,8 @@ class Ellipse2 extends Shape {
     this.size = size;
     this.strokeColor = undefined;
     this.strokeSize = undefined;
+
+    this.active = true;
   }
 
   rotate() {
@@ -54,12 +56,16 @@ class Ellipse2 extends Shape {
 
   display() {
     push();
+    if(this.active && currentTime2 < 414) {
     noFill();
     stroke((mapMid / 4) * scaleVolume, (mapMid / 4) * scaleVolume, mapTreble * 2 + mapMid + scaleVolume, mapMid / 3);
     strokeWeight(scaleVolume / 3);
     ellipse(this.x, this.y, this.size + scaleVolume * 4);
-    pop();
+  } else {
+    this.active = false;
   }
+  pop();
+}
 }
 
 // a class of rotating ellipses for the Dynamic Dance scene

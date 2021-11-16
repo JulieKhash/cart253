@@ -95,9 +95,11 @@ class FireMan extends Shape {
   //     pop()
   //   }
   // }
+
+  // displays a fireman figure until given time and makes it appear almsot in the end
   displayFireman() {
     push();
-    if (this.active && currentTime2 < 35 && currentTime2 < 390) {
+    if (this.active && currentTime2 < 35 || currentTime2 > 390) {
       texture(firemanImg);
       stroke((mapMid / 4) * scaleVolume, (mapMid / 4) * scaleVolume, mapTreble * 2 + mapMid + scaleVolume, mapMid / 3);
       ellipse(this.x, this.y, 1000 + mapVolume + mapTreble / 2);
@@ -107,7 +109,6 @@ class FireMan extends Shape {
     pop();
   }
 }
-
 
 //a class for Chameleon Man
 class ChameleonMan extends Shape {
