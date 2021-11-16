@@ -168,15 +168,19 @@ function setup() {
 
 
 function draw() {
-  orbitControl(6, 6, 0.2); // allows movement around 3D scene using mouse/trackpad
+  // orbitControl() allows movement around 3D scene using mouse/trackpad. Left-clicking and dragging will rotate camera position,
+  // left-clicking and dragging will pan the camera positon without rotating,
+  // using scroll-wheel will zoom in/out from the center of the sketch
+  orbitControl(6, 6, 0.2);
   translate(0, 0, 0); //x, y, z positions the scene in the center
 
+  // get the current time of the given song to better control animations
   currentTime1 = musicRock.currentTime();
   console.log(currentTime1);
   currentTime2 = musicOneTwo.currentTime()
   //console.log(currentTime2);
 
-  //get the sound level to detect the beats
+  //get the sound level to detect the "beats"
   volume = amp.getLevel();
 
   //map the volume number to a bigger size
@@ -211,7 +215,6 @@ function draw() {
     danceDynamic();
   }
 }
-
 
 ////////Scene 3: dynamic dance
 function danceDynamic() {
