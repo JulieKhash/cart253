@@ -9,7 +9,7 @@ let state = `title`
 
 let titlescreen;
 
-
+// 3d font
 let font;
 
 //all the images
@@ -64,7 +64,6 @@ let numEllipsesFX2 = 20;
 let ellipseFX2;
 let ellipsesFX2 = [];
 
-
 let angel;
 let fireman;
 let chameleonman;
@@ -73,8 +72,6 @@ let fireball1;
 let fireball2;
 
 let centralVisualizer;
-
-
 
 function preload() {
   font = loadFont('assets/fonts/KIMONOG.ttf');
@@ -96,13 +93,11 @@ function setup() {
 
   titlescreen = new Title();
 
-  amp = new p5.Amplitude();
+  amp = new p5.Amplitude(); //an instance for amplitude for all sounds
   amp.setInput(musicXylophone);
   amp.setInput(musicOneTwo);
   amp.setInput(musicRock);
-  musicRock.setVolume(0.4);
-
-  //musicOneTwo.setVolume(0.5); //reduction of volume by half
+  musicRock.setVolume(0.4); //reduction of volume almost by half
 
   fft = new p5.FFT(0.8, 512); //reduction of bins/samples down to 512 (by power of two)
   fft.setInput(musicOneTwo);
@@ -114,9 +109,6 @@ function setup() {
     ellipse1 = new Ellipse1(300);
     ellipses1.push(ellipse1);
   }
-  angel = new Angel(angelImg, lightImg);
-  fireman = new FireMan(firemanImg, lightImg);
-  chameleonman = new ChameleonMan(chameleonManImg, lightImg);
 
   //ellipses for the cosmos scene
   for (let i = 0; i < numEllipses2; i++) {
@@ -124,51 +116,53 @@ function setup() {
     ellipses2.push(ellipse2);
   }
 
-  //ellipses for the dynamic scene 1
+  //ellipses 1 for the dynamic scene
   for (let i = 0; i < numEllipses3; i++) {
     let size = 400;
     ellipse3 = new Ellipse3(size + 100 + i, size, size / 4, lightImg);
     ellipses3.push(ellipse3);
   }
 
-  //ellipses for the dynamic scene 2
+  //ellipses 2 for the dynamic scene
   for (let i = 0; i < numEllipses3; i++) {
     let x = 120
     let y = 200;
-    let size = 20;
+    let size = 10;
     ellipseFX1 = new Ellipse3(x + i, y, size, lightImg);
     ellipsesFX1.push(ellipseFX1);
   }
 
-  //ellipses for the dynamic scene 3
+  //ellipses 3 for the dynamic scene
   for (let i = 0; i < numEllipses3; i++) {
     let x = 250
     let y = 100;
-    let size = 50;
+    let size = 20;
     ellipseFX2 = new Ellipse3(x + i / 2 + 100, y, size, lightImg);
     ellipsesFX2.push(ellipseFX2);
   }
+
+  // the instances of the main figures
+  angel = new Angel(angelImg, lightImg);
+  fireman = new FireMan(firemanImg, lightImg);
+  chameleonman = new ChameleonMan(chameleonManImg, lightImg);
 
   //fireballs for the cosmos scene
   fireball1 = new Fireball1();
   fireball2 = new Fireball2();
 
-  //centrial rectangles
+  //centrial visualizer
   centralVisualizer = new Visualizer();
 }
 
 
 function draw() {
-  orbitControl(6, 6, 0.2);
-  translate(0, 0, 0); //postion the scene in the center
+  orbitControl(6, 6, 0.2); // allows movement around 3D scene using mouse/trackpad
+  translate(0, 0, 0); //x, y, z positions the scene in the center
 
   currentTime1 = musicRock.currentTime();
   //console.log(currentTime);
   currentTime2 = musicOneTwo.currentTime()
   //console.log(currentTime2);
-
-
-  //let radius = width / 6;
 
   //get the sound level to detect the beats
   volume = amp.getLevel();
@@ -192,7 +186,7 @@ function draw() {
   mapMid = map(mid, 0, 255, 5, 600);
   mapTreble = map(treble, 0, 255, 5, 900);
 
-  console.log(mapMid)
+  console.log(mapVolume)
 
   // states for different scenes
   if (state === `title`) {
@@ -206,12 +200,12 @@ function draw() {
   }
 }
 
-
+////////Scene 3: dynamic dance
 function danceDynamic() {
   background(mapVolume * 2, 0, 0);
-  ellipse3.effect();
+  ellipse3.bgEffect();
 
-  // rotating ellipses
+  // shows rotating ellipses around visualizer
   push();
   for (let i = 0; i < ellipses3.length; i++) {
     ellipses3[i].rotate();
@@ -219,6 +213,7 @@ function danceDynamic() {
   }
   pop();
 
+// shows the rotating light FX close to the center of the the visualizer
   push();
   for (let j = 0; j < 15; j++) {
     ellipsesFX1[j].rotate2();
@@ -226,6 +221,7 @@ function danceDynamic() {
   }
   pop();
 
+// shows the rotating light FX along the edge of the visualizer
   push();
   for (let k = 0; k < ellipses3.length; k++) {
     ellipsesFX2[k].rotate3();
@@ -233,12 +229,12 @@ function danceDynamic() {
   }
   pop();
 
-
+  // show the cental audio visualizer
   push();
   centralVisualizer.display();
   pop();
 
-
+  // shows the "chameleon" figure
   push();
   //chameleonman.rotate();
   chameleonman.display();
@@ -247,15 +243,12 @@ function danceDynamic() {
 }
 
 
-
-
-
-////////Scene2: dancing fire
+////////Scene2: cosmos dance
 function danceCosmos() {
   //dark blue background, responds to the sound amplitude
   background(0, 0, mapVolume / 2);
 
-  //rotating orbits
+  // shows rotating orbital ellipses
   push();
   for (let i = 0; i < ellipses2.length; i++) {
     ellipses2[i].rotate();
@@ -263,28 +256,31 @@ function danceCosmos() {
   }
   pop();
 
-  //fireball in the center
+  // main fireball in the center
   push();
   fireball1.rotate();
   fireball1.display();
   pop();
 
-  //fireballs rotating around the orbits
+  // displays smaller fireballs rotating around the orbit
   push();
   fireball2.rotate();
   fireball2.display();
   pop()
 
-  //shows rotating fireman figure
+  // shows the light in the center
+  push();
+  fireman.displayLight();
+  pop();
+
+  // shows rotating fireman figure
   push();
   fireman.rotate();
   fireman.display();
   pop();
 }
 
-
-
-///////// Scene1: dancing angel
+///////// Scene1: angel dance
 function danceAngel() {
   background(0, mapVolume - 10, mapVolume);
 
@@ -292,17 +288,21 @@ function danceAngel() {
   for (let i = 0; i < ellipses1.length; i++) {
     ellipses1[i].rotate();
     ellipses1[i].display();
-    // ellipses[i].keyPressed();
   }
+
+ // displays rotating angel alternating with light
+  push();
   angel.rotate();
   angel.display();
+  pop();
 }
 
-// main screen
+// 3D title screen
 function titleScreen() {
   titlescreen.draw();
 }
 
+// change the screen wheb ENTER is pressed
 function keyPressed() {
   if (state === `title` && keyCode === ENTER) {
     state = `danceAngel`;
@@ -316,18 +316,18 @@ function keyPressed() {
     musicOneTwo.stop();
     state = `danceDynamic`;
     musicRock.play();
-  //   jumpSong();
+    jumpSong();
   }
 }
 
 function jumpSong() {
   let len = musicRock.duration();
-  musicRock.jump(100);
+  musicRock.jump(110);
 
 }
 
 function jumpSong1() {
   let len = musicOneTwo.duration();
- musicOneTwo.jump(350);
+  musicOneTwo.jump(350);
 
 }

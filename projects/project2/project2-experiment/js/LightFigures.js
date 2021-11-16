@@ -1,9 +1,7 @@
 // a class for the Angel
 class Angel extends Shape {
-  constructor(angelImg, lightImg) {
-    super()
-    this.x = 0;
-    this.y = 0;
+  constructor(x, y, angelImg, lightImg) {
+    super(x, y)
     this.size = 300;
     this.strokeColor = 250
     this.strokeSize = 1;
@@ -39,10 +37,8 @@ class Angel extends Shape {
 
 //a class for the Fire Man
 class FireMan extends Shape {
-  constructor(fireman, lightImg) {
-    super()
-    this.x = 0;
-    this.y = 0;
+  constructor(x, y, fireman, lightImg) {
+    super(x, y);
     this.size = 300;
     this.strokeColor = 250
     this.strokeSize = 1;
@@ -53,6 +49,7 @@ class FireMan extends Shape {
     this.active = true;
   }
 
+// rotates fireman figure
   rotate() {
     rotate(frameCount * -this.maxRotationSpeed)
     rotateX(frameCount * this.minRotationSpeed * 5);
@@ -60,6 +57,7 @@ class FireMan extends Shape {
 
   }
 
+// rotates light in the center
   rotateLight() {
     rotate(frameCount * -this.maxRotationSpeed)
     rotateX(frameCount * -this.minRotationSpeed * 5);
@@ -68,41 +66,30 @@ class FireMan extends Shape {
   }
 
 
-  display() {
-    this.displayLight();
-    this.displayFireman();
-  }
+  // display() {
+  //   this.displayLight();
+  //   this.displayFireman();
+  // }
 
+// displays a light in the the center once it reaches given soundThreshold
   displayLight() {
     push();
     if (mapMid > this.soundThreshold) {
       this.rotateLight();
       noStroke();
       texture(lightImg);
-      ellipse(this.x, this.y, mapBass * 2 + mapMid * 2 + mapTreble);
-      // } else {
-      //   this.displayFireman()
-      // }
+      ellipse(this.x, this.y, mapBass * 1.5 + mapMid * 2 + mapTreble);
       pop();
     }
   }
 
-  //   displayFireman() {
-  //     push();
-  //     imageMode(CENTER);
-  //     image(this.imageFireMan, 0, 250, (3000 / 4) + mapVolume + mapTreble / 2, (4000 / 4) +
-  //       mapVolume + mapTreble / 2);
-  //     pop()
-  //   }
-  // }
-
-  // displays a fireman figure until given time and makes it appear almsot in the end
-  displayFireman() {
+  // displays a fireman figure until given time and makes it appear almost in the end
+  display() {
     push();
     if (this.active && currentTime2 < 35 || currentTime2 > 390) {
       texture(firemanImg);
       stroke((mapMid / 4) * scaleVolume, (mapMid / 4) * scaleVolume, mapTreble * 2 + mapMid + scaleVolume, mapMid / 3);
-      ellipse(this.x, this.y, 1000 + mapVolume + mapTreble / 2);
+      ellipse(this.x, this.y, this.size*3 + mapTreble);
     } else {
       this.active = false;
     }
@@ -110,12 +97,10 @@ class FireMan extends Shape {
   }
 }
 
-//a class for Chameleon Man
+//a class for the Chameleon Man
 class ChameleonMan extends Shape {
-  constructor(chameleonManImg, lightImg) {
-    super();
-    this.x = 0;
-    this.y = 0;
+  constructor(x, y, chameleonManImg, lightImg) {
+    super(x, y);
     this.size = undefined;
     this.sizeW = undefined;
     this.sizeH = undefined;
@@ -167,6 +152,7 @@ class ChameleonMan extends Shape {
       this.rotateLight2();
       this.size = mapVolume + mapTreble * 2
       image(lightImg, this.x, this.y, this.size, this.size);
+      
       this.rotateMan2();
       this.sizeW = 3000 / mapTreble + mapVolume * 2;
       this.sizeH = 4000 / mapTreble + mapVolume * 2;

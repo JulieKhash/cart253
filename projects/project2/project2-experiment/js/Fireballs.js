@@ -8,8 +8,6 @@ class Fireball1 extends Shape {
   }
 
   rotate() {
-    //translate(-100, 0, -100);
-
     rotate(frameCount * this.maxRotationSpeed * 5)
     rotateX(frameCount * this.maxRotationSpeed)
     rotateY(frameCount * this.maxRotationSpeed)
@@ -20,7 +18,7 @@ class Fireball1 extends Shape {
     push();
     noStroke()
     texture(fireballImg)
-    sphere(this.size + scaleVolume * 1.5);
+    sphere(this.size + scaleVolume * 2);
     pop();
 
   }
@@ -39,28 +37,26 @@ class Fireball2 extends Shape {
   }
 
   rotate() {
-    rotate(frameCount *  this.minRotationSpeed * 5)
+    rotate(frameCount * this.minRotationSpeed * 5)
     rotateY(frameCount * this.minRotationSpeed * 3)
     rotateZ(frameCount * -this.minRotationSpeed * 3)
   }
 
   display() {
     push();
-    if (!this.active && currentTime2 > 10 && currentTime2 < 400){
-    for (let i = 0; i < this.numSmallSpheres; i++) {
+    if (!this.active && currentTime2 > 10 && currentTime2 < 400) {
+      for (let i = 0; i < this.numSmallSpheres; i++) {
 
-      this.x = this.radius * cos(i);
-      this.y = this.radius * sin(i);
-      translate(this.x + 100, this.y + 50, 100);
-      noStroke()
-      texture(fireballImg);
-      sphere(this.size + i + scaleVolume * 2);
+        this.x = this.radius * cos(i);
+        this.y = this.radius * sin(i);
+        translate(this.x + 100, this.y + 50, 100);
+        noStroke()
+        texture(fireballImg);
+        sphere(this.size + i + scaleVolume * 2);
+      }
+    } else {
+      this.active = false;
     }
-  } else {
-    this.active = false;
-  }
     pop();
-
-
-}
+  }
 }

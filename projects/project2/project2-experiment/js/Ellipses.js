@@ -1,4 +1,4 @@
-//defining an Ellipse1 class for the Angel Dance scene
+//defining an Ellipse1 class for the Angel Scene
 class Ellipse1 extends Shape {
   constructor(size) {
     super();
@@ -7,22 +7,17 @@ class Ellipse1 extends Shape {
     this.size = size;
     this.strokeColor = 255
     this.strokeSize = 1;
-
-    this.mapMouseX;
   }
 
   rotate() {
-
-    this.mapMouseX = map(mouseX, 0, width, 0, 200);
+    super.control();
 
     rotateX(frameCount * -this.minRotationSpeed * 8);
     rotateY(frameCount * -this.minRotationSpeed * 8);
     rotateZ(frameCount * -this.minRotationSpeed * 8);
-
   }
 
   display() {
-
     push();
     noFill();
     stroke(this.strokeColor);
@@ -30,7 +25,6 @@ class Ellipse1 extends Shape {
     ellipse(this.x, this.y, this.size, this.mapMouseX * 5 + mapVolume * 2);
     pop();
   }
-
 }
 
 // a class Ellipse2 for the Cosmos Dance scene
@@ -79,16 +73,16 @@ class Ellipse3 extends Shape {
     this.strokeSize = undefined;
 
     this.minSoundThreshold = 30;
-    this.maxSoundThreshold = 50;
+    this.maxSoundThreshold = 40;
     this.lightImg = lightImg;
 
     this.active = true;
   }
 
 //makes the background flashy with the higher volume
-  effect(){
+  bgEffect(){
     if  (mapVolume > this.maxSoundThreshold){
-    background(mapVolume * 2, mapVolume * 2, mapVolume * 2);
+    background(mapVolume * 3, mapVolume * 3, mapVolume * 3);
   }
 }
 
@@ -97,7 +91,6 @@ class Ellipse3 extends Shape {
     rotateY(frameCount *  this.maxRotationSpeed);
     rotateZ(frameCount * -this.maxRotationSpeed);
   }
-
 
   rotate2(){
     rotate(frameCount * this.maxRotationSpeed*2 + mapVolume);
@@ -132,7 +125,6 @@ class Ellipse3 extends Shape {
       }
 
 
-
   display() {
     push();
     // makes the rotating ellipses appear and stay when soundThreshold reached
@@ -149,20 +141,3 @@ class Ellipse3 extends Shape {
       pop();
   }
 }
-
-// a class Ellipse4 that adds the flashy effect inside the Visualizer
-// class Ellipse4 extends Shape {
-//   constructor(x, y, size, lightImg) {
-//   super();
-//   this.x = x;
-//   this.y = y;
-//   this.size = size;
-//   this.strokeColor = undefined;
-//   this.strokeSize = undefined;
-//   this.maxSoundThreshold = 50;
-//   this.lightImg = lightImg;
-//
-//   this.active = false;
-//
-// }
-// }
