@@ -245,16 +245,22 @@ function danceDynamic() {
   centralVisualizer.display();
   pop();
 
+  push();
+  chameleonman.displayLight2();
+  pop();
+
   // shows the "chameleon" figure
   push();
   //chameleonman.rotate();
-  // chameleonman.displayLight2();
   chameleonman.display();
   pop();
 
   push();
-  chameleonman.displayLight2();
+  chameleonman.display2();
   pop();
+
+
+
 }
 
 
@@ -317,7 +323,6 @@ function titleScreen() {
   titlescreen.draw();
 }
 
-
 function music1Play(){
   musicXylophone.play()
 }
@@ -353,14 +358,17 @@ function keyPressed() {
     music1Stop();
     clearTimeout(timeOut1);
     state = `danceCosmos`;
-    timeOut2 = setTimeout(music2Play, musicDelayTime);
+    musicOneTwo.play()
+    //timeOut2 = setTimeout(music2Play, musicDelayTime);
     // jumpSong1();
   } else if (state === `danceCosmos` && keyCode === ENTER) {
     // musicOneTwo.stop();
     music2Stop();
-    clearTimeout(timeOut2);
+
+    //clearTimeout(timeOut2);
     state = `danceDynamic`;
-    timeOut3 = setTimeout(music3Play, musicDelayTime);
+    musicRock.play()
+    //timeOut3 = setTimeout(music3Play, musicDelayTime);
     jumpSong();
   }
 }
@@ -368,7 +376,7 @@ function keyPressed() {
 
 function jumpSong() {
   let len = musicRock.duration();
-  musicRock.jump(110);
+  musicRock.jump(120);
 }
 
 function jumpSong1() {

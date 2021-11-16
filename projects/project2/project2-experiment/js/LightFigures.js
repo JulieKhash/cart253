@@ -119,7 +119,7 @@ class ChameleonMan extends Shape {
   }
 
   rotateMan2() {
-    rotate(frameCount * this.minRotationSpeed * 8);
+    rotate(frameCount * this.maxRotationSpeed);
   }
 
   rotateMan1() {
@@ -152,14 +152,33 @@ class ChameleonMan extends Shape {
       this.rotateLight2();
       this.size = mapVolume + mapTreble * 2
       image(lightImg, this.x, this.y, this.size, this.size);
-
-      // this.rotateMan2();
-      // this.sizeW = 3000 / mapTreble + mapVolume * 2;
-      // this.sizeH = 4000 / mapTreble + mapVolume * 2;
-      // image(chameleonManImg, this.x, this.y, this.sizeW, this.sizeH);
     }
     pop();
   }
+
+  // display2(){
+  //   push();
+  //   imageMode(CENTER);
+  //   if (mapVolume > this.maxVolumeThresold) {
+  //   this.rotateMan2();
+  //   this.sizeW = 3000 / mapTreble + mapVolume * 2.5;
+  //   this.sizeH = 4000 / mapTreble + mapVolume * 2.5;
+  //   image(chameleonManImg, this.x, this.y, this.sizeW, this.sizeH);
+  // }
+  // pop();
+
+  display2(){
+    push();
+    imageMode(CENTER);
+    noStroke();
+    if (mapVolume > this.maxVolumeThresold-5) {
+    this.rotateMan2();
+    this.size = 3000 / mapTreble + mapVolume * 2;
+    texture(chameleonManImg)
+    ellipse(this.x, this.y, this.size)
+  }
+  pop();
+}
 
 
 }
