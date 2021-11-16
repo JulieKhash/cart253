@@ -44,7 +44,6 @@ let mapTreble;
 let currentTime1;
 let currentTime2;
 let musicDelayTime = 1500; //1.5 secs before the music onset
-
 let timeOut1;
 let timeOut2;
 let timeOut3
@@ -80,7 +79,6 @@ let fireball1;
 let fireball2;
 
 let centralVisualizer;
-
 
 
 function preload() {
@@ -250,8 +248,12 @@ function danceDynamic() {
   // shows the "chameleon" figure
   push();
   //chameleonman.rotate();
+  // chameleonman.displayLight2();
   chameleonman.display();
-  chameleonman.display2();
+  pop();
+
+  push();
+  chameleonman.displayLight2();
   pop();
 }
 
@@ -316,7 +318,6 @@ function titleScreen() {
 }
 
 
-
 function music1Play(){
   musicXylophone.play()
 }
@@ -360,7 +361,7 @@ function keyPressed() {
     clearTimeout(timeOut2);
     state = `danceDynamic`;
     timeOut3 = setTimeout(music3Play, musicDelayTime);
-  //  jumpSong();
+    jumpSong();
   }
 }
 
@@ -368,11 +369,9 @@ function keyPressed() {
 function jumpSong() {
   let len = musicRock.duration();
   musicRock.jump(110);
-
 }
 
 function jumpSong1() {
   let len = musicOneTwo.duration();
-  musicOneTwo.jump(350);
-
+  musicOneTwo.jump(70);
 }

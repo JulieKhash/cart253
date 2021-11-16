@@ -145,7 +145,7 @@ class ChameleonMan extends Shape {
   }
 
   // displays rotating figure and light that adds the double effect
-  display2() {
+  displayLight2() {
     push();
     imageMode(CENTER);
     if (mapVolume > this.maxVolumeThresold) {
@@ -153,10 +153,10 @@ class ChameleonMan extends Shape {
       this.size = mapVolume + mapTreble * 2
       image(lightImg, this.x, this.y, this.size, this.size);
 
-      this.rotateMan2();
-      this.sizeW = 3000 / mapTreble + mapVolume * 2;
-      this.sizeH = 4000 / mapTreble + mapVolume * 2;
-      image(chameleonManImg, this.x, this.y, this.sizeW, this.sizeH);
+      // this.rotateMan2();
+      // this.sizeW = 3000 / mapTreble + mapVolume * 2;
+      // this.sizeH = 4000 / mapTreble + mapVolume * 2;
+      // image(chameleonManImg, this.x, this.y, this.sizeW, this.sizeH);
     }
     pop();
   }
