@@ -119,7 +119,7 @@ class ChameleonMan extends Shape {
   }
 
   rotateMan2() {
-    rotate(frameCount * this.maxRotationSpeed);
+    rotate(frameCount * this.maxRotationSpeed * 5);
   }
 
   rotateMan1() {
@@ -171,9 +171,9 @@ class ChameleonMan extends Shape {
     push();
     imageMode(CENTER);
     noStroke();
-    if (mapVolume > this.maxVolumeThresold-5) {
+    if (mapVolume > this.maxVolumeThresold) {
     this.rotateMan2();
-    this.size = 3000 / mapTreble + mapVolume * 2;
+    this.size = 3000 / mapTreble + mapVolume * 3;
     texture(chameleonManImg)
     ellipse(this.x, this.y, this.size)
   }

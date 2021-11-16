@@ -71,6 +71,8 @@ let numEllipsesFX2 = 20;
 let ellipseFX2;
 let ellipsesFX2 = [];
 
+let lightFX3;
+
 let angel;
 let fireman;
 let chameleonman;
@@ -127,7 +129,7 @@ function setup() {
   //ellipses 1 for the dynamic scene
   for (let i = 0; i < numEllipses3; i++) {
     let size = 400;
-    ellipse3 = new Ellipse3(size + 100 + i, size, size / 4, lightImg);
+    ellipse3 = new LightFX(size + 100 + i, size, size / 4, lightImg);
     ellipses3.push(ellipse3);
   }
 
@@ -136,16 +138,16 @@ function setup() {
     let x = 120
     let y = 200;
     let size = 10;
-    ellipseFX1 = new Ellipse3(x + i, y, size, lightImg);
+    ellipseFX1 = new LightFX(x + i, y, size, lightImg);
     ellipsesFX1.push(ellipseFX1);
   }
 
   //ellipses 3 for the dynamic scene
   for (let i = 0; i < numEllipses3; i++) {
-    let x = 250
+    let x = 350
     let y = 100;
     let size = 20;
-    ellipseFX2 = new Ellipse3(x + i / 2 + 100, y, size, lightImg);
+    ellipseFX2 = new LightFX(x + i/2, y, size, lightImg);
     ellipsesFX2.push(ellipseFX2);
   }
 
@@ -168,7 +170,7 @@ function draw() {
   translate(0, 0, 0); //x, y, z positions the scene in the center
 
   currentTime1 = musicRock.currentTime();
-  //console.log(currentTime);
+  console.log(currentTime1);
   currentTime2 = musicOneTwo.currentTime()
   //console.log(currentTime2);
 
@@ -194,7 +196,7 @@ function draw() {
   mapMid = map(mid, 0, 255, 5, 600);
   mapTreble = map(treble, 0, 255, 5, 900);
 
-  //console.log(mapVolume)
+  //console.log(mapBass)
 
   // states for different scenes
   if (state === `title`) {
@@ -220,15 +222,15 @@ function danceDynamic() {
   push();
   for (let i = 0; i < ellipses3.length; i++) {
     ellipses3[i].rotate();
-    ellipses3[i].display();
+    ellipses3[i].lightFX1();
   }
   pop();
 
 // shows the rotating light FX close to the center of the the visualizer
   push();
-  for (let j = 0; j < 15; j++) {
+  for (let j = 0; j < ellipses3.length; j++) {
     ellipsesFX1[j].rotate2();
-    ellipsesFX1[j].display2();
+    ellipsesFX1[j].lightFX2();
   }
   pop();
 
@@ -236,9 +238,10 @@ function danceDynamic() {
   push();
   for (let k = 0; k < ellipses3.length; k++) {
     ellipsesFX2[k].rotate3();
-    ellipsesFX2[k].display3();
+    ellipsesFX2[k].lightFX3();
   }
   pop();
+
 
   // show the cental audio visualizer
   push();
@@ -376,7 +379,7 @@ function keyPressed() {
 
 function jumpSong() {
   let len = musicRock.duration();
-  musicRock.jump(120);
+  musicRock.jump(240);
 }
 
 function jumpSong1() {
