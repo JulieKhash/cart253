@@ -46,7 +46,7 @@ class Fireball2 extends Shape {
 
   display() {
     push();
-    if (!this.active && currentTime2 > 10){
+    if (!this.active && currentTime2 > 10 && currentTime2 > 400){
     for (let i = 0; i < this.numSmallSpheres; i++) {
 
       this.x = this.radius * cos(i);

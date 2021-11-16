@@ -1,3 +1,4 @@
+// a class for the Angel
 class Angel extends Shape {
   constructor(angelImg, lightImg) {
     super()
@@ -33,11 +34,10 @@ class Angel extends Shape {
     ellipse(this.x, this.y, this.size + mapVolume * 3);
     pop();
   }
-
 }
 
 
-// class fireman
+//a class for the Fire Man
 class FireMan extends Shape {
   constructor(fireman, lightImg) {
     super()
@@ -80,36 +80,36 @@ class FireMan extends Shape {
       noStroke();
       texture(lightImg);
       ellipse(this.x, this.y, mapBass + mapMid * 2 + mapTreble);
-    // } else {
-    //   this.displayFireman()
-    // }
+      // } else {
+      //   this.displayFireman()
+      // }
+      pop();
+    }
+  }
+
+  //   displayFireman() {
+  //     push();
+  //     imageMode(CENTER);
+  //     image(this.imageFireMan, 0, 250, (3000 / 4) + mapVolume + mapTreble / 2, (4000 / 4) +
+  //       mapVolume + mapTreble / 2);
+  //     pop()
+  //   }
+  // }
+  displayFireman() {
+    push();
+    if (this.active && currentTime2 < 35 && currentTime2 < 390) {
+      texture(firemanImg);
+      stroke((mapMid / 4) * scaleVolume, (mapMid / 4) * scaleVolume, mapTreble * 2 + mapMid + scaleVolume, mapMid / 3);
+      ellipse(this.x, this.y, 1000 + mapVolume + mapTreble / 2);
+    } else {
+      this.active = false;
+    }
     pop();
   }
 }
 
-//   displayFireman() {
-//     push();
-//     imageMode(CENTER);
-//     image(this.imageFireMan, 0, 250, (3000 / 4) + mapVolume + mapTreble / 2, (4000 / 4) +
-//       mapVolume + mapTreble / 2);
-//     pop()
-//   }
-// }
-displayFireman() {
-  push();
-  if (this.active && currentTime2 < 35){
-  texture(firemanImg);
-  stroke((mapMid / 4) * scaleVolume, (mapMid / 4) * scaleVolume, mapTreble * 2 + mapMid + scaleVolume, mapMid / 3);
-  ellipse(this.x, this.y, 1000 + mapVolume + mapTreble / 2);
-} else {
-  this.active = false;
-}
-  pop();
-}
-}
 
-
-// class for Chameleon Man
+//a class for Chameleon Man
 class ChameleonMan extends Shape {
   constructor(chameleonManImg, lightImg) {
     super();
@@ -133,7 +133,7 @@ class ChameleonMan extends Shape {
   }
 
   rotateMan2() {
-    rotate(frameCount * this.minRotationSpeed*8);
+    rotate(frameCount * this.minRotationSpeed * 8);
   }
 
   rotateMan1() {
@@ -155,7 +155,7 @@ class ChameleonMan extends Shape {
       this.sizeH = 4000 / mapTreble + mapVolume * 2;
       image(chameleonManImg, this.x, this.y, this.sizeW, this.sizeH);
     }
-      pop();
+    pop();
   }
 
   // displays rotating figure and light that adds the double effect

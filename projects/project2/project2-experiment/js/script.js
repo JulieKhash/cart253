@@ -38,7 +38,6 @@ let treble;
 let mapBass;
 let mapMid;
 let mapTreble;
-
 let currentTime1;
 let currentTime2;
 
