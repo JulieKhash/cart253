@@ -50,7 +50,7 @@ class FireMan extends Shape {
 
     this.imageFireMan = firemanImg;
     this.imageLight = lightImg
-
+    this.active = true;
   }
 
   rotate() {
@@ -70,6 +70,7 @@ class FireMan extends Shape {
 
   display() {
     this.displayLight();
+    this.displayFireman();
   }
 
   displayLight() {
@@ -79,11 +80,12 @@ class FireMan extends Shape {
       noStroke();
       texture(lightImg);
       ellipse(this.x, this.y, mapBass + mapMid * 2 + mapTreble);
-    } else {
-      this.displayFireman()
-    }
+    // } else {
+    //   this.displayFireman()
+    // }
     pop();
   }
+}
 
 //   displayFireman() {
 //     push();
@@ -95,14 +97,16 @@ class FireMan extends Shape {
 // }
 displayFireman() {
   push();
+  if (this.active && currentTime2 < 35){
   texture(firemanImg);
   stroke((mapMid / 4) * scaleVolume, (mapMid / 4) * scaleVolume, mapTreble * 2 + mapMid + scaleVolume, mapMid / 3);
-  ellipse(0, 0, 3000/2 + mapVolume + mapTreble / 2, 4000/2 + mapVolume + mapTreble / 2)
-
-  pop()
+  ellipse(this.x, this.y, 1000 + mapVolume + mapTreble / 2);
+} else {
+  this.active = false;
+}
+  pop();
 }
 }
-
 
 
 // class for Chameleon Man
@@ -137,7 +141,7 @@ class ChameleonMan extends Shape {
     rotateY(frameCount * -this.minRotationSpeed * 5);
   }
 
-  //
+
   display() {
     push();
     imageMode(CENTER);
