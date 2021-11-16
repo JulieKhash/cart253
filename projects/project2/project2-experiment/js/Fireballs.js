@@ -4,7 +4,7 @@ class Fireball1 extends Shape {
     super();
     this.x = 0;
     this.y = 0;
-    this.size = 80;
+    this.size = 60;
   }
 
   rotate() {

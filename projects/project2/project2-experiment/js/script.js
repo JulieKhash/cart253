@@ -165,7 +165,7 @@ function draw() {
   currentTime1 = musicRock.currentTime();
   //console.log(currentTime);
   currentTime2 = musicOneTwo.currentTime()
-  console.log(currentTime2);
+  //console.log(currentTime2);
 
 
   //let radius = width / 6;
@@ -192,7 +192,7 @@ function draw() {
   mapMid = map(mid, 0, 255, 5, 600);
   mapTreble = map(treble, 0, 255, 5, 900);
 
-  //console.log(mapVolume)
+  console.log(mapMid)
 
   // states for different scenes
   if (state === `title`) {
@@ -311,11 +311,11 @@ function keyPressed() {
     musicXylophone.stop();
     state = `danceCosmos`;
     musicOneTwo.play();
-    jumpSong1();
-  // } else if (state === `danceCosmos` && keyCode === ENTER) {
-  //   musicOneTwo.stop();
-  //   state = `danceDynamic`;
-  //   musicRock.play();
+    // jumpSong1();
+  } else if (state === `danceCosmos` && keyCode === ENTER) {
+    musicOneTwo.stop();
+    state = `danceDynamic`;
+    musicRock.play();
   //   jumpSong();
   }
 }

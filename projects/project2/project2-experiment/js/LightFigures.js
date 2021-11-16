@@ -46,7 +46,7 @@ class FireMan extends Shape {
     this.size = 300;
     this.strokeColor = 250
     this.strokeSize = 1;
-    this.soundThreshold = 250;
+    this.soundThreshold = 270;
 
     this.imageFireMan = firemanImg;
     this.imageLight = lightImg
@@ -79,7 +79,7 @@ class FireMan extends Shape {
       this.rotateLight();
       noStroke();
       texture(lightImg);
-      ellipse(this.x, this.y, mapBass + mapMid * 2 + mapTreble);
+      ellipse(this.x, this.y, mapBass * 2 + mapMid * 2 + mapTreble);
       // } else {
       //   this.displayFireman()
       // }
