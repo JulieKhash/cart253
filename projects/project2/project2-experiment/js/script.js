@@ -59,17 +59,29 @@ let ellipse2;
 let ellipses2 = [];
 
 //ellipses for the dynamic scene
-let numEllipses3 = 30;
-let ellipse3;
-let ellipses3 = [];
+// let numEllipses3 = 30;
+// let ellipse3;
+// let ellipses3 = [];
 
-let numEllipsesFX1 = 20;
-let ellipseFX1;
-let ellipsesFX1 = [];
+let numlights = 30;
 
-let numEllipsesFX2 = 20;
-let ellipseFX2;
-let ellipsesFX2 = [];
+let light1;
+let lights1 = [];
+
+let light2;
+let lights2 = [];
+
+let light3;
+let lights3 = [];
+
+
+// let numEllipsesFX1 = 20;
+// let ellipseFX1;
+// let ellipsesFX1 = [];
+//
+// let numEllipsesFX2 = 20;
+// let ellipseFX2;
+// let ellipsesFX2 = [];
 
 let lightFX3;
 
@@ -127,28 +139,28 @@ function setup() {
   }
 
   //ellipses 1 for the dynamic scene
-  for (let i = 0; i < numEllipses3; i++) {
+  for (let i = 0; i < numlights; i++) {
     let size = 400;
-    ellipse3 = new LightFX(size + 100 + i, size, size / 4, lightImg);
-    ellipses3.push(ellipse3);
+    light1 = new LightFX(size + 100 + i, size, size / 4, lightImg);
+    lights1.push(light1);
   }
 
   //ellipses 2 for the dynamic scene
-  for (let i = 0; i < numEllipses3; i++) {
+  for (let i = 0; i < numlights; i++) {
     let x = 120
     let y = 200;
     let size = 10;
-    ellipseFX1 = new LightFX(x + i, y, size, lightImg);
-    ellipsesFX1.push(ellipseFX1);
+    light2 = new LightFX(x + i, y, size, lightImg);
+    lights2.push(light2);
   }
 
   //ellipses 3 for the dynamic scene
-  for (let i = 0; i < numEllipses3; i++) {
+  for (let i = 0; i < numlights; i++) {
     let x = 350
     let y = 100;
     let size = 20;
-    ellipseFX2 = new LightFX(x + i/2, y, size, lightImg);
-    ellipsesFX2.push(ellipseFX2);
+    light3 = new LightFX(x + i/2, y, size, lightImg);
+    lights3.push(light3);
   }
 
   // the instances of the main figures
@@ -216,29 +228,29 @@ function draw() {
 ////////Scene 3: dynamic dance
 function danceDynamic() {
   background(mapVolume * 2, 0, 0);
-  ellipse3.bgEffect();
+  light1.bgEffect();
 
   // shows rotating ellipses around visualizer
   push();
-  for (let i = 0; i < ellipses3.length; i++) {
-    ellipses3[i].rotate();
-    ellipses3[i].lightFX1();
+  for (let i = 0; i < lights1.length; i++) {
+    lights1[i].rotate();
+    lights1[i].lightFX1();
   }
   pop();
 
 // shows the rotating light FX close to the center of the the visualizer
   push();
-  for (let j = 0; j < ellipses3.length; j++) {
-    ellipsesFX1[j].rotate2();
-    ellipsesFX1[j].lightFX2();
+  for (let j = 0; j < lights2.length; j++) {
+    lights2[j].rotate2();
+    lights2[j].lightFX2();
   }
   pop();
 
 // shows the rotating light FX along the edge of the visualizer
   push();
-  for (let k = 0; k < ellipses3.length; k++) {
-    ellipsesFX2[k].rotate3();
-    ellipsesFX2[k].lightFX3();
+  for (let k = 0; k < lights3.length; k++) {
+    lights3[k].rotate3();
+    lights3[k].lightFX3();
   }
   pop();
 
