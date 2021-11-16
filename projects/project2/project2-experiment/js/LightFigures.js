@@ -83,7 +83,7 @@ class FireMan extends Shape {
     }
   }
 
-  // displays a fireman figure until given time and makes it appear almost in the end
+  // displays a fireman figure until a given time and makes it appear closer to the end
   display() {
     push();
     if (this.active && currentTime2 < 35 || currentTime2 > 390) {
@@ -152,7 +152,7 @@ class ChameleonMan extends Shape {
       this.rotateLight2();
       this.size = mapVolume + mapTreble * 2
       image(lightImg, this.x, this.y, this.size, this.size);
-      
+
       this.rotateMan2();
       this.sizeW = 3000 / mapTreble + mapVolume * 2;
       this.sizeH = 4000 / mapTreble + mapVolume * 2;

@@ -50,7 +50,7 @@ class Ellipse2 extends Shape {
 
   display() {
     push();
-    if(this.active && currentTime2 < 414) {
+    if(this.active && currentTime2 > 0.5 || currentTime2 < 414) {
     noFill();
     stroke((mapMid / 4) * scaleVolume, (mapMid / 4) * scaleVolume, mapTreble * 2 + mapMid + scaleVolume, mapMid / 3);
     strokeWeight(scaleVolume / 3);

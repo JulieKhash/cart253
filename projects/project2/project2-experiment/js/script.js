@@ -25,6 +25,9 @@ let musicXylophone;
 let musicOneTwo;
 let musicRock;
 
+let music1;
+
+
 //all the sound analyzers
 let amp;
 let fft;
@@ -40,6 +43,11 @@ let mapMid;
 let mapTreble;
 let currentTime1;
 let currentTime2;
+let musicDelayTime = 1500; //1.5 secs before the music onset
+
+let timeOut1;
+let timeOut2;
+let timeOut3
 
 //ellipses for the angel scene
 let numEllipses1 = 5;
@@ -72,6 +80,8 @@ let fireball1;
 let fireball2;
 
 let centralVisualizer;
+
+
 
 function preload() {
   font = loadFont('assets/fonts/KIMONOG.ttf');
@@ -186,7 +196,7 @@ function draw() {
   mapMid = map(mid, 0, 255, 5, 600);
   mapTreble = map(treble, 0, 255, 5, 900);
 
-  console.log(mapVolume)
+  //console.log(mapVolume)
 
   // states for different scenes
   if (state === `title`) {
@@ -199,6 +209,9 @@ function draw() {
     danceDynamic();
   }
 }
+
+
+
 
 ////////Scene 3: dynamic dance
 function danceDynamic() {
@@ -302,23 +315,55 @@ function titleScreen() {
   titlescreen.draw();
 }
 
+
+
+function music1Play(){
+  musicXylophone.play()
+}
+function music2Play(){
+  musicOneTwo.play()
+}
+function music3Play(){
+  musicRock.play()
+}
+
+function music1Stop(){
+  musicXylophone.stop()
+}
+function music2Stop(){
+  musicOneTwo.stop()
+}
+function music3Stop(){
+  musicRock.stop()
+}
+
+// timeOut1 = setTimeout(music1Play, musicDelayTime);
+// timeOut2 = setTimeout(music2Play, musicDelayTime);
+// timeOut3 = setTimeout(music3Play, musicDelayTime);
+
 // change the screen wheb ENTER is pressed
 function keyPressed() {
   if (state === `title` && keyCode === ENTER) {
     state = `danceAngel`;
-    musicXylophone.play();
+    timeOut1 = setTimeout(music1Play, musicDelayTime);
+
   } else if (state === `danceAngel` && keyCode === ENTER) {
-    musicXylophone.stop();
+    // musicXylophone.stop();
+    music1Stop();
+    clearTimeout(timeOut1);
     state = `danceCosmos`;
-    musicOneTwo.play();
+    timeOut2 = setTimeout(music2Play, musicDelayTime);
     // jumpSong1();
   } else if (state === `danceCosmos` && keyCode === ENTER) {
-    musicOneTwo.stop();
+    // musicOneTwo.stop();
+    music2Stop();
+    clearTimeout(timeOut2);
     state = `danceDynamic`;
-    musicRock.play();
-    jumpSong();
+    timeOut3 = setTimeout(music3Play, musicDelayTime);
+  //  jumpSong();
   }
 }
+
 
 function jumpSong() {
   let len = musicRock.duration();
