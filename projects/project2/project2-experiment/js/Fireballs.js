@@ -35,7 +35,7 @@ class Fireball2 extends Shape {
     this.size = 20;
     this.numSmallSpheres = 10;
 
-    this.active = false;
+    this.active = true;
   }
 
   rotate() {
@@ -46,8 +46,9 @@ class Fireball2 extends Shape {
 
   display() {
     push();
-
+    if (!this.active && currentTime2 > 10){
     for (let i = 0; i < this.numSmallSpheres; i++) {
+
       this.x = this.radius * cos(i);
       this.y = this.radius * sin(i);
       translate(this.x + 100, this.y + 50, 100);
@@ -55,6 +56,11 @@ class Fireball2 extends Shape {
       texture(fireballImg);
       sphere(this.size + i + scaleVolume * 2);
     }
-    pop();
+  } else {
+    this.active = false;
   }
+    pop();
+
+
+}
 }

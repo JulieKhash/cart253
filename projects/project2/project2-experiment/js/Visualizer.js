@@ -19,7 +19,7 @@ class Visualizer extends Shape {
 
   display() {
 
-    if (this.active && currentTime < 305) {
+    if (this.active && currentTime1 < 305) {
       push();
       for (let i = 0; i < spectrum.length; i++) {
         this.rotate();

@@ -39,7 +39,8 @@ let mapBass;
 let mapMid;
 let mapTreble;
 
-let currentTime;
+let currentTime1;
+let currentTime2;
 
 //ellipses for the angel scene
 let numEllipses1 = 5;
@@ -79,7 +80,7 @@ let centralVisualizer;
 function preload() {
   font = loadFont('assets/fonts/KIMONOG.ttf');
   angelImg = loadImage(`assets/images/AngelMan.png`);
-  firemanImg = loadImage(`assets/images/FireMan.png`);
+  firemanImg = loadImage(`assets/images/FireManSmaller.png`);
   fireballImg = loadImage(`assets/images/fireball.gif`);
   lightImg = loadImage(`assets/images/light.png`);
   light2Img = loadImage(`assets/images/blue.png`);
@@ -135,7 +136,7 @@ function setup() {
   for (let i = 0; i < numEllipses3; i++) {
     let x = 120
     let y = 200;
-    let size = 30;
+    let size = 20;
     ellipseFX1 = new Ellipse3(x + i, y, size, lightImg);
     ellipsesFX1.push(ellipseFX1);
   }
@@ -162,8 +163,10 @@ function draw() {
   orbitControl(6, 6, 0.2);
   translate(0, 0, 0); //postion the scene in the center
 
-  currentTime = musicRock.currentTime();
+  currentTime1 = musicRock.currentTime();
   //console.log(currentTime);
+  currentTime2 = musicOneTwo.currentTime()
+  console.log(currentTime2);
 
 
   //let radius = width / 6;
@@ -190,7 +193,7 @@ function draw() {
   mapMid = map(mid, 0, 255, 5, 600);
   mapTreble = map(treble, 0, 255, 5, 900);
 
-  console.log(mapVolume)
+  //console.log(mapVolume)
 
   // states for different scenes
   if (state === `title`) {
@@ -218,7 +221,7 @@ function danceDynamic() {
   pop();
 
   push();
-  for (let j = 0; j < ellipses3.length; j++) {
+  for (let j = 0; j < 15; j++) {
     ellipsesFX1[j].rotate2();
     ellipsesFX1[j].display2();
   }

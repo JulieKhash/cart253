@@ -85,13 +85,22 @@ class FireMan extends Shape {
     pop();
   }
 
-  displayFireman() {
-    push();
-    imageMode(CENTER);
-    image(this.imageFireMan, 0, 250, (3000 / 4) + mapVolume + mapTreble / 2, (4000 / 4) +
-      mapVolume + mapTreble / 2);
-    pop()
-  }
+//   displayFireman() {
+//     push();
+//     imageMode(CENTER);
+//     image(this.imageFireMan, 0, 250, (3000 / 4) + mapVolume + mapTreble / 2, (4000 / 4) +
+//       mapVolume + mapTreble / 2);
+//     pop()
+//   }
+// }
+displayFireman() {
+  push();
+  texture(firemanImg);
+  stroke((mapMid / 4) * scaleVolume, (mapMid / 4) * scaleVolume, mapTreble * 2 + mapMid + scaleVolume, mapMid / 3);
+  ellipse(0, 0, 3000/2 + mapVolume + mapTreble / 2, 4000/2 + mapVolume + mapTreble / 2)
+
+  pop()
+}
 }
 
 
@@ -160,7 +169,6 @@ class ChameleonMan extends Shape {
     }
     pop();
   }
-
 
 
 }

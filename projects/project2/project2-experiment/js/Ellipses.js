@@ -110,7 +110,7 @@ class Ellipse3 extends Shape {
     //stroke(mapTreble, mapMid / 2, 10)
     if (!this.active || mapVolume > this.maxSoundThreshold){
       texture(lightImg);
-      ellipse(this.x, this.y, this.size + mapBass/3);
+      ellipse(this.x, this.y, this.size + mapBass/4);
     }
     pop();
     }
@@ -131,7 +131,7 @@ class Ellipse3 extends Shape {
     push();
     // makes the rotating ellipses appear and stay when soundThreshold reached
     // if (this.active || mapVolume >= this.maxSoundThreshold) {
-    if (!this.active && currentTime > 102.1 && currentTime < 277) {
+    if (!this.active && currentTime1 > 102.1 && currentTime1 < 277) {
 
       noFill();
       stroke(mapTreble, mapMid / 2, 0, mapVolume);
