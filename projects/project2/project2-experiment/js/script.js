@@ -53,48 +53,38 @@ let numEllipses1 = 5;
 let ellipse1;
 let ellipses1 = [] //an empty array to store our ellipses
 
-//ellipses for the fire scene
+//ellipses for the cosmos scene
 let numEllipses2 = 7;
 let ellipse2;
 let ellipses2 = [];
 
-//ellipses for the dynamic scene
-// let numEllipses3 = 30;
-// let ellipse3;
-// let ellipses3 = [];
-
+// number of the light effects
 let numlights = 30;
 
 let light1;
-let lights1 = [];
+let lights1 = []; //an empty array to store the first light effects
 
 let light2;
-let lights2 = [];
+let lights2 = []; // to store the second light effects
 
 let light3;
-let lights3 = [];
+let lights3 = []; // to store the third light effects
 
+// let lightFX3;
 
-// let numEllipsesFX1 = 20;
-// let ellipseFX1;
-// let ellipsesFX1 = [];
-//
-// let numEllipsesFX2 = 20;
-// let ellipseFX2;
-// let ellipsesFX2 = [];
-
-let lightFX3;
-
+// main characters
 let angel;
 let fireman;
 let chameleonman;
 
+// fireballs in the cosmos
 let fireball1;
 let fireball2;
 
+// visualizer
 let centralVisualizer;
 
-
+// preload all the media in our program from assets file
 function preload() {
   font = loadFont('assets/fonts/KIMONOG.ttf');
   angelImg = loadImage(`assets/images/AngelMan.png`);
@@ -109,14 +99,14 @@ function preload() {
   musicRock = loadSound(`assets/sounds/electro-rock.mp3`);
 }
 
-
+// intial setup for our program: canvas, main screen, audion analyzers and object instances
 function setup() {
   createCanvas(1700, 1000, WEBGL); //WEBGL for 3D canvas
 
-  titlescreen = new Title();
+  titlescreen = new Title(); //starts the screen with title
 
-  amp = new p5.Amplitude(); //an instance for amplitude for all sounds
-  amp.setInput(musicXylophone);
+  amp = new p5.Amplitude(); //an instance of amplitude for all sounds
+  amp.setInput(musicXylophone); // provide the audio input for the analyzer
   amp.setInput(musicOneTwo);
   amp.setInput(musicRock);
   musicRock.setVolume(0.4); //reduction of volume almost by half
@@ -138,14 +128,14 @@ function setup() {
     ellipses2.push(ellipse2);
   }
 
-  //ellipses 1 for the dynamic scene
+  //light effects 1 for the dynamic scene
   for (let i = 0; i < numlights; i++) {
     let size = 400;
     light1 = new LightFX(size + 100 + i, size, size / 4, lightImg);
     lights1.push(light1);
   }
 
-  //ellipses 2 for the dynamic scene
+  //light effects 2 for the dynamic scene
   for (let i = 0; i < numlights; i++) {
     let x = 120
     let y = 200;
@@ -154,12 +144,12 @@ function setup() {
     lights2.push(light2);
   }
 
-  //ellipses 3 for the dynamic scene
+  //light effects 3 for the dynamic scene
   for (let i = 0; i < numlights; i++) {
     let x = 350
     let y = 100;
     let size = 20;
-    light3 = new LightFX(x + i/2, y, size, lightImg);
+    light3 = new LightFX(x + i / 2, y, size, lightImg);
     lights3.push(light3);
   }
 
@@ -223,33 +213,31 @@ function draw() {
 }
 
 
-
-
 ////////Scene 3: dynamic dance
 function danceDynamic() {
   background(mapVolume * 2, 0, 0);
   light1.bgEffect();
 
-  // shows rotating ellipses around visualizer
+  // shows rotating and floating light ellipses around the visualizer
   push();
   for (let i = 0; i < lights1.length; i++) {
-    lights1[i].rotate();
+    lights1[i].rotateFX1();
     lights1[i].lightFX1();
   }
   pop();
 
-// shows the rotating light FX close to the center of the the visualizer
+  // shows the rotating light FX close to the center of the the visualizer
   push();
   for (let j = 0; j < lights2.length; j++) {
-    lights2[j].rotate2();
+    lights2[j].rotateFX2();
     lights2[j].lightFX2();
   }
   pop();
 
-// shows the rotating light FX along the edge of the visualizer
+  // shows the rotating light FX along the edge of the visualizer
   push();
   for (let k = 0; k < lights3.length; k++) {
-    lights3[k].rotate3();
+    lights3[k].rotateFX3();
     lights3[k].lightFX3();
   }
   pop();
@@ -260,21 +248,20 @@ function danceDynamic() {
   centralVisualizer.display();
   pop();
 
+  // shows the second layer of the light in the center
   push();
   chameleonman.displayLight2();
   pop();
 
-  // shows the "chameleon" figure
+  // shows the main "chameleon" figure alternating with light
   push();
-  //chameleonman.rotate();
-  chameleonman.display();
+  chameleonman.display1();
   pop();
 
+  // shows the smaller dancing figure second time
   push();
   chameleonman.display2();
   pop();
-
-
 
 }
 
@@ -326,7 +313,7 @@ function danceAngel() {
     ellipses1[i].display();
   }
 
- // displays rotating angel alternating with light
+  // displays rotating angel alternating with light
   push();
   angel.rotate();
   angel.display();
@@ -338,23 +325,28 @@ function titleScreen() {
   titlescreen.draw();
 }
 
-function music1Play(){
+//put all the songs play/stop methods for better control and the timer
+function music1Play() {
   musicXylophone.play()
 }
-function music2Play(){
+
+function music2Play() {
   musicOneTwo.play()
 }
-function music3Play(){
+
+function music3Play() {
   musicRock.play()
 }
 
-function music1Stop(){
+function music1Stop() {
   musicXylophone.stop()
 }
-function music2Stop(){
+
+function music2Stop() {
   musicOneTwo.stop()
 }
-function music3Stop(){
+
+function music3Stop() {
   musicRock.stop()
 }
 
@@ -362,7 +354,7 @@ function music3Stop(){
 // timeOut2 = setTimeout(music2Play, musicDelayTime);
 // timeOut3 = setTimeout(music3Play, musicDelayTime);
 
-// change the screen wheb ENTER is pressed
+// change the screen when ENTER is pressed
 function keyPressed() {
   if (state === `title` && keyCode === ENTER) {
     state = `danceAngel`;
@@ -388,10 +380,9 @@ function keyPressed() {
   }
 }
 
-
 function jumpSong() {
   let len = musicRock.duration();
-  musicRock.jump(240);
+  musicRock.jump(95);
 }
 
 function jumpSong1() {

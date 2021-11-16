@@ -1,4 +1,4 @@
-// a class of rotating ellipses for the Dynamic Dance scene
+// a class of rotating light effects for the Dynamic Dance scene
 class LightFX extends Shape {
   constructor(x, y, size, lightImg) {
     super();
@@ -22,18 +22,18 @@ class LightFX extends Shape {
   }
 }
 
-  rotate() {
+  rotateFX1() {
     rotateX(frameCount * -this.maxRotationSpeed);
     rotateY(frameCount *  this.maxRotationSpeed);
     rotateZ(frameCount * -this.maxRotationSpeed);
   }
 
-  rotate2(){
+  rotateFX2(){
     rotate(frameCount * -this.maxRotationSpeed*3 + mapVolume);
     rotateZ(frameCount * -this.maxRotationSpeed*2);
   }
 
-  rotate3(){
+  rotateFX3(){
     rotate(frameCount * this.maxRotationSpeed*2 + mapVolume);
     rotateZ(frameCount * -this.maxRotationSpeed);
   }
