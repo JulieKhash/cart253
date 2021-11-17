@@ -5,19 +5,19 @@ class Angel extends Shape {
     this.size = 300;
     this.strokeColor = 250
     this.strokeSize = 1;
-
     this.imageAngel = angelImg;
     this.imageLight = lightImg;
-
     this.soundThreshold = 60;
   }
 
+  // rotates angel/light inside the ellipse
   rotate() {
     rotateX(frameCount * -this.minRotationSpeed * 8);
     rotateY(frameCount * -this.minRotationSpeed * 8);
     rotateZ(frameCount * -this.minRotationSpeed * 8);
   }
 
+  // shows angel image alternating with light based on a given soundThreshold
   display() {
     push();
     noFill();
@@ -34,7 +34,6 @@ class Angel extends Shape {
   }
 }
 
-
 //a class for the Fire Man
 class FireMan extends Shape {
   constructor(x, y, fireman, lightImg) {
@@ -43,7 +42,6 @@ class FireMan extends Shape {
     this.strokeColor = 250
     this.strokeSize = 1;
     this.soundThreshold = 270;
-
     this.imageFireMan = firemanImg;
     this.imageLight = lightImg
     this.active = true;
@@ -73,8 +71,7 @@ class FireMan extends Shape {
       this.rotateLight();
       noStroke();
       texture(lightImg);
-      //siz grows by the end
-      ellipse(this.x, this.y, mapBass * 1.5 + mapMid * 2 + mapTreble);
+      ellipse(this.x, this.y, mapBass * 1.5 + mapMid * 2 + mapTreble); //growing size by the end, with the higher bass/mid/treble together
       pop();
     }
   }
@@ -101,7 +98,6 @@ class ChameleonMan extends Shape {
     this.sizeW = undefined;
     this.sizeH = undefined;
     this.imageChameleonMan = chameleonManImg
-
     this.minVolumeThreshold = 25;
     this.maxVolumeThresold = 45;
   }
@@ -127,6 +123,7 @@ class ChameleonMan extends Shape {
     rotateY(frameCount * -this.minRotationSpeed * 5);
   }
 
+  //NOTE: I put some of the light effects here because they closely interact with the main figures.
 
   // displays rotating light that adds the double light effect in the center
   displayLight2() {
@@ -148,8 +145,7 @@ class ChameleonMan extends Shape {
     if (mapVolume > this.maxVolumeThresold) {
       this.rotateMan2();
       this.size = 3000 / mapTreble + mapVolume * 3;
-      //using texture on ellipse cuz had issues with glitch
-      texture(chameleonManImg)
+      texture(chameleonManImg); //using texture inside the ellipse cuz had issues with glitch
       ellipse(this.x, this.y, this.size)
     }
     pop();
@@ -162,9 +158,9 @@ class ChameleonMan extends Shape {
     //starts showing the light when reachign the given min volume
     if (mapVolume > this.minVolumeThreshold) {
       this.rotateLight1();
-      this.size = mapVolume + mapTreble, mapVolume + mapTreble
+      this.size = mapVolume + mapTreble;
       image(lightImg, this.x, this.y, this.size, this.size);
-      //else shows the main figure if less then a min volume (slowly starts and stops dancing)
+      //else shows the main figure if less then a minimum volume (slowly starts and stops dancing)
     } else {
       this.rotateMan1();
       // size reconfigues according to the higher notes and volume
@@ -174,6 +170,5 @@ class ChameleonMan extends Shape {
     }
     pop();
   }
-
 
 }
