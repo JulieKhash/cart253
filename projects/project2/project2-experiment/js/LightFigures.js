@@ -147,7 +147,7 @@ class ChameleonMan extends Shape {
     noStroke();
     if (mapVolume > this.maxVolumeThresold) {
       this.rotateMan2();
-      this.size = 3000 / mapTreble + mapVolume * 3 + mapBass / 5;
+      this.size = 3000 / mapTreble + mapVolume * 3;
       //using texture on ellipse cuz had issues with glitch
       texture(chameleonManImg)
       ellipse(this.x, this.y, this.size)

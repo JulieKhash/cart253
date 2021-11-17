@@ -70,9 +70,6 @@ let lights2 = []; // to store the second light effects
 let light3;
 let lights3 = []; // to store the third light effects
 
-let light4;
-let lights4 = []; // to store the third light effects
-
 // main characters
 let angel;
 let fireman;
@@ -100,7 +97,7 @@ function preload() {
   musicRock = loadSound(`assets/sounds/electro-rock.mp3`);
 }
 
-// intial setup for our program: canvas, main screen, audion analyzers and object instances
+// intial setup for our program: canvas, main screen, audio analyzers and object instances
 function setup() {
   createCanvas(1700, 1000, WEBGL); //WEBGL for 3D canvas
 
@@ -131,8 +128,10 @@ function setup() {
 
   //light effects 1 for the dynamic scene
   for (let i = 0; i < numlights; i++) {
-    let size = 400;
-    light1 = new LightFX(size + 100 + i, size, size / 4, lightImg);
+    let x = 500;
+    let y = 400;
+    let size = 100;
+    light1 = new LightFX(x + i, y, size, lightImg);
     lights1.push(light1);
   }
 
@@ -154,14 +153,6 @@ function setup() {
     lights3.push(light3);
   }
 
-  //light effects 4 for the dynamic scene
-  for (let i = 0; i < numlights; i++) {
-    let x = 350
-    let y = 100;
-    let size = 15;
-    light4 = new LightFX(x + i / 2, y, size, lightImg);
-    lights4.push(light4);
-  }
 
   // the instances of the main figures
   angel = new Angel(angelImg, lightImg);
@@ -184,7 +175,7 @@ function draw() {
   orbitControl(6, 6, 0.2);
   translate(0, 0, 0); //x, y, z positions the scene in the center
 
-  // get the current time of the given song to better control animations
+  // get the current time of the given song for better animation control
   currentTime1 = musicRock.currentTime();
   console.log(currentTime1);
   currentTime2 = musicOneTwo.currentTime()
@@ -228,7 +219,7 @@ function draw() {
 
 ////////Scene 3: dynamic dance
 function danceDynamic() {
-  background(mapVolume * 2, 0, 0);
+  background(mapVolume * 2, 0, 0); //dark-red bg that responds to song's volume
   light1.bgEffect();
 
   // shows rotating and floating light ellipses around the visualizer
@@ -254,16 +245,6 @@ function danceDynamic() {
     lights3[k].lightFX3();
   }
   pop();
-
-  // shows the rotating light FX along the edge of the visualizer
-  // push();
-  // for (let h = 0; h < lights3.length; h++) {
-  //   lights4[h].rotateFX4();
-  //   lights4[h].lightFX4();
-  // }
-  // pop();
-
-
 
   // show the cental audio visualizer
   push();
@@ -301,7 +282,7 @@ function danceCosmos() {
   }
   pop();
 
-  // main fireball in the center
+  // shows main fireball in the center
   push();
   fireball1.rotate();
   fireball1.display();
@@ -372,28 +353,19 @@ function music3Stop() {
   musicRock.stop()
 }
 
-// timeOut1 = setTimeout(music1Play, musicDelayTime);
-// timeOut2 = setTimeout(music2Play, musicDelayTime);
-// timeOut3 = setTimeout(music3Play, musicDelayTime);
-
-// change the screen when ENTER is pressed
+// change the screen when key ENTER is pressed
 function keyPressed() {
   if (state === `title` && keyCode === ENTER) {
     state = `danceAngel`;
-    timeOut1 = setTimeout(music1Play, musicDelayTime);
-
+    timeOut1 = setTimeout(music1Play, musicDelayTime); //music starts after some delay
   } else if (state === `danceAngel` && keyCode === ENTER) {
-    // musicXylophone.stop();
     music1Stop();
     clearTimeout(timeOut1);
     state = `danceCosmos`;
-    //musicOneTwo.play()
     timeOut2 = setTimeout(music2Play, musicDelayTime);
     // jumpSong1();
   } else if (state === `danceCosmos` && keyCode === ENTER) {
-    // musicOneTwo.stop();
     music2Stop();
-
     clearTimeout(timeOut2);
     state = `danceDynamic`;
     //musicRock.play()
