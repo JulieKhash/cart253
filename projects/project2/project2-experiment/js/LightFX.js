@@ -38,6 +38,37 @@ class LightFX extends Shape {
     rotateZ(frameCount * -this.maxRotationSpeed);
   }
 
+  rotateFX4(){
+    rotate(frameCount * this.maxRotationSpeed*2 + mapVolume);
+    //rotateZ(frameCount * -this.maxRotationSpeed);
+  }
+
+
+    lightFX4(){
+      push();
+        if (!this.active && currentTime1 > 258 && currentTime1 < 260) {
+          noFill();
+          noStroke();
+          texture(lightImg);
+          this.size = mapBass  + mapVolume;
+          ellipse(this.x, this.y, this.size);
+    } else {
+      this.active = false;
+    }
+    pop();
+  }
+
+  lightFX3(){
+    push();
+    noStroke();
+    if (!this.active || mapBass > 275){
+      texture(lightImg);
+      this.size = mapBass/3;
+      ellipse(this.x, this.y, this.size);
+    }
+    pop();
+    }
+
 
   lightFX2() {
     push();
@@ -50,33 +81,12 @@ class LightFX extends Shape {
     pop();
     }
 
-    lightFX3(){
-      push();
-      noStroke();
-      if (!this.active || mapBass > 275){
-        texture(lightImg);
-        this.size = mapBass/3;
-        ellipse(this.x, this.y, this.size);
-      }
-      pop();
-      }
-
-  //
-  //   lightFX4(){
-  //     push();
-  //       if (!this.active && currentTime1 > 258 && currentTime1 < 262) {
-  //         texture(lightImg);
-  //         this.size = mapBass * 3 + mapVolume;
-  //         ellipse(this.x, this.y, this.size);
-  //   }
-  //   pop();
-  // }
 
   lightFX1() {
     push();
     // makes the rotating ellipses appear and stay when soundThreshold reached
     // if (this.active || mapVolume >= this.maxSoundThreshold) {
-    if (!this.active && currentTime1 > 102.1 && currentTime1 < 277) {
+    if (!this.active && currentTime1 > 102.2 && currentTime1 < 277) {
 
       noFill();
       stroke(mapTreble, mapMid / 2, 0, mapVolume);

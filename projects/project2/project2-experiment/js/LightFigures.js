@@ -73,6 +73,7 @@ class FireMan extends Shape {
       this.rotateLight();
       noStroke();
       texture(lightImg);
+      //siz grows by the end
       ellipse(this.x, this.y, mapBass * 1.5 + mapMid * 2 + mapTreble);
       pop();
     }
@@ -146,7 +147,7 @@ class ChameleonMan extends Shape {
     noStroke();
     if (mapVolume > this.maxVolumeThresold) {
       this.rotateMan2();
-      this.size = 3000 / mapTreble + mapVolume * 3;
+      this.size = 3000 / mapTreble + mapVolume * 3 + mapBass / 5;
       //using texture on ellipse cuz had issues with glitch
       texture(chameleonManImg)
       ellipse(this.x, this.y, this.size)

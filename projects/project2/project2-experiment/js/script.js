@@ -70,7 +70,8 @@ let lights2 = []; // to store the second light effects
 let light3;
 let lights3 = []; // to store the third light effects
 
-// let lightFX3;
+let light4;
+let lights4 = []; // to store the third light effects
 
 // main characters
 let angel;
@@ -151,6 +152,15 @@ function setup() {
     let size = 20;
     light3 = new LightFX(x + i / 2, y, size, lightImg);
     lights3.push(light3);
+  }
+
+  //light effects 4 for the dynamic scene
+  for (let i = 0; i < numlights; i++) {
+    let x = 350
+    let y = 100;
+    let size = 15;
+    light4 = new LightFX(x + i / 2, y, size, lightImg);
+    lights4.push(light4);
   }
 
   // the instances of the main figures
@@ -245,6 +255,15 @@ function danceDynamic() {
   }
   pop();
 
+  // shows the rotating light FX along the edge of the visualizer
+  // push();
+  // for (let h = 0; h < lights3.length; h++) {
+  //   lights4[h].rotateFX4();
+  //   lights4[h].lightFX4();
+  // }
+  // pop();
+
+
 
   // show the cental audio visualizer
   push();
@@ -328,7 +347,7 @@ function titleScreen() {
   titlescreen.draw();
 }
 
-//put all the songs play/stop methods for better control and the timer
+//put all the songs play/stop methods into functions for better start/end time control
 function music1Play() {
   musicXylophone.play()
 }
@@ -368,24 +387,24 @@ function keyPressed() {
     music1Stop();
     clearTimeout(timeOut1);
     state = `danceCosmos`;
-    musicOneTwo.play()
-    //timeOut2 = setTimeout(music2Play, musicDelayTime);
+    //musicOneTwo.play()
+    timeOut2 = setTimeout(music2Play, musicDelayTime);
     // jumpSong1();
   } else if (state === `danceCosmos` && keyCode === ENTER) {
     // musicOneTwo.stop();
     music2Stop();
 
-    //clearTimeout(timeOut2);
+    clearTimeout(timeOut2);
     state = `danceDynamic`;
-    musicRock.play()
-    //timeOut3 = setTimeout(music3Play, musicDelayTime);
-    jumpSong();
+    //musicRock.play()
+    timeOut3 = setTimeout(music3Play, musicDelayTime);
+    //jumpSong();
   }
 }
 
 function jumpSong() {
   let len = musicRock.duration();
-  musicRock.jump(95);
+  musicRock.jump(250);
 }
 
 function jumpSong1() {
