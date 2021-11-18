@@ -20,14 +20,14 @@ class Visualizer extends Shape {
   display() {
     if (this.active && currentTime1 < 305) {
       push();
-      // create a number of rectangles at the length of the spectrum (512)
+      // create a rectangle for the each frequency band in the audio spectrum (512)
       for (let i = 0; i < spectrum.length; i++) {
-        //rotates each reactangle indivisually
+        //rotates each reactangle individually
         this.rotate();
         //sin/cos wraps the linear waveform around the circle
         let x = this.radius * cos(i);
         let y = this.radius * sin(i);
-        // size chiangs according to the higher notes
+        // size changes according to the higher notes
         this.size = mapTreble / 3
         noFill();
         // color changes according to high/mid notes and the volume
