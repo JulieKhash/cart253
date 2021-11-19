@@ -41,9 +41,9 @@ class Ellipse2 extends Shape {
 
   rotate() {
 
-    rotateX(frameCount * this.minRotationSpeed * 4);
-    rotateY(frameCount * this.minRotationSpeed * 4);
-    rotateZ(frameCount * this.minRotationSpeed * 4);
+    rotateX(frameCount * this.minRotationSpeed * 3);
+    rotateY(frameCount * this.minRotationSpeed * 3);
+    rotateZ(frameCount * this.minRotationSpeed * 3);
 
   }
 
