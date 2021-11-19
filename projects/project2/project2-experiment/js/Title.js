@@ -1,14 +1,14 @@
 class Title {
   constructor(light2Img) {
-  this.x = 0;
-  this.y = 0;
-  this.titleString = `Cosmic Dance`
-  this.instruction = `Press enter to switch between the scenes`
-  this.imageSun = light2Img;
-  this.size = 1772/2;
+    this.x = 0;
+    this.y = 0;
+    this.titleString = `Cosmic Dance`
+    this.instruction = `Press enter to switch between the scenes`
+    this.imageSun = light2Img;
+    this.size = 1772 / 2;
   }
 
-  displayTitle(){
+  displayTitle() {
     push();
     textAlign(CENTER, CENTER);
     textFont(font);
@@ -26,26 +26,22 @@ class Title {
     pop();
   }
 
-  rotateImage(){
+  rotateImage() {
     rotate(frameCount * 0.007);
   }
 
-  displayImage(){
+// dispplay rotating sun image
+  displayImage() {
     push();
-    this.rotateImage()
+    this.rotateImage();
     imageMode(CENTER);
     image(this.imageSun, this.x, this.y, this.size, this.size);
     pop();
   }
 
-  draw(){
-      background(random(240,245), random(240,245), random(240,245));
-      this.displayImage();
-      this.displayTitle();
+  draw() {
+    background(random(240, 245), random(240, 245), random(240, 245));
+    this.displayImage();
+    this.displayTitle();
   }
-
-
-  // keyPressed(){
-  //   currentState = new Angel
-  // }
 }

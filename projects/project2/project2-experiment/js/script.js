@@ -1,6 +1,16 @@
 /**
-Title of Project
-Author Name
+Cosmic Dance - Interactive audio visualizer
+Julie Khashimova
+
+Credits:
+
+Collage figures by Julie Khashimova
+Gifs from giphy.com
+Font from https: //www.freefontspro.com/ by Apostropic labs
+Music collection from https://freemusicarchive.org/
+Music 1 by Monolog Rockstars - Dream Sequence
+Music 2 by Hinterheim - Let the droids explore hell
+Muisc 3 by Done By Fish - We will meet on the other branch of the wave
 
 */
 "use strict";
@@ -25,9 +35,6 @@ let chameleonManImg;
 let musicXylophone;
 let musicOneTwo;
 let musicRock;
-
-let music1;
-
 
 //all the sound analyzers
 let amp;
@@ -374,10 +381,10 @@ function keyPressed() {
     //musicRock.play()
     timeOut3 = setTimeout(music3Play, musicDelayTime);
     //jumpSong();
-  // } else if (state === `danceDynamic` && keyCode === ENTER) {
-  //   music3Stop();
-  //   clearTimeout(timeOut3);
-  //   state = `title`;
+    // } else if (state === `danceDynamic` && keyCode === ENTER) {
+    //   music3Stop();
+    //   clearTimeout(timeOut3);
+    //   state = `title`;
   }
 }
 

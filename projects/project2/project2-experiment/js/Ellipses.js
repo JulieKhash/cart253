@@ -53,7 +53,7 @@ class Ellipse2 extends Shape {
   //the orbit activates and responds to the sounds between given song times
   display() {
     push();
-    if (this.active && currentTime2 > 1 || currentTime2 < 414) {
+    if (this.active && currentTime2 > 2 || currentTime2 < 414) {
       noFill();
       //stroke responds to the mid and high sound ranges, along with the volume
       stroke((mapMid / 4) * scaleVolume, (mapMid / 4) * scaleVolume, mapTreble * 2 + mapMid + scaleVolume, mapMid / 3);
