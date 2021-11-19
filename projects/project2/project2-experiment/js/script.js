@@ -371,7 +371,11 @@ function keyPressed() {
     //musicRock.play()
     timeOut3 = setTimeout(music3Play, musicDelayTime);
     //jumpSong();
-  }
+} else if (state === `danceDynamic` && keyCode === ENTER) {
+  music3Stop();
+  clearTimeout(timeOut3);
+  state = `title`;
+}
 }
 
 function jumpSong() {

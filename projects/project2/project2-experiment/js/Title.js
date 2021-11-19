@@ -3,7 +3,7 @@ class Title {
   this.x = 0;
   this.y = 0;
   this.titleString = `Cosmic Dance`
-  this.instruction = `Press enter to change the scene`
+  this.instruction = `Press enter to switch between the scenes`
   }
 
   displayTitle(){
