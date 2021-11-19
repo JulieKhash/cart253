@@ -3,7 +3,9 @@ class Title {
     this.x = 0;
     this.y = 0;
     this.titleString = `Cosmic Dance`
-    this.instruction = `Press enter to switch between the scenes`
+    this.instruction = `Press ENTER to switch between the scenes`
+    this.instruction2 = `Click and DRAG for better interaction`
+    this.instruction3 = `Use mouse-wheel/trackpad to control the distance`
     this.imageSun = light2Img;
     this.size = 1772 / 2;
   }
@@ -20,9 +22,11 @@ class Title {
     push();
     textAlign(CENTER, CENTER);
     textFont(font);
-    textSize(20);
+    textSize(16);
     fill(random(255));
     text(this.instruction, this.x, this.y + 200);
+    text(this.instruction2, this.x, this.y + 250);
+    text(this.instruction3, this.x, this.y + 300);
     pop();
   }
 
