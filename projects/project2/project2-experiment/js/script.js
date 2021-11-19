@@ -101,7 +101,7 @@ function preload() {
 function setup() {
   createCanvas(1700, 1000, WEBGL); //WEBGL for 3D canvas
 
-  titlescreen = new Title(); //starts the screen with title
+  titlescreen = new Title(light2Img); //starts the screen with title
 
   amp = new p5.Amplitude(); //an instance of amplitude for all sounds
   amp.setInput(musicXylophone); // provide the audio input for the analyzer

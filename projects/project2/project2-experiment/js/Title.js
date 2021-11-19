@@ -1,9 +1,11 @@
 class Title {
-  constructor() {
+  constructor(light2Img) {
   this.x = 0;
   this.y = 0;
   this.titleString = `Cosmic Dance`
   this.instruction = `Press enter to switch between the scenes`
+  this.imageSun = light2Img;
+  this.size = 1772/2;
   }
 
   displayTitle(){
@@ -11,7 +13,7 @@ class Title {
     textAlign(CENTER, CENTER);
     textFont(font);
     textSize(100);
-    fill(random(255), random(255), 0);
+    fill(random(250), random(250), 0);
     text(this.titleString, this.x, this.y);
     pop();
 
@@ -24,8 +26,21 @@ class Title {
     pop();
   }
 
+  rotateImage(){
+    rotate(frameCount * 0.007);
+  }
+
+  displayImage(){
+    push();
+    this.rotateImage()
+    imageMode(CENTER);
+    image(this.imageSun, this.x, this.y, this.size, this.size);
+    pop();
+  }
+
   draw(){
-      background(220, 220, 220);
+      background(random(240,245), random(240,245), random(240,245));
+      this.displayImage();
       this.displayTitle();
   }
 
