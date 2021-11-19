@@ -19,7 +19,7 @@ class Fireball1 extends Shape {
   display() {
     push();
     noStroke()
-    texture(fireballImg)
+    texture(fireball2Img)
     sphere(this.size + scaleVolume * 2); // size grows according to the volume
     pop();
 

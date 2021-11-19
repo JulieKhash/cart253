@@ -17,6 +17,7 @@ let lightImg;
 let light2Img;
 let angelImg;
 let firemanImg;
+let fireball2Img
 let fireballImg;
 let chameleonManImg;
 
@@ -88,6 +89,7 @@ function preload() {
   angelImg = loadImage(`assets/images/AngelMan.png`);
   firemanImg = loadImage(`assets/images/FireManSmaller.png`);
   fireballImg = loadImage(`assets/images/fireball.gif`);
+  fireball2Img = loadImage(`assets/images/fireball2.gif`);
   lightImg = loadImage(`assets/images/light.png`);
   light2Img = loadImage(`assets/images/blue.png`);
   chameleonManImg = loadImage(`assets/images/ChameleonMan.png`)

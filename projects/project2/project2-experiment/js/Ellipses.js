@@ -1,4 +1,4 @@
-7//defining an Ellipse1 class for the Angel Scene
+//defining an Ellipse1 class for the Angel Scene
 class Ellipse1 extends Shape {
   constructor(size) {
     super();
@@ -9,8 +9,11 @@ class Ellipse1 extends Shape {
     this.strokeSize = 1;
   }
 
+// rotate ellipses
   rotate() {
     super.control(); //mouseX
+
+    rotate(frameCount * -this.maxRotationSpeed)
 
     rotateX(frameCount * -this.minRotationSpeed * 8);
     rotateY(frameCount * -this.minRotationSpeed * 8);
