@@ -82,7 +82,7 @@ let fireball2;
 // visualizer
 let centralVisualizer;
 
-// preload all the media in our program from assets file
+// import all the media in our program from assets file
 function preload() {
   font = loadFont('assets/fonts/KIMONOG.ttf');
   angelImg = loadImage(`assets/images/AngelMan.png`);
@@ -97,7 +97,7 @@ function preload() {
   musicRock = loadSound(`assets/sounds/electro-rock.mp3`);
 }
 
-// intial setup for our program: canvas, main screen, audio analyzers and object instances
+// initial setup for our program: canvas, main screen, audio analyzers and object instances
 function setup() {
   createCanvas(1700, 1000, WEBGL); //WEBGL for 3D canvas
 
@@ -268,7 +268,6 @@ function danceDynamic() {
 
 }
 
-
 ////////Scene2: cosmos dance
 function danceCosmos() {
   //dark blue background, responds to the sound amplitude
@@ -311,10 +310,12 @@ function danceAngel() {
   background(0, mapVolume - 10, mapVolume);
 
   // rotating ellipses
+  push();
   for (let i = 0; i < ellipses1.length; i++) {
     ellipses1[i].rotate();
     ellipses1[i].display();
   }
+  pop();
 
   // displays rotating angel alternating with light
   push();
@@ -371,19 +372,19 @@ function keyPressed() {
     //musicRock.play()
     timeOut3 = setTimeout(music3Play, musicDelayTime);
     //jumpSong();
-} else if (state === `danceDynamic` && keyCode === ENTER) {
-  music3Stop();
-  clearTimeout(timeOut3);
-  state = `title`;
-}
-}
-
-function jumpSong() {
-  let len = musicRock.duration();
-  musicRock.jump(250);
+  } else if (state === `danceDynamic` && keyCode === ENTER) {
+    music3Stop();
+    clearTimeout(timeOut3);
+    state = `title`;
+  }
 }
 
-function jumpSong1() {
-  let len = musicOneTwo.duration();
-  musicOneTwo.jump(70);
-}
+// function jumpSong() {
+//   let len = musicRock.duration();
+//   musicRock.jump(250);
+// }
+//
+// function jumpSong1() {
+//   let len = musicOneTwo.duration();
+//   musicOneTwo.jump(70);
+// }

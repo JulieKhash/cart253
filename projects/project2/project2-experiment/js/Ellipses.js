@@ -12,9 +12,9 @@ class Ellipse1 extends Shape {
   rotate() {
     super.control(); //mouseX
 
-    rotateX(frameCount * -this.minRotationSpeed * 7);
-    rotateY(frameCount * -this.minRotationSpeed * 7);
-    rotateZ(frameCount * -this.minRotationSpeed * 7);
+    rotateX(frameCount * -this.minRotationSpeed * 8);
+    rotateY(frameCount * -this.minRotationSpeed * 8);
+    rotateZ(frameCount * -this.minRotationSpeed * 8);
   }
 
   display() {
@@ -41,9 +41,9 @@ class Ellipse2 extends Shape {
 
   rotate() {
 
-    rotateX(frameCount * this.minRotationSpeed * 3);
-    rotateY(frameCount * this.minRotationSpeed * 3);
-    rotateZ(frameCount * this.minRotationSpeed * 3);
+    rotateX(frameCount * this.minRotationSpeed * 2);
+    rotateY(frameCount * this.minRotationSpeed * 2);
+    rotateZ(frameCount * this.minRotationSpeed * 2);
 
   }
 
