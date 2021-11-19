@@ -29,6 +29,7 @@ let angelImg;
 let firemanImg;
 let fireball2Img
 let fireballImg;
+let luminanceImg;
 let chameleonManImg;
 
 //all the music
@@ -97,6 +98,7 @@ function preload() {
   firemanImg = loadImage(`assets/images/FireManSmaller.png`);
   fireballImg = loadImage(`assets/images/fireball.gif`);
   fireball2Img = loadImage(`assets/images/fireball2.gif`);
+  luminanceImg =  loadImage(`assets/images/luminance.gif`);
   lightImg = loadImage(`assets/images/light.png`);
   light2Img = loadImage(`assets/images/blue.png`);
   chameleonManImg = loadImage(`assets/images/ChameleonMan.png`)
@@ -188,7 +190,7 @@ function draw() {
   currentTime1 = musicRock.currentTime();
   console.log(currentTime1);
   currentTime2 = musicOneTwo.currentTime()
-  //console.log(currentTime2);
+  console.log(currentTime2);
 
   //get the sound level to detect the "beats"
   volume = amp.getLevel();
@@ -372,8 +374,9 @@ function keyPressed() {
     music1Stop();
     clearTimeout(timeOut1);
     state = `danceCosmos`;
-    timeOut2 = setTimeout(music2Play, musicDelayTime);
-    // jumpSong1();
+    musicOneTwo.play();
+    // timeOut2 = setTimeout(music2Play, musicDelayTime);
+    jumpSong1();
   } else if (state === `danceCosmos` && keyCode === ENTER) {
     music2Stop();
     clearTimeout(timeOut2);
@@ -393,7 +396,7 @@ function keyPressed() {
 //   musicRock.jump(250);
 // }
 //
-// function jumpSong1() {
-//   let len = musicOneTwo.duration();
-//   musicOneTwo.jump(70);
-// }
+function jumpSong1() {
+  let len = musicOneTwo.duration();
+  musicOneTwo.jump(235);
+}
