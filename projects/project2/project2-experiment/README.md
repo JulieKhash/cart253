@@ -9,4 +9,4 @@ The 3D space makes the scene more immersive and flexible. The user can control t
 
 The figures and code-generated geometries respond to the amplitude and frequencies of music using the FFT method. The stage and dancers come to life when user enters, and the music should "breathe life" into the figures.
 
-I like it when the work gives the user certain mystical sensations and turns it into a personal experience. For me, this work serves as a foundation for my future artistic endeavours, and I certainly enjoyed working and learning new things along the way. Thankfully, I had a lot of freedom to express my artistic visions through programming as well!
+I like it when the work gives the user certain mystical sensations and turns it into a personal experience. For me, this work serves as a foundation for my future artistic endeavours, and I certainly enjoyed working and learning new things along the way. Thankfully, I had a lot of freedom to express my artistic visions through programming!
