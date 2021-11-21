@@ -374,9 +374,9 @@ function keyPressed() {
     music1Stop();
     clearTimeout(timeOut1);
     state = `danceCosmos`;
-    musicOneTwo.play();
-    // timeOut2 = setTimeout(music2Play, musicDelayTime);
-    jumpSong1();
+    // musicOneTwo.play();
+    timeOut2 = setTimeout(music2Play, musicDelayTime);
+    //jumpSong1();
   } else if (state === `danceCosmos` && keyCode === ENTER) {
     music2Stop();
     clearTimeout(timeOut2);

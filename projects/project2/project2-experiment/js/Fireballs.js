@@ -21,14 +21,14 @@ class Fireball1 extends Shape {
     noStroke();
     //switch sphere texture from fire to luminance during the given timeframe
     if (currentTime2 > 246 && currentTime2 < 370) {
-    texture(luminanceImg);
-    sphere(this.size + scaleVolume * 2);
+      texture(luminanceImg);
+      sphere(this.size + scaleVolume * 2);
     } else {
-    texture(fireball2Img);
-    sphere(this.size + scaleVolume * 2); // size grows according to the volume
+      texture(fireball2Img);
+      sphere(this.size + scaleVolume * 2); // size grows according to the volume
+    }
+    pop();
   }
-  pop();
-}
 }
 
 // a class for the small fireballs rotating along the orbit
