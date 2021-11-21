@@ -34,7 +34,7 @@ class Title {
     rotate(frameCount * 0.007);
   }
 
-// dispplay rotating sun image
+// display rotating sun image
   displayImage() {
     push();
     this.rotateImage();

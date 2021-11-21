@@ -9,7 +9,7 @@ class Ellipse1 extends Shape {
     this.strokeSize = 1;
   }
 
-// rotate ellipses
+  // rotate ellipses
   rotate() {
     super.control(); //mouseX
 

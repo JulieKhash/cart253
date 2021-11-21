@@ -1,6 +1,6 @@
-/**
-Cosmic Dance - Interactive audio visualizer
-Julie Khashimova
+/***************************************
+Cosmic Dance - Interactive multimedia audio visualizer
+by Julie Khashimova
 
 Credits:
 
@@ -12,9 +12,12 @@ Music 1 by Monolog Rockstars - Dream Sequence
 Music 2 by Hinterheim - Let the droids explore hell
 Muisc 3 by Done By Fish - We will meet on the other branch of the wave
 
-*/
+The code was developed by me utilizing the knowdlge of course materials, p5 libraries and continous experimentation.
+
+***************************************/
 "use strict";
 
+//the program begins with title screen
 let state = `title`
 
 let titlescreen;
@@ -131,13 +134,13 @@ function setup() {
     ellipses1.push(ellipse1);
   }
 
-  //ellipses for the cosmos scene
+  // ellipses for the cosmos scene
   for (let i = 0; i < numEllipses2; i++) {
     ellipse2 = new Ellipse2(250 * i);
     ellipses2.push(ellipse2);
   }
 
-  //light effects 1 for the dynamic scene
+  // light effects 1 for the dynamic scene
   for (let i = 0; i < numlights; i++) {
     let x = 500;
     let y = 400;
@@ -146,7 +149,7 @@ function setup() {
     lights1.push(light1);
   }
 
-  //light effects 2 for the dynamic scene
+  // light effects 2 for the dynamic scene
   for (let i = 0; i < numlights; i++) {
     let x = 120
     let y = 200;
@@ -155,7 +158,7 @@ function setup() {
     lights2.push(light2);
   }
 
-  //light effects 3 for the dynamic scene
+  // light effects 3 for the dynamic scene
   for (let i = 0; i < numlights; i++) {
     let x = 350
     let y = 100;
@@ -374,20 +377,12 @@ function keyPressed() {
     music1Stop();
     clearTimeout(timeOut1);
     state = `danceCosmos`;
-    // musicOneTwo.play();
     timeOut2 = setTimeout(music2Play, musicDelayTime);
-    //jumpSong1();
   } else if (state === `danceCosmos` && keyCode === ENTER) {
     music2Stop();
     clearTimeout(timeOut2);
     state = `danceDynamic`;
-    //musicRock.play()
     timeOut3 = setTimeout(music3Play, musicDelayTime);
-    //jumpSong();
-    // } else if (state === `danceDynamic` && keyCode === ENTER) {
-    //   music3Stop();
-    //   clearTimeout(timeOut3);
-    //   state = `title`;
   }
 }
 
@@ -396,7 +391,7 @@ function keyPressed() {
 //   musicRock.jump(250);
 // }
 //
-function jumpSong1() {
-  let len = musicOneTwo.duration();
-  musicOneTwo.jump(235);
-}
+// function jumpSong1() {
+//   let len = musicOneTwo.duration();
+//   musicOneTwo.jump(235);
+// }
