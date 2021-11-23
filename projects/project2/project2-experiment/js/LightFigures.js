@@ -12,9 +12,11 @@ class Angel extends Shape {
 
   // rotates angel/light inside the ellipse
   rotate() {
-    rotateX(frameCount * -this.minRotationSpeed * 8);
-    rotateY(frameCount * -this.minRotationSpeed * 8);
-    rotateZ(frameCount * -this.minRotationSpeed * 8);
+    rotate(frameCount * -this.minRotationSpeed * 7);
+
+    rotateX(frameCount * -this.minRotationSpeed * 9);
+    rotateY(frameCount * -this.minRotationSpeed * 9);
+    rotateZ(frameCount * -this.minRotationSpeed * 9);
   }
 
   // shows angel image alternating with light based on a given soundThreshold

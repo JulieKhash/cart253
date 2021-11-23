@@ -18,13 +18,13 @@ class Visualizer extends Shape {
   // a visualizer that's made of the sound spectrum data
   // makes and displays the sound visualizer until a given song's time
   display() {
-    if (this.active && currentTime1 < 305) {
+    if (this.active && currentTime1 > 1 || currentTime1 < 305) {
       push();
       // create a rectangle for the each frequency band in the audio spectrum (512)
       for (let i = 0; i < spectrum.length; i++) {
         //rotates each reactangle individually
         this.rotate();
-        //sin/cos wraps the linear waveform around the circle
+        //sin/cos wraps the linear waveform into the circle
         let x = this.radius * cos(i);
         let y = this.radius * sin(i);
         // size changes according to the higher notes

@@ -12,7 +12,6 @@ Music 1 by Monolog Rockstars - Dream Sequence
 Music 2 by Hinterheim - Let the droids explore hell
 Muisc 3 by Done By Fish - We will meet on the other branch of the wave
 
-The code was developed by me utilizing the knowdlge of course materials, p5 libraries and continous experimentation.
 
 ***************************************/
 "use strict";

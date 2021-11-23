@@ -13,7 +13,7 @@ class Ellipse1 extends Shape {
   rotate() {
     super.control(); //mouseX
 
-    rotate(frameCount * -this.maxRotationSpeed)
+    rotate(frameCount * -this.maxRotationSpeed);
 
     rotateX(frameCount * -this.minRotationSpeed * 8);
     rotateY(frameCount * -this.minRotationSpeed * 8);
@@ -44,20 +44,20 @@ class Ellipse2 extends Shape {
 
   rotate() {
 
-    rotateX(frameCount * this.minRotationSpeed * 2);
-    rotateY(frameCount * this.minRotationSpeed * 2);
-    rotateZ(frameCount * this.minRotationSpeed * 2);
+    rotateX(frameCount * this.minRotationSpeed);
+    rotateY(frameCount * this.minRotationSpeed);
+    rotateZ(frameCount * this.minRotationSpeed);
 
   }
 
   //the orbit activates and responds to the sounds between given song times
   display() {
     push();
-    if (this.active && currentTime2 > 2 || currentTime2 < 414) {
+    if (this.active && currentTime2 > 3 || currentTime2 < 413) {
       noFill();
       //stroke responds to the mid and high sound ranges, along with the volume
       stroke((mapMid / 4) * scaleVolume, (mapMid / 4) * scaleVolume, mapTreble * 2 + mapMid + scaleVolume, mapMid / 3);
-      strokeWeight(scaleVolume / 3);
+      strokeWeight(scaleVolume / 2);
       ellipse(this.x, this.y, this.size + scaleVolume * 4); //orbital dimension grows with the higher volume
     } else {
       this.active = false;
