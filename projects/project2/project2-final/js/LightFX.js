@@ -1,4 +1,4 @@
-// a class of rotating light effects for the Dynamic Dance scene
+// a class of rotating light effects for the Dynamic Dance scene (extends Shape class)
 class LightFX extends Shape {
   constructor(x, y, size, lightImg) {
     super();

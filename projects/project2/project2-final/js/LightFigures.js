@@ -1,4 +1,4 @@
-// a class for the Angel
+// a class for the Angel (extends Shape class)
 class Angel extends Shape {
   constructor(x, y, angelImg, lightImg) {
     super(x, y)
@@ -36,7 +36,7 @@ class Angel extends Shape {
   }
 }
 
-//a class for the Fire Man
+//a class for the Fire Man (extends Shape class)
 class FireMan extends Shape {
   constructor(x, y, fireman, lightImg) {
     super(x, y);
@@ -92,7 +92,7 @@ class FireMan extends Shape {
   }
 }
 
-//a class for the Chameleon Man
+//a class for the Chameleon Man (extends Shape class)
 class ChameleonMan extends Shape {
   constructor(x, y, chameleonManImg, lightImg) {
     super(x, y);

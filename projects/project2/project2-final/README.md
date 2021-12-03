@@ -5,7 +5,7 @@
 
 The program includes my original collage figures, as the main characters who "dance" to the music, have their own personalities and rule their world. They allow the user to look into their realm and interact closely with it.
 
-The 3D space makes the scene more immersive and flexible. The user can control the distance and the position of the objects in the space with their mouse, which, in turn, makes them "feel" influencing the event.
+The 3D space makes the scene more immersive and flexible. The user can control the distance and the position of the objects in the space with their mouse, which, in turn, makes them feel "influencing" the event.
 
 The figures and code-generated geometries respond to the amplitude and frequencies of music using the FFT method. The stage and dancers come to life when user enters, and the music should "breathe life" into the figures.
 

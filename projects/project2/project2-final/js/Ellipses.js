@@ -1,4 +1,4 @@
-//defining an Ellipse1 class for the Angel Scene
+//defining an Ellipse1 class for the Angel Scene (extends Shape class)
 class Ellipse1 extends Shape {
   constructor(size) {
     super();
@@ -30,7 +30,7 @@ class Ellipse1 extends Shape {
   }
 }
 
-// a class Ellipse2 for the Cosmos Dance scene
+// a class Ellipse2 for the Cosmos Dance scene (extends Shape class)
 class Ellipse2 extends Shape {
   constructor(size) {
     super();

@@ -1,3 +1,4 @@
+// a class for the start page
 class Title {
   constructor(light2Img) {
     this.x = 0;

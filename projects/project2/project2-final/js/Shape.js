@@ -1,4 +1,4 @@
-// a superclass Shape that contains the most common properties for all subclass objects
+// a superclass Shape that contains the most common properties for all subclass objects (extends Shape class)
 class Shape {
   constructor(x, y, size, strokeColor, strokeSize) {
     this.x = 0;

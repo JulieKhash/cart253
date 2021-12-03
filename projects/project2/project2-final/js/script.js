@@ -384,13 +384,3 @@ function keyPressed() {
     timeOut3 = setTimeout(music3Play, musicDelayTime);
   }
 }
-
-// function jumpSong() {
-//   let len = musicRock.duration();
-//   musicRock.jump(250);
-// }
-//
-// function jumpSong1() {
-//   let len = musicOneTwo.duration();
-//   musicOneTwo.jump(235);
-// }

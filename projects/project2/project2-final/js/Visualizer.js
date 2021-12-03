@@ -1,3 +1,4 @@
+// a class for the Visualizer (extends Shape class)
 class Visualizer extends Shape {
   constructor() {
     super();

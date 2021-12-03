@@ -1,4 +1,4 @@
-// a class for the central fire ball
+// a class for the central fire ball (extends Shape class)
 class Fireball1 extends Shape {
   constructor() {
     super();
@@ -31,7 +31,7 @@ class Fireball1 extends Shape {
   }
 }
 
-// a class for the small fireballs rotating along the orbit
+// a class for the small fireballs rotating along the orbit (extends Shape class)
 class Fireball2 extends Shape {
   constructor() {
     super();
