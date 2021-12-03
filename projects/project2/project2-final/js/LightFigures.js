@@ -13,7 +13,6 @@ class Angel extends Shape {
   // rotates angel/light inside the ellipse
   rotate() {
     rotate(frameCount * -this.minRotationSpeed * 7);
-
     rotateX(frameCount * -this.minRotationSpeed * 9);
     rotateY(frameCount * -this.minRotationSpeed * 9);
     rotateZ(frameCount * -this.minRotationSpeed * 9);
@@ -172,5 +171,4 @@ class ChameleonMan extends Shape {
     }
     pop();
   }
-
 }
